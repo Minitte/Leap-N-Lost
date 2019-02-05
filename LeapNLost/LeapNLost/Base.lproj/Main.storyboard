@@ -66,6 +66,9 @@
                                 <state key="normal" title="Play">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="cyD-kn-t94" kind="show" id="vxx-1b-e3l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-ov-cV2">
                                 <rect key="frame" x="104" y="288" width="166" height="30"/>
@@ -125,6 +128,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvE-sz-ViH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1413.5999999999999" y="26.53673163418291"/>
+        </scene>
+        <!--View Controller Game-->
+        <scene sceneID="pIS-LM-G8f">
+            <objects>
+                <viewController title="View Controller Game" id="cyD-kn-t94" customClass="ViewControllerGame" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uMy-LC-6gp" customClass="GLKView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6gj-gu-tBq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DRY-Mi-mdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147" y="31"/>
         </scene>
     </scenes>
 </document>
