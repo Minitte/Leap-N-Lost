@@ -15,6 +15,10 @@
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
+		AD38173022091FD900390CFF /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38172A22091FD800390CFF /* GLESRenderer.cpp */; };
+		AD38173122091FD900390CFF /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD38172C22091FD800390CFF /* Renderer.mm */; };
+		AD38173222091FD900390CFF /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172D22091FD800390CFF /* Shader.fsh */; };
+		AD38173322091FD900390CFF /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172F22091FD900390CFF /* Shader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,12 @@
 		AD38171C220909F800390CFF /* LeapNLost-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LeapNLost-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
+		AD38172A22091FD800390CFF /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
+		AD38172B22091FD800390CFF /* GLESRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLESRenderer.hpp; sourceTree = "<group>"; };
+		AD38172C22091FD800390CFF /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		AD38172D22091FD800390CFF /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		AD38172E22091FD900390CFF /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		AD38172F22091FD900390CFF /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +73,7 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
+				AD38172922091FBB00390CFF /* Engine */,
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
 				5718CA222203C522000EC054 /* ViewControllerTitle.swift */,
 				5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */,
@@ -82,6 +93,19 @@
 				AD3817232209122E00390CFF /* OpenGLES.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD38172922091FBB00390CFF /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				AD38172A22091FD800390CFF /* GLESRenderer.cpp */,
+				AD38172B22091FD800390CFF /* GLESRenderer.hpp */,
+				AD38172E22091FD900390CFF /* Renderer.h */,
+				AD38172C22091FD800390CFF /* Renderer.mm */,
+				AD38172D22091FD800390CFF /* Shader.fsh */,
+				AD38172F22091FD900390CFF /* Shader.vsh */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +167,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD38173222091FD900390CFF /* Shader.fsh in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
+				AD38173322091FD900390CFF /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,9 +182,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD38173022091FD900390CFF /* GLESRenderer.cpp in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
+				AD38173122091FD900390CFF /* Renderer.mm in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
