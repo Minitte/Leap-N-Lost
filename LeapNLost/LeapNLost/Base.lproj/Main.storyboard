@@ -21,9 +21,6 @@
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-cJ-liu">
                                 <rect key="frame" x="100" y="536" width="175" height="30"/>
                                 <state key="normal" title="TAP TO START!"/>
-                                <connections>
-                                    <segue destination="50b-uE-2Sx" kind="showDetail" animates="NO" id="1VE-LU-bgP"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LEAP N' LOST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQA-Nj-qHk">
                                 <rect key="frame" x="66" y="121" width="243" height="21"/>
@@ -33,6 +30,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="VQA-Nj-qHk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="23T-4C-88I"/>
                             <constraint firstItem="VQA-Nj-qHk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="4LR-so-3bi"/>
@@ -42,12 +40,21 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="akM-cJ-liu" secondAttribute="trailing" constant="100" id="sAC-Km-kvK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wg3-bh-73b" appends="YES" id="npA-LY-Gha"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="startButton" destination="akM-cJ-liu" id="L8a-Jy-3e8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wg3-bh-73b">
+                    <connections>
+                        <action selector="tapStart:" destination="BYZ-38-t0r" id="hJv-MS-DH8"/>
+                        <segue destination="50b-uE-2Sx" kind="showDetail" id="0zS-Wr-pRq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="669.60000000000002" y="25.637181409295355"/>
         </scene>

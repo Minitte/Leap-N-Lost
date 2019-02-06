@@ -15,6 +15,14 @@ class ViewControllerMainMenu: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    /*@IBAction func testJSON(_ sender: Any) {
+        var level = Level();
+        let data = level.readLevel(withArea: 0, withLevel: 0);
+        level = level.parseJSON(data: data);
+        print(level.rows[0].type);
+    }*/
+    
+    
     // Exits app when Exit button is pressed
     @IBAction func exitApp(_ sender: Any) {
         UIControl().sendAction(#selector(NSXPCConnection.suspend),
