@@ -9,20 +9,21 @@
 import Foundation
 import GLKit
 
+// *** TESTING *** //
 let vertexList : [Vertex] = [
     
     // Front
     Vertex(1, -1, 1,   1, 0, 0, 1),     // 0
     Vertex(1,  1, 1,   1, 0, 0, 1),     // 1
-    Vertex(-1, 1, 1,   0, 1, 0, 1),     // 2
-    Vertex(-1,-1, 1,   0, 1, 0, 1),     // 3
+    Vertex(-1, 1, 1,   1, 0, 0, 1),     // 2
+    Vertex(-1,-1, 1,   1, 0, 0, 1),     // 3
     
     
     // Back
-    Vertex(-1,-1,-1,   1, 0, 0, 1),     // 4
+    Vertex(-1,-1,-1,   0, 1, 0, 1),     // 4
     Vertex(-1, 1,-1,   1, 0, 0, 1),     // 5
-    Vertex( 1, 1,-1,   0, 1, 0, 1),     // 6
-    Vertex( 1,-1,-1,   0, 1, 0, 1)      // 7
+    Vertex( 1, 1,-1,   1, 0, 0, 1),     // 6
+    Vertex( 1,-1,-1,   1, 0, 0, 1)      // 7
     
 ]
 
@@ -51,7 +52,10 @@ let indexList : [GLubyte] = [
     3, 4, 7,
     7, 0, 3
 ]
+// *** TESTING *** //
 
 class Model {
+    
+    
     
 }

@@ -8,6 +8,6 @@ varying lowp vec4 frag_Color;
 
 void main(void) {
     frag_Color = a_Color;
-    //gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * a_Position;
-    gl_Position = a_Position;
+    gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * a_Position;
+    //gl_Position = a_Position;
 }
