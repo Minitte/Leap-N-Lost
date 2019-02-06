@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57082063220A9DF9000740D3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57082062220A9DF9000740D3 /* Level.swift */; };
+		5708206B220AD991000740D3 /* Levels in Resources */ = {isa = PBXBuildFile; fileRef = 5708206A220AD990000740D3 /* Levels */; };
 		5718CA212203C522000EC054 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA202203C522000EC054 /* AppDelegate.swift */; };
 		5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA222203C522000EC054 /* ViewControllerTitle.swift */; };
 		5718CA262203C522000EC054 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA242203C522000EC054 /* Main.storyboard */; };
@@ -18,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		57082062220A9DF9000740D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
-		57082066220ABFDF000740D3 /* Level_0-0.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Level_0-0.json"; sourceTree = "<group>"; };
+		5708206A220AD990000740D3 /* Levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Levels; sourceTree = "<group>"; };
 		5718CA1D2203C522000EC054 /* LeapNLost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeapNLost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5718CA202203C522000EC054 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5718CA222203C522000EC054 /* ViewControllerTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTitle.swift; sourceTree = "<group>"; };
@@ -40,14 +41,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		57082067220AC026000740D3 /* Levels */ = {
-			isa = PBXGroup;
-			children = (
-				57082066220ABFDF000740D3 /* Level_0-0.json */,
-			);
-			path = Levels;
-			sourceTree = "<group>";
-		};
 		5718CA142203C522000EC054 = {
 			isa = PBXGroup;
 			children = (
@@ -67,7 +60,7 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
-				57082067220AC026000740D3 /* Levels */,
+				5708206A220AD990000740D3 /* Levels */,
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
 				5718CA222203C522000EC054 /* ViewControllerTitle.swift */,
 				5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */,
@@ -139,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
+				5708206B220AD991000740D3 /* Levels in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 			);
