@@ -12,28 +12,33 @@ import Swift
 
 class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
-    var renderer: Renderer = Renderer()
-    var ozma: GLKView?
+    private var gameEngine : GameEngine?;
+    private var glkView : GLKView?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.delegate = self
-        
-        renderer = Renderer()
-        var viewz = self.view as? GLKView
-        
-        renderer.setup(self.view as? GLKView)
-        
-        renderer.loadModels()
+        setupGL();
+    }
+    
+    /**
+     * Sets up the openGL engine.
+     */
+    func setupGL() {
+        glkView = self.view as? GLKView
+        glkView!.context = EAGLContext(api: .openGLES2)!
+        EAGLContext.setCurrent(glkView!.context)
+        delegate = self
+        gameEngine = GameEngine(self.view as! GLKView);
+    
         
     }
     
     func glkViewControllerUpdate(_ controller: GLKViewController) {
-        renderer.update()
+        gameEngine!.update()
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        renderer.draw(rect)
+        gameEngine!.render(rect)
     }
 }
