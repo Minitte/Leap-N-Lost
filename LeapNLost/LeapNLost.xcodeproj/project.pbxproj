@@ -21,6 +21,9 @@
 		AD38173122091FD900390CFF /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD38172C22091FD800390CFF /* Renderer.mm */; };
 		AD38173222091FD900390CFF /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172D22091FD800390CFF /* Shader.fsh */; };
 		AD38173322091FD900390CFF /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172F22091FD900390CFF /* Shader.vsh */; };
+		ADA9DCF9220B80490036B01E /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9DCF8220B80490036B01E /* Scoreboard.swift */; };
+		ADE3A27A220B60AC001D290C /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A279220B60AC001D290C /* PlayerProfile.swift */; };
+		ADE3A27C220B6E9C001D290C /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE3A27B220B6E9C001D290C /* LevelScoreboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		AD38172D22091FD800390CFF /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		AD38172E22091FD900390CFF /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		AD38172F22091FD900390CFF /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		ADA9DCF8220B80490036B01E /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
+		ADE3A279220B60AC001D290C /* PlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
+		ADE3A27B220B6E9C001D290C /* LevelScoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelScoreboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,7 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
+				ADE3A278220B607B001D290C /* Player */,
 				5708206C220AE502000740D3 /* Levels */,
 				AD38172922091FBB00390CFF /* Engine */,
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
@@ -112,6 +119,16 @@
 				AD38172F22091FD900390CFF /* Shader.vsh */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		ADE3A278220B607B001D290C /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				ADE3A279220B60AC001D290C /* PlayerProfile.swift */,
+				ADE3A27B220B6E9C001D290C /* LevelScoreboard.swift */,
+				ADA9DCF8220B80490036B01E /* Scoreboard.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +208,11 @@
 			files = (
 				AD38173022091FD900390CFF /* GLESRenderer.cpp in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
+				ADE3A27C220B6E9C001D290C /* LevelScoreboard.swift in Sources */,
+				ADA9DCF9220B80490036B01E /* Scoreboard.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
+				ADE3A27A220B60AC001D290C /* PlayerProfile.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
 				AD38173122091FD900390CFF /* Renderer.mm in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
