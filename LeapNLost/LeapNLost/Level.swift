@@ -6,10 +6,10 @@
 //  Copyright © 2019 bcit. All rights reserved.
 //
 
-import Foundation
+import Foundation;
 
-struct Level : Codable {
-    struct Info : Codable {
+struct Level : Decodable {
+    struct Info : Decodable {
         let area: Int;
         let level: Int;
         let desc: String;
@@ -20,14 +20,45 @@ struct Level : Codable {
             case level
             case desc
         }
+        
+        init(){
+            area = -1;
+            level = -1;
+            desc = "";
+        }
     }
     
-    struct Row : Codable {
+    struct Row : Decodable {
         let id: Int;
         let type: String;
         let speed: Float;
+        init(){
+            id = -1;
+            type = "";
+            speed = 0.0;
+        }
     }
     
     let info: Info;
     let rows: [Row];
+    
+    init(){
+        info = Info();
+        rows = [Row]();
+    }
+}
+
+// Accepts a JSON string as argument, returns a Level object
+func parseJSON(string: String) -> Level{
+    let data = string.data(using: .utf8)!
+    var level = Level();
+    do {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        level = try decoder.decode(Level.self, from: data)
+    } catch{
+        print("Error parsing JSON")
+    }
+    
+    return level;
 }
