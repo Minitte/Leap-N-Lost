@@ -21,6 +21,7 @@ struct Level : Decodable {
             case desc
         }
         
+        // Info Constructor
         init(){
             area = -1;
             level = -1;
@@ -32,6 +33,8 @@ struct Level : Decodable {
         let id: Int;
         let type: String;
         let speed: Float;
+        
+        // Row constructor
         init(){
             id = -1;
             type = "";
@@ -42,22 +45,36 @@ struct Level : Decodable {
     let info: Info;
     let rows: [Row];
     
+    // Level Constructor
     init(){
         info = Info();
         rows = [Row]();
     }
 }
 
+//Reads the level file for Area area and Level level i.e. Level 1-1 readLevel(1,1)
+func readLevel(withArea area: Int, withLevel level: Int) -> Data{
+    let path = "Levels\\Level_" + String(area) + "-" + String(level) + ".json";
+    var data = Data();
+    do {
+        data =  try JSONSerialization.data(withJSONObject: path);
+    }
+    catch {
+        print("Error reading file.")
+    }
+    
+    return data;
+}
+
 // Accepts a JSON string as argument, returns a Level object
-func parseJSON(string: String) -> Level{
-    let data = string.data(using: .utf8)!
+func parseJSON(data: Data) -> Level{
     var level = Level();
     do {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         level = try decoder.decode(Level.self, from: data)
     } catch{
-        print("Error parsing JSON")
+        print("Error parsing JSON.")
     }
     
     return level;
