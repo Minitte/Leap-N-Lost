@@ -15,6 +15,12 @@
 		5718CA282203C523000EC054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA272203C523000EC054 /* Assets.xcassets */; };
 		5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA292203C523000EC054 /* LaunchScreen.storyboard */; };
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
+		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
+		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
+		AD38173022091FD900390CFF /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38172A22091FD800390CFF /* GLESRenderer.cpp */; };
+		AD38173122091FD900390CFF /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD38172C22091FD800390CFF /* Renderer.mm */; };
+		AD38173222091FD900390CFF /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172D22091FD800390CFF /* Shader.fsh */; };
+		AD38173322091FD900390CFF /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = AD38172F22091FD900390CFF /* Shader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,15 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
+		AD38171C220909F800390CFF /* LeapNLost-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LeapNLost-Bridging-Header.h"; sourceTree = "<group>"; };
+		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
+		AD38172A22091FD800390CFF /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
+		AD38172B22091FD800390CFF /* GLESRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLESRenderer.hpp; sourceTree = "<group>"; };
+		AD38172C22091FD800390CFF /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		AD38172D22091FD800390CFF /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		AD38172E22091FD900390CFF /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		AD38172F22091FD900390CFF /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +62,7 @@
 			children = (
 				5718CA1F2203C522000EC054 /* LeapNLost */,
 				5718CA1E2203C522000EC054 /* Products */,
+				AD3817222209122E00390CFF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,16 +78,40 @@
 			isa = PBXGroup;
 			children = (
 				5708206C220AE502000740D3 /* Levels */,
+				AD38172922091FBB00390CFF /* Engine */,
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
 				5718CA222203C522000EC054 /* ViewControllerTitle.swift */,
 				5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */,
+				AD381727220919F500390CFF /* ViewControllerGame.swift */,
 				5718CA242203C522000EC054 /* Main.storyboard */,
 				5718CA272203C523000EC054 /* Assets.xcassets */,
 				5718CA292203C523000EC054 /* LaunchScreen.storyboard */,
 				5718CA2C2203C523000EC054 /* Info.plist */,
 				57082062220A9DF9000740D3 /* Level.swift */,
+				AD38171C220909F800390CFF /* LeapNLost-Bridging-Header.h */,
 			);
 			path = LeapNLost;
+			sourceTree = "<group>";
+		};
+		AD3817222209122E00390CFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD3817232209122E00390CFF /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD38172922091FBB00390CFF /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				AD38172A22091FD800390CFF /* GLESRenderer.cpp */,
+				AD38172B22091FD800390CFF /* GLESRenderer.hpp */,
+				AD38172E22091FD900390CFF /* Renderer.h */,
+				AD38172C22091FD800390CFF /* Renderer.mm */,
+				AD38172D22091FD800390CFF /* Shader.fsh */,
+				AD38172F22091FD900390CFF /* Shader.vsh */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +146,7 @@
 				TargetAttributes = {
 					5718CA1C2203C522000EC054 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -132,9 +174,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5708206D220AE502000740D3 /* Levels in Resources */,
+				AD38173222091FD900390CFF /* Shader.fsh in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
+				AD38173322091FD900390CFF /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,9 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD38173022091FD900390CFF /* GLESRenderer.cpp in Sources */,
+				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
+				AD38173122091FD900390CFF /* Renderer.mm in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,8 +341,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7L3989XA8;
+				DEVELOPMENT_TEAM = 35VZWR9J58;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -304,6 +352,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LeapNLost/LeapNLost-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -313,8 +363,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7L3989XA8;
+				DEVELOPMENT_TEAM = 35VZWR9J58;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -323,6 +374,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LeapNLost/LeapNLost-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
