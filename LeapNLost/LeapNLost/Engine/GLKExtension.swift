@@ -9,6 +9,10 @@
 import Foundation
 import GLKit
 
+/**
+ * Extensions to GLK functions.
+ * Code referenced from https://github.com/skyfe79/LearningOpenGLES2
+ */
 extension GLKMatrix4 {
     
     // Gets all the values of the matrix as a Float array.

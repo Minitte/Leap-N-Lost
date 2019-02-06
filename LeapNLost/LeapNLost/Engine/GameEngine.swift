@@ -9,6 +9,10 @@
 import Foundation
 import GLKit
 
+/**
+ * Class for the game engine.
+ * Renders and updates all game objects every frame.
+ */
 class GameEngine {
     
     // Reference to the game view.
@@ -17,117 +21,97 @@ class GameEngine {
     // Reference to the shader loader.
     private var shaderLoader : ShaderLoader;
     
-    var vao: GLuint;
-    var vertexBuffer: GLuint;
-    var indexBuffer: GLuint;
+    // Test
+    //var rotation : Float;
     
-    var radians : Float;
+    // Array of all game objects in the scene.
+    var gameObjects : [GameObject];
     
+    // Camera matrices
+    var modelViewMatrix : GLKMatrix4;
+    var projectionMatrix : GLKMatrix4;
+    
+    /**
+     * Constructor for the game engine.
+     * view - Reference to the application view.
+     */
     init(_ view : GLKView) {
+        // Initialize properties
         self.view = view;
-        vao = 0;
-        vertexBuffer = 0;
-        indexBuffer = 0;
-        radians = 0;
-        
+        modelViewMatrix = GLKMatrix4Identity;
+        projectionMatrix = GLKMatrix4Identity;
         shaderLoader = ShaderLoader(vertexShader: "SimpleVertexShader.glsl", fragmentShader: "SimpleFragmentShader.glsl");
+        
+        // Populate with gameobjects
+        gameObjects = [GameObject]();
+        for _ in 1...10 {
+            gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
+        }
         
         setupGL();
     }
     
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n)
-    }
-    
+    /**
+     * Any additional setup for openGL is done here
+     */
     func setupGL() {
         // Enable depth buffer
         view.drawableDepthFormat = GLKViewDrawableDepthFormat.format24;
         glEnable(GLbitfield(GL_DEPTH_TEST));
-        
-        // Generate and bind the vertex array object
-        glGenVertexArraysOES(1, &vao)
-        glBindVertexArrayOES(vao)
-        
-        // Generate and bind the vertex buffer
-        glGenBuffers(GLsizei(1), &vertexBuffer)
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
-        
-        // Generate and bind the index buffer
-        glGenBuffers(GLsizei(1), &indexBuffer)
-        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
-        
-        // Model properties
-        let vertices = vertexList;
-        let indices = indexList;
-        let count = vertices.count
-        let size =  MemoryLayout<Vertex>.size
-        
-        glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, vertices, GLenum(GL_STATIC_DRAW))
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW))
-        
-        // 현재 vao가 바인딩 되어 있어서 아래 함수를 실행하면 정점과 인덱스 데이터가 모두 vao에 저장된다.
-        glEnableVertexAttribArray(VertexAttributes.position.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.position.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(0))
-        
-        glEnableVertexAttribArray(VertexAttributes.color.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.color.rawValue,
-            4,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size)) // x, y, z | r, g, b, a :: offset is 3*sizeof(GLfloat)
-        
-        // 바인딩을 끈다
-        glBindVertexArrayOES(0)
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0)
-        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0)
     }
     
     /**
      * The update loop
      */
     func update() {
-        var mv = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, -5.0);
-        mv = GLKMatrix4RotateY(mv, radians)
-        
-        let aspect = Float(view.drawableWidth) / Float(view.drawableHeight);
-        let perspective = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 20);
-        
-        shaderLoader.modelViewMatrix = mv;
-        shaderLoader.projectionMatrix = perspective;
-        //mvp = modelMatrix()
-        
         // Continue rotation
-        radians += 0.1;
+        //rotation += 0.1;
+        
+        // Create a model view matrix
+        modelViewMatrix = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, -10.0);
+        //modelViewMatrix = GLKMatrix4RotateY(modelViewMatrix, rotation);
+ 
+        // Create a projection matrix
+        let aspect = Float(view.drawableWidth) / Float(view.drawableHeight);
+        projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 20);
+        
+        
+        // Loop through every object in scene and call update
+        for gameObject in gameObjects {
+            gameObject.update();
+        }
     }
     
-    func modelMatrix() -> GLKMatrix4 {
-        var modelMatrix : GLKMatrix4 = GLKMatrix4Identity
-        modelMatrix = GLKMatrix4Translate(modelMatrix, 0, 0, -5.0)
-        modelMatrix = GLKMatrix4Rotate(modelMatrix, 0, 1, 0, 0)
-        modelMatrix = GLKMatrix4Rotate(modelMatrix, radians, 0, 1, 0)
-        modelMatrix = GLKMatrix4Rotate(modelMatrix, 0, 0, 0, 1)
-        ///modelMatrix = GLKMatrix4Scale(modelMatrix, self.scale, self.scale, self.scale)
-        return modelMatrix
-    }
-    
+    /**
+     * The render loop.
+     */
     func render(_ draw : CGRect) {
-        
-        
+        // Clear screen and buffers
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
-        //glClear(GLbitfield(GL_DEPTH_BUFFER_BIT))
         
-        let indices = indexList
-        
-        shaderLoader.prepareToDraw();
-        glBindVertexArrayOES(vao)
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_BYTE), nil)
-        glBindVertexArrayOES(0)
+        // Loop through every object in scene and call render
+        for gameObject in gameObjects {
+            
+            // Get the game object's rotation as a matrix
+            var rotationMatrix = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
+            
+            // Get the game object's position as a matrix
+            var positionMatrix = GLKMatrix4Identity;
+            positionMatrix = GLKMatrix4Translate(positionMatrix, gameObject.position.x, gameObject.position.y, gameObject.position.z);
+            
+            // Multiply together to get transformation matrix
+            var objectMatrix = GLKMatrix4Multiply(modelViewMatrix, positionMatrix);
+            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
+            objectMatrix = GLKMatrix4Scale(objectMatrix, 0.2, 0.2, 0.2);
+            
+            // Render the object after passing the matrices to the shader
+            shaderLoader.modelViewMatrix = objectMatrix;
+            shaderLoader.projectionMatrix = projectionMatrix;
+            shaderLoader.prepareToDraw()
+            gameObject.model.render();
+        }
     }
 }

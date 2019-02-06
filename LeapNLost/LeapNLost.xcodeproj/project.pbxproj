@@ -24,6 +24,8 @@
 		AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36589220B6C1C00ED9827 /* Vertex.swift */; };
 		AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */; };
 		AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3658D220B6DDC00ED9827 /* Model.swift */; };
+		AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36596220B8AA300ED9827 /* GameObject.swift */; };
+		AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3659A220B8B4700ED9827 /* Cube.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		AEF36589220B6C1C00ED9827 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLKExtension.swift; sourceTree = "<group>"; };
 		AEF3658D220B6DDC00ED9827 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AEF36596220B8AA300ED9827 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		AEF3659A220B8B4700ED9827 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,12 +110,12 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				AEF36598220B8ACB00ED9827 /* Models */,
 				AEF36584220B6AB100ED9827 /* Shaders */,
 				AEF36580220B5F2500ED9827 /* GameEngine.swift */,
 				AEF36582220B601700ED9827 /* ShaderLoader.swift */,
-				AEF36589220B6C1C00ED9827 /* Vertex.swift */,
 				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
-				AEF3658D220B6DDC00ED9827 /* Model.swift */,
+				AEF36596220B8AA300ED9827 /* GameObject.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -123,6 +127,24 @@
 				AEF36585220B6ABE00ED9827 /* SimpleVertexShader.glsl */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		AEF36598220B8ACB00ED9827 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AEF36599220B8AD300ED9827 /* Primitives */,
+				AEF3658D220B6DDC00ED9827 /* Model.swift */,
+				AEF36589220B6C1C00ED9827 /* Vertex.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AEF36599220B8AD300ED9827 /* Primitives */ = {
+			isa = PBXGroup;
+			children = (
+				AEF3659A220B8B4700ED9827 /* Cube.swift */,
+			);
+			path = Primitives;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
@@ -207,6 +230,7 @@
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
+				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,

@@ -47,7 +47,6 @@ class ShaderLoader {
         glUseProgram(self.programHandle)
         
         glUniformMatrix4fv(self.projectionMatrixUniform, 1, GLboolean(GL_FALSE), self.projectionMatrix.array);
-        
         glUniformMatrix4fv(self.modelViewMatrixUniform, 1, GLboolean(GL_FALSE), self.modelViewMatrix.array);
     }
     
