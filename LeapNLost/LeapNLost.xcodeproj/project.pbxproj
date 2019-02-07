@@ -17,6 +17,8 @@
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
+		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
+		AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */; };
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
 		AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36580220B5F2500ED9827 /* GameEngine.swift */; };
 		AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36582220B601700ED9827 /* ShaderLoader.swift */; };

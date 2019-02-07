@@ -58,6 +58,7 @@ class PlayerProfile : Codable {
         
         var payload : Data?;
         
+        // try to encode the player object
         do {
             payload = try JSONEncoder().encode(self);
         } catch {
@@ -70,7 +71,7 @@ class PlayerProfile : Codable {
         let file = "playerprofile0.sav";
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
+            // file location
             let fileURL = dir.appendingPathComponent(file);
             
             //writing
@@ -98,14 +99,18 @@ class PlayerProfile : Codable {
             
             //reading
             do {
+                // text of the json file
                 let text = try String(contentsOf: fileURL, encoding: .utf8);
                 
+                // convert to json data
                 let profileData : Data? = text.data(using: .utf8);
                 
+                // check if success
                 if (profileData == nil) {
                     NSLog("Error reading a player profile!");
                 }
                 
+                // decode json
                 let loadedProfile : PlayerProfile = try JSONDecoder().decode(PlayerProfile.self, from: profileData!);
                 
                 return loadedProfile;
