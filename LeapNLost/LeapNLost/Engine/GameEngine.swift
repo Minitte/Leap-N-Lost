@@ -24,9 +24,8 @@ class GameEngine {
     // Array of all game objects in the scene.
     var gameObjects : [GameObject];
     
-    // Camera matrices
-    var modelViewMatrix : GLKMatrix4;
-    var projectionMatrix : GLKMatrix4;
+    // camera properties
+    var mainCamera : Camera;
     
     /**
      * Constructor for the game engine.
@@ -35,8 +34,6 @@ class GameEngine {
     init(_ view : GLKView) {
         // Initialize properties
         self.view = view;
-        modelViewMatrix = GLKMatrix4Identity;
-        projectionMatrix = GLKMatrix4Identity;
         
         // Load shaders
         shaderLoader = ShaderLoader(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
@@ -46,6 +43,10 @@ class GameEngine {
         for _ in 1...10 {
             gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
         }
+        
+        mainCamera = Camera();
+        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
+        
         
         setupGL();
     }
@@ -63,12 +64,8 @@ class GameEngine {
      * The update loop
      */
     func update() {
-        // Create a model view matrix
-        modelViewMatrix = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, -10.0);
- 
         // Create a projection matrix
-        let aspect = Float(view.drawableWidth) / Float(view.drawableHeight);
-        projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 20);
+        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 20);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
@@ -97,13 +94,13 @@ class GameEngine {
             positionMatrix = GLKMatrix4Translate(positionMatrix, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            var objectMatrix = GLKMatrix4Multiply(modelViewMatrix, positionMatrix);
+            var objectMatrix = GLKMatrix4Multiply(mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, 0.2, 0.2, 0.2);
             
             // Render the object after passing the matrices to the shader
             shaderLoader.modelViewMatrix = objectMatrix;
-            shaderLoader.projectionMatrix = projectionMatrix;
+            shaderLoader.projectionMatrix = mainCamera.perspectiveMatrix;
             shaderLoader.prepareToDraw();
             gameObject.model.render();
         }

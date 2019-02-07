@@ -21,10 +21,13 @@ class Camera {
     private var rotationMatrix : GLKMatrix4;
     
     // The viewing angle of the camera
-    private var perspectiveMatrix : GLKMatrix4;
+    public var perspectiveMatrix : GLKMatrix4;
     
     // combined matrix of position, rotation and perspective
-    private var combinedMatrix : GLKMatrix4;
+    public var combinedMatrix : GLKMatrix4;
+    
+    // combined position and rotation matrix.
+    public var transformMatrix : GLKMatrix4;
     
     /**
      * Initalizer for a camera class
@@ -34,6 +37,10 @@ class Camera {
         rotationMatrix = GLKMatrix4Identity;
         perspectiveMatrix = GLKMatrix4Identity;
         combinedMatrix = GLKMatrix4Identity;
+        transformMatrix = GLKMatrix4Identity;
+        
+        updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -44,12 +51,15 @@ class Camera {
         rotationMatrix = GLKMatrix4Identity;
         perspectiveMatrix = GLKMatrix4Identity;
         combinedMatrix = GLKMatrix4Identity; 
+        transformMatrix = GLKMatrix4Identity;
         
         // Set the position matrix
         positionMatrix.m30 = x;
         positionMatrix.m31 = y;
         positionMatrix.m32 = z;
         
+        updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -59,6 +69,7 @@ class Camera {
         positionMatrix = GLKMatrix4Translate(GLKMatrix4Identity, x, y, z);
         
         updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -68,6 +79,7 @@ class Camera {
         positionMatrix = GLKMatrix4Translate(positionMatrix, x, y, z);
         
         updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -79,6 +91,7 @@ class Camera {
         rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, z);
         
         updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -90,6 +103,7 @@ class Camera {
         rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, z);
         
         updateCombined();
+        updateTransformMatrix();
     }
     
     /**
@@ -102,11 +116,11 @@ class Camera {
     }
     
     /**
-     * Returns the combined matrix for the camera. A perspective needs to be passed
-     * in the camera using setPerspective for this to properly work.
+     * calculates the perspective matrix based on the args
      */
-    public func getCombinedMatrix() -> GLKMatrix4 {
-        return combinedMatrix;
+    public func calculatePerspectiveMatrix(viewWidth w:Int, viewHeight h:Int, fieldOfView fov:Int, nearClipZ nearZ:Int, farClipZ farZ:Int) {
+        let aspect = Float(w) / Float(h);
+        perspectiveMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, Float(nearZ), Float(farZ));
     }
     
     /**
@@ -115,5 +129,12 @@ class Camera {
     private func updateCombined() {
         combinedMatrix = GLKMatrix4Multiply(positionMatrix, rotationMatrix);
         combinedMatrix = GLKMatrix4Multiply(perspectiveMatrix, combinedMatrix);
+    }
+    
+    /**
+     * Updates the transform matrix by multiplying position and rotation.
+     */
+    private func updateTransformMatrix() {
+        transformMatrix = GLKMatrix4Multiply(positionMatrix, rotationMatrix);
     }
 }
