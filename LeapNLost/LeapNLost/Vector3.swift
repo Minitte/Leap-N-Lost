@@ -9,16 +9,24 @@
 import Foundation
 import GLKit
 
-// Minimum difference for checking if two Floats are equal.
-let epsilon : Float = 0.001;
-
 /**
  * This is a class for vector objects that contain three floating point numbers.
  */
 class Vector3 : CustomStringConvertible {
     
-    public var description : String { return "x: \(x) y: \(y) z: \(z)"};
+    // Minimum difference for checking if two Floats are equal.
+    fileprivate static let Epsilon : Float = 0.001;
     
+    // Returns a String representation of the vector (i.e. toString).
+    var description : String { return "x: \(x) y: \(y) z: \(z)"};
+    
+    // Vector shorthands
+    private(set) static var Forward : Vector3 = Vector3 (withX: 0, withY: 0, withZ: 1)
+    private(set) static var Up : Vector3 = Vector3(withX: 0, withY: 1, withZ: 0)
+    private(set) static var Left : Vector3 = Vector3(withX: -1, withY: 0, withZ: 0)
+    private(set) static var Right : Vector3 = Vector3(withX: 1, withY: 0, withZ: 0)
+    
+    // Vector components
     var x : Float;
     var y : Float;
     var z : Float;
@@ -65,10 +73,33 @@ class Vector3 : CustomStringConvertible {
         let magnitude : Float = self.magnitude();
         return Vector3(withX: x / magnitude, withY: y / magnitude, withZ: z / magnitude);
     }
+    
+    /**
+     * other - the other vector
+     * Returns the dot product of the two vectors.
+     */
+    func dot(other: Vector3) -> Float {
+        return (x * other.x + y * other.y + z * other.z);
+    }
+    
+    /**
+     * other - the other vector
+     * Returns the projection of this vector onto the other vector.
+     */
+    func project(other: Vector3) -> Vector3 {
+        let dotProduct = self.dot(other: other);
+        return other * (dotProduct / (powf(other.magnitude(), 2)));
+    }
 }
 
+/**
+ * Operator overloader for checking if two vectors are equal using ==
+ * left - the vector on the left side
+ * right - the vector on the right side
+ * Returns true if the vectors are equal, false otherwise
+ */
 func ==(left: Vector3, right: Vector3) -> Bool {
-    if (fabsf(left.x - right.x) < epsilon && fabsf(left.y - right.y) < epsilon && fabsf(left.z - right.z) < epsilon) {
+    if (fabsf(left.x - right.x) < Vector3.Epsilon && fabsf(left.y - right.y) < Vector3.Epsilon && fabsf(left.z - right.z) < Vector3.Epsilon) {
         return true;
     } else {
         return false;
