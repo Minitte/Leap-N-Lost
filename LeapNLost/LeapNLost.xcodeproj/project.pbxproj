@@ -17,6 +17,7 @@
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
+		AD606C29220BBA7F008B1517 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C28220BBA7F008B1517 /* Camera.swift */; };
 		AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36580220B5F2500ED9827 /* GameEngine.swift */; };
 		AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36582220B601700ED9827 /* ShaderLoader.swift */; };
 		AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AEF36585220B6ABE00ED9827 /* VertexShader.glsl */; };
@@ -41,6 +42,7 @@
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
+		AD606C28220BBA7F008B1517 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEF36580220B5F2500ED9827 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AEF36582220B601700ED9827 /* ShaderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLoader.swift; sourceTree = "<group>"; };
 		AEF36585220B6ABE00ED9827 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				AD606C27220BBA6A008B1517 /* Camera */,
 				AEF36598220B8ACB00ED9827 /* Models */,
 				AEF36584220B6AB100ED9827 /* Shaders */,
 				AEF36580220B5F2500ED9827 /* GameEngine.swift */,
@@ -116,6 +119,14 @@
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		AD606C27220BBA6A008B1517 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				AD606C28220BBA7F008B1517 /* Camera.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		AE84400D220BB5E6000891C0 /* Controllers */ = {
@@ -240,6 +251,7 @@
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
+				AD606C29220BBA7F008B1517 /* Camera.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
 			);
@@ -389,7 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35VZWR9J58;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -410,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 35VZWR9J58;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
