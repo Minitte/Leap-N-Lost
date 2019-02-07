@@ -40,6 +40,6 @@ class GameObject {
      * Update loop.
      */
     func update() {
-        rotation.y += Float.random(in: 0...0.5);
+        rotation.y += Float.random(in: 0...1);
     }
 }

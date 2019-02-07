@@ -21,9 +21,6 @@ class GameEngine {
     // Reference to the shader loader.
     private var shaderLoader : ShaderLoader;
     
-    // Test
-    //var rotation : Float;
-    
     // Array of all game objects in the scene.
     var gameObjects : [GameObject];
     
@@ -40,9 +37,11 @@ class GameEngine {
         self.view = view;
         modelViewMatrix = GLKMatrix4Identity;
         projectionMatrix = GLKMatrix4Identity;
-        shaderLoader = ShaderLoader(vertexShader: "SimpleVertexShader.glsl", fragmentShader: "SimpleFragmentShader.glsl");
         
-        // Populate with gameobjects
+        // Load shaders
+        shaderLoader = ShaderLoader(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        
+        // Populate with gameobjects for testing purposes
         gameObjects = [GameObject]();
         for _ in 1...10 {
             gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
@@ -64,17 +63,12 @@ class GameEngine {
      * The update loop
      */
     func update() {
-        // Continue rotation
-        //rotation += 0.1;
-        
         // Create a model view matrix
         modelViewMatrix = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, -10.0);
-        //modelViewMatrix = GLKMatrix4RotateY(modelViewMatrix, rotation);
  
         // Create a projection matrix
         let aspect = Float(view.drawableWidth) / Float(view.drawableHeight);
         projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, 1, 20);
-        
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
@@ -110,7 +104,7 @@ class GameEngine {
             // Render the object after passing the matrices to the shader
             shaderLoader.modelViewMatrix = objectMatrix;
             shaderLoader.projectionMatrix = projectionMatrix;
-            shaderLoader.prepareToDraw()
+            shaderLoader.prepareToDraw();
             gameObject.model.render();
         }
     }

@@ -19,7 +19,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     private var glkView : GLKView?;
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
         setupGL();
     }
     
@@ -28,10 +28,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      */
     func setupGL() {
         // Set the context
-        glkView = self.view as? GLKView
-        glkView!.context = EAGLContext(api: .openGLES2)!
-        EAGLContext.setCurrent(glkView!.context)
-        delegate = self
+        glkView = self.view as? GLKView;
+        glkView!.context = EAGLContext(api: .openGLES2)!;
+        EAGLContext.setCurrent(glkView!.context);
+        delegate = self;
         
         // Start the engine
         gameEngine = GameEngine(self.view as! GLKView);
@@ -41,13 +41,13 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      * Updates the game.
      */
     func glkViewControllerUpdate(_ controller: GLKViewController) {
-        gameEngine!.update()
+        gameEngine!.update();
     }
     
     /**
      * Renders the game.
      */
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        gameEngine!.render(rect)
+        gameEngine!.render(rect);
     }
 }
