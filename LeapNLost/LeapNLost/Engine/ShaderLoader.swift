@@ -21,10 +21,14 @@ class ShaderLoader {
     // ??
     var modelViewMatrixUniform : Int32;
     var projectionMatrixUniform : Int32;
+    var textureUniform : Int32;
     
     // MVP
     var modelViewMatrix : GLKMatrix4 = GLKMatrix4Identity;
     var projectionMatrix : GLKMatrix4 = GLKMatrix4Identity;
+    
+    // The current texture to use
+    var texture : GLuint;
     
     /**
      * Constructor for this class.
@@ -35,6 +39,8 @@ class ShaderLoader {
         programHandle = 0;
         modelViewMatrixUniform = 0;
         projectionMatrixUniform = 0;
+        textureUniform = 0;
+        texture = 0;
         modelViewMatrix = GLKMatrix4Identity;
         projectionMatrix = GLKMatrix4Identity;
         self.compile(vertexShader: vertexShader, fragmentShader: fragmentShader);
@@ -48,6 +54,10 @@ class ShaderLoader {
         
         glUniformMatrix4fv(self.projectionMatrixUniform, 1, GLboolean(GL_FALSE), self.projectionMatrix.array);
         glUniformMatrix4fv(self.modelViewMatrixUniform, 1, GLboolean(GL_FALSE), self.modelViewMatrix.array);
+        
+        glActiveTexture(GLenum(GL_TEXTURE1))
+        glBindTexture(GLenum(GL_TEXTURE_2D), self.texture)
+        glUniform1i(self.textureUniform, 1)
     }
     
     /**
@@ -108,11 +118,13 @@ class ShaderLoader {
         
         glBindAttribLocation(self.programHandle, VertexAttributes.position.rawValue, "a_Position");
         glBindAttribLocation(self.programHandle, VertexAttributes.color.rawValue, "a_Color");
+        glBindAttribLocation(self.programHandle, VertexAttributes.texCoord.rawValue, "a_TexCoord")
         glLinkProgram(self.programHandle);
         
         // Probably unnecessary
         self.modelViewMatrixUniform = glGetUniformLocation(self.programHandle, "u_ModelViewMatrix");
         self.projectionMatrixUniform = glGetUniformLocation(self.programHandle, "u_ProjectionMatrix");
+        self.textureUniform = glGetUniformLocation(self.programHandle, "u_Texture");
         
         var linkStatus : GLint = 0;
         glGetProgramiv(self.programHandle, GLenum(GL_LINK_STATUS), &linkStatus);

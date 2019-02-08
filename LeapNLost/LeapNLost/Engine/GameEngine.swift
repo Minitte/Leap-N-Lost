@@ -98,9 +98,10 @@ class GameEngine {
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, 0.2, 0.2, 0.2);
             
-            // Render the object after passing the matrices to the shader
+            // Render the object after passing the matrices and texture to the shader
             shaderLoader.modelViewMatrix = objectMatrix;
             shaderLoader.projectionMatrix = mainCamera.perspectiveMatrix;
+            shaderLoader.texture = gameObject.model.texture;
             shaderLoader.prepareToDraw();
             gameObject.model.render();
         }

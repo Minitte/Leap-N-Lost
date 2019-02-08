@@ -26,6 +26,9 @@ class Model {
     // The model's indices
     var indices : [GLubyte]
     
+    // The model's texture
+    var texture : GLuint;
+    
     // Buffers
     var vao: GLuint;
     var vertexBuffer: GLuint;
@@ -38,6 +41,9 @@ class Model {
         vao = 0;
         vertexBuffer = 0;
         indexBuffer = 0;
+        texture = 0;
+        
+        loadTexture(filename: "crate.jpg");
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);
@@ -58,6 +64,7 @@ class Model {
         glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, vertices, GLenum(GL_STATIC_DRAW));
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW));
         
+        // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
         glVertexAttribPointer(
             VertexAttributes.position.rawValue,
@@ -66,6 +73,7 @@ class Model {
             GLboolean(GL_FALSE),
             GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(0));
         
+        // Colour
         glEnableVertexAttribArray(VertexAttributes.color.rawValue);
         glVertexAttribPointer(
             VertexAttributes.color.rawValue,
@@ -73,6 +81,15 @@ class Model {
             GLenum(GL_FLOAT),
             GLboolean(GL_FALSE),
             GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size)); // x, y, z | r, g, b, a :: offset is 3*sizeof(GLfloat)
+        
+        // Texture
+        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.texCoord.rawValue,
+            2,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET((7) * MemoryLayout<GLfloat>.size)) // x, y, z | r, g, b, a | u, v :: offset is (3+4)*sizeof(GLfloat)
         
         glBindVertexArrayOES(0);
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
@@ -86,6 +103,21 @@ class Model {
         glBindVertexArrayOES(vao);
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_BYTE), nil);
         glBindVertexArrayOES(0);
+    }
+    
+    /**
+     * Loads a texture.
+     * filename - the name of the texture file.
+     */
+    func loadTexture(filename: String) {
+        let path = Bundle.main.path(forResource: filename, ofType: nil)!
+        let option = [ GLKTextureLoaderOriginBottomLeft: true]
+        do {
+            let info = try GLKTextureLoader.texture(withContentsOfFile: path, options: option as [String : NSNumber]?)
+            self.texture = info.name
+        } catch {
+            print("*** Texture loading error ***");
+        }
     }
     
     func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
