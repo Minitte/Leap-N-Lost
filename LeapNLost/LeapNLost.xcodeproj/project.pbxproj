@@ -24,6 +24,7 @@
 		AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */; };
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
+		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
 		AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36580220B5F2500ED9827 /* GameEngine.swift */; };
 		AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36582220B601700ED9827 /* ShaderLoader.swift */; };
 		AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AEF36585220B6ABE00ED9827 /* VertexShader.glsl */; };
@@ -34,6 +35,16 @@
 		AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36596220B8AA300ED9827 /* GameObject.swift */; };
 		AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3659A220B8B4700ED9827 /* Cube.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AEC69778220D1153009AA6F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5718CA152203C522000EC054 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5718CA1C2203C522000EC054;
+			remoteInfo = LeapNLost;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		57082062220A9DF9000740D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -57,6 +68,9 @@
 		AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScoreboard.swift; sourceTree = "<group>"; };
 		AD606C2E220BC75E008B1517 /* PlayerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEC69775220D1153009AA6F1 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
+		AEC69777220D1153009AA6F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEF36580220B5F2500ED9827 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		AEF36582220B601700ED9827 /* ShaderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLoader.swift; sourceTree = "<group>"; };
 		AEF36585220B6ABE00ED9827 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
@@ -77,6 +91,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AEC69770220D1153009AA6F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				5718CA1F2203C522000EC054 /* LeapNLost */,
+				AEC69774220D1153009AA6F1 /* MathTests */,
 				5718CA1E2203C522000EC054 /* Products */,
 				AD3817222209122E00390CFF /* Frameworks */,
 			);
@@ -93,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				5718CA1D2203C522000EC054 /* LeapNLost.app */,
+				AEC69773220D1153009AA6F1 /* MathTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +207,15 @@
 			path = Math;
 			sourceTree = "<group>";
 		};
+		AEC69774220D1153009AA6F1 /* MathTests */ = {
+			isa = PBXGroup;
+			children = (
+				AEC69775220D1153009AA6F1 /* MathTests.swift */,
+				AEC69777220D1153009AA6F1 /* Info.plist */,
+			);
+			path = MathTests;
+			sourceTree = "<group>";
+		};
 		AEF36584220B6AB100ED9827 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,19 +264,41 @@
 			productReference = 5718CA1D2203C522000EC054 /* LeapNLost.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AEC69772220D1153009AA6F1 /* MathTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEC6977C220D1153009AA6F1 /* Build configuration list for PBXNativeTarget "MathTests" */;
+			buildPhases = (
+				AEC6976F220D1153009AA6F1 /* Sources */,
+				AEC69770220D1153009AA6F1 /* Frameworks */,
+				AEC69771220D1153009AA6F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AEC69779220D1153009AA6F1 /* PBXTargetDependency */,
+			);
+			name = MathTests;
+			productName = MathTests;
+			productReference = AEC69773220D1153009AA6F1 /* MathTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5718CA152203C522000EC054 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = bcit;
 				TargetAttributes = {
 					5718CA1C2203C522000EC054 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+					};
+					AEC69772220D1153009AA6F1 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 5718CA1C2203C522000EC054;
 					};
 				};
 			};
@@ -262,6 +316,7 @@
 			projectRoot = "";
 			targets = (
 				5718CA1C2203C522000EC054 /* LeapNLost */,
+				AEC69772220D1153009AA6F1 /* MathTests */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +334,13 @@
 				57793E59220D014D00943230 /* frogtex.png in Resources */,
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEC69771220D1153009AA6F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +371,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AEC6976F220D1153009AA6F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AEC69779220D1153009AA6F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5718CA1C2203C522000EC054 /* LeapNLost */;
+			targetProxy = AEC69778220D1153009AA6F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5718CA242203C522000EC054 /* Main.storyboard */ = {
@@ -488,6 +566,46 @@
 			};
 			name = Release;
 		};
+		AEC6977A220D1153009AA6F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MathTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BCIT.MathTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeapNLost.app/LeapNLost";
+			};
+			name = Debug;
+		};
+		AEC6977B220D1153009AA6F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MathTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BCIT.MathTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeapNLost.app/LeapNLost";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -505,6 +623,15 @@
 			buildConfigurations = (
 				5718CA302203C523000EC054 /* Debug */,
 				5718CA312203C523000EC054 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEC6977C220D1153009AA6F1 /* Build configuration list for PBXNativeTarget "MathTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEC6977A220D1153009AA6F1 /* Debug */,
+				AEC6977B220D1153009AA6F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
