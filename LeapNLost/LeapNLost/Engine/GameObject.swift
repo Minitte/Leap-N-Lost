@@ -19,10 +19,10 @@ class GameObject {
     var model : Model;
     
     // World position of this game object.
-    var position : GLKVector3;
+    var position : Vector3;
     
     // Local rotation of this game object.
-    var rotation : GLKVector3;
+    var rotation : Vector3;
     
     /**
      * Construtor for the game object.
@@ -32,8 +32,8 @@ class GameObject {
         self.model = model;
         
         // Spawn in a random position for testing purposes
-        position = GLKVector3Make(Float.random(in: -2...2), Float.random(in: -2...2), Float.random(in: -2...2));
-        rotation = GLKVector3Make(0,0,0);
+        position = Vector3(withX: Float.random(in: -2...2), withY: Float.random(in: -2...2), withZ: Float.random(in: -2...2));
+        rotation = Vector3(withX: 0, withY: 0, withZ: 0);
     }
     
     /**

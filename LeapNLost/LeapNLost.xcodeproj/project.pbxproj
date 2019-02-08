@@ -15,6 +15,7 @@
 		5718CA282203C523000EC054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA272203C523000EC054 /* Assets.xcassets */; };
 		5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA292203C523000EC054 /* LaunchScreen.storyboard */; };
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
+		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
 		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
@@ -42,6 +43,7 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
+		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
 		AD606C2C220BC75E008B1517 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				5718CA292203C523000EC054 /* LaunchScreen.storyboard */,
 				5718CA2C2203C523000EC054 /* Info.plist */,
 				57082062220A9DF9000740D3 /* Level.swift */,
+				9227BE24220BFD6F00E3BE4D /* Vector3.swift */,
 			);
 			path = LeapNLost;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
+				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
