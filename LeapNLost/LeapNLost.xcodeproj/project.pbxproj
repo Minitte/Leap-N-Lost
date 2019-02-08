@@ -15,6 +15,8 @@
 		5718CA282203C523000EC054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA272203C523000EC054 /* Assets.xcassets */; };
 		5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA292203C523000EC054 /* LaunchScreen.storyboard */; };
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
+		57793E58220D014D00943230 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57793E54220D014C00943230 /* frog.obj */; };
+		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
@@ -44,6 +46,10 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
+		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Engine/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
+		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Engine/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
+		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Engine/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
+		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
@@ -106,6 +112,17 @@
 				57082062220A9DF9000740D3 /* Level.swift */,
 			);
 			path = LeapNLost;
+			sourceTree = "<group>";
+		};
+		57793E5A220D016F00943230 /* Frog */ = {
+			isa = PBXGroup;
+			children = (
+				57793E54220D014C00943230 /* frog.obj */,
+				57793E57220D014D00943230 /* frogMTL.h */,
+				57793E56220D014C00943230 /* frogOBJ.h */,
+				57793E55220D014C00943230 /* frogtex.png */,
+			);
+			path = Frog;
 			sourceTree = "<group>";
 		};
 		AD3817222209122E00390CFF /* Frameworks */ = {
@@ -179,6 +196,7 @@
 		AEF36598220B8ACB00ED9827 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57793E5A220D016F00943230 /* Frog */,
 				AEF36599220B8AD300ED9827 /* Primitives */,
 				AEF3658D220B6DDC00ED9827 /* Model.swift */,
 				AEF36589220B6C1C00ED9827 /* Vertex.swift */,
@@ -257,6 +275,8 @@
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
+				57793E58220D014D00943230 /* frog.obj in Resources */,
+				57793E59220D014D00943230 /* frogtex.png in Resources */,
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 			);
