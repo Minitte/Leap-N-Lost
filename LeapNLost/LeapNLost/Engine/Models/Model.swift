@@ -45,7 +45,6 @@ class Model {
         
         // Load a crate texture for testing purposes
         loadTexture(filename: "crate.jpg");
-        glBindTexture(GLenum(GL_TEXTURE_2D), self.texture)
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);

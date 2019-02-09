@@ -27,6 +27,9 @@ class ShaderLoader {
     var modelViewMatrix : GLKMatrix4;
     var projectionMatrix : GLKMatrix4;
     
+    // The current texture to use when rending
+    var currentTexture : GLuint;
+    
     /**
      * Constructor for this class. Compiles the shaders after initializing.
      * vertexShader - The name of the vertex shader file as a String
@@ -38,6 +41,7 @@ class ShaderLoader {
         modelViewMatrixUniform = 0;
         projectionMatrixUniform = 0;
         textureUniform = 0;
+        currentTexture = 0;
         modelViewMatrix = GLKMatrix4Identity;
         projectionMatrix = GLKMatrix4Identity;
         
@@ -55,6 +59,8 @@ class ShaderLoader {
         glUniformMatrix4fv(self.projectionMatrixUniform, 1, GLboolean(GL_FALSE), self.projectionMatrix.array);
         glUniformMatrix4fv(self.modelViewMatrixUniform, 1, GLboolean(GL_FALSE), self.modelViewMatrix.array);
         glUniform1i(self.textureUniform, 0)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), self.currentTexture)
     }
     
     /**

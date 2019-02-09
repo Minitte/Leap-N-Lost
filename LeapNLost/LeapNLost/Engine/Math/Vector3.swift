@@ -21,10 +21,10 @@ class Vector3 : CustomStringConvertible {
     var description : String { return "x: \(x) y: \(y) z: \(z)"};
     
     // Vector shorthands
-    private(set) static var Forward : Vector3 = Vector3 (withX: 0, withY: 0, withZ: 1)
-    private(set) static var Up : Vector3 = Vector3(withX: 0, withY: 1, withZ: 0)
-    private(set) static var Left : Vector3 = Vector3(withX: -1, withY: 0, withZ: 0)
-    private(set) static var Right : Vector3 = Vector3(withX: 1, withY: 0, withZ: 0)
+    private(set) static var Forward : Vector3 = Vector3 (0, 0, 1)
+    private(set) static var Up : Vector3 = Vector3(0, 1, 0)
+    private(set) static var Left : Vector3 = Vector3(-1, 0, 0)
+    private(set) static var Right : Vector3 = Vector3(1, 0, 0)
     
     // Vector components
     var x : Float;
@@ -46,7 +46,7 @@ class Vector3 : CustomStringConvertible {
      * y - The y value of the vector
      * z - the z value of the vector
      */
-    init(withX x: Float, withY y: Float, withZ z: Float) {
+    init(_ x: Float, _ y: Float, _ z: Float) {
         self.x = x;
         self.y = y;
         self.z = z;
@@ -71,7 +71,7 @@ class Vector3 : CustomStringConvertible {
      */
     func normalize() -> Vector3 {
         let magnitude : Float = self.magnitude();
-        return Vector3(withX: x / magnitude, withY: y / magnitude, withZ: z / magnitude);
+        return Vector3(x / magnitude, y / magnitude, z / magnitude);
     }
     
     /**
@@ -113,7 +113,7 @@ func ==(left: Vector3, right: Vector3) -> Bool {
  * Returns the sum of the two vectors.
  */
 func +(left: Vector3, right: Vector3) -> Vector3 {
-    let sum = Vector3(withX: left.x + right.x, withY: left.y + right.y, withZ: left.z + right.z);
+    let sum = Vector3(left.x + right.x, left.y + right.y, left.z + right.z);
     return sum;
 }
 
@@ -124,7 +124,7 @@ func +(left: Vector3, right: Vector3) -> Vector3 {
  * Returns the difference of the two vectors.
  */
 func -(left: Vector3, right: Vector3) -> Vector3 {
-    let sum = Vector3(withX: left.x - right.x, withY: left.y - right.y, withZ: left.z - right.z);
+    let sum = Vector3(left.x - right.x, left.y - right.y, left.z - right.z);
     return sum;
 }
 
@@ -135,7 +135,7 @@ func -(left: Vector3, right: Vector3) -> Vector3 {
  * Returns the vector after multiplying.
  */
 func *(left: Vector3, right: Vector3) -> Vector3 {
-    let product = Vector3(withX: left.x * right.x, withY: left.y * right.y, withZ: left.z * right.z);
+    let product = Vector3(left.x * right.x, left.y * right.y, left.z * right.z);
     return product;
 }
 
@@ -146,7 +146,7 @@ func *(left: Vector3, right: Vector3) -> Vector3 {
  * Returns the vector after scaling.
  */
 func *(left: Vector3, right: Float) -> Vector3 {
-    let product = Vector3(withX: left.x * right, withY: left.y * right, withZ: left.z * right);
+    let product = Vector3(left.x * right, left.y * right, left.z * right);
     return product;
 }
 
@@ -158,7 +158,7 @@ func *(left: Vector3, right: Float) -> Vector3 {
  */
 func *(left: Vector3, right: Int) -> Vector3 {
     let intScalar = Float(right);
-    let product = Vector3(withX: left.x * intScalar, withY: left.y * intScalar, withZ: left.z * intScalar);
+    let product = Vector3(left.x * intScalar, left.y * intScalar, left.z * intScalar);
     return product;
 }
 
@@ -169,7 +169,7 @@ func *(left: Vector3, right: Int) -> Vector3 {
  * Returns the vector after dividing.
  */
 func /(left: Vector3, right: Vector3) -> Vector3 {
-    let product = Vector3(withX: left.x / right.x, withY: left.y / right.y, withZ: left.z / right.z);
+    let product = Vector3(left.x / right.x, left.y / right.y, left.z / right.z);
     return product;
 }
 
@@ -180,7 +180,7 @@ func /(left: Vector3, right: Vector3) -> Vector3 {
  * Returns the vector after dividing.
  */
 func /(left: Vector3, right: Float) -> Vector3 {
-    let product = Vector3(withX: left.x / right, withY: left.y / right, withZ: left.z / right);
+    let product = Vector3(left.x / right, left.y / right, left.z / right);
     return product;
 }
 
@@ -192,6 +192,6 @@ func /(left: Vector3, right: Float) -> Vector3 {
  */
 func /(left: Vector3, right: Int) -> Vector3 {
     let intDivisor = Float(right);
-    let product = Vector3(withX: left.x / intDivisor, withY: left.y / intDivisor, withZ: left.z / intDivisor);
+    let product = Vector3(left.x / intDivisor, left.y / intDivisor, left.z / intDivisor);
     return product;
 }
