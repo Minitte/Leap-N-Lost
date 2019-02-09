@@ -24,6 +24,9 @@ class GameObject {
     // Local rotation of this game object.
     var rotation : Vector3;
     
+    // Scale of this game object.
+    var scale : Vector3;
+    
     /**
      * Construtor for the game object.
      * model - the model of the game object.
@@ -32,14 +35,16 @@ class GameObject {
         self.model = model;
         
         // Spawn in a random position for testing purposes
-        position = Vector3(withX: Float.random(in: -2...2), withY: Float.random(in: -2...2), withZ: Float.random(in: -2...2));
-        rotation = Vector3(withX: 0, withY: 0, withZ: 0);
+        position = Vector3(Float.random(in: -2...2), Float.random(in: -2...2), Float.random(in: -2...2));
+        rotation = Vector3(0, 0, 0);
+        scale = Vector3(0.5, 0.5, 0.5);
     }
     
     /**
      * Update loop.
      */
     func update() {
-        rotation.y += Float.random(in: 0...1);
+        // Continuously rotate around y axis for testing purposes
+        rotation.y += Float.random(in: 0...0.3);
     }
 }

@@ -24,7 +24,7 @@ class MathTests: XCTestCase {
      * Expected result is 3.
      */
     func testMagnitude() {
-        let testVec : Vector3 = Vector3(withX: 1, withY: 2, withZ: 2);
+        let testVec : Vector3 = Vector3(1, 2, 2);
         let expected : Float = 3;
         
         assert(testVec.magnitude() == expected);
@@ -34,9 +34,9 @@ class MathTests: XCTestCase {
      * Test normalization of a (10, 10, 10) vector.
      */
     func testNormalize() {
-        let testVec : Vector3 = Vector3(withX: 10, withY: 10, withZ: 10);
+        let testVec : Vector3 = Vector3(10, 10, 10);
         let magnitude : Float = testVec.magnitude();
-        let expectedVector = Vector3(withX: testVec.x / magnitude, withY: testVec.y / magnitude, withZ: testVec.z / magnitude);
+        let expectedVector = Vector3(testVec.x / magnitude, testVec.y / magnitude, testVec.z / magnitude);
         
         assert(testVec.normalize() == expectedVector);
     }
@@ -45,8 +45,8 @@ class MathTests: XCTestCase {
      * Test dot product.
      */
     func testDot() {
-        let testVecLeft : Vector3 = Vector3(withX: 1, withY: 2, withZ: 3);
-        let testVectRight : Vector3 = Vector3(withX: 4, withY: 5, withZ: 6);
+        let testVecLeft : Vector3 = Vector3(1, 2, 3);
+        let testVectRight : Vector3 = Vector3(4, 5, 6);
         
         let expectedValue : Float = 32;
         
@@ -59,10 +59,10 @@ class MathTests: XCTestCase {
      * Expected result is a zero vector.
      */
     func testProjection() {
-        let testVecLeft : Vector3 = Vector3(withX: 0, withY: 1, withZ: 0);
-        let testVecRight : Vector3 = Vector3(withX: 1, withY: 0, withZ: 0   );
+        let testVecLeft : Vector3 = Vector3(0, 1, 0);
+        let testVecRight : Vector3 = Vector3(1, 0, 0);
         
-        let expectedVector : Vector3 = Vector3(withX: 0, withY: 0, withZ: 0);
+        let expectedVector : Vector3 = Vector3(0, 0, 0);
         
         assert(testVecLeft.project(other: testVecRight) == expectedVector);
     }

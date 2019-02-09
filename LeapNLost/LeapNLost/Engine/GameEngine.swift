@@ -85,23 +85,23 @@ class GameEngine {
         for gameObject in gameObjects {
             
             // Get the game object's rotation as a matrix
-            var rotationMatrix = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
+            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
             rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
             rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
             
             // Get the game object's position as a matrix
-            var positionMatrix = GLKMatrix4Identity;
-            positionMatrix = GLKMatrix4Translate(positionMatrix, gameObject.position.x, gameObject.position.y, gameObject.position.z);
+            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            var objectMatrix = GLKMatrix4Multiply(mainCamera.transformMatrix, positionMatrix);
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
-            objectMatrix = GLKMatrix4Scale(objectMatrix, 0.2, 0.2, 0.2);
+            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
-            // Render the object after passing the matrices to the shader
+            // Render the object after passing the matrices and texture to the shader
             shaderLoader.modelViewMatrix = objectMatrix;
             shaderLoader.projectionMatrix = mainCamera.perspectiveMatrix;
-            shaderLoader.prepareToDraw();
+            shaderLoader.currentTexture = gameObject.model.texture;
+            shaderLoader.prepareToRender();
             gameObject.model.render();
         }
     }
