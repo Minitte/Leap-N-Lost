@@ -43,7 +43,9 @@ class Model {
         indexBuffer = 0;
         texture = 0;
         
+        // Load a crate texture for testing purposes
         loadTexture(filename: "crate.jpg");
+        glBindTexture(GLenum(GL_TEXTURE_2D), self.texture)
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);
@@ -61,6 +63,7 @@ class Model {
         let count = vertices.count;
         let size =  MemoryLayout<Vertex>.size;
         
+        // Load vertices and indices into buffers
         glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, vertices, GLenum(GL_STATIC_DRAW));
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW));
         
@@ -80,7 +83,7 @@ class Model {
             4,
             GLenum(GL_FLOAT),
             GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size)); // x, y, z | r, g, b, a :: offset is 3*sizeof(GLfloat)
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size));
         
         // Texture
         glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
@@ -89,8 +92,9 @@ class Model {
             2,
             GLenum(GL_FLOAT),
             GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET((7) * MemoryLayout<GLfloat>.size)) // x, y, z | r, g, b, a | u, v :: offset is (3+4)*sizeof(GLfloat)
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(7 * MemoryLayout<GLfloat>.size))
         
+        // Bind the buffers
         glBindVertexArrayOES(0);
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);

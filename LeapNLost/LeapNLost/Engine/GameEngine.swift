@@ -101,8 +101,7 @@ class GameEngine {
             // Render the object after passing the matrices and texture to the shader
             shaderLoader.modelViewMatrix = objectMatrix;
             shaderLoader.projectionMatrix = mainCamera.perspectiveMatrix;
-            shaderLoader.texture = gameObject.model.texture;
-            shaderLoader.prepareToDraw();
+            shaderLoader.prepareToRender();
             gameObject.model.render();
         }
     }

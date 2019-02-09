@@ -10,7 +10,7 @@ import Foundation
 import GLKit
 
 /**
- * Class for loading and linking shaders to openGL.
+ * Class for loading and linking shaders to openGL. Basically the render engine.
  * Most of this code is referenced from https://github.com/skyfe79/LearningOpenGLES2
  */
 class ShaderLoader {
@@ -18,46 +18,43 @@ class ShaderLoader {
     // The program handle as an int. Will be non-zero if there are no errors
     var programHandle : GLuint;
     
-    // ??
+    // Locations of uniform variables in the shaders
     var modelViewMatrixUniform : Int32;
     var projectionMatrixUniform : Int32;
     var textureUniform : Int32;
     
-    // MVP
-    var modelViewMatrix : GLKMatrix4 = GLKMatrix4Identity;
-    var projectionMatrix : GLKMatrix4 = GLKMatrix4Identity;
-    
-    // The current texture to use
-    var texture : GLuint;
+    // Model, view, and projection matrices
+    var modelViewMatrix : GLKMatrix4;
+    var projectionMatrix : GLKMatrix4;
     
     /**
-     * Constructor for this class.
+     * Constructor for this class. Compiles the shaders after initializing.
      * vertexShader - The name of the vertex shader file as a String
      * fragmentShader - the name of the fragment shader file as a String
      */
     init(vertexShader: String, fragmentShader: String) {
+        // Initialize variables
         programHandle = 0;
         modelViewMatrixUniform = 0;
         projectionMatrixUniform = 0;
         textureUniform = 0;
-        texture = 0;
         modelViewMatrix = GLKMatrix4Identity;
         projectionMatrix = GLKMatrix4Identity;
+        
+        // Compile shaders
         self.compile(vertexShader: vertexShader, fragmentShader: fragmentShader);
+        glUseProgram(self.programHandle);
+        //glActiveTexture(GLenum(GL_TEXTURE0))
     }
     
     /**
-     * Prepares the drawing of the current frame in openGL.
+     * Prepares the render of the current frame in openGL.
      */
-    func prepareToDraw() {
-        glUseProgram(self.programHandle)
-        
+    func prepareToRender() {
+        // Set uniform variables in the shaders
         glUniformMatrix4fv(self.projectionMatrixUniform, 1, GLboolean(GL_FALSE), self.projectionMatrix.array);
         glUniformMatrix4fv(self.modelViewMatrixUniform, 1, GLboolean(GL_FALSE), self.modelViewMatrix.array);
-        
-        glActiveTexture(GLenum(GL_TEXTURE1))
-        glBindTexture(GLenum(GL_TEXTURE_2D), self.texture)
-        glUniform1i(self.textureUniform, 1)
+        glUniform1i(self.textureUniform, 0)
     }
     
     /**
@@ -121,7 +118,7 @@ class ShaderLoader {
         glBindAttribLocation(self.programHandle, VertexAttributes.texCoord.rawValue, "a_TexCoord")
         glLinkProgram(self.programHandle);
         
-        // Probably unnecessary
+        // Get locations of uniform variables in shaders
         self.modelViewMatrixUniform = glGetUniformLocation(self.programHandle, "u_ModelViewMatrix");
         self.projectionMatrixUniform = glGetUniformLocation(self.programHandle, "u_ProjectionMatrix");
         self.textureUniform = glGetUniformLocation(self.programHandle, "u_Texture");
