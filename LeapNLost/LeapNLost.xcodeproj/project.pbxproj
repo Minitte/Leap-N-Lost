@@ -150,6 +150,13 @@
 			path = Frog;
 			sourceTree = "<group>";
 		};
+		92372E6F220F91CB001F5139 /* Lighting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lighting;
+			sourceTree = "<group>";
+		};
 		AD3817222209122E00390CFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +168,7 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				92372E6F220F91CB001F5139 /* Lighting */,
 				AEC6974B220D03ED009AA6F1 /* Math */,
 				AEC69748220D03CF009AA6F1 /* Camera */,
 				AEF36598220B8ACB00ED9827 /* Models */,

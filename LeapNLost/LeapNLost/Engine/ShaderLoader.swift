@@ -121,7 +121,8 @@ class ShaderLoader {
         
         glBindAttribLocation(self.programHandle, VertexAttributes.position.rawValue, "a_Position");
         glBindAttribLocation(self.programHandle, VertexAttributes.color.rawValue, "a_Color");
-        glBindAttribLocation(self.programHandle, VertexAttributes.texCoord.rawValue, "a_TexCoord")
+        glBindAttribLocation(self.programHandle, VertexAttributes.texCoord.rawValue, "a_TexCoord");
+        glBindAttribLocation(self.programHandle, VertexAttributes.normal.rawValue, "a_Normal");
         glLinkProgram(self.programHandle);
         
         // Get locations of uniform variables in shaders
