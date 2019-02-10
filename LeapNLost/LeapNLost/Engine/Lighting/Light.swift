@@ -13,12 +13,6 @@ import Foundation
  */
 class Light {
     
-    // Position of the light
-    var position : Vector3;
-    
-    // Direction that the light is facing
-    var direction : Vector3;
-    
     // Color of the light
     var color : Vector3;
     
@@ -28,33 +22,33 @@ class Light {
     var specularIntensity : Float;
     
     /**
-     * Default constructor, sets all variables to zero.
+     * Default constructor, initializes all variables to zero.
+     * Visibility is protected to prevent initializaiton by classes
+     * that aren't subclasses of this.
      */
-    init() {
+    internal init() {
         // Initialize variables
-        position = Vector3();
-        direction = Vector3();
-        color = Vector3();
-        ambientIntensity = 0;
-        diffuseIntensity = 0;
-        specularIntensity = 0;
+        self.color = Vector3();
+        self.ambientIntensity = 0;
+        self.diffuseIntensity = 0;
+        self.specularIntensity = 0;
     }
     
     /**
      * Constructor with parameters for each variable.
-     * position - the position of the light
-     * direction - the direction that the light is facing
+     * Visibility is protected to prevent being initialization by classes
+     * that aren't subclasses of this.
+     *
      * color - the color of the light
      * ambientIntensity - scalar for the ambient light
      * diffuseIntensity - scalar for the diffuse light
      * specularIntensity - scalar for the specular light
      */
-    init(position: Vector3, direction: Vector3, color: Vector3, ambientIntensity: Float, diffuseIntensity: Float, specularIntensity: Float) {
-        self.position = position;
-        self.direction = direction;
+    internal init(color: Vector3, ambientIntensity: Float, diffuseIntensity: Float, specularIntensity: Float) {
         self.color = color;
         self.ambientIntensity = ambientIntensity;
         self.diffuseIntensity = diffuseIntensity;
         self.specularIntensity = specularIntensity;
     }
+    
 }

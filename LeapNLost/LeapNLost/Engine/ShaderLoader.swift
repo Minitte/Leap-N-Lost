@@ -36,7 +36,7 @@ class ShaderLoader {
     var currentTexture : GLuint;
     
     // Directonal light, i.e. the sun in the game
-    var directionalLight : Light;
+    var directionalLight : DirectionalLight;
     
     /**
      * Constructor for this class. Compiles the shaders after initializing.
@@ -65,7 +65,7 @@ class ShaderLoader {
         lightSpecularIntensityUniform = 0;
         
         // Initialize directional light with hardcoded variables for now
-        directionalLight = Light(position: Vector3(), direction: Vector3(0, -1, -1), color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1);
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -1, -1));
         
         // Compile shaders
         self.compile(vertexShader: vertexShader, fragmentShader: fragmentShader);
