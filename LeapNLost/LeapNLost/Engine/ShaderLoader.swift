@@ -16,12 +16,17 @@ import GLKit
 class ShaderLoader {
     
     // The program handle as an int. Will be non-zero if there are no errors
-    var programHandle : GLuint;
+    private(set) var programHandle : GLuint;
     
     // Locations of uniform variables in the shaders
     var modelViewMatrixUniform : Int32;
     var projectionMatrixUniform : Int32;
     var textureUniform : Int32;
+    var lightColorUniform : Int32;
+    var lightDirectionUniform : Int32;
+    var lightAmbientIntensityUniform : Int32;
+    var lightDiffuseIntensityUniform : Int32;
+    var lightSpecularIntensityUniform : Int32;
     
     // Model, view, and projection matrices
     var modelViewMatrix : GLKMatrix4;
@@ -29,6 +34,9 @@ class ShaderLoader {
     
     // The current texture to use when rending
     var currentTexture : GLuint;
+    
+    // Directonal light, i.e. the sun in the game
+    var directionalLight : Light;
     
     /**
      * Constructor for this class. Compiles the shaders after initializing.
@@ -38,12 +46,26 @@ class ShaderLoader {
     init(vertexShader: String, fragmentShader: String) {
         // Initialize variables
         programHandle = 0;
+        
+        // Camera matrices
         modelViewMatrixUniform = 0;
         projectionMatrixUniform = 0;
-        textureUniform = 0;
-        currentTexture = 0;
         modelViewMatrix = GLKMatrix4Identity;
         projectionMatrix = GLKMatrix4Identity;
+        
+        // Textures
+        textureUniform = 0;
+        currentTexture = 0;
+        
+        // Lighting
+        lightColorUniform = 0;
+        lightDirectionUniform = 0;
+        lightAmbientIntensityUniform = 0;
+        lightDiffuseIntensityUniform = 0;
+        lightSpecularIntensityUniform = 0;
+        
+        // Initialize directional light with hardcoded variables for now
+        directionalLight = Light(position: Vector3(), direction: Vector3(0, -1, -1), color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1);
         
         // Compile shaders
         self.compile(vertexShader: vertexShader, fragmentShader: fragmentShader);
@@ -59,8 +81,14 @@ class ShaderLoader {
         glUniformMatrix4fv(self.projectionMatrixUniform, 1, GLboolean(GL_FALSE), self.projectionMatrix.array);
         glUniformMatrix4fv(self.modelViewMatrixUniform, 1, GLboolean(GL_FALSE), self.modelViewMatrix.array);
         glUniform1i(self.textureUniform, 0)
-        
         glBindTexture(GLenum(GL_TEXTURE_2D), self.currentTexture)
+        
+        // Directional lighting variables
+        glUniform3fv(self.lightColorUniform, 1, directionalLight.color.array);
+        glUniform3fv(self.lightDirectionUniform, 1, directionalLight.direction.array);
+        glUniform1f(self.lightAmbientIntensityUniform, directionalLight.ambientIntensity);
+        glUniform1f(self.lightDiffuseIntensityUniform, directionalLight.diffuseIntensity)
+        glUniform1f(self.lightSpecularIntensityUniform, directionalLight.specularIntensity);
     }
     
     /**
@@ -129,6 +157,11 @@ class ShaderLoader {
         self.modelViewMatrixUniform = glGetUniformLocation(self.programHandle, "u_ModelViewMatrix");
         self.projectionMatrixUniform = glGetUniformLocation(self.programHandle, "u_ProjectionMatrix");
         self.textureUniform = glGetUniformLocation(self.programHandle, "u_Texture");
+        self.lightColorUniform = glGetUniformLocation(self.programHandle, "dirLight.Color")
+        self.lightDirectionUniform = glGetUniformLocation(self.programHandle, "dirLight.Direction")
+        self.lightAmbientIntensityUniform = glGetUniformLocation(self.programHandle, "dirLight.AmbientIntensity")
+        self.lightDiffuseIntensityUniform = glGetUniformLocation(self.programHandle, "dirLight.DiffuseIntensity")
+        self.lightSpecularIntensityUniform = glGetUniformLocation(self.programHandle, "dirLight.SpecularIntensity")
         
         var linkStatus : GLint = 0;
         glGetProgramiv(self.programHandle, GLenum(GL_LINK_STATUS), &linkStatus);

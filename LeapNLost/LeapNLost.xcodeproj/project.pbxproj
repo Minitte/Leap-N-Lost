@@ -18,6 +18,7 @@
 		57793E58220D014D00943230 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57793E54220D014C00943230 /* frog.obj */; };
 		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
+		92372E71220F92EC001F5139 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E70220F92EC001F5139 /* Light.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
 		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
@@ -63,6 +64,7 @@
 		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Engine/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
 		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		92372E70220F92EC001F5139 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
 		AD606C2C220BC75E008B1517 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		92372E6F220F91CB001F5139 /* Lighting */ = {
 			isa = PBXGroup;
 			children = (
+				92372E70220F92EC001F5139 /* Light.swift */,
 			);
 			path = Lighting;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92372E71220F92EC001F5139 /* Light.swift in Sources */,
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */,
