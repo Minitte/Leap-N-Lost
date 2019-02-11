@@ -57,4 +57,8 @@ class Spotlight : Light {
         super.init(color: color, ambientIntensity: ambientIntensity,
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
+    
+    override func render(shader: Shader) {
+        
+    }
 }

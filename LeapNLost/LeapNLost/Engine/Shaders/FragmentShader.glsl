@@ -6,11 +6,11 @@ varying lowp vec3 frag_Normal; // World normal
 varying lowp vec3 frag_Position; // World position
 
 struct DirLight {
-    lowp vec3 Color;
-    lowp vec3 Direction;
-    lowp float AmbientIntensity;
-    lowp float DiffuseIntensity;
-    lowp float SpecularIntensity;
+    lowp vec3 color;
+    lowp vec3 direction;
+    lowp float ambientIntensity;
+    lowp float diffuseIntensity;
+    lowp float specularIntensity;
 };
 uniform DirLight dirLight;
 
@@ -23,19 +23,19 @@ void main(void) {
 
 lowp vec4 calcDirLighting() {
     // Ambient
-    lowp vec3 AmbientColor = dirLight.Color * dirLight.AmbientIntensity;
+    lowp vec3 ambientColor = dirLight.color * dirLight.ambientIntensity;
     
     // Diffuse
-    lowp vec3 Normal = normalize(frag_Normal);
-    lowp float DiffuseFactor = max(-dot(Normal, dirLight.Direction), 0.0);
-    lowp vec3 DiffuseColor = dirLight.Color * dirLight.DiffuseIntensity * DiffuseFactor;
+    lowp vec3 normal = normalize(frag_Normal);
+    lowp float diffuseFactor = max(-dot(normal, dirLight.direction), 0.0);
+    lowp vec3 diffuseColor = dirLight.color * dirLight.diffuseIntensity * diffuseFactor;
     
     // Specular
-    lowp vec3 Eye = normalize(frag_Position);
-    lowp vec3 Reflection = reflect(dirLight.Direction, Normal);
-    lowp float SpecularFactor = pow(max(0.0, -dot(Reflection, Eye)), 1.0); //  Leave shininess at 1.0 for now
-    lowp vec3 SpecularColor = dirLight.Color * dirLight.SpecularIntensity * SpecularFactor;
+    lowp vec3 eye = normalize(frag_Position);
+    lowp vec3 reflection = reflect(dirLight.direction, normal);
+    lowp float specularFactor = pow(max(0.0, -dot(reflection, eye)), 1.0); //  Leave shininess at 1.0 for now
+    lowp vec3 specularColor = dirLight.color * dirLight.specularIntensity * specularFactor;
     
     // Add all three for phong lighting
-    return vec4((AmbientColor + DiffuseColor + SpecularColor), 1.0);
+    return vec4((ambientColor + diffuseColor + specularColor), 1.0);
 }

@@ -36,4 +36,16 @@ class DirectionalLight : Light {
         super.init(color: color, ambientIntensity: ambientIntensity,
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
+    
+    /**
+     * Renders this directional light by setting all the directional
+     * light variables in the shaders.
+     */
+    override func render(shader: Shader) {
+        shader.setVector(variableName: "dirLight.color", value: color);
+        shader.setVector(variableName: "dirLight.direction", value: direction);
+        shader.setFloat(variableName: "dirLight.ambientIntensity", value: ambientIntensity);
+        shader.setFloat(variableName: "dirLight.diffuseIntensity", value: diffuseIntensity);
+        shader.setFloat(variableName: "dirLight.specularIntensity", value: specularIntensity);
+    }
 }
