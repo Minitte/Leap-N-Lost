@@ -8,6 +8,11 @@
 
 import Foundation
 
+/**
+ * Class for directional lights that emit a constant light in a certain direction.
+ * This light applies to all game objects in the scene.
+ * More information at: https://learnopengl.com/Lighting/Light-casters
+ */
 class DirectionalLight : Light {
     
     // Direction of the light
@@ -41,7 +46,7 @@ class DirectionalLight : Light {
      * Renders this directional light by setting all the directional
      * light variables in the shaders.
      */
-    override func render(shader: Shader) {
+    func render(shader: Shader) {
         shader.setVector(variableName: "dirLight.color", value: color);
         shader.setVector(variableName: "dirLight.direction", value: direction);
         shader.setFloat(variableName: "dirLight.ambientIntensity", value: ambientIntensity);

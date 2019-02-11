@@ -50,13 +50,4 @@ class Light {
         self.diffuseIntensity = diffuseIntensity;
         self.specularIntensity = specularIntensity;
     }
-    
-    /**
-     * Renders this light by setting the appropriate variables in the shader.
-     * Must be overriden by subclasses.
-     */
-    internal func render(shader: Shader) {
-        preconditionFailure("Light.render() must be overriden.");
-    }
-    
 }

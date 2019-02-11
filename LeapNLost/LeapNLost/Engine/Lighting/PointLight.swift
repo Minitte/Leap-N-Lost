@@ -59,7 +59,18 @@ class PointLight : Light {
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
     
-    override func render(shader: Shader) {
-        
+    /**
+     * Renders this point light by setting all the point
+     * light variables in the shaders.
+     */
+    func render(shader: Shader, lightNumber : Int) {
+        shader.setVector(variableName: "pointLights[" + String(lightNumber) + "].color", value: color);
+        shader.setVector(variableName: "pointLights[" + String(lightNumber) + "].position", value: position);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].constant", value: constant);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].linear", value: linear);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].quadratic", value: quadratic);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].ambientIntensity", value: ambientIntensity);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].diffuseIntensity", value: diffuseIntensity);
+        shader.setFloat(variableName: "pointLights[" + String(lightNumber) + "].specularIntensity", value: specularIntensity);
     }
 }

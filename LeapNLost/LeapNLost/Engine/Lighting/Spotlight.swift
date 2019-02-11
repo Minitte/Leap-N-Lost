@@ -58,7 +58,10 @@ class Spotlight : Light {
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
     
-    override func render(shader: Shader) {
-        
+    /**
+     * TODO
+     */
+    func render(shader: Shader) {
+        preconditionFailure("Spotlights are currently not implemented");
     }
 }
