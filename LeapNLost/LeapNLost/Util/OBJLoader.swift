@@ -11,24 +11,41 @@ import GLKit
 
 class OBJLoader {
     
-    public static func loadModel(nameOfModel name:String) {
+    /**
+     * tries to load a model
+     */
+    public static func loadModel(nameOfModel name:String) -> Model? {
+        // get full obj file path
         let path = Bundle.main.path(forResource: "model_" + name, ofType: "obj");
         
         do {
+            // attempt to get contents of obj file
             let contents : String = try String(contentsOfFile: path!);
             
+            // extract lines from the string
             let lines : [String] = contents.components(separatedBy: "\n");
             
             // process lines
-            var vertices : [Vertex] = extractVertexData(objLines: lines);
+            // get vertices from file
+            let vertices : [Vertex] = extractVertexData(objLines: lines);
             
-            NSLog(contents);
-        }
-        catch {
+            // get indices from file
+            let indices : [GLubyte] = extractIndices(objLines: lines);
+            
+            // create model from extracted data
+            let model : Model = Model.init(vertices: vertices, indices: indices);
+            
+            return model;
+        } catch {
             print("Error reading file. \(error)");
         }
+        
+        return nil;
     }
     
+    /**
+     * Extracts the vertex data from the lines
+     */
     private static func extractVertexData(objLines lines:[String]) -> [Vertex] {
         var vertices : [Vertex] = [Vertex]();
         
@@ -38,6 +55,7 @@ class OBJLoader {
         
         var vNorm : [[GLfloat]] = [[GLfloat]]();
         
+        // read data
         for line in lines {
             let elements : [String] = line.components(separatedBy: " ");
             
@@ -60,6 +78,7 @@ class OBJLoader {
             }
         }
         
+        // create vertices
         for i in 0 ..< vPos.count {
             
             if (i < texCoord.count) {
@@ -72,11 +91,34 @@ class OBJLoader {
                 let v : Vertex = Vertex.init(vPos[i][0], vPos[i][1], vPos[i][2], 0, 0, 0, 0, 0, 0);
                 vertices.append(v);
             }
-            
-            
         }
         
         return vertices;
+    }
+    
+    /**
+     * Extracts the indices from the lines
+     */
+    private static func extractIndices(objLines lines:[String]) -> [GLubyte] {
+        var indices : [GLubyte] = [GLubyte]();
+        
+        for line in lines {
+            let elements : [String] = line.components(separatedBy: " ");
+            
+            if (elements[0] == "f") {
+                
+                for i in 1 ..< elements.count {
+                    let indexSet = elements[i].components(separatedBy: "/");
+                    
+                    for index in indexSet {
+                        indices.append(GLubyte(index)!);
+                    }
+                }
+                
+            }
+        }
+        
+        return indices;
     }
     
     /**
