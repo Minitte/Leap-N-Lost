@@ -93,6 +93,15 @@ class Model {
             GLboolean(GL_FALSE),
             GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(7 * MemoryLayout<GLfloat>.size))
         
+        // Normals
+        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.normal.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(9 * MemoryLayout<GLfloat>.size))
+        
         // Bind the buffers
         glBindVertexArrayOES(0);
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);

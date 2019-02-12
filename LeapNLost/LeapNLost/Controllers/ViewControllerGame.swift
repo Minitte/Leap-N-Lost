@@ -33,6 +33,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         EAGLContext.setCurrent(glkView!.context);
         delegate = self;
         
+        // Enable depth buffer
+        glkView!.drawableDepthFormat = GLKViewDrawableDepthFormat.format24;
+        glEnable(GLbitfield(GL_DEPTH_TEST));
+        
         // Start the engine
         gameEngine = GameEngine(self.view as! GLKView);
     }

@@ -18,13 +18,20 @@ class GameEngine {
     // Reference to the game view.
     private var view : GLKView;
     
-    // Reference to the shader loader.
-    private var shaderLoader : ShaderLoader;
+    // Reference to the shader
+    private var shader : Shader;
     
     // Array of all game objects in the scene.
     var gameObjects : [GameObject];
     
-    // camera properties
+    // The directional light in the scene, i.e. the sun
+    var directionalLight : DirectionalLight;
+    
+    // Arrays of all lights in the scene.
+    var pointLights : [PointLight];
+    //var spotlights : [Spotlight];
+    
+    // Camera properties
     var mainCamera : Camera;
     
     /**
@@ -36,7 +43,8 @@ class GameEngine {
         self.view = view;
         
         // Load shaders
-        shaderLoader = ShaderLoader(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        let programHandle : GLuint = ShaderLoader().compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        self.shader = Shader(programHandle: programHandle);
         
         // Populate with gameobjects for testing purposes
         gameObjects = [GameObject]();
@@ -44,24 +52,20 @@ class GameEngine {
             gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
         }
         
+        // Initialize some test lighting
+        pointLights = [PointLight]();
+        for _ in 0...3 {
+            pointLights.append(PointLight(color: Vector3(1, 0, 0.5), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1.0, linear: 0.5, quadratic: 0.1));
+        }
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -1, -1));
+        
+        // Setup the camera
         mainCamera = Camera();
         mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
-        
-        
-        setupGL();
     }
     
     /**
-     * Any additional setup for openGL is done here
-     */
-    func setupGL() {
-        // Enable depth buffer
-        view.drawableDepthFormat = GLKViewDrawableDepthFormat.format24;
-        glEnable(GLbitfield(GL_DEPTH_TEST));
-    }
-    
-    /**
-     * The update loop
+     * The update loop.
      */
     func update() {
         // Create a projection matrix
@@ -81,6 +85,9 @@ class GameEngine {
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
+        // Set camera position variable in shader
+        shader.setVector(variableName: "view_Position", value: Vector3(0, 0, -10));
+        
         // Loop through every object in scene and call render
         for gameObject in gameObjects {
             
@@ -97,11 +104,26 @@ class GameEngine {
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
+            // Apply all point lights to the rendering of this game object
+            // TODO - Only apply point lights that are within range
+            var lightsRendered : Int = 0;
+            
+            for light in pointLights {
+                light.render(shader: shader, lightNumber: lightsRendered);
+                lightsRendered += 1;
+                
+                // Stop after maximum number of lights
+                if (lightsRendered == 4) {
+                    break;
+                }
+            }
+            
+            directionalLight.render(shader: shader);
+            
             // Render the object after passing the matrices and texture to the shader
-            shaderLoader.modelViewMatrix = objectMatrix;
-            shaderLoader.projectionMatrix = mainCamera.perspectiveMatrix;
-            shaderLoader.currentTexture = gameObject.model.texture;
-            shaderLoader.prepareToRender();
+            shader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            shader.setMatrix(variableName: "u_ProjectionMatrix", value: mainCamera.perspectiveMatrix);
+            shader.setTexture(texture: gameObject.model.texture);
             gameObject.model.render();
         }
     }

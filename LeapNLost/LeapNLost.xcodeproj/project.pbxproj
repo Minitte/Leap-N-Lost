@@ -18,6 +18,11 @@
 		57793E58220D014D00943230 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57793E54220D014C00943230 /* frog.obj */; };
 		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
+		92372E71220F92EC001F5139 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E70220F92EC001F5139 /* Light.swift */; };
+		92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7222102F44001F5139 /* DirectionalLight.swift */; };
+		92372E75221033A4001F5139 /* PointLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E74221033A4001F5139 /* PointLight.swift */; };
+		92372E7722103CE8001F5139 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7622103CE7001F5139 /* Spotlight.swift */; };
+		92372E7922111C04001F5139 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7822111C04001F5139 /* Shader.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
 		AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD381727220919F500390CFF /* ViewControllerGame.swift */; };
 		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
@@ -63,6 +68,11 @@
 		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Engine/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
 		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		92372E70220F92EC001F5139 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		92372E7222102F44001F5139 /* DirectionalLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalLight.swift; sourceTree = "<group>"; };
+		92372E74221033A4001F5139 /* PointLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointLight.swift; sourceTree = "<group>"; };
+		92372E7622103CE7001F5139 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
+		92372E7822111C04001F5139 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AD381727220919F500390CFF /* ViewControllerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGame.swift; sourceTree = "<group>"; };
 		AD606C2C220BC75E008B1517 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
@@ -150,6 +160,17 @@
 			path = Frog;
 			sourceTree = "<group>";
 		};
+		92372E6F220F91CB001F5139 /* Lighting */ = {
+			isa = PBXGroup;
+			children = (
+				92372E70220F92EC001F5139 /* Light.swift */,
+				92372E7222102F44001F5139 /* DirectionalLight.swift */,
+				92372E74221033A4001F5139 /* PointLight.swift */,
+				92372E7622103CE7001F5139 /* Spotlight.swift */,
+			);
+			path = Lighting;
+			sourceTree = "<group>";
+		};
 		AD3817222209122E00390CFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +182,7 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				92372E6F220F91CB001F5139 /* Lighting */,
 				AEC6974B220D03ED009AA6F1 /* Math */,
 				AEC69748220D03CF009AA6F1 /* Camera */,
 				AEF36598220B8ACB00ED9827 /* Models */,
@@ -169,6 +191,7 @@
 				AEF36582220B601700ED9827 /* ShaderLoader.swift */,
 				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
+				92372E7822111C04001F5139 /* Shader.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -363,20 +386,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92372E7922111C04001F5139 /* Shader.swift in Sources */,
+				92372E71220F92EC001F5139 /* Light.swift in Sources */,
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */,
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
+				92372E75221033A4001F5139 /* PointLight.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
 				AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */,
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
+				92372E7722103CE8001F5139 /* Spotlight.swift in Sources */,
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
+				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
