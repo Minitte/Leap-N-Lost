@@ -110,9 +110,11 @@ class OBJLoader {
                 for i in 1 ..< elements.count {
                     let indexSet = elements[i].components(separatedBy: "/");
                     
-                    for index in indexSet {
-                        indices.append(GLubyte(index)!);
-                    }
+//                    for index in indexSet {
+//                        indices.append((GLubyte(index)!) - GLubyte(1));
+//                    }
+                    
+                    indices.append((GLubyte(indexSet[0])!) - GLubyte(1));
                 }
                 
             }

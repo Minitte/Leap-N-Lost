@@ -41,7 +41,11 @@ class GameEngine {
         // Populate with gameobjects for testing purposes
         gameObjects = [GameObject]();
         for _ in 1...10 {
-            gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
+            //gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
+            
+            var go : GameObject = GameObject.init(OBJLoader.loadModel(nameOfModel: "cube")!);
+            
+            gameObjects.append(go);
         }
         
         mainCamera = Camera();

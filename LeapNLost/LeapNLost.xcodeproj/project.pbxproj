@@ -129,7 +129,6 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
-				ADEF384B221243A2000DEFCB /* model_cube.obj */,
 				ADEF384622123B32000DEFCB /* Util */,
 				AD606C2B220BC744008B1517 /* Player */,
 				AE84400D220BB5E6000891C0 /* Controllers */,
@@ -252,6 +251,7 @@
 		AEF36598220B8ACB00ED9827 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ADEF384B221243A2000DEFCB /* model_cube.obj */,
 				AEC6977D220D15FB009AA6F1 /* Textures */,
 				57793E5A220D016F00943230 /* Frog */,
 				AEF36599220B8AD300ED9827 /* Primitives */,
