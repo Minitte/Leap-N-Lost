@@ -24,6 +24,7 @@
 		AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */; };
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
+		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
 		AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEC6977E220D1613009AA6F1 /* crate.jpg */; };
@@ -70,6 +71,7 @@
 		AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScoreboard.swift; sourceTree = "<group>"; };
 		AD606C2E220BC75E008B1517 /* PlayerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
+		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC69775220D1153009AA6F1 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
+				ADEF384B221243A2000DEFCB /* model_cube.obj */,
 				ADEF384622123B32000DEFCB /* Util */,
 				AD606C2B220BC744008B1517 /* Player */,
 				AE84400D220BB5E6000891C0 /* Controllers */,
@@ -350,6 +353,7 @@
 			files = (
 				AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */,
 				5708206D220AE502000740D3 /* Levels in Resources */,
+				ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
