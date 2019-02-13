@@ -36,12 +36,14 @@ class ModelCachManager {
             // check if still null
             if (mesh == nil) {
                 return nil;
+            } else {
+                meshDictionary[meshName] = mesh;
             }
         }
         
         let model : Model = Model.init(vertices: (mesh?.vertices)!, indices: (mesh?.indices)!);
         
-//        model.loadTexture(filename: texName);
+        model.loadTexture(filename: texName);
         
         return model;
     }

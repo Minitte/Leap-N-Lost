@@ -44,7 +44,8 @@ class Model {
         texture = 0;
         
         // Load a crate texture for testing purposes
-        loadTexture(filename: "lilypad.png");
+        // default texture
+        loadTexture(filename: "default-texture.png");
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);

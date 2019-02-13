@@ -51,14 +51,14 @@ class GameEngine {
         for _ in 1...5 {
 //            gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
             
-//            let model : Model = ModelCachManager.instance.loadModel(withMeshName: "frog", withTextureName: "frogTex.png")!;
+            let model : Model = ModelCachManager.instance.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
             
-//            let go : GameObject = GameObject.init(model);
+            let go : GameObject = GameObject.init(model);
 
-            let go : GameObject = GameObject.init(OBJLoader.loadModel(nameOfModel: "frog")!);
-            
+//            let go : GameObject = GameObject.init(OBJLoader.loadModel(nameOfModel: "frog")!);
+//
             go.scale = Vector3(3,3,3);
-
+//
             gameObjects.append(go);
         }
         
