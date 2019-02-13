@@ -59,6 +59,53 @@ class OBJLoader {
     }
     
     /**
+     * returns a struct with the vertices and indices.
+     */
+    public static func loadMeshSet(nameOfMesh name:String) -> MeshSet? {
+        // get full obj file path
+        let path = Bundle.main.path(forResource: name, ofType: "obj");
+        
+        if (path == nil) {
+            NSLog("OBJLoader.loadModel() -> Failed to load " + name + ".obj because file was not found.");
+            return nil;
+        }
+        
+        do {
+            // attempt to get contents of obj file
+            let contents : String = try String(contentsOfFile: path!);
+            
+            // extract lines from the string
+            let lines : [String] = contents.components(separatedBy: "\n");
+            
+            // process lines
+            // Read in reference data
+            let ref : ModelRefData = extractDataRef(objLines: lines);
+            
+            // read in index data for faces
+            let face : FaceData = extractFaceData(objLines: lines);
+            
+            // create list of vertices
+            let vertices : [Vertex] = createVertices(refData: ref, faceData: face);
+            
+            // create indice list
+            var indices : [GLuint] = [GLuint]();
+            
+            for i in 0 ..< face.refCount {
+                indices.append(GLuint(i));
+            }
+            
+            // create model from extracted data
+            let mesh : MeshSet = MeshSet(vertices: vertices, indices: indices);
+            
+            return mesh;
+        } catch {
+            print("Error reading file. \(error)");
+        }
+        
+        return nil;
+    }
+    
+    /**
      * Creates the vertices base on data ref and face ref
      */
     private static func createVertices(refData ref:ModelRefData, faceData face:FaceData) -> [Vertex] {

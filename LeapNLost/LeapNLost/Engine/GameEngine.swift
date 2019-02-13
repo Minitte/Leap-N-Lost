@@ -38,7 +38,9 @@ class GameEngine {
         // Load shaders
         let programHandle : GLuint = ShaderLoader().compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.shader = Shader(programHandle: programHandle);
+
         self.currentScene = Scene(view: view);
+      
         lastTime = mach_absolute_time();
     }
     
