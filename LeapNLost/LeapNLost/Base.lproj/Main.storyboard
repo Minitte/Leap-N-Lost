@@ -18,26 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-cJ-liu">
-                                <rect key="frame" x="100" y="536" width="175" height="30"/>
-                                <state key="normal" title="TAP TO START!"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cartoon-forest" translatesAutoresizingMaskIntoConstraints="NO" id="19h-N7-0VQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-cJ-liu">
+                                <rect key="frame" x="59.5" y="527" width="256" height="38"/>
+                                <state key="normal" image="TapToStart"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LEAP N' LOST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQA-Nj-qHk">
-                                <rect key="frame" x="66" y="121" width="243" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="frog" translatesAutoresizingMaskIntoConstraints="NO" id="uMN-dm-Yqr">
+                                <rect key="frame" x="67" y="211" width="240" height="240"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="LeapNLostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="H3P-AA-ACP">
+                                <rect key="frame" x="35" y="72" width="304" height="67"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="VQA-Nj-qHk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="23T-4C-88I"/>
-                            <constraint firstItem="VQA-Nj-qHk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="4LR-so-3bi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VQA-Nj-qHk" secondAttribute="trailing" constant="60" id="OYa-s9-RBq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="akM-cJ-liu" secondAttribute="bottom" constant="101" id="Xaa-z1-Afg"/>
-                            <constraint firstItem="akM-cJ-liu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="rNF-3n-zep"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="akM-cJ-liu" secondAttribute="trailing" constant="100" id="sAC-Km-kvK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H3P-AA-ACP" secondAttribute="trailing" constant="1" id="A7A-rP-S7J"/>
+                            <constraint firstItem="uMN-dm-Yqr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Csr-6c-jz3"/>
+                            <constraint firstItem="19h-N7-0VQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="FU3-ph-BOI"/>
+                            <constraint firstItem="19h-N7-0VQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Isl-eB-4Dx"/>
+                            <constraint firstItem="akM-cJ-liu" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ks4-6L-Owh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="akM-cJ-liu" secondAttribute="bottom" constant="102" id="awa-Ju-dkt"/>
+                            <constraint firstItem="H3P-AA-ACP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="hHu-jV-Aqd"/>
+                            <constraint firstItem="H3P-AA-ACP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="n73-8o-Nwi"/>
+                            <constraint firstItem="uMN-dm-Yqr" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nVa-4p-ZDp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -65,6 +71,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cartoon-forest" translatesAutoresizingMaskIntoConstraints="NO" id="2f1-sJ-hs6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GfP-Ck-MCp">
                                 <rect key="frame" x="100" y="278.5" width="175" height="30"/>
                                 <color key="backgroundColor" red="0.8236987348" green="1" blue="0.75828911330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,12 +115,9 @@
                                     <action selector="exitApp:" destination="50b-uE-2Sx" eventType="touchUpInside" id="mn4-as-Hhr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7b0-RI-SsT">
-                                <rect key="frame" x="139.5" y="161" width="96.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mainmenu" translatesAutoresizingMaskIntoConstraints="NO" id="mCB-UH-WPE">
+                                <rect key="frame" x="83" y="167" width="208" height="39"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -120,19 +126,21 @@
                             <constraint firstItem="GfP-Ck-MCp" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="96c-EG-uID"/>
                             <constraint firstItem="Zpq-Mk-E5l" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="GAJ-09-W4i"/>
                             <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="Zpq-Mk-E5l" secondAttribute="trailing" constant="100" id="JDL-aY-jsS"/>
-                            <constraint firstItem="7b0-RI-SsT" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="LQ6-Qc-oaZ"/>
                             <constraint firstItem="Y15-ov-cV2" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="Q5P-Cy-cYN"/>
+                            <constraint firstItem="2f1-sJ-hs6" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="QKv-tS-TNW"/>
                             <constraint firstItem="GfP-Ck-MCp" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="cKz-FF-koH"/>
+                            <constraint firstItem="mCB-UH-WPE" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="gSU-7j-AXO"/>
                             <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="ulH-4t-YeJ" secondAttribute="trailing" constant="100" id="glf-tN-NMS"/>
                             <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="GfP-Ck-MCp" secondAttribute="trailing" constant="100" id="hRr-k0-o3l"/>
                             <constraint firstItem="Y15-ov-cV2" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="i1l-jJ-8c8"/>
+                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="top" secondItem="mCB-UH-WPE" secondAttribute="bottom" constant="72.5" id="m4T-Xu-ug0"/>
                             <constraint firstItem="ulH-4t-YeJ" firstAttribute="top" secondItem="Y15-ov-cV2" secondAttribute="bottom" constant="20" id="n7v-Cd-5NS"/>
                             <constraint firstItem="Y15-ov-cV2" firstAttribute="top" secondItem="GfP-Ck-MCp" secondAttribute="bottom" constant="20" id="nCr-Jc-wHj"/>
-                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="top" secondItem="7b0-RI-SsT" secondAttribute="bottom" constant="93.5" id="pyV-qf-S4y"/>
                             <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="Y15-ov-cV2" secondAttribute="trailing" constant="100" id="s5P-SF-rt2"/>
                             <constraint firstItem="ulH-4t-YeJ" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="tP7-6f-uCS"/>
                             <constraint firstItem="Zpq-Mk-E5l" firstAttribute="top" secondItem="ulH-4t-YeJ" secondAttribute="bottom" constant="20" id="ulW-9X-HC6"/>
                             <constraint firstItem="Y15-ov-cV2" firstAttribute="centerY" secondItem="mBE-HV-cn7" secondAttribute="centerY" id="xyN-Vg-BTE"/>
+                            <constraint firstItem="2f1-sJ-hs6" firstAttribute="centerY" secondItem="mBE-HV-cn7" secondAttribute="centerY" id="yJK-l1-sxZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mBE-HV-cn7"/>
                     </view>
@@ -157,4 +165,11 @@
             <point key="canvasLocation" x="2147" y="31"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LeapNLostLogo" width="600" height="100"/>
+        <image name="TapToStart" width="256" height="38"/>
+        <image name="cartoon-forest" width="810" height="1440"/>
+        <image name="frog" width="258" height="265"/>
+        <image name="mainmenu" width="256" height="38"/>
+    </resources>
 </document>
