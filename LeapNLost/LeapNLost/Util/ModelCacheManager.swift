@@ -11,19 +11,13 @@ import GLKit;
 
 class ModelCacheManager {
     
-    public static var instance : ModelCacheManager = ModelCacheManager.init();
-    
-    private static var meshDictionary : [String : MeshSet];
-    
-    init() {
-        meshDictionary = [:];
-    }
+    private static var meshDictionary : [String : MeshSet] = [:];
     
     /**
      * returns a model with the given texture and mesh.
      * If the mesh has not been loaded yet, this will try to load it from file.
      */
-    public func loadModel(withMeshName meshName:String, withTextureName texName:String, saveToCache save:Bool = true) -> Model? {
+    public static func loadModel(withMeshName meshName:String, withTextureName texName:String, saveToCache save:Bool = true) -> Model? {
         
         var mesh : MeshSet? = meshDictionary[meshName];
         
@@ -53,7 +47,7 @@ class ModelCacheManager {
     /**
      * Remove all in cache
      */
-    public func flushCache() {
+    public static func flushCache() {
         meshDictionary = [:];
     }
 }
