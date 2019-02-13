@@ -44,7 +44,7 @@ class Model {
         texture = 0;
         
         // Load a crate texture for testing purposes
-        loadTexture(filename: "crate.jpg");
+        loadTexture(filename: "frogtex.png");
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);
