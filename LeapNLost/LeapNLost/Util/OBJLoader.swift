@@ -16,7 +16,12 @@ class OBJLoader {
      */
     public static func loadModel(nameOfModel name:String) -> Model? {
         // get full obj file path
-        let path = Bundle.main.path(forResource: "model_" + name, ofType: "obj");
+        let path = Bundle.main.path(forResource: name, ofType: "obj");
+        
+        if (path == nil) {
+            NSLog("OBJLoader.loadModel() -> Failed to load " + name + ".obj because file was not found.");
+            return nil;
+        }
         
         do {
             // attempt to get contents of obj file
