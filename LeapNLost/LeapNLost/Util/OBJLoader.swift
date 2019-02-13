@@ -41,10 +41,10 @@ class OBJLoader {
             let vertices : [Vertex] = createVertices(refData: ref, faceData: face);
             
             // create indice list
-            var indices : [GLubyte] = [GLubyte]();
+            var indices : [GLuint] = [GLuint]();
             
             for i in 0 ..< face.refCount {
-                indices.append(GLubyte(i));
+                indices.append(GLuint(i));
             }
             
             // create model from extracted data

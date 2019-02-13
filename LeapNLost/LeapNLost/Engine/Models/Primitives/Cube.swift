@@ -53,7 +53,7 @@ struct Cube {
         Vertex(-1, -1, -1, 0, 0, 0, 1,  0, 0,  0,-1, 0), // 23
     ]
     
-    static let indexList : [GLubyte] = [
+    static let indexList : [GLuint] = [
         // Front
         0, 1, 2,
         2, 3, 0,
