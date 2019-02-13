@@ -54,10 +54,9 @@ class GameEngine {
         
         // Initialize some test lighting
         pointLights = [PointLight]();
-        for _ in 0...3 {
-            pointLights.append(PointLight(color: Vector3(1, 0, 0.5), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1.0, linear: 0.5, quadratic: 0.1));
-        }
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -1, -1));
+        pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
+        
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, 0, -1));
         
         // Setup the camera
         mainCamera = Camera();
@@ -85,8 +84,10 @@ class GameEngine {
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
-        // Set camera position variable in shader
+        // Set camera variables in shader
+        
         shader.setVector(variableName: "view_Position", value: Vector3(0, 0, -10));
+        shader.setMatrix(variableName: "u_ProjectionMatrix", value: mainCamera.perspectiveMatrix);
         
         // Loop through every object in scene and call render
         for gameObject in gameObjects {
@@ -106,23 +107,15 @@ class GameEngine {
             
             // Apply all point lights to the rendering of this game object
             // TODO - Only apply point lights that are within range
-            var lightsRendered : Int = 0;
-            
-            for light in pointLights {
-                light.render(shader: shader, lightNumber: lightsRendered);
-                lightsRendered += 1;
-                
-                // Stop after maximum number of lights
-                if (lightsRendered == 4) {
-                    break;
-                }
+            for i in 0..<pointLights.count {
+                pointLights[i].render(shader: shader, lightNumber: i);
             }
             
+            // Apply directional light
             directionalLight.render(shader: shader);
             
-            // Render the object after passing the matrices and texture to the shader
+            // Render the object after passing model view matrix and texture to the shader
             shader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            shader.setMatrix(variableName: "u_ProjectionMatrix", value: mainCamera.perspectiveMatrix);
             shader.setTexture(texture: gameObject.model.texture);
             gameObject.model.render();
         }
