@@ -31,6 +31,11 @@ class Vector3 : CustomStringConvertible {
     var y : Float;
     var z : Float;
     
+    // Gets all the values of the vetor as a Float array.
+    var array: [Float] {
+        return [x, y, z];
+    }
+    
     /*
      * Default constructor, sets all variables to zero.
      */
