@@ -23,7 +23,7 @@ class ModelCachManager {
      * returns a model with the given texture and mesh.
      * If the mesh has not been loaded yet, this will try to load it from file.
      */
-    public func loadModel(withMeshName meshName:String, withTextureName texName:String) -> Model? {
+    public func loadModel(withMeshName meshName:String, withTextureName texName:String, saveToCach save:Bool = true) -> Model? {
         
         var mesh : MeshSet? = meshDictionary[meshName];
         
@@ -36,7 +36,9 @@ class ModelCachManager {
             // check if still null
             if (mesh == nil) {
                 return nil;
-            } else {
+            }
+            
+            if (save) {
                 meshDictionary[meshName] = mesh;
             }
         }
