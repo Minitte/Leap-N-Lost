@@ -43,8 +43,8 @@ class GameObject {
     /**
      * Update loop.
      */
-    func update() {
+    func update(delta: Float) {
         // Continuously rotate around y axis for testing purposes
-        rotation.y += 0.1;
+        rotation.y += 1 * delta;
     }
 }

@@ -9,6 +9,10 @@
 import Foundation;
 
 struct Level : Decodable {
+    
+    // The number of tiles per row
+    static let tilesPerRow : Int = 10;
+    
     var info: Info;
     var rows: [Row];
     // Level Constructor

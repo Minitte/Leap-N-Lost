@@ -34,6 +34,7 @@
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
 		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
+		AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA9892214CF4C004704D8 /* Scene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
 		AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEC6977E220D1613009AA6F1 /* crate.jpg */; };
@@ -101,6 +102,7 @@
 		AD606C2E220BC75E008B1517 /* PlayerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
+		AE4CA9892214CF4C004704D8 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC69775220D1153009AA6F1 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
 				92372E7822111C04001F5139 /* Shader.swift */,
+				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 			files = (
 				92372E7922111C04001F5139 /* Shader.swift in Sources */,
 				92372E71220F92EC001F5139 /* Light.swift in Sources */,
+				AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */,
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */,

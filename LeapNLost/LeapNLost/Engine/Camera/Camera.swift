@@ -17,8 +17,14 @@ class Camera {
     // position matrix
     private var positionMatrix : GLKMatrix4;
     
+    // camera's "Position"
+    private(set) var position : Vector3;
+    
     // rotation matrix
     private var rotationMatrix : GLKMatrix4;
+    
+    // camera's rotation
+    private(set) var rotation : Vector3;
     
     // The viewing angle of the camera
     public var perspectiveMatrix : GLKMatrix4;
@@ -39,6 +45,9 @@ class Camera {
         combinedMatrix = GLKMatrix4Identity;
         transformMatrix = GLKMatrix4Identity;
         
+        position = Vector3.init();
+        rotation = Vector3.init();
+        
         updateCombined();
         updateTransformMatrix();
     }
@@ -58,6 +67,9 @@ class Camera {
         positionMatrix.m31 = y;
         positionMatrix.m32 = z;
         
+        position = Vector3(-x, -y, -z);
+        rotation = Vector3.init();
+        
         updateCombined();
         updateTransformMatrix();
     }
@@ -68,6 +80,8 @@ class Camera {
     public func setPosition(xPosition x:Float, yPosition y:Float, zPosition z:Float) {
         positionMatrix = GLKMatrix4Translate(GLKMatrix4Identity, x, y, z);
         
+        position = Vector3(x, y, z);
+        
         updateCombined();
         updateTransformMatrix();
     }
@@ -77,6 +91,8 @@ class Camera {
      */
     public func translate(xTranslation x:Float, yTranslation y:Float, zTranslation z:Float) {
         positionMatrix = GLKMatrix4Translate(positionMatrix, x, y, z);
+        
+        position = position + Vector3(-x, -y, -z);
         
         updateCombined();
         updateTransformMatrix();
@@ -90,6 +106,8 @@ class Camera {
         rotationMatrix = GLKMatrix4RotateY(rotationMatrix, y);
         rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, z);
         
+        rotation = Vector3(x, y, z);
+        
         updateCombined();
         updateTransformMatrix();
     }
@@ -101,6 +119,8 @@ class Camera {
         rotationMatrix = GLKMatrix4RotateX(rotationMatrix, x);
         rotationMatrix = GLKMatrix4RotateY(rotationMatrix, y);
         rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, z);
+        
+        rotation = rotation + Vector3(x, y, z);
         
         updateCombined();
         updateTransformMatrix();
