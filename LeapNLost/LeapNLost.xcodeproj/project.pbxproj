@@ -42,6 +42,17 @@
 		AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3658D220B6DDC00ED9827 /* Model.swift */; };
 		AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36596220B8AA300ED9827 /* GameObject.swift */; };
 		AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3659A220B8B4700ED9827 /* Cube.swift */; };
+		FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710A2214AFA800C94A22 /* carBlue.png */; };
+		FEF171102214AFA800C94A22 /* carGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710B2214AFA800C94A22 /* carGreen.png */; };
+		FEF171112214AFA800C94A22 /* carRed.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710C2214AFA800C94A22 /* carRed.png */; };
+		FEF171122214AFA800C94A22 /* car.mtl in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710D2214AFA800C94A22 /* car.mtl */; };
+		FEF171132214AFA800C94A22 /* car.obj in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710E2214AFA800C94A22 /* car.obj */; };
+		FEF171172214AFB100C94A22 /* lilypad.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF171142214AFB100C94A22 /* lilypad.png */; };
+		FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */ = {isa = PBXBuildFile; fileRef = FEF171152214AFB100C94A22 /* Lilypad.obj */; };
+		FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */ = {isa = PBXBuildFile; fileRef = FEF171162214AFB100C94A22 /* Lilypad.mtl */; };
+		FEF1711E2214B45C00C94A22 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1711B2214B45C00C94A22 /* tree.png */; };
+		FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */ = {isa = PBXBuildFile; fileRef = FEF1711C2214B45C00C94A22 /* tree.mtl */; };
+		FEF171202214B45C00C94A22 /* tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = FEF1711D2214B45C00C94A22 /* tree.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +107,17 @@
 		AEF3658D220B6DDC00ED9827 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AEF36596220B8AA300ED9827 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		AEF3659A220B8B4700ED9827 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		FEF1710A2214AFA800C94A22 /* carBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBlue.png; sourceTree = "<group>"; };
+		FEF1710B2214AFA800C94A22 /* carGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carGreen.png; sourceTree = "<group>"; };
+		FEF1710C2214AFA800C94A22 /* carRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carRed.png; sourceTree = "<group>"; };
+		FEF1710D2214AFA800C94A22 /* car.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = car.mtl; sourceTree = "<group>"; };
+		FEF1710E2214AFA800C94A22 /* car.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = car.obj; sourceTree = "<group>"; };
+		FEF171142214AFB100C94A22 /* lilypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lilypad.png; sourceTree = "<group>"; };
+		FEF171152214AFB100C94A22 /* Lilypad.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Lilypad.obj; sourceTree = "<group>"; };
+		FEF171162214AFB100C94A22 /* Lilypad.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Lilypad.mtl; sourceTree = "<group>"; };
+		FEF1711B2214B45C00C94A22 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		FEF1711C2214B45C00C94A22 /* tree.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.mtl; sourceTree = "<group>"; };
+		FEF1711D2214B45C00C94A22 /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +297,9 @@
 		AEF36598220B8ACB00ED9827 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FEF1711A2214B3D000C94A22 /* Tree */,
+				FEF171092214AF2600C94A22 /* Lilypad */,
+				FEF171082214AF1800C94A22 /* Car */,
 				AEC6977D220D15FB009AA6F1 /* Textures */,
 				57793E5A220D016F00943230 /* Frog */,
 				AEF36599220B8AD300ED9827 /* Primitives */,
@@ -290,6 +315,38 @@
 				AEF3659A220B8B4700ED9827 /* Cube.swift */,
 			);
 			path = Primitives;
+			sourceTree = "<group>";
+		};
+		FEF171082214AF1800C94A22 /* Car */ = {
+			isa = PBXGroup;
+			children = (
+				FEF1710D2214AFA800C94A22 /* car.mtl */,
+				FEF1710E2214AFA800C94A22 /* car.obj */,
+				FEF1710A2214AFA800C94A22 /* carBlue.png */,
+				FEF1710B2214AFA800C94A22 /* carGreen.png */,
+				FEF1710C2214AFA800C94A22 /* carRed.png */,
+			);
+			path = Car;
+			sourceTree = "<group>";
+		};
+		FEF171092214AF2600C94A22 /* Lilypad */ = {
+			isa = PBXGroup;
+			children = (
+				FEF171162214AFB100C94A22 /* Lilypad.mtl */,
+				FEF171152214AFB100C94A22 /* Lilypad.obj */,
+				FEF171142214AFB100C94A22 /* lilypad.png */,
+			);
+			path = Lilypad;
+			sourceTree = "<group>";
+		};
+		FEF1711A2214B3D000C94A22 /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				FEF1711C2214B45C00C94A22 /* tree.mtl */,
+				FEF1711D2214B45C00C94A22 /* tree.obj */,
+				FEF1711B2214B45C00C94A22 /* tree.png */,
+			);
+			path = Tree;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,16 +431,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
+				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
 				AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */,
 				57E97AEC2212CBA200A10BC9 /* Audio in Resources */,
 				5708206D220AE502000740D3 /* Levels in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
+				FEF171202214B45C00C94A22 /* tree.obj in Resources */,
+				FEF171112214AFA800C94A22 /* carRed.png in Resources */,
+				FEF171122214AFA800C94A22 /* car.mtl in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
+				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
+				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
+				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
 				57793E59220D014D00943230 /* frogtex.png in Resources */,
+				FEF171132214AFA800C94A22 /* car.obj in Resources */,
+				FEF171172214AFB100C94A22 /* lilypad.png in Resources */,
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
+				FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
