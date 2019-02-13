@@ -48,15 +48,21 @@ class GameEngine {
         
         // Populate with gameobjects for testing purposes
         gameObjects = [GameObject]();
-        for _ in 1...10 {
-            gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
+        for _ in 1...5 {
+//            gameObjects.append(GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube)));
+            
+            var go : GameObject = GameObject.init(OBJLoader.loadModel(nameOfModel: "frog")!);
+
+            go.scale = Vector3(3,3,3);
+
+            gameObjects.append(go);
         }
         
         // Initialize some test lighting
         pointLights = [PointLight]();
-        pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
+        pointLights.append(PointLight(color: Vector3(0, 0, 0), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
         
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, 0, -1));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 1), ambientIntensity: 1, diffuseIntensity: 0, specularIntensity: 0, direction: Vector3(0, 0, -1));
         
         // Setup the camera
         mainCamera = Camera();

@@ -24,7 +24,7 @@ class Model {
     var vertices : [Vertex]
     
     // The model's indices
-    var indices : [GLubyte]
+    var indices : [GLuint]
     
     // The model's texture
     var texture : GLuint;
@@ -34,7 +34,7 @@ class Model {
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
     
-    init(vertices: [Vertex], indices: [GLubyte]) {
+    init(vertices: [Vertex], indices: [GLuint]) {
         // Initialize properties
         self.vertices = vertices;
         self.indices = indices;
@@ -44,7 +44,7 @@ class Model {
         texture = 0;
         
         // Load a crate texture for testing purposes
-        loadTexture(filename: "crate.jpg");
+        loadTexture(filename: "lilypad.png");
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);
@@ -64,7 +64,7 @@ class Model {
         
         // Load vertices and indices into buffers
         glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, vertices, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLubyte>.size, indices, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLuint>.size, indices, GLenum(GL_STATIC_DRAW));
         
         // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
@@ -113,7 +113,7 @@ class Model {
      */
     func render() {
         glBindVertexArrayOES(vao);
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_BYTE), nil);
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), nil);
         glBindVertexArrayOES(0);
     }
     
@@ -144,7 +144,7 @@ class Model {
     static func CreatePrimitive(primitiveType : Primitive) -> Model {
         // Vertices and indices of the model
         var vertices : [Vertex];
-        var indices : [GLubyte];
+        var indices : [GLuint];
         
         // Check which primitive type to make
         switch primitiveType {
