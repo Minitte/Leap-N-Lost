@@ -9,9 +9,9 @@
 import Foundation
 import GLKit;
 
-class ModelCachManager {
+class ModelCacheManager {
     
-    public static var instance : ModelCachManager = ModelCachManager.init();
+    public static var instance : ModelCacheManager = ModelCacheManager.init();
     
     private var meshDictionary : [String : MeshSet];
     
