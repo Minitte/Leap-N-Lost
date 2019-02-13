@@ -13,7 +13,7 @@ class ModelCacheManager {
     
     public static var instance : ModelCacheManager = ModelCacheManager.init();
     
-    private var meshDictionary : [String : MeshSet];
+    private static var meshDictionary : [String : MeshSet];
     
     init() {
         meshDictionary = [:];
@@ -23,7 +23,7 @@ class ModelCacheManager {
      * returns a model with the given texture and mesh.
      * If the mesh has not been loaded yet, this will try to load it from file.
      */
-    public func loadModel(withMeshName meshName:String, withTextureName texName:String, saveToCach save:Bool = true) -> Model? {
+    public func loadModel(withMeshName meshName:String, withTextureName texName:String, saveToCache save:Bool = true) -> Model? {
         
         var mesh : MeshSet? = meshDictionary[meshName];
         
@@ -48,6 +48,13 @@ class ModelCacheManager {
         model.loadTexture(filename: texName);
         
         return model;
+    }
+    
+    /**
+     * Remove all in cache
+     */
+    public func flushCache() {
+        meshDictionary = [:];
     }
 }
 
