@@ -32,6 +32,9 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    // For testing shadows***
+    var quad : GameObject;
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -41,6 +44,12 @@ class Scene {
         self.view = view;
         level = Level();
         gameObjects = [GameObject]();
+        
+        // Initialize a quad for testing purposes
+        self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        quad.scale = Vector3(7.0, 7.0, 1.0);
+        quad.position = Vector3(0, 0, -20);
+        gameObjects.append(quad);
         
         // Initialize some test lighting
         pointLights = [PointLight]();
@@ -72,7 +81,7 @@ class Scene {
         for _ in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -5, -Float(rowCount));
+                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -3, -Float(rowCount) + 1);
                 gameObjects.append(tile);
             }
             rowCount += 1;
@@ -85,7 +94,7 @@ class Scene {
      */
     func update(delta: Float) {
         // Create a projection matrix
-        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 20);
+        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {

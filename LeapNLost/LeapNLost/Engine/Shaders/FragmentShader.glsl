@@ -66,7 +66,8 @@ void main(void) {
     }
 
     // Set fragment colour
-    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting;
+    gl_FragColor = texture2D(u_Texture, frag_TexCoord);
+    
 }
 
 /**

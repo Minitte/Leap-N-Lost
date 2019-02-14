@@ -25,6 +25,7 @@
 		92372E75221033A4001F5139 /* PointLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E74221033A4001F5139 /* PointLight.swift */; };
 		92372E7722103CE8001F5139 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7622103CE7001F5139 /* Spotlight.swift */; };
 		92372E7922111C04001F5139 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7822111C04001F5139 /* Shader.swift */; };
+		928D537C2215EEBD002C6F2B /* ShadowRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */; };
 		AD08FB242214CFED00C0B689 /* default-texture.png in Resources */ = {isa = PBXBuildFile; fileRef = AD08FB232214CFED00C0B689 /* default-texture.png */; };
 		AD177D412214C40E00EC72C5 /* ModelCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */; };
 		AD3817242209122E00390CFF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD3817232209122E00390CFF /* OpenGLES.framework */; };
@@ -35,7 +36,7 @@
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
 		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
 		AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA9892214CF4C004704D8 /* Scene.swift */; };
-		AE4CA99B2214D7F5004704D8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */; };
+		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
 		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
@@ -96,6 +97,7 @@
 		92372E74221033A4001F5139 /* PointLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointLight.swift; sourceTree = "<group>"; };
 		92372E7622103CE7001F5139 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		92372E7822111C04001F5139 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
+		928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRenderer.swift; sourceTree = "<group>"; };
 		AD08FB232214CFED00C0B689 /* default-texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-texture.png"; sourceTree = "<group>"; };
 		AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCacheManager.swift; sourceTree = "<group>"; };
 		AD3817232209122E00390CFF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -106,7 +108,7 @@
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
 		AE4CA9892214CF4C004704D8 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
-		AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
+		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
 		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
 				92372E7822111C04001F5139 /* Shader.swift */,
 				AE4CA9892214CF4C004704D8 /* Scene.swift */,
+				928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -273,7 +276,7 @@
 		AE4CA9992214D7D4004704D8 /* Shadows */ = {
 			isa = PBXGroup;
 			children = (
-				AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */,
+				AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */,
 			);
 			path = Shadows;
 			sourceTree = "<group>";
@@ -532,7 +535,8 @@
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
-				AE4CA99B2214D7F5004704D8 /* FrameBuffer.swift in Sources */,
+				AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */,
+				928D537C2215EEBD002C6F2B /* ShadowRenderer.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,
 				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,

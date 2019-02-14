@@ -9,7 +9,7 @@
 import Foundation
 import GLKit
 
-class FrameBuffer {
+class ShadowBuffer {
     
     // The name of the buffer as an int
     var bufferName : GLuint;
@@ -43,14 +43,16 @@ class FrameBuffer {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
         
-        // we do not want to wrap, this will cause incorrect shadows to be rendered
+        // Do not wrap as it will cause incorrect shadows to be rendered
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
         
+        /*
         // set up the depth compare function to check the shadow depth in hardware
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_COMPARE_FUNC_EXT), GL_LEQUAL);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_COMPARE_MODE_EXT), GL_COMPARE_REF_TO_TEXTURE_EXT);
-        
+        */
+ 
         // Bind the texture to the buffer
         glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_DEPTH_ATTACHMENT), GLenum(GL_TEXTURE_2D), depthTexture, 0);
         
