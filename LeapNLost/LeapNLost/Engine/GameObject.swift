@@ -46,5 +46,6 @@ class GameObject {
     func update(delta: Float) {
         // Continuously rotate around y axis for testing purposes
         rotation.y += 1 * delta;
+        position.y += Float.random(in: -0.1...0.2);
     }
 }

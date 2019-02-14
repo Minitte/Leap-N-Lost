@@ -69,13 +69,18 @@ class GameEngine {
      * The render loop.
      */
     func render(_ draw : CGRect) {
+        renderShadows();
+        
+        glUseProgram(mainShader.programHandle);
         // Clear screen and buffers
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
+        glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
         
         // Set camera variables in shader
         mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -107,12 +112,56 @@ class GameEngine {
             mainShader.setTexture(texture: gameObject.model.texture);
             gameObject.model.render();
         }
+        
     }
     
     func renderShadows() {
         //var lightPosition = Vector3(0, 0, 100000);
-        
+        glViewport(0, 0, 1024, 1024);
         //glCullFace(GLenum(GL_FRONT));
         glUseProgram(shadowShader.programHandle);
+        glBindBuffer(GLenum(GL_FRAMEBUFFER), shadowBuffer.bufferName);
+        
+        // Clear screen and buffers
+        glClearColor(0.0, 1.0, 0.0, 1.0);
+        glClear(GLbitfield(GL_DEPTH_BUFFER_BIT))
+        
+        shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        
+        
+        // Loop through every object in scene and call render
+        for gameObject in currentScene.gameObjects {
+            
+            // Get the game object's rotation as a matrix
+            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
+            
+            // Get the game object's position as a matrix
+            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
+            
+            // Multiply together to get transformation matrix
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
+            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
+            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
+            /*
+            // Apply all point lights to the rendering of this game object
+            // TODO - Only apply point lights that are within range
+            for i in 0..<currentScene.pointLights.count {
+                currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+            }
+            
+            // Apply directional light
+            currentScene.directionalLight.render(shader: mainShader);
+            */
+            
+            // Render the object after passing model view matrix and texture to the shader
+            shadowShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            //shadowShader.setTexture(texture: gameObject.model.texture);
+            gameObject.model.render();
+        }
+        
+        
+        //glBindBuffer(GLenum(GL_FRAMEBUFFER), 0);
     }
 }
