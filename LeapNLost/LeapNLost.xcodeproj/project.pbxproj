@@ -35,6 +35,9 @@
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
 		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
 		AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA9892214CF4C004704D8 /* Scene.swift */; };
+		AE4CA99B2214D7F5004704D8 /* FrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */; };
+		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
+		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
 		AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEC6977E220D1613009AA6F1 /* crate.jpg */; };
@@ -103,6 +106,9 @@
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
 		AE4CA9892214CF4C004704D8 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBuffer.swift; sourceTree = "<group>"; };
+		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
+		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC69775220D1153009AA6F1 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
@@ -228,6 +234,7 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				AE4CA9992214D7D4004704D8 /* Shadows */,
 				57E97AE82212A77F00A10BC9 /* Audio */,
 				92372E6F220F91CB001F5139 /* Lighting */,
 				AEC6974B220D03ED009AA6F1 /* Math */,
@@ -261,6 +268,14 @@
 				AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		AE4CA9992214D7D4004704D8 /* Shadows */ = {
+			isa = PBXGroup;
+			children = (
+				AE4CA99A2214D7F5004704D8 /* FrameBuffer.swift */,
+			);
+			path = Shadows;
 			sourceTree = "<group>";
 		};
 		AE84400D220BB5E6000891C0 /* Controllers */ = {
@@ -311,6 +326,8 @@
 			children = (
 				AEF36586220B6ABE00ED9827 /* FragmentShader.glsl */,
 				AEF36585220B6ABE00ED9827 /* VertexShader.glsl */,
+				AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */,
+				AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -466,7 +483,9 @@
 				FEF171122214AFA800C94A22 /* car.mtl in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
+				AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
+				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
 				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
@@ -513,6 +532,7 @@
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
+				AE4CA99B2214D7F5004704D8 /* FrameBuffer.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,
 				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,

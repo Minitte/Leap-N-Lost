@@ -19,13 +19,16 @@ class GameEngine {
     private var view : GLKView;
     
     // Reference to the shader
-    private var shader : Shader;
+    private var mainShader : Shader;
+    private var shadowShader : Shader;
     
     // The current scene
     var currentScene : Scene;
     
     // Holds the timestamp for the last frame rendered
     var lastTime : UInt64;
+    
+    var shadowBuffer : FrameBuffer;
     
     /**
      * Constructor for the game engine.
@@ -34,14 +37,20 @@ class GameEngine {
     init(_ view : GLKView) {
         // Initialize properties
         self.view = view;
+        
+        self.currentScene = Scene(view: view);
+        lastTime = mach_absolute_time();
 
         // Load shaders
-        let programHandle : GLuint = ShaderLoader().compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
-        self.shader = Shader(programHandle: programHandle);
-
-        self.currentScene = Scene(view: view);
-      
-        lastTime = mach_absolute_time();
+        let shaderLoader = ShaderLoader();
+        var programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        self.mainShader = Shader(programHandle: programHandle);
+        
+        programHandle = shaderLoader.compile(vertexShader: "ShadowVertexShader.glsl", fragmentShader: "ShadowFragmentShader.glsl");
+        self.shadowShader = Shader(programHandle: programHandle);
+        
+        glUseProgram(mainShader.programHandle);
+        shadowBuffer = FrameBuffer();
     }
     
     /**
@@ -65,8 +74,8 @@ class GameEngine {
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         
         // Set camera variables in shader
-        shader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
-        shader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -87,16 +96,23 @@ class GameEngine {
             // Apply all point lights to the rendering of this game object
             // TODO - Only apply point lights that are within range
             for i in 0..<currentScene.pointLights.count {
-                currentScene.pointLights[i].render(shader: shader, lightNumber: i);
+                currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
             }
             
             // Apply directional light
-            currentScene.directionalLight.render(shader: shader);
+            currentScene.directionalLight.render(shader: mainShader);
             
             // Render the object after passing model view matrix and texture to the shader
-            shader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            shader.setTexture(texture: gameObject.model.texture);
+            mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            mainShader.setTexture(texture: gameObject.model.texture);
             gameObject.model.render();
         }
+    }
+    
+    func renderShadows() {
+        //var lightPosition = Vector3(0, 0, 100000);
+        
+        //glCullFace(GLenum(GL_FRONT));
+        glUseProgram(shadowShader.programHandle);
     }
 }
