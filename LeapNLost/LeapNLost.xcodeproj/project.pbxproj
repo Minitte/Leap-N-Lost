@@ -19,6 +19,9 @@
 		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E97AE92212A8D400A10BC9 /* Audio.swift */; };
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
+		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
+		6F8665FE2214D8B200E6C75A /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FC2214D8B200E6C75A /* Cutscene.swift */; };
+		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
 		92372E71220F92EC001F5139 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E70220F92EC001F5139 /* Light.swift */; };
 		92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7222102F44001F5139 /* DirectionalLight.swift */; };
@@ -87,6 +90,9 @@
 		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		57E97AE92212A8D400A10BC9 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
+		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
+		6F8665FC2214D8B200E6C75A /* Cutscene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
+		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		92372E70220F92EC001F5139 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		92372E7222102F44001F5139 /* DirectionalLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalLight.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
+				6F8665FA2214D86D00E6C75A /* Cutscenes */,
 				ADEF384622123B32000DEFCB /* Util */,
 				57E97AEB2212CBA200A10BC9 /* Audio */,
 				AD606C2B220BC744008B1517 /* Player */,
@@ -204,6 +211,16 @@
 				57E97AE92212A8D400A10BC9 /* Audio.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		6F8665FA2214D86D00E6C75A /* Cutscenes */ = {
+			isa = PBXGroup;
+			children = (
+				6F8665FC2214D8B200E6C75A /* Cutscene.swift */,
+				6F8665FB2214D8B200E6C75A /* intro.json */,
+				6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */,
+			);
+			path = Cutscenes;
 			sourceTree = "<group>";
 		};
 		92372E6F220F91CB001F5139 /* Lighting */ = {
@@ -468,6 +485,7 @@
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
+				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
 				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
 				AD08FB242214CFED00C0B689 /* default-texture.png in Resources */,
@@ -494,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */,
 				92372E7922111C04001F5139 /* Shader.swift in Sources */,
 				92372E71220F92EC001F5139 /* Light.swift in Sources */,
 				AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */,
@@ -509,6 +528,7 @@
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
 				92372E7722103CE8001F5139 /* Spotlight.swift in Sources */,
+				6F8665FE2214D8B200E6C75A /* Cutscene.swift in Sources */,
 				AD177D412214C40E00EC72C5 /* ModelCacheManager.swift in Sources */,
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
