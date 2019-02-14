@@ -30,6 +30,8 @@ class GameEngine {
     
     var shadowBuffer : FrameBuffer;
     
+    var quad : GameObject;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
@@ -51,6 +53,11 @@ class GameEngine {
         
         glUseProgram(mainShader.programHandle);
         shadowBuffer = FrameBuffer();
+        
+        quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        quad.scale = Vector3(5.0, 5.0, 1.0);
+        quad.position = Vector3(0, 0, -20);
+        currentScene.gameObjects.append(quad);
     }
     
     /**
@@ -70,6 +77,8 @@ class GameEngine {
      */
     func render(_ draw : CGRect) {
         renderShadows();
+        glEnable(GLbitfield(GL_DEPTH_TEST));
+        view.bindDrawable();
         
         glUseProgram(mainShader.programHandle);
         // Clear screen and buffers
@@ -84,6 +93,9 @@ class GameEngine {
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
+            if (gameObject != quad) {
+                continue;
+            }
             
             // Get the game object's rotation as a matrix
             var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
@@ -109,21 +121,26 @@ class GameEngine {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            mainShader.setTexture(texture: gameObject.model.texture);
+            mainShader.setTexture(texture: shadowBuffer.depthTexture);
             gameObject.model.render();
         }
-        
     }
     
     func renderShadows() {
+        glEnable(GLbitfield(GL_DEPTH_TEST));
+        glActiveTexture(shadowBuffer.depthTexture);
         //var lightPosition = Vector3(0, 0, 100000);
         glViewport(0, 0, 1024, 1024);
         //glCullFace(GLenum(GL_FRONT));
         glUseProgram(shadowShader.programHandle);
-        glBindBuffer(GLenum(GL_FRAMEBUFFER), shadowBuffer.bufferName);
+        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), shadowBuffer.bufferName);
+        
+        // Enable depth buffer
+        //view.drawableDepthFormat = GLKViewDrawableDepthFormat.format24;
+        glEnable(GLbitfield(GL_DEPTH_TEST));
         
         // Clear screen and buffers
-        glClearColor(0.0, 1.0, 0.0, 1.0);
+        glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_DEPTH_BUFFER_BIT))
         
         shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
@@ -131,6 +148,9 @@ class GameEngine {
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
+            if (gameObject == quad) {
+                continue;
+            }
             
             // Get the game object's rotation as a matrix
             var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
@@ -162,6 +182,9 @@ class GameEngine {
         }
         
         
-        //glBindBuffer(GLenum(GL_FRAMEBUFFER), 0);
+        glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0);
+        
+        
+        
     }
 }

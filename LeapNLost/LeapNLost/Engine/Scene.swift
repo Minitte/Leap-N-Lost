@@ -72,7 +72,7 @@ class Scene {
         for _ in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -5, -Float(rowCount));
+                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -3, -Float(rowCount) + 1);
                 gameObjects.append(tile);
             }
             rowCount += 1;
@@ -85,7 +85,7 @@ class Scene {
      */
     func update(delta: Float) {
         // Create a projection matrix
-        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 20);
+        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
