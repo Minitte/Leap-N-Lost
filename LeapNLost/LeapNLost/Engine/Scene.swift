@@ -32,6 +32,9 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    // For testing shadows***
+    var quad : GameObject;
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -41,6 +44,12 @@ class Scene {
         self.view = view;
         level = Level();
         gameObjects = [GameObject]();
+        
+        // Initialize a quad for testing purposes
+        self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        quad.scale = Vector3(7.0, 7.0, 1.0);
+        quad.position = Vector3(0, 0, -20);
+        gameObjects.append(quad);
         
         // Initialize some test lighting
         pointLights = [PointLight]();

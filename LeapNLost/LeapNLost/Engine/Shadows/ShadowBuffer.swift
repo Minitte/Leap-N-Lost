@@ -9,7 +9,7 @@
 import Foundation
 import GLKit
 
-class FrameBuffer {
+class ShadowBuffer {
     
     // The name of the buffer as an int
     var bufferName : GLuint;
@@ -43,7 +43,7 @@ class FrameBuffer {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
         
-        // we do not want to wrap, this will cause incorrect shadows to be rendered
+        // Do not wrap as it will cause incorrect shadows to be rendered
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
         
@@ -67,7 +67,5 @@ class FrameBuffer {
         
         // Go back to default frame buffer
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0);
-        
-        
     }
 }
