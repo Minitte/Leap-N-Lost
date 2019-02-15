@@ -37,8 +37,8 @@ class GameEngine {
     init(_ view : GLKView) {
         // Initialize variables
         self.view = view;
-        self.shadowRenderer = ShadowRenderer();
         self.currentScene = Scene(view: view);
+        self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
         lastTime = mach_absolute_time();
 
         // Load shaders
@@ -75,11 +75,11 @@ class GameEngine {
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
         
-        // Switch back to regular face culling
+        // Switch back to regular back face culling
         glCullFace(GLenum(GL_BACK));
         
         // Set camera variables in shader
-        mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
+        mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
         

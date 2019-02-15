@@ -45,23 +45,26 @@ class Scene {
         level = Level();
         gameObjects = [GameObject]();
         
-        // Initialize a quad for testing purposes
+        // Initialize a quad for testing purposes ***
         self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
         quad.scale = Vector3(7.0, 7.0, 1.0);
         quad.position = Vector3(0, 0, -20);
         gameObjects.append(quad);
         
-        // Initialize some test lighting
+        // Initialize some test lighting ***
         pointLights = [PointLight]();
         pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
         
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, 0, -1));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         mainCamera = Camera();
-        mainCamera.setPosition(xPosition: 5, yPosition: 5, zPosition: -15);
-        mainCamera.rotate(xRotation: -0.4, yRotation: 0.4, zRotation: 0);
         
+        // For testing purposes ***
+        mainCamera.translate(xTranslation: 7, yTranslation: 1, zTranslation: -5);
+        mainCamera.rotate(xRotation: 0, yRotation: 0.4, zRotation: 0);
+        
+        // Load the first level
         loadLevel(area: 0, level: 0);
     }
     
@@ -82,12 +85,12 @@ class Scene {
         for _ in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), Float.random(in: 0...5), -Float(rowCount) - 13);
+                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), Float.random(in: -3...3), -Float(rowCount) - 13);
                 gameObjects.append(tile);
             }
             rowCount += 1;
             
-            if (rowCount == 2) {
+            if (rowCount == 2) { // for testing ***
                 break;
             }
         }

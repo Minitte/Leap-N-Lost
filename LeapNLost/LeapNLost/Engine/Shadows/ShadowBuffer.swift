@@ -11,6 +11,9 @@ import GLKit
 
 class ShadowBuffer {
     
+    // Length and width of the depth texture
+    let textureSize : GLsizei = 1024;
+    
     // The name of the buffer as an int
     var bufferName : GLuint;
     
@@ -37,7 +40,7 @@ class ShadowBuffer {
         // Generate the depth texture
         glGenTextures(1, &depthTexture);
         glBindTexture(GLenum(GL_TEXTURE_2D), depthTexture);
-        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_DEPTH_COMPONENT, 1024, 1024, 0,GLenum(GL_DEPTH_COMPONENT), GLenum(GL_UNSIGNED_INT), nil);
+        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_DEPTH_COMPONENT, textureSize, textureSize, 0,GLenum(GL_DEPTH_COMPONENT), GLenum(GL_UNSIGNED_INT), nil);
 
         // Set texture parameters
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
@@ -46,12 +49,6 @@ class ShadowBuffer {
         // Do not wrap as it will cause incorrect shadows to be rendered
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
-        
-        /*
-        // set up the depth compare function to check the shadow depth in hardware
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_COMPARE_FUNC_EXT), GL_LEQUAL);
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_COMPARE_MODE_EXT), GL_COMPARE_REF_TO_TEXTURE_EXT);
-        */
  
         // Bind the texture to the buffer
         glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_DEPTH_ATTACHMENT), GLenum(GL_TEXTURE_2D), depthTexture, 0);

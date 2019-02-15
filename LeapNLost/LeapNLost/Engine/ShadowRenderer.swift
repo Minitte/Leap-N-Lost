@@ -24,27 +24,34 @@ class ShadowRenderer {
     
     /**
      * Default constructor, initializes variables.
+     * directionalLight - reference to the scene's directional light
      */
-    init() {
+    init(lightDirection : Vector3) {
         // Initialize variables
         shadowBuffer = ShadowBuffer();
         shadowCamera = Camera();
         let programHandle : GLuint = ShaderLoader().compile(vertexShader: "ShadowVertexShader.glsl", fragmentShader: "ShadowFragmentShader.glsl");
         self.shadowShader = Shader(programHandle: programHandle);
-        setupCamera();
+        setupCamera(lightDirection: lightDirection);
         
+        // Enable culling
         glEnable(GLenum(GL_CULL_FACE));
     }
     
-    func setupCamera() {
+    /**
+     * Sets up the shadow camera.
+     * lightDirection - the direction of the scene's main light source
+     */
+    func setupCamera(lightDirection : Vector3) {
         let nearPlane : Float = 1;
-        let farPlane : Float = 60;
+        let farPlane : Float = 40;
         
-        let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-10, 10, -10, 10, nearPlane, farPlane);
-        let lightInvDirection = Vector3(0, 1, 10);
+        // Create the orthographic camera
+        // TODO - Create it without hardcoding the view parameters
+        let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-15, 15, -15, 15, nearPlane, farPlane);
+        let lightInvDirection = -lightDirection;
         let lightView : GLKMatrix4 = GLKMatrix4MakeLookAt(lightInvDirection.x, lightInvDirection.y, lightInvDirection.z, 0, 0, 0, 0, 1, 0);
         shadowCamera.perspectiveMatrix = GLKMatrix4Multiply(lightProjection, lightView);
-        shadowCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
     }
     
     /**
@@ -52,7 +59,7 @@ class ShadowRenderer {
      */
     func render(scene: Scene) {
         // Set viewport, shader, and frame buffer to shadow mappping settings
-        glViewport(0, 0, 1024, 1024);
+        glViewport(0, 0, shadowBuffer.textureSize, shadowBuffer.textureSize);
         glUseProgram(shadowShader.programHandle);
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), shadowBuffer.bufferName);
         
@@ -68,9 +75,6 @@ class ShadowRenderer {
         
         // Loop through every object in scene and call render
         for gameObject in scene.gameObjects {
-            if (gameObject == scene.quad) {
-                continue; // Testing
-            }
             
             // Get the game object's rotation as a matrix
             var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
@@ -80,7 +84,7 @@ class ShadowRenderer {
             // Get the game object's position as a matrix
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
-            // Multiply together to get transformation matrix
+            // Multiply together to get transformation matrix, use the main camera's transform matrix here
             var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(scene.mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
