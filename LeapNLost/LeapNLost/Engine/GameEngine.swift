@@ -77,9 +77,13 @@ class GameEngine {
         
         // Set camera variables in shader
         mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
-        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        //mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
         
-        mainShader.setTexture(textureName: "u_ShadowMap", texture: shadowRenderer.shadowBuffer.depthTexture);
+        // Bind shadow map texture
+        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1, texture: shadowRenderer.shadowBuffer.depthTexture);
+        glActiveTexture(GLenum(GL_TEXTURE1));
+        glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -96,7 +100,8 @@ class GameEngine {
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
+            //var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(shadowRenderer.shadowCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
@@ -111,7 +116,9 @@ class GameEngine {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            mainShader.setTexture(texture: shadowRenderer.shadowBuffer.depthTexture);
+            mainShader.setTexture(textureName: "u_Texture", textureNum: 0, texture: gameObject.model.texture);
+            glActiveTexture(GLenum(GL_TEXTURE0));
+            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             gameObject.model.render();
         }
     }

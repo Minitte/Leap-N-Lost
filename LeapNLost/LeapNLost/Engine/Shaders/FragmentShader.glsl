@@ -77,10 +77,9 @@ void main(void) {
     
     // 1.0 means no shadow
     highp float shadow = currentDepth < closestDepth ? 1.0 : 0.0;
-    
 
     // Set fragment colour
-    gl_FragColor = vec4(vec3(shadow), 1.0);//texture2D(u_ShadowMap, frag_TexCoord);
+    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * vec4(vec3(shadow), 1.0);
     
 }
 

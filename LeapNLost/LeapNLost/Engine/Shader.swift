@@ -27,16 +27,12 @@ class Shader {
     
     /**
      * Sets a texture variable in the shader.
-     * texture - the texture to set to
+     * textureName - the name of the texture uniform in the shader
+     * textureNum - the texture number to set to
+     * texture - the id of the texture
      */
-    func setTexture(texture: GLuint) {
-        glUniform1i(glGetUniformLocation(self.programHandle, "u_Texture"), 0);
-        glBindTexture(GLenum(GL_TEXTURE_2D), texture);
-    }
-    
-    func setTexture(textureName: String, texture: GLuint) {
-        glUniform1i(glGetUniformLocation(self.programHandle, textureName), 0);
-        glBindTexture(GLenum(GL_TEXTURE_2D), texture);
+    func setTexture(textureName: String, textureNum: GLint, texture: GLuint) {
+        glUniform1i(glGetUniformLocation(self.programHandle, textureName), textureNum);
     }
     
     /**

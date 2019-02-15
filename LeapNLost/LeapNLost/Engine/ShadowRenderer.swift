@@ -14,6 +14,8 @@ import GLKit
  */
 class ShadowRenderer {
     
+    var shadowCamera : Camera;
+    
     // The frame buffer for storing depth values.
     var shadowBuffer : ShadowBuffer;
     
@@ -26,8 +28,21 @@ class ShadowRenderer {
     init() {
         // Initialize variables
         shadowBuffer = ShadowBuffer();
+        shadowCamera = Camera();
         let programHandle : GLuint = ShaderLoader().compile(vertexShader: "ShadowVertexShader.glsl", fragmentShader: "ShadowFragmentShader.glsl");
         self.shadowShader = Shader(programHandle: programHandle);
+        setupCamera();
+    }
+    
+    func setupCamera() {
+        let nearPlane : Float = 1;
+        let farPlane : Float = 60;
+        
+        let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-10, 10, -10, 10, nearPlane, farPlane);
+        let lightInvDirection = Vector3(0, 0, 1);
+        let lightView : GLKMatrix4 = GLKMatrix4MakeLookAt(lightInvDirection.x, lightInvDirection.y, lightInvDirection.z, 0, 0, 0, 0, 1, 0);
+        shadowCamera.perspectiveMatrix = GLKMatrix4Multiply(lightProjection, lightView);
+        shadowCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
     }
     
     /**
@@ -44,7 +59,7 @@ class ShadowRenderer {
         glClear(GLbitfield(GL_DEPTH_BUFFER_BIT))
         
         // TODO - Change this to a orthographic matrix
-        shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: scene.mainCamera.perspectiveMatrix);
+        shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.perspectiveMatrix);
         
         // Loop through every object in scene and call render
         for gameObject in scene.gameObjects {
@@ -61,7 +76,7 @@ class ShadowRenderer {
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(scene.mainCamera.transformMatrix, positionMatrix);
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(shadowCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
