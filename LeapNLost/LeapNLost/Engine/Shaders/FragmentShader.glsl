@@ -39,6 +39,7 @@ uniform DirLight dirLight;
 
 // The texture map
 uniform sampler2D u_Texture;
+uniform sampler2D u_ShadowMap;
 
 uniform lowp vec3 view_Position; // Position of the camera
 
@@ -47,6 +48,7 @@ varying lowp vec4 frag_Color; // Fragment color
 varying lowp vec2 frag_TexCoord; // Texture coordinate
 varying lowp vec3 frag_Normal; // World normal
 varying lowp vec3 frag_Position; // World position
+varying highp vec4 frag_LightSpacePosition;
 
 // Function declarations
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
@@ -61,12 +63,24 @@ void main(void) {
     // Calculate total lighting
     lowp vec4 lighting = calcDirLighting(normal, viewDir);
     
+    /*
     for (int i = 0; i < NR_POINT_LIGHTS; i++) {
         lighting +=calcPointLighting(pointLights[i], normal, viewDir);
     }
+    */
+    
+    highp vec3 projCoords = frag_LightSpacePosition.xyz / frag_LightSpacePosition.w;
+    projCoords = projCoords * 0.5 + 0.5;
+    
+    highp float closestDepth = texture2D(u_ShadowMap, projCoords.xy).r;
+    highp float currentDepth = projCoords.z;
+    
+    // 1.0 means no shadow
+    highp float shadow = currentDepth < closestDepth ? 1.0 : 0.0;
+    
 
     // Set fragment colour
-    gl_FragColor = texture2D(u_Texture, frag_TexCoord);
+    gl_FragColor = vec4(vec3(shadow), 1.0);//texture2D(u_ShadowMap, frag_TexCoord);
     
 }
 

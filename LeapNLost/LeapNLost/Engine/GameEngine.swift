@@ -79,6 +79,8 @@ class GameEngine {
         mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
         
+        mainShader.setTexture(textureName: "u_ShadowMap", texture: shadowRenderer.shadowBuffer.depthTexture);
+        
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
             if (gameObject != currentScene.quad) {

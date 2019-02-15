@@ -34,6 +34,11 @@ class Shader {
         glBindTexture(GLenum(GL_TEXTURE_2D), texture);
     }
     
+    func setTexture(textureName: String, texture: GLuint) {
+        glUniform1i(glGetUniformLocation(self.programHandle, textureName), 0);
+        glBindTexture(GLenum(GL_TEXTURE_2D), texture);
+    }
+    
     /**
      * Sets a float variable in the shader.
      * variableName - the name of the variable

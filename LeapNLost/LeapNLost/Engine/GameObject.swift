@@ -47,5 +47,6 @@ class GameObject : NSObject {
         // Continuously rotate around y axis for testing purposes
         //rotation.y += 1 * delta;
         position.y += Float.random(in: -0.1...0.2);
+        //position.z += Float.random(in: -0.1...0.2);
     }
 }
