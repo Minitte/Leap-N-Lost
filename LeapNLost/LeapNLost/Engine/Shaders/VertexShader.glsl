@@ -1,5 +1,6 @@
 uniform highp mat4 u_ModelViewMatrix;
 uniform highp mat4 u_ProjectionMatrix;
+uniform highp mat4 u_LightSpaceMatrix;
 
 attribute vec4 a_Position;
 attribute vec4 a_Color;
@@ -21,7 +22,7 @@ void main(void) {
     frag_Normal = (u_ModelViewMatrix * vec4(a_Normal, 0)).xyz;
     frag_Position = (u_ModelViewMatrix * a_Position).xyz;
     
-    frag_LightSpacePosition = u_ProjectionMatrix * vec4(frag_Position, 1.0);
+    frag_LightSpacePosition = u_LightSpaceMatrix * vec4(frag_Position, 1.0);
     
     // Pass position after being multiplied by MVP matrix to fragment shader
     gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * a_Position;

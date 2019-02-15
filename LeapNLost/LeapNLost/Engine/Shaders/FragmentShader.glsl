@@ -76,10 +76,11 @@ void main(void) {
     highp float currentDepth = projCoords.z;
     
     // 1.0 means no shadow
-    highp float shadow = currentDepth < closestDepth ? 1.0 : 0.0;
+    lowp float bias = 0.005;
+    highp float shadow = currentDepth - bias < closestDepth ? 1.0 : 0.0;
 
     // Set fragment colour
-    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * vec4(vec3(shadow), 1.0);
+    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting * vec4(vec3(shadow), 1.0);
     
 }
 

@@ -59,7 +59,8 @@ class Scene {
         
         // Setup the camera
         mainCamera = Camera();
-        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
+        mainCamera.setPosition(xPosition: 5, yPosition: 5, zPosition: -15);
+        mainCamera.rotate(xRotation: -0.4, yRotation: 0.4, zRotation: 0);
         
         loadLevel(area: 0, level: 0);
     }
@@ -81,10 +82,14 @@ class Scene {
         for _ in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -3, -Float(rowCount) + 1);
+                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), Float.random(in: 0...5), -Float(rowCount) - 13);
                 gameObjects.append(tile);
             }
             rowCount += 1;
+            
+            if (rowCount == 2) {
+                break;
+            }
         }
     }
     

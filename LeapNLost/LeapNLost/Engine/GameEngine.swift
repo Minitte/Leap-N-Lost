@@ -75,10 +75,13 @@ class GameEngine {
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
         
+        // Switch back to regular face culling
+        glCullFace(GLenum(GL_BACK));
+        
         // Set camera variables in shader
         mainShader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
-        //mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
-        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
         
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1, texture: shadowRenderer.shadowBuffer.depthTexture);
@@ -87,9 +90,6 @@ class GameEngine {
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
-            if (gameObject != currentScene.quad) {
-                continue; // Testing purposes
-            }
             
             // Get the game object's rotation as a matrix
             var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
@@ -100,8 +100,7 @@ class GameEngine {
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            //var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(shadowRenderer.shadowCamera.transformMatrix, positionMatrix);
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             

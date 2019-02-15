@@ -32,6 +32,8 @@ class ShadowRenderer {
         let programHandle : GLuint = ShaderLoader().compile(vertexShader: "ShadowVertexShader.glsl", fragmentShader: "ShadowFragmentShader.glsl");
         self.shadowShader = Shader(programHandle: programHandle);
         setupCamera();
+        
+        glEnable(GLenum(GL_CULL_FACE));
     }
     
     func setupCamera() {
@@ -39,7 +41,7 @@ class ShadowRenderer {
         let farPlane : Float = 60;
         
         let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-10, 10, -10, 10, nearPlane, farPlane);
-        let lightInvDirection = Vector3(0, 0, 1);
+        let lightInvDirection = Vector3(0, 1, 10);
         let lightView : GLKMatrix4 = GLKMatrix4MakeLookAt(lightInvDirection.x, lightInvDirection.y, lightInvDirection.z, 0, 0, 0, 0, 1, 0);
         shadowCamera.perspectiveMatrix = GLKMatrix4Multiply(lightProjection, lightView);
         shadowCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
@@ -57,6 +59,9 @@ class ShadowRenderer {
         // Clear screen and depth buffer
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_DEPTH_BUFFER_BIT))
+        
+        // Render only back faces, this avoids self shadowing
+        glCullFace(GLenum(GL_FRONT));
         
         // TODO - Change this to a orthographic matrix
         shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.perspectiveMatrix);
@@ -76,7 +81,7 @@ class ShadowRenderer {
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
             
             // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(shadowCamera.transformMatrix, positionMatrix);
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(scene.mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
