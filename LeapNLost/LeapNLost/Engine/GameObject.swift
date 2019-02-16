@@ -13,7 +13,7 @@ import GLKit
  * Class for game objects.
  * Each game object contains a model.
  */
-class GameObject {
+class GameObject : NSObject {
     
     // The model of the game object.
     var model : Model;
@@ -35,7 +35,7 @@ class GameObject {
         self.model = model;
         
         // Spawn in a random position for testing purposes
-        position = Vector3(Float.random(in: -2...2), Float.random(in: -2...2), Float.random(in: -2...2));
+        position = Vector3(0, 0, 0);
         rotation = Vector3(0, 0, 0);
         scale = Vector3(0.5, 0.5, 0.5);
     }
@@ -45,6 +45,8 @@ class GameObject {
      */
     func update(delta: Float) {
         // Continuously rotate around y axis for testing purposes
-        rotation.y += 1 * delta;
+        //rotation.y += 1 * delta;
+        //position.y += Float.random(in: -0.1...0.2);
+        //position.z += Float.random(in: -0.1...0.2);
     }
 }

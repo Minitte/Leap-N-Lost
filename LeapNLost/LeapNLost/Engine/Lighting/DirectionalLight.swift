@@ -37,7 +37,7 @@ class DirectionalLight : Light {
      */
     init(color: Vector3, ambientIntensity: Float, diffuseIntensity: Float, specularIntensity: Float,
         direction: Vector3) {
-        self.direction = direction;
+        self.direction = direction.normalize();
         super.init(color: color, ambientIntensity: ambientIntensity,
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
