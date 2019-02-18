@@ -65,7 +65,7 @@ class Scene {
         mainCamera.rotate(xRotation: 0, yRotation: 0.4, zRotation: 0);
         
         // Load the first level
-        loadLevel(area: 0, level: 0);
+        loadLevel(area: 1, level: 1);
     }
     
     /**
@@ -82,12 +82,26 @@ class Scene {
         var rowCount : Int = 0;
         
         // Generate tiles for each row
-        for _ in self.level.rows {
+        for j in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
                 tile.position = Vector3(Float(i - Level.tilesPerRow / 2), Float.random(in: -3...3), -Float(rowCount) - 13);
                 gameObjects.append(tile);
             }
+            
+            // Spawn cars
+            if(j.type == "road"){
+                let colors = ["Blue", "Red", "Green"];
+                let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
+                let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
+                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+                let car = GameObject.init(model ?? model2);
+                car.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                car.type = "car";
+                car.speed = j.speed;
+                gameObjects.append(car);
+            }
+            
             rowCount += 1;
             
             if (rowCount == 2) { // for testing ***

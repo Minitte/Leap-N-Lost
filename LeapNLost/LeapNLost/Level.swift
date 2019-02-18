@@ -76,7 +76,7 @@ struct Info : Decodable {
 struct Row : Decodable {
     let id: Int;
     let type: String;
-    let speed: Double;
+    let speed: Float;
     
     // Row constructor
     init(){

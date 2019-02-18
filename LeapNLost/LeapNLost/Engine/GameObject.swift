@@ -27,6 +27,12 @@ class GameObject : NSObject {
     // Scale of this game object.
     var scale : Vector3;
     
+    // Game object type
+    var type : String;
+    
+    // Game object speed
+    var speed : Float;
+    
     /**
      * Construtor for the game object.
      * model - the model of the game object.
@@ -38,15 +44,43 @@ class GameObject : NSObject {
         position = Vector3(0, 0, 0);
         rotation = Vector3(0, 0, 0);
         scale = Vector3(0.5, 0.5, 0.5);
+        type = "";
+        speed = 1.0;
     }
     
     /**
      * Update loop.
      */
     func update(delta: Float) {
-        // Continuously rotate around y axis for testing purposes
-        //rotation.y += 1 * delta;
-        //position.y += Float.random(in: -0.1...0.2);
-        //position.z += Float.random(in: -0.1...0.2);
+        
+        // What type of game object is this?
+        switch(type){
+        // Game object is a car
+        case "car":
+            // If speed is positive, move right
+            if(speed > 0.0){
+                rotation.y = -1.5708;
+                if(position.x < Float(Level.tilesPerRow)/2){
+                    position.x += 1 * delta * speed;
+                } else {
+                    position.x = Float(-Level.tilesPerRow);
+                }
+            }
+            // If speed is negative, move left
+            else{
+                rotation.y = 1.5708;
+                if(position.x > Float(-Level.tilesPerRow)/2){
+                    position.x += 1 * delta * speed;
+                } else {
+                    position.x = Float(Level.tilesPerRow);
+                }
+            }
+        default:
+            // Continuously rotate around y axis for testing purposes
+            //rotation.y += 1 * delta;
+            //position.y += Float.random(in: -0.1...0.2);
+            //position.z += Float.random(in: -0.1...0.2);
+            break;
+        }
     }
 }
