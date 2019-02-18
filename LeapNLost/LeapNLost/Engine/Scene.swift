@@ -33,7 +33,7 @@ class Scene {
     private var view : GLKView;
     
     // For testing shadows***
-    var quad : GameObject;
+    //var quad : GameObject;
     
     /**
      * Constructor, initializes the scene.
@@ -46,10 +46,10 @@ class Scene {
         gameObjects = [GameObject]();
         
         // Initialize a quad for testing purposes ***
-        self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        /*self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
         quad.scale = Vector3(7.0, 7.0, 1.0);
         quad.position = Vector3(0, 0, -20);
-        gameObjects.append(quad);
+        gameObjects.append(quad);*/
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
@@ -61,8 +61,8 @@ class Scene {
         mainCamera = Camera();
         
         // For testing purposes ***
-        mainCamera.translate(xTranslation: 7, yTranslation: 1, zTranslation: -5);
-        mainCamera.rotate(xRotation: 0, yRotation: 0.4, zRotation: 0);
+        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
+        mainCamera.rotate(xRotation: 0.4, yRotation: 0, zRotation: 0)
         
         // Load the first level
         loadLevel(area: 1, level: 1);
@@ -85,12 +85,13 @@ class Scene {
         for j in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), Float.random(in: -3...3), -Float(rowCount) - 13);
+                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -5, -Float(rowCount));
                 gameObjects.append(tile);
             }
             
-            // Spawn cars
-            if(j.type == "road"){
+            // Spawn things
+            switch(j.type){
+            case "road":
                 let colors = ["Blue", "Red", "Green"];
                 let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
                 let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
@@ -100,13 +101,22 @@ class Scene {
                 car.type = "car";
                 car.speed = j.speed;
                 gameObjects.append(car);
-            }
-            
-            rowCount += 1;
-            
-            if (rowCount == 2) { // for testing ***
+            case "water":
+                let model = ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true);
+                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+                let lilypad = GameObject.init(model ?? model2);
+                lilypad.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                lilypad.type = "lilypad";
+                lilypad.speed = j.speed;
+                gameObjects.append(lilypad);
+            default:
                 break;
             }
+            rowCount += 1;
+            
+            /*if (rowCount == 2) { // for testing ***
+                break;
+            }*/
         }
     }
     
