@@ -39,6 +39,7 @@ uniform DirLight dirLight;
 
 // The texture map
 uniform sampler2D u_Texture;
+uniform sampler2D u_ShadowMap;
 
 uniform lowp vec3 view_Position; // Position of the camera
 
@@ -47,11 +48,12 @@ varying lowp vec4 frag_Color; // Fragment color
 varying lowp vec2 frag_TexCoord; // Texture coordinate
 varying lowp vec3 frag_Normal; // World normal
 varying lowp vec3 frag_Position; // World position
+varying highp vec4 frag_LightSpacePosition; // Shadow map coordinate
 
 // Function declarations
+lowp float calcShadow(lowp vec3 normal);
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 viewDir);
-
 
 void main(void) {
     // Properties
@@ -61,12 +63,32 @@ void main(void) {
     // Calculate total lighting
     lowp vec4 lighting = calcDirLighting(normal, viewDir);
     
+    /*
     for (int i = 0; i < NR_POINT_LIGHTS; i++) {
         lighting +=calcPointLighting(pointLights[i], normal, viewDir);
     }
+    */
+    
+    // Calculate shadows
+    lowp float shadow = calcShadow(normal);
 
     // Set fragment colour
-    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting;
+    gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting * vec4(vec3(shadow), 1.0);
+    
+}
+
+lowp float calcShadow(lowp vec3 normal) {
+    // Convert shadow map coordinates into uv format (0 to 1)
+    lowp vec3 projCoords = frag_LightSpacePosition.xyz / frag_LightSpacePosition.w;
+    projCoords = projCoords * 0.5 + 0.5;
+    
+    // Calculate depths
+    highp float closestDepth = texture2D(u_ShadowMap, projCoords.xy).r;
+    highp float currentDepth = projCoords.z;
+    
+    // 1.0 means no shadow
+    lowp float bias = max(0.05 * (1.0 - dot(normal, dirLight.direction)), 0.005);
+    return currentDepth - bias < closestDepth ? 1.0 : 0.3;
 }
 
 /**
@@ -84,7 +106,7 @@ lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir) {
     
     // Specular
     lowp vec3 reflection = reflect(direction, normal);
-    lowp float specularFactor = pow(max(0.0, dot(reflection, viewDir)), 32.0);
+    lowp float specularFactor = pow(max(0.0, dot(reflection, viewDir)), 16.0);
     lowp vec3 specularColor = dirLight.color * dirLight.specularIntensity * specularFactor;
     
     // Add all three for phong lighting
@@ -109,7 +131,7 @@ lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 v
     
     // Specular
     lowp vec3 reflection = reflect(lightDir, normal);
-    lowp float specularFactor = pow(max(dot(reflection, viewDir), 0.0), 32.0);
+    lowp float specularFactor = pow(max(dot(reflection, viewDir), 0.0), 16.0);
     lowp vec3 specularColor = pointLight.color * pointLight.specularIntensity * specularFactor;
     
     // Point light attenuation

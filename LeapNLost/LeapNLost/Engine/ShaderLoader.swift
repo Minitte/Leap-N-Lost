@@ -104,7 +104,7 @@ class ShaderLoader {
         }
         
         // Successfully linked, use and return the handle
-        glUseProgram(programHandle);
+        //glUseProgram(programHandle);
         return programHandle;
     }
 }
