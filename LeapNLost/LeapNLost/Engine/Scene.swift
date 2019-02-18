@@ -61,7 +61,7 @@ class Scene {
         mainCamera = Camera();
         
         // For testing purposes ***
-        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
+        mainCamera.translate(xTranslation: 0, yTranslation: 0, zTranslation: -10);
         mainCamera.rotate(xRotation: 0.4, yRotation: 0, zRotation: 0)
         
         // Load the first level

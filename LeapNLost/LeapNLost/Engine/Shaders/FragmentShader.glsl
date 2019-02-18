@@ -51,7 +51,7 @@ varying lowp vec3 frag_Position; // World position
 varying highp vec4 frag_LightSpacePosition; // Shadow map coordinate
 
 // Function declarations
-lowp float calcShadow(lowp vec3 normal);
+lowp float calcShadow();
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 viewDir);
 
@@ -70,14 +70,14 @@ void main(void) {
     */
     
     // Calculate shadows
-    lowp float shadow = calcShadow(normal);
+    lowp float shadow = calcShadow();
 
     // Set fragment colour
     gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting * vec4(vec3(shadow), 1.0);
     
 }
 
-lowp float calcShadow(lowp vec3 normal) {
+lowp float calcShadow() {
     // Convert shadow map coordinates into uv format (0 to 1)
     lowp vec3 projCoords = frag_LightSpacePosition.xyz / frag_LightSpacePosition.w;
     projCoords = projCoords * 0.5 + 0.5;
@@ -86,9 +86,8 @@ lowp float calcShadow(lowp vec3 normal) {
     highp float closestDepth = texture2D(u_ShadowMap, projCoords.xy).r;
     highp float currentDepth = projCoords.z;
     
-    // 1.0 means no shadow
-    lowp float bias = max(0.05 * (1.0 - dot(normal, dirLight.direction)), 0.005);
-    return currentDepth - bias < closestDepth ? 1.0 : 0.3;
+    highp float bias = 0.005;
+    return currentDepth - bias < closestDepth ? 1.0 : 0.3; // 1.0 means no shadow
 }
 
 /**
