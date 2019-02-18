@@ -58,12 +58,15 @@ class GameObject : NSObject {
         // Game object is a car
         case "car":
             // If speed is positive, move right
+            let colors = ["Blue", "Red", "Green"];
             if(speed > 0.0){
                 rotation.y = -1.5708;
                 if(position.x < Float(Level.tilesPerRow)/2){
                     position.x += 1 * delta * speed;
                 } else {
                     position.x = Float(-Level.tilesPerRow);
+                    let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
+                    model.loadTexture(filename: "car" + carColor + ".png");
                 }
             }
             // If speed is negative, move left
@@ -73,6 +76,8 @@ class GameObject : NSObject {
                     position.x += 1 * delta * speed;
                 } else {
                     position.x = Float(Level.tilesPerRow);
+                    let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
+                    model.loadTexture(filename: "car" + carColor + ".png");
                 }
             }
         default:
