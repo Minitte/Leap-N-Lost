@@ -37,13 +37,13 @@
         },
         {
             "id": 6,
-            "type": "grass",
+            "type": "water",
             "speed": 1.0
         },
         {
             "id": 7,
-            "type": "grass",
-            "speed": 1.0
+            "type": "water",
+            "speed": -1.0
         },
         {
             "id": 8,

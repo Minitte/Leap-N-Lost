@@ -89,8 +89,9 @@ class Scene {
                 gameObjects.append(tile);
             }
             
-            // Spawn cars
-            if(j.type == "road"){
+            // Spawn things
+            switch(j.type){
+            case "road":
                 let colors = ["Blue", "Red", "Green"];
                 let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
                 let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
@@ -100,8 +101,17 @@ class Scene {
                 car.type = "car";
                 car.speed = j.speed;
                 gameObjects.append(car);
+            case "water":
+                let model = ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true);
+                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+                let lilypad = GameObject.init(model ?? model2);
+                lilypad.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                lilypad.type = "lilypad";
+                lilypad.speed = j.speed;
+                gameObjects.append(lilypad);
+            default:
+                break;
             }
-            
             rowCount += 1;
             
             /*if (rowCount == 2) { // for testing ***

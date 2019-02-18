@@ -60,7 +60,7 @@ class GameObject : NSObject {
             // If speed is positive, move right
             let colors = ["Blue", "Red", "Green"];
             if(speed > 0.0){
-                rotation.y = -1.5708;
+                rotation.y = -Float.pi/2;
                 if(position.x < Float(Level.tilesPerRow)/2){
                     position.x += 1 * delta * speed;
                 } else {
@@ -71,13 +71,31 @@ class GameObject : NSObject {
             }
             // If speed is negative, move left
             else{
-                rotation.y = 1.5708;
+                rotation.y = Float.pi/2;
                 if(position.x > Float(-Level.tilesPerRow)/2){
                     position.x += 1 * delta * speed;
                 } else {
                     position.x = Float(Level.tilesPerRow);
                     let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
                     model.loadTexture(filename: "car" + carColor + ".png");
+                }
+            }
+        case "lilypad":
+            if(speed > 0.0){
+                rotation.y = Float.pi;
+                if(position.x < Float(Level.tilesPerRow)/2){
+                    position.x += 1 * delta * speed;
+                } else {
+                    position.x = Float(-Level.tilesPerRow);
+                }
+            }
+                // If speed is negative, move left
+            else{
+                rotation.y = Float.pi;
+                if(position.x > Float(-Level.tilesPerRow)/2){
+                    position.x += 1 * delta * speed;
+                } else {
+                    position.x = Float(Level.tilesPerRow);
                 }
             }
         default:
