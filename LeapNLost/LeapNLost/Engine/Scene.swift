@@ -61,8 +61,8 @@ class Scene {
         mainCamera = Camera();
         
         // For testing purposes ***
-        mainCamera.translate(xTranslation: 0, yTranslation: 0, zTranslation: -10);
-        mainCamera.rotate(xRotation: 0.4, yRotation: 0, zRotation: 0)
+        mainCamera.translate(xTranslation: 0, yTranslation: -5, zTranslation: -15);
+        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
         
         // Load the first level
         loadLevel(area: 1, level: 1);
@@ -78,45 +78,48 @@ class Scene {
         let data = self.level.readLevel(withArea: area, withLevel: level);
         self.level = self.level.parseJSON(data: data);
         
-        // Row counter
-        var rowCount : Int = 0;
-        
         // Generate tiles for each row
-        for j in self.level.rows {
-            for i in 0..<Level.tilesPerRow {
-                let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -5, -Float(rowCount));
-                gameObjects.append(tile);
-            }
+        for rowIndex in 0..<self.level.rows.count {
+            let row = self.level.rows[rowIndex];
+            var texture : String;
+            var depth : Float;
             
             // Spawn things
-            switch(j.type){
+            switch(row.type){
             case "road":
                 let colors = ["Blue", "Red", "Green"];
                 let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
                 let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
                 let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
                 let car = GameObject.init(model ?? model2);
-                car.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                depth = -5;
+                car.position = Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2);
                 car.type = "car";
-                car.speed = j.speed;
+                car.speed = row.speed;
+                texture = "road.jpg";
                 gameObjects.append(car);
             case "water":
                 let model = ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true);
                 let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
                 let lilypad = GameObject.init(model ?? model2);
-                lilypad.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                depth = -5.5;
+                lilypad.position = Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2);
                 lilypad.type = "lilypad";
-                lilypad.speed = j.speed;
+                lilypad.speed = row.speed;
+                texture = "water.jpg";
                 gameObjects.append(lilypad);
             default:
-                break;
+                depth = -5;
+                texture = "grass.jpg";
             }
-            rowCount += 1;
             
-            /*if (rowCount == 2) { // for testing ***
-                break;
-            }*/
+            // Generate the row's tiles
+            for tileIndex in 0..<Level.tilesPerRow {
+                let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+                tile.model.loadTexture(filename: texture);
+                tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
+                gameObjects.append(tile);
+            }
         }
     }
     

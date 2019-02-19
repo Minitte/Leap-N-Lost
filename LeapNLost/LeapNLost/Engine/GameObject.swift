@@ -43,7 +43,7 @@ class GameObject : NSObject {
         // Spawn in a random position for testing purposes
         position = Vector3(0, 0, 0);
         rotation = Vector3(0, 0, 0);
-        scale = Vector3(0.5, 0.5, 0.5);
+        scale = Vector3(1, 1, 1);
         type = "";
         speed = 1.0;
     }
