@@ -51,6 +51,11 @@ class Scene {
         quad.position = Vector3(0, 0, -20);
         gameObjects.append(quad);*/
         
+        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
+        let playerGO : PlayerGameObject = PlayerGameObject.init(frogModel);
+        gameObjects.append(playerGO);
+        playerGO.position = Vector3(0, 0, 3);
+        
         // Initialize some test lighting ***
         pointLights = [PointLight]();
         pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
@@ -65,7 +70,7 @@ class Scene {
         mainCamera.rotate(xRotation: 0.4, yRotation: 0, zRotation: 0)
         
         // Load the first level
-        loadLevel(area: 1, level: 1);
+        //loadLevel(area: 1, level: 1);
     }
     
     /**
