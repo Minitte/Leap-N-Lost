@@ -18,6 +18,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // This view as a GLKView
     private var glkView : GLKView?;
     
+    private var input : InputManager = InputManager.init();
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         setupGL();
@@ -45,6 +47,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      * Updates the game.
      */
     func glkViewControllerUpdate(_ controller: GLKViewController) {
+        input.nextFrame();
+        
         gameEngine!.update();
     }
     
