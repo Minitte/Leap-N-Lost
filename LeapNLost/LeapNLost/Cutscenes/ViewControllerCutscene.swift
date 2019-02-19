@@ -12,17 +12,41 @@ import UIKit
 //Adding typewritter effect function to UITextView
 extension UITextView {
     //animate will take in a string and sets the UITextView's text
-    func animate(text: String, delay: TimeInterval) {
+    func animate(text: String, label: UILabel, delay: TimeInterval) {
         //Sets a block of code for asynchronous execution
         DispatchQueue.main.async {
             //Set the text to blank.
             self.text = ""
+            var isSpeaker : Bool = false;
+            var currentSpeaker : String = "";
             
             //Loop through the passed in String
             for (index, character) in text.enumerated() {
-                //Enqueues the append function to execute eventually.
+               //Enqueues the append function to execute eventually.
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay * Double(index)) {
-                    self.text?.append(character)
+                    //if the character is an @ symbol
+                    if(character == "@") {
+                        
+                        //Toggle a boolean used to read who is speaking.
+                        isSpeaker = !isSpeaker;
+                        
+                        //If false and character is still @ symbol
+                        if(!isSpeaker) {
+                            //Display who is speaking in a UILabel.
+                            label.text = currentSpeaker;
+                        }else {
+                            //Make the local String blank.
+                            currentSpeaker = "";
+                        }
+                    }else {
+                        //If character is not @ symbol. Display character in UITextField
+                        if(!isSpeaker) {
+                            self.text?.append(character)
+                        }else {
+                            //Append local string for speaker.
+                            currentSpeaker.append(character);
+                        }
+                    }
                 }
             }
         }
@@ -53,16 +77,34 @@ extension Cutscene {
         
         return cutscene;
     }
+    
+    //Function to concatenate a line object.
+    func combineLines(lines : Cutscene) -> String{
+        var data : String = "";
+        
+        for i in 0..<lines.dialog.count {
+            data += "@" + lines.dialog[i].speaker + "@" + lines.dialog[i].lines;
+        }
+        
+        return data;
+    }
 
 }
 class ViewControllerCutscene: UIViewController {
-    @IBOutlet weak var dialogController: UITextView!
+    @IBOutlet weak var dialogController: UITextView!;
+    
+    @IBOutlet weak var dialogSpeaker: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad();
+        //Create Cutscene object.
         var cutscene = Cutscene();
+        //Load intro.
         let data = cutscene.readCutscene(json: "intro");
         cutscene = cutscene.parseCutscene(data: data);
-        print(cutscene.dialog[0].lines);
+        let lines : String = cutscene.combineLines(lines: cutscene);
+        //Call animate to show cutscene.
+        dialogController.animate(text: lines, label: dialogSpeaker , delay: 0.6);
+        
     }
     
    

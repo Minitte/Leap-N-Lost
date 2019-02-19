@@ -4,28 +4,28 @@
     "dialog": [
         {
             "id": 1,
-            "speaker": "Player",
-            "lines": "Who am I?"
+            "speaker": "Jackee",
+            "lines": "Who am I?\n"
         },
         {
             "id": 2,
-            "speaker": "Player",
-            "lines": "How did I get here?"
+            "speaker": "Lin",
+            "lines": "How did I get here?\n"
         },
         {
             "id": 3,
-            "speaker": "Player",
-            "lines": "I need to go back."
+            "speaker": "Jackee",
+            "lines": "I need to go back.\n"
         },
         {
             "id": 4,
-            "speaker": "Player",
-            "lines": "but, go back where?"
+            "speaker": "Lin",
+            "lines": "but, go back where?\n"
         },
         {
             "id": 5,
-            "speaker": "Player",
-            "lines": "For now I need to get out of here."
+            "speaker": "Jackee",
+            "lines": "For now I need to get out of here.\n"
         }
     ]
 }

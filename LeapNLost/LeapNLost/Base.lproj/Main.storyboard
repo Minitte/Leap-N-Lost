@@ -82,7 +82,7 @@
                                 </state>
                                 <connections>
                                     <action selector="playButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="UvN-eW-wEh"/>
-                                    <segue destination="mJx-y9-31j" kind="showDetail" id="SW0-x6-4aF"/>
+                                    <segue destination="cyD-kn-t94" kind="showDetail" id="Yhs-EQ-tdt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-ov-cV2">
@@ -180,12 +180,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAR-y8-VFa">
+                                <rect key="frame" x="0.0" y="435" width="83" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xbi-X0-ZuU"/>
                     </view>
                     <connections>
                         <outlet property="dialogController" destination="VHv-rR-SGJ" id="eju-7H-zcq"/>
+                        <outlet property="dialogSpeaker" destination="WAR-y8-VFa" id="R2s-zn-iRV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCd-S1-XLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -196,7 +204,7 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="cartoon-forest" width="810" height="1440"/>
         <image name="frog" width="258" height="265"/>
         <image name="mainmenu" width="256" height="38"/>
     </resources>
