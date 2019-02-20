@@ -58,7 +58,6 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
-        print(delta);
     }
     
     /**
