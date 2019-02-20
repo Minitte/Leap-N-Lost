@@ -1,0 +1,31 @@
+{
+    "title": "Intro",
+    "picture": "No picture for now",
+    "dialog": [
+        {
+            "id": 1,
+            "speaker": "Jackee",
+            "lines": "Who am I?\n"
+        },
+        {
+            "id": 2,
+            "speaker": "Lin",
+            "lines": "How did I get here?\n"
+        },
+        {
+            "id": 3,
+            "speaker": "Jackee",
+            "lines": "I need to go back.\n"
+        },
+        {
+            "id": 4,
+            "speaker": "Lin",
+            "lines": "but, go back where?\n"
+        },
+        {
+            "id": 5,
+            "speaker": "Jackee",
+            "lines": "For now I need to get out of here.\n"
+        }
+    ]
+}
