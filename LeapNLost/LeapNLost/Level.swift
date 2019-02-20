@@ -11,7 +11,7 @@ import Foundation;
 struct Level : Decodable {
     
     // The number of tiles per row
-    static let tilesPerRow : Int = 10;
+    static let tilesPerRow : Int = 15;
     
     var info: Info;
     var rows: [Row];
