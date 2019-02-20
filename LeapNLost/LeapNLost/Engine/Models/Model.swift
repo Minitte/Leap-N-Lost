@@ -123,6 +123,8 @@ class Model {
      * filename - the name of the texture file.
      */
     func loadTexture(filename: String) {
+        deleteTexture(); // Delete existing texture if it exists
+        
         let path = Bundle.main.path(forResource: filename, ofType: nil)!
         let option = [ GLKTextureLoaderOriginBottomLeft: true]
         do {
@@ -130,6 +132,17 @@ class Model {
             self.texture = info.name
         } catch {
             print("*** Texture loading error ***");
+        }
+    }
+    
+    /**
+     * Deletes an existing texture from memory.
+     */
+    func deleteTexture() {
+        // Cleanup if there is an existing texture
+        if (texture != 0) {
+            let textures : [GLuint] = [GLuint].init(repeating: texture, count: 1);
+            glDeleteTextures(1, textures);
         }
     }
     
@@ -163,5 +176,6 @@ class Model {
         glDeleteBuffers(1, &vao);
         glDeleteBuffers(1, &vertexBuffer);
         glDeleteBuffers(1, &indexBuffer);
+        deleteTexture();
     }
 }
