@@ -10,13 +10,13 @@ import Foundation
 
 class PlayerGameObject : GameObject {
  
-    private var gravity : Vector3 = Vector3.init(0, -9.81 * 3, 0);
+    private var gravity : Vector3 = Vector3.init(0, -9.81, 0);
     
-    private var leapForward : Vector3 = Vector3.init(0, 9.81 / 2, -6);
+    private var leapForward : Vector3 = Vector3.init(0, 9.81/2, -2);
     
-    private var leapLeft : Vector3 = Vector3.init(-6, 9.81 / 2, 0);
+    private var leapLeft : Vector3 = Vector3.init(-2, 9.81/2, 0);
     
-    private var leapRight : Vector3 = Vector3.init(6, 9.81 / 2, 0);
+    private var leapRight : Vector3 = Vector3.init(2, 9.81/2, 0);
     
     private var velocity : Vector3 = Vector3.init(0, 0, 0);
     	
