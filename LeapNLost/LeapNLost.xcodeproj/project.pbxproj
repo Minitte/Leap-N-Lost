@@ -57,6 +57,8 @@
 		AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3658D220B6DDC00ED9827 /* Model.swift */; };
 		AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF36596220B8AA300ED9827 /* GameObject.swift */; };
 		AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF3659A220B8B4700ED9827 /* Cube.swift */; };
+		E2DA6517221BC5460065A150 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA6516221BC5460065A150 /* InputManager.swift */; };
+		E2DA6519221BCE230065A150 /* PlayerGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA6518221BCE230065A150 /* PlayerGameObject.swift */; };
 		FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710A2214AFA800C94A22 /* carBlue.png */; };
 		FEF171102214AFA800C94A22 /* carGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710B2214AFA800C94A22 /* carGreen.png */; };
 		FEF171112214AFA800C94A22 /* carRed.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710C2214AFA800C94A22 /* carRed.png */; };
@@ -137,6 +139,8 @@
 		AEF3658D220B6DDC00ED9827 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AEF36596220B8AA300ED9827 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		AEF3659A220B8B4700ED9827 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		E2DA6516221BC5460065A150 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
+		E2DA6518221BCE230065A150 /* PlayerGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerGameObject.swift; sourceTree = "<group>"; };
 		FEF1710A2214AFA800C94A22 /* carBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBlue.png; sourceTree = "<group>"; };
 		FEF1710B2214AFA800C94A22 /* carGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carGreen.png; sourceTree = "<group>"; };
 		FEF1710C2214AFA800C94A22 /* carRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carRed.png; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				E2DA6515221BC52B0065A150 /* Input */,
 				AE4CA9992214D7D4004704D8 /* Shadows */,
 				57E97AE82212A77F00A10BC9 /* Audio */,
 				92372E6F220F91CB001F5139 /* Lighting */,
@@ -273,6 +278,7 @@
 				92372E7822111C04001F5139 /* Shader.swift */,
 				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 				928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */,
+				E2DA6518221BCE230065A150 /* PlayerGameObject.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -384,6 +390,14 @@
 				AEF3659A220B8B4700ED9827 /* Cube.swift */,
 			);
 			path = Primitives;
+			sourceTree = "<group>";
+		};
+		E2DA6515221BC52B0065A150 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				E2DA6516221BC5460065A150 /* InputManager.swift */,
+			);
+			path = Input;
 			sourceTree = "<group>";
 		};
 		FEF171082214AF1800C94A22 /* Car */ = {
@@ -548,6 +562,7 @@
 			files = (
 				6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */,
 				92372E7922111C04001F5139 /* Shader.swift in Sources */,
+				E2DA6519221BCE230065A150 /* PlayerGameObject.swift in Sources */,
 				92372E71220F92EC001F5139 /* Light.swift in Sources */,
 				AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */,
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
@@ -568,6 +583,7 @@
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
 				AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */,
+				E2DA6517221BC5460065A150 /* InputManager.swift in Sources */,
 				928D537C2215EEBD002C6F2B /* ShadowRenderer.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,

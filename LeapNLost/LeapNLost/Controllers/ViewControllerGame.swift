@@ -40,11 +40,42 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         // Start the engine
         gameEngine = GameEngine(self.view as! GLKView);
     }
+
+    
+    @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
+        if (sender.state == .ended) {
+//            NSLog("tapped");
+            
+            let tapPos : CGPoint = sender.location(in: self.view);
+            
+            let tapPosVec : Vector3 = Vector3.init(Float(tapPos.x), Float(tapPos.y), 0);
+            
+            InputManager.registerSingleTap(at: tapPosVec);
+        }
+    }
+
+    @IBAction func OnSwipeRight(_ sender: UISwipeGestureRecognizer) {
+        if (sender.state == .ended) {
+//            NSLog("Swiped right");
+            
+            InputManager.registerRightSwipe();
+        }
+    }
+    
+    @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
+        if (sender.state == .ended) {
+//            NSLog("Swiped left");
+            
+            InputManager.registerLeftSwipe();
+        }
+    }
     
     /**
      * Updates the game.
      */
     func glkViewControllerUpdate(_ controller: GLKViewController) {
+        InputManager.nextFrame();
+        
         gameEngine!.update();
     }
     
