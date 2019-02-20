@@ -12,7 +12,11 @@ class PlayerGameObject : GameObject {
  
     private var gravity : Vector3 = Vector3.init(0, -9.81 * 3, 0);
     
-    private var leap : Vector3 = Vector3.init(0, 5, 1);
+    private var leapForward : Vector3 = Vector3.init(0, 5, 1);
+    
+    private var leapLeft : Vector3 = Vector3.init(-1, 5, 0);
+    
+    private var leapRight : Vector3 = Vector3.init(1, 5, 0);
     
     private var velocity : Vector3 = Vector3.init(0, 0, 0);
     
@@ -24,8 +28,18 @@ class PlayerGameObject : GameObject {
      * Overrided base update
      */
     override func update(delta: Float) {
-        if (InputManager.singleTap && !hopping) {
-            hopForward();
+        if (!hopping) {
+            if (InputManager.singleTap) {
+                hopForward();
+            }
+            
+            if (InputManager.leftSwipe) {
+                hopLeft();
+            }
+            
+            if (InputManager.rightSwipe) {
+                hopRight();
+            }
         }
         
         if (hopping) {
@@ -42,8 +56,29 @@ class PlayerGameObject : GameObject {
         }
     }
     
+    /**
+     * hops forward
+     */
     public func hopForward() {
-        velocity = leap * 1;
+        velocity = leapForward * 1;
+        
+        hopping = true;
+    }
+    
+    /**
+     * hops left
+     */
+    public func hopLeft() {
+        velocity = leapLeft * 1;
+        
+        hopping = true;
+    }
+    
+    /**
+     * hops right
+     */
+    public func hopRight() {
+        velocity = leapRight * 1;
         
         hopping = true;
     }
