@@ -64,7 +64,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
-            NSLog("Swiped left");
+//            NSLog("Swiped left");
             
             InputManager.registerLeftSwipe();
         }
