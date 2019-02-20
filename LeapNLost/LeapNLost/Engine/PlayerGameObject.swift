@@ -12,17 +12,15 @@ class PlayerGameObject : GameObject {
  
     private var gravity : Vector3 = Vector3.init(0, -9.81 * 3, 0);
     
-    private var leapForward : Vector3 = Vector3.init(0, 5, -1);
+    private var leapForward : Vector3 = Vector3.init(0, 9.81 / 2, -6);
     
-    private var leapLeft : Vector3 = Vector3.init(-1, 5, 0);
+    private var leapLeft : Vector3 = Vector3.init(-6, 9.81 / 2, 0);
     
-    private var leapRight : Vector3 = Vector3.init(1, 5, 0);
+    private var leapRight : Vector3 = Vector3.init(6, 9.81 / 2, 0);
     
     private var velocity : Vector3 = Vector3.init(0, 0, 0);
     	
     private var hopping : Bool = false;
-    
-    private var frameTime : Float = 1/30;
     
     public var groupPositionY : Float = -3;
     
@@ -45,9 +43,9 @@ class PlayerGameObject : GameObject {
         }
         
         if (hopping) {
-            velocity = velocity + (gravity * frameTime);
+            velocity = velocity + (gravity * delta);
             
-            let scaledVelocity : Vector3 = velocity * frameTime;
+            let scaledVelocity : Vector3 = velocity * delta;
             
             position = position + scaledVelocity;
             
