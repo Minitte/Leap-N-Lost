@@ -12,14 +12,14 @@ class PlayerGameObject : GameObject {
  
     private var gravity : Vector3 = Vector3.init(0, -9.81 * 3, 0);
     
-    private var leapForward : Vector3 = Vector3.init(0, 5, 1);
+    private var leapForward : Vector3 = Vector3.init(0, 5, -1);
     
     private var leapLeft : Vector3 = Vector3.init(-1, 5, 0);
     
     private var leapRight : Vector3 = Vector3.init(1, 5, 0);
     
     private var velocity : Vector3 = Vector3.init(0, 0, 0);
-    
+    	
     private var hopping : Bool = false;
     
     private var frameTime : Float = 1/30;
