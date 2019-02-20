@@ -92,25 +92,17 @@ class Scene {
             // Spawn things
             switch(row.type){
             case "road":
-                let colors = ["Blue", "Red", "Green"];
-                let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
-                let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
-                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
-                let car = GameObject.init(model ?? model2);
                 depth = -5;
-                car.position = Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2);
-                car.type = "car";
-                car.speed = row.speed;
                 texture = "road.jpg";
+                
+                // Create car object
+                let car = Car.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
                 gameObjects.append(car);
             case "water":
-                let model = ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true);
-                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
-                let lilypad = GameObject.init(model ?? model2);
                 depth = -5.5;
-                lilypad.position = Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2);
-                lilypad.type = "lilypad";
-                lilypad.speed = row.speed;
+                
+                // Create lilypad object
+                let lilypad = Lilypad.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
                 texture = "water.jpg";
                 gameObjects.append(lilypad);
             default:

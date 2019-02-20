@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5707397C221CEDAC00F54DB3 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5707397B221CEDAC00F54DB3 /* Car.swift */; };
+		5707397E221CF50B00F54DB3 /* Lilypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5707397D221CF50B00F54DB3 /* Lilypad.swift */; };
 		57082063220A9DF9000740D3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57082062220A9DF9000740D3 /* Level.swift */; };
 		5708206D220AE502000740D3 /* Levels in Resources */ = {isa = PBXBuildFile; fileRef = 5708206C220AE502000740D3 /* Levels */; };
 		5718CA212203C522000EC054 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA202203C522000EC054 /* AppDelegate.swift */; };
@@ -83,6 +85,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5707397B221CEDAC00F54DB3 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		5707397D221CF50B00F54DB3 /* Lilypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lilypad.swift; sourceTree = "<group>"; };
 		57082062220A9DF9000740D3 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		5708206C220AE502000740D3 /* Levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Levels; sourceTree = "<group>"; };
 		5718CA1D2203C522000EC054 /* LeapNLost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeapNLost.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +412,7 @@
 				FEF1710A2214AFA800C94A22 /* carBlue.png */,
 				FEF1710B2214AFA800C94A22 /* carGreen.png */,
 				FEF1710C2214AFA800C94A22 /* carRed.png */,
+				5707397B221CEDAC00F54DB3 /* Car.swift */,
 			);
 			path = Car;
 			sourceTree = "<group>";
@@ -418,6 +423,7 @@
 				FEF171162214AFB100C94A22 /* Lilypad.mtl */,
 				FEF171152214AFB100C94A22 /* Lilypad.obj */,
 				FEF171142214AFB100C94A22 /* lilypad.png */,
+				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 			);
 			path = Lilypad;
 			sourceTree = "<group>";
@@ -571,6 +577,7 @@
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
 				92372E75221033A4001F5139 /* PointLight.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
+				5707397E221CF50B00F54DB3 /* Lilypad.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
 				AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */,
@@ -589,6 +596,7 @@
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,
 				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
+				5707397C221CEDAC00F54DB3 /* Car.swift in Sources */,
 				57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
