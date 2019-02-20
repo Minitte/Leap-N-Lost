@@ -70,7 +70,7 @@ class Scene {
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
         
         // Load the first level
-        //loadLevel(area: 1, level: 1);
+        loadLevel(area: 1, level: 1);
     }
     
     /**
