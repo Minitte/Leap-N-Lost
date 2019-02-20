@@ -39,7 +39,7 @@ class GameEngine {
         self.view = view;
         self.currentScene = Scene(view: view);
         self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
-        lastTime = mach_absolute_time();
+        lastTime = Date().toMillis();
 
         // Load shaders
         let shaderLoader = ShaderLoader();
@@ -52,11 +52,13 @@ class GameEngine {
      */
     func update() {
         // Calculate delta time
-        let delta : Float = Float(mach_absolute_time() - lastTime) / 1000000000; // Convert nanoseconds to seconds
-        lastTime = mach_absolute_time();
-        
+        let date : Date = Date();
+        let delta : Float = Float(date.toMillis() - lastTime) / 1000; // Convert milliseconds to seconds
+        lastTime = date.toMillis();
+
         // Update the scene
         currentScene.update(delta: delta);
+        print(delta);
     }
     
     /**
@@ -120,5 +122,12 @@ class GameEngine {
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             gameObject.model.render();
         }
+    }
+}
+
+extension Date {
+    // Converts and returns the current date and time in milliseconds.
+    func toMillis() -> UInt64! {
+        return UInt64(self.timeIntervalSince1970 * 1000)
     }
 }
