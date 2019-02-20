@@ -56,6 +56,8 @@ class Scene {
         gameObjects.append(playerGO);
         playerGO.position = Vector3(0, -3, 2);
         playerGO.groupPositionY = -3;
+        playerGO.scale = playerGO.scale * 1.5;
+        playerGO.rotation = Vector3.init(0, Float.pi, 0);
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
