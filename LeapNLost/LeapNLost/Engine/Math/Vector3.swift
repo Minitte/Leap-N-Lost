@@ -134,6 +134,15 @@ func -(left: Vector3, right: Vector3) -> Vector3 {
 }
 
 /**
+ * Operator overloader for getting the negative of a vector (opposite direction) using -
+ * right - the vector to get the negative of
+ * Returns the vector after negating all elements.
+ */
+prefix func -(right: Vector3) -> Vector3 {
+    return Vector3(-right.x, -right.y, -right.z);
+}
+
+/**
  * Operator overloader for multiplying two vectors together using *
  * left - the vector on the left side
  * right - the float scalar on the right side

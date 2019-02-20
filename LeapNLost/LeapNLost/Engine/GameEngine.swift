@@ -19,7 +19,7 @@ class GameEngine {
     private var view : GLKView;
     
     // Reference to the shader
-    private var shader : Shader;
+    private var mainShader : Shader;
     
     // The current scene
     var currentScene : Scene;
@@ -27,21 +27,24 @@ class GameEngine {
     // Holds the timestamp for the last frame rendered
     var lastTime : UInt64;
     
+    // Handles shadow mapping
+    var shadowRenderer : ShadowRenderer;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
      */
     init(_ view : GLKView) {
-        // Initialize properties
+        // Initialize variables
         self.view = view;
+        self.currentScene = Scene(view: view);
+        self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
+        lastTime = mach_absolute_time();
 
         // Load shaders
-        let programHandle : GLuint = ShaderLoader().compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
-        self.shader = Shader(programHandle: programHandle);
-
-        self.currentScene = Scene(view: view);
-      
-        lastTime = mach_absolute_time();
+        let shaderLoader = ShaderLoader();
+        let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        self.mainShader = Shader(programHandle: programHandle);
     }
     
     /**
@@ -60,13 +63,30 @@ class GameEngine {
      * The render loop.
      */
     func render(_ draw : CGRect) {
-        // Clear screen and buffers
+        // Render shadows first
+        shadowRenderer.render(scene: currentScene);
+        
+        // Switch view back to the default frame buffer
+        view.bindDrawable();
+        glUseProgram(mainShader.programHandle);
+        
+        // Clear screen and buffers, set viewport to correct size
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
+        glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
+        
+        // Switch back to regular back face culling
+        glCullFace(GLenum(GL_BACK));
         
         // Set camera variables in shader
-        shader.setVector(variableName: "view_Position", value: Vector3(0, 0, 10));
-        shader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
+        
+        // Bind shadow map texture
+        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1, texture: shadowRenderer.shadowBuffer.depthTexture);
+        glActiveTexture(GLenum(GL_TEXTURE1));
+        glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -87,15 +107,17 @@ class GameEngine {
             // Apply all point lights to the rendering of this game object
             // TODO - Only apply point lights that are within range
             for i in 0..<currentScene.pointLights.count {
-                currentScene.pointLights[i].render(shader: shader, lightNumber: i);
+                currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
             }
             
             // Apply directional light
-            currentScene.directionalLight.render(shader: shader);
+            currentScene.directionalLight.render(shader: mainShader);
             
             // Render the object after passing model view matrix and texture to the shader
-            shader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            shader.setTexture(texture: gameObject.model.texture);
+            mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            mainShader.setTexture(textureName: "u_Texture", textureNum: 0, texture: gameObject.model.texture);
+            glActiveTexture(GLenum(GL_TEXTURE0));
+            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             gameObject.model.render();
         }
     }

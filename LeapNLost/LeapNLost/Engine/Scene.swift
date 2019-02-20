@@ -32,6 +32,9 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    // For testing shadows***
+    //var quad : GameObject;
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -42,17 +45,27 @@ class Scene {
         level = Level();
         gameObjects = [GameObject]();
         
-        // Initialize some test lighting
+        // Initialize a quad for testing purposes ***
+        /*self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        quad.scale = Vector3(7.0, 7.0, 1.0);
+        quad.position = Vector3(0, 0, -20);
+        gameObjects.append(quad);*/
+        
+        // Initialize some test lighting ***
         pointLights = [PointLight]();
         pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
         
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, 0, -1));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         mainCamera = Camera();
-        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
         
-        loadLevel(area: 0, level: 0);
+        // For testing purposes ***
+        mainCamera.setPosition(xPosition: 0, yPosition: 0, zPosition: -10);
+        mainCamera.rotate(xRotation: 0.4, yRotation: 0, zRotation: 0)
+        
+        // Load the first level
+        loadLevel(area: 1, level: 1);
     }
     
     /**
@@ -69,13 +82,41 @@ class Scene {
         var rowCount : Int = 0;
         
         // Generate tiles for each row
-        for _ in self.level.rows {
+        for j in self.level.rows {
             for i in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
                 tile.position = Vector3(Float(i - Level.tilesPerRow / 2), -5, -Float(rowCount));
                 gameObjects.append(tile);
             }
+            
+            // Spawn things
+            switch(j.type){
+            case "road":
+                let colors = ["Blue", "Red", "Green"];
+                let carColor = colors[Int(arc4random_uniform(UInt32(colors.count)))];
+                let model = ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + carColor + ".png", saveToCache: true);
+                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+                let car = GameObject.init(model ?? model2);
+                car.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                car.type = "car";
+                car.speed = j.speed;
+                gameObjects.append(car);
+            case "water":
+                let model = ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true);
+                let model2 = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+                let lilypad = GameObject.init(model ?? model2);
+                lilypad.position = Vector3(Float(-Level.tilesPerRow), -4, -Float(rowCount)-0.5);
+                lilypad.type = "lilypad";
+                lilypad.speed = j.speed;
+                gameObjects.append(lilypad);
+            default:
+                break;
+            }
             rowCount += 1;
+            
+            /*if (rowCount == 2) { // for testing ***
+                break;
+            }*/
         }
     }
     
@@ -85,7 +126,7 @@ class Scene {
      */
     func update(delta: Float) {
         // Create a projection matrix
-        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 20);
+        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
