@@ -44,7 +44,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
         if (sender.state == .ended) {
-            NSLog("tapped");
+//            NSLog("tapped");
             
             let tapPos : CGPoint = sender.location(in: self.view);
             
@@ -56,13 +56,17 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
 
     @IBAction func OnSwipeRight(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
-            NSLog("Swiped right");
+//            NSLog("Swiped right");
+            
+            InputManager.registerRightSwipe();
         }
     }
     
     @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
             NSLog("Swiped left");
+            
+            InputManager.registerLeftSwipe();
         }
     }
     

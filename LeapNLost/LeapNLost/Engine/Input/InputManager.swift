@@ -17,6 +17,23 @@ class InputManager {
         }
     }
     
+    // Boolean to show if the user has swiped to the left
+    public static var leftSwipe : Bool {
+        get {
+            return currentInputFrame.leftSwipe;
+        }
+    }
+    
+    // Boolean to show if the user has swiped to the right
+    public static var rightSwipe : Bool {
+        get {
+            return currentInputFrame.rightSwipe;
+        }
+    }
+    
+    // Boolean to show if the user has swiped to the right
+    public var rightSwipe : Bool = false;
+    
     // The current input frame
     private static var currentInputFrame : InputFrame = InputFrame.init();
     
@@ -39,6 +56,20 @@ class InputManager {
     }
     
     /**
+     * Registers a left swipe for the next frame
+     */
+    public static func registerLeftSwipe() {
+        storedInputFrame.leftSwipe = true;
+    }
+    
+    /**
+     * Registers a right swipe for the next frame
+     */
+    public static func registerRightSwipe() {
+        storedInputFrame.rightSwipe = true;
+    }
+    
+    /**
      * Moves the stored input to the next frame
      */
     public static func nextFrame() {
@@ -57,6 +88,12 @@ class InputManager {
         
         // Data about the single tap.
         public var singleTapData : InputData?;
+        
+        // Boolean to show if the user has swiped to the left
+        public var leftSwipe : Bool = false;
+        
+        // Boolean to show if the user has swiped to the right
+        public var rightSwipe : Bool = false;
     }
     
     /**
