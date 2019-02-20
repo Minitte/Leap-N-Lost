@@ -55,8 +55,6 @@ class Scene {
         let playerGO : PlayerGameObject = PlayerGameObject.init(withModel: frogModel);
         gameObjects.append(playerGO);
         playerGO.position = Vector3(0, -3, 0);
-        playerGO.scale = playerGO.scale * 1.5;
-        playerGO.rotation = Vector3.init(0, Float.pi, 0);
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();

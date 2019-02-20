@@ -31,7 +31,10 @@ class PlayerGameObject : GameObject {
         
         leapForward = Vector3.init(0, h, -hl);
         leapLeft = Vector3.init(-hl, h, 0);
-        leapLeft = Vector3.init(hl, h, 0);
+        leapRight = Vector3.init(hl, h, 0);
+        
+        scale = scale * 1.5;
+        rotation = Vector3.init(0, Float.pi, 0);
     }
     
     /**
@@ -72,6 +75,8 @@ class PlayerGameObject : GameObject {
     public func hopForward() {
         velocity = leapForward * 1;
         
+        rotation = Vector3.init(0, Float.pi, 0);
+        
         hopping = true;
     }
     
@@ -81,6 +86,8 @@ class PlayerGameObject : GameObject {
     public func hopLeft() {
         velocity = leapLeft * 1;
         
+        rotation = Vector3.init(0, -Float.pi/2.0, 0);
+        
         hopping = true;
     }
     
@@ -89,6 +96,8 @@ class PlayerGameObject : GameObject {
      */
     public func hopRight() {
         velocity = leapRight * 1;
+        
+        rotation = Vector3.init(0, Float.pi/2.0, 0);
         
         hopping = true;
     }
