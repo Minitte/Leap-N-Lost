@@ -18,8 +18,6 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // This view as a GLKView
     private var glkView : GLKView?;
     
-    private var input : InputManager = InputManager.init();
-    
     override func viewDidLoad() {
         super.viewDidLoad();
         setupGL();
@@ -47,6 +45,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
         if (sender.state == .ended) {
             NSLog("tapped");
+            
+            let tapPos : CGPoint = sender.location(in: self.view);
+            
+            let tapPosVec : Vector3 = Vector3.init(Float(tapPos.x), Float(tapPos.y), 0);
+            
+            InputManager.registerSingleTap(at: tapPosVec);
         }
     }
 
@@ -66,7 +70,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      * Updates the game.
      */
     func glkViewControllerUpdate(_ controller: GLKViewController) {
-        input.nextFrame();
+        InputManager.nextFrame();
         
         gameEngine!.update();
     }

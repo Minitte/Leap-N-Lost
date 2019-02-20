@@ -11,28 +11,28 @@ import Foundation
 class InputManager {
     
     // Boolean to show if the user has tapped on the screen.
-    public var singleTap : Bool {
+    public static var singleTap : Bool {
         get {
             return currentInputFrame.singleTap;
         }
     }
     
     // The current input frame
-    private var currentInputFrame : InputFrame;
+    private static var currentInputFrame : InputFrame = InputFrame.init();
     
     // The input frame for the next update
-    private var storedInputFrame : InputFrame;
+    private static var storedInputFrame : InputFrame = InputFrame.init();
     
-    init() {
-        currentInputFrame = InputFrame.init();
-        
-        storedInputFrame = InputFrame.init();
-    }
+//    init() {
+//        currentInputFrame = InputFrame.init();
+//        
+//        storedInputFrame = InputFrame.init();
+//    }
     
     /**
      * Registers a single tap at a certain location
      */
-    public func registerSingleTap(at position:Vector3) {
+    public static func registerSingleTap(at position:Vector3) {
         storedInputFrame.singleTap = true;
         
         storedInputFrame.singleTapData = InputData.init(startPosition: position, endPosition: position, touchID: 0);
@@ -41,7 +41,7 @@ class InputManager {
     /**
      * Moves the stored input to the next frame
      */
-    public func nextFrame() {
+    public static func nextFrame() {
         currentInputFrame = storedInputFrame;
         
         storedInputFrame = InputFrame.init();
