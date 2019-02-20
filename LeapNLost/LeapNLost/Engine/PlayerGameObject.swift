@@ -24,6 +24,8 @@ class PlayerGameObject : GameObject {
     
     private var frameTime : Float = 1/30;
     
+    public var groupPositionY : Float = -3;
+    
     /**
      * Overrided base update
      */
@@ -49,8 +51,8 @@ class PlayerGameObject : GameObject {
             
             position = position + scaledVelocity;
             
-            if (position.y < 0) {
-                position.y = 0;
+            if (position.y < groupPositionY) {
+                position.y = groupPositionY;
                 hopping = false;
             }
         }
