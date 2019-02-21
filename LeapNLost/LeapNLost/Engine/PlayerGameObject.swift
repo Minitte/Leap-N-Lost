@@ -9,20 +9,33 @@
 import Foundation
 
 class PlayerGameObject : GameObject {
- 
-    private var gravity : Vector3 = Vector3.init(0, -9.81 * 3, 0);
     
-    private var leapForward : Vector3 = Vector3.init(0, 5, 1);
+    private var gravity : Vector3 = Vector3.init(0, -9.81, 0);
     
-    private var leapLeft : Vector3 = Vector3.init(-1, 5, 0);
+    private var leapForward : Vector3 = Vector3.init();
     
-    private var leapRight : Vector3 = Vector3.init(1, 5, 0);
+    private var leapLeft : Vector3 = Vector3.init();
     
-    private var velocity : Vector3 = Vector3.init(0, 0, 0);
+    private var leapRight : Vector3 = Vector3.init();
     
+    private var velocity : Vector3 = Vector3.init();
+    	
     private var hopping : Bool = false;
     
-    private var frameTime : Float = 1/30;
+    private var groundPositionY : Float = -3;
+    
+    init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
+        super.init(model);
+        
+        let h : Float = 9.81 / hl
+        
+        leapForward = Vector3.init(0, h, -hl);
+        leapLeft = Vector3.init(-hl, h, 0);
+        leapRight = Vector3.init(hl, h, 0);
+        
+        scale = scale * 1.5;
+        rotation = Vector3.init(0, Float.pi, 0);
+    }
     
     /**
      * Overrided base update
@@ -43,14 +56,14 @@ class PlayerGameObject : GameObject {
         }
         
         if (hopping) {
-            velocity = velocity + (gravity * frameTime);
+            velocity = velocity + (gravity * delta);
             
-            let scaledVelocity : Vector3 = velocity * frameTime;
+            let scaledVelocity : Vector3 = velocity * delta;
             
             position = position + scaledVelocity;
             
-            if (position.y < 0) {
-                position.y = 0;
+            if (position.y < groundPositionY) {
+                position.y = groundPositionY;
                 hopping = false;
             }
         }
@@ -62,6 +75,8 @@ class PlayerGameObject : GameObject {
     public func hopForward() {
         velocity = leapForward * 1;
         
+        rotation = Vector3.init(0, Float.pi, 0);
+        
         hopping = true;
     }
     
@@ -71,6 +86,8 @@ class PlayerGameObject : GameObject {
     public func hopLeft() {
         velocity = leapLeft * 1;
         
+        rotation = Vector3.init(0, -Float.pi/2.0, 0);
+        
         hopping = true;
     }
     
@@ -79,6 +96,8 @@ class PlayerGameObject : GameObject {
      */
     public func hopRight() {
         velocity = leapRight * 1;
+        
+        rotation = Vector3.init(0, Float.pi/2.0, 0);
         
         hopping = true;
     }
