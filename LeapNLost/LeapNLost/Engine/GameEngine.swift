@@ -46,10 +46,9 @@ class GameEngine {
         self.view = view;
         self.currentScene = Scene(view: view);
         self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
-        lastTime = Date().toMillis();
-        //vao = 0;
-        vertexBuffer = 0;
-        indexBuffer = 0;
+        self.lastTime = Date().toMillis();
+        self.vertexBuffer = 0;
+        self.indexBuffer = 0;
         self.currentOffset = BufferOffset();
 
         // Load shaders
@@ -167,7 +166,7 @@ class GameEngine {
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
         
         // Bind shadow map texture
-        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1, texture: shadowRenderer.shadowBuffer.depthTexture);
+        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
         glActiveTexture(GLenum(GL_TEXTURE1));
         glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
         
@@ -198,7 +197,7 @@ class GameEngine {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            mainShader.setTexture(textureName: "u_Texture", textureNum: 0, texture: gameObject.model.texture);
+            mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
             glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             

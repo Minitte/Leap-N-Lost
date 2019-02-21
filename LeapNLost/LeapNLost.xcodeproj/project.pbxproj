@@ -211,7 +211,6 @@
 				5718CA272203C523000EC054 /* Assets.xcassets */,
 				5718CA292203C523000EC054 /* LaunchScreen.storyboard */,
 				5718CA2C2203C523000EC054 /* Info.plist */,
-				57082062220A9DF9000740D3 /* Level.swift */,
 			);
 			path = LeapNLost;
 			sourceTree = "<group>";
@@ -267,6 +266,15 @@
 			path = GameObjects;
 			sourceTree = "<group>";
 		};
+		928D5386221F571B002C6F2B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				57082062220A9DF9000740D3 /* Level.swift */,
+				AE4CA9892214CF4C004704D8 /* Scene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		AD3817222209122E00390CFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,17 +286,17 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				57E97AE82212A77F00A10BC9 /* Audio */,
+				AEC69748220D03CF009AA6F1 /* Camera */,
 				928D5385221F5536002C6F2B /* GameObjects */,
 				E2DA6515221BC52B0065A150 /* Input */,
-				AE4CA9992214D7D4004704D8 /* Shadows */,
-				57E97AE82212A77F00A10BC9 /* Audio */,
 				92372E6F220F91CB001F5139 /* Lighting */,
 				AEC6974B220D03ED009AA6F1 /* Math */,
-				AEC69748220D03CF009AA6F1 /* Camera */,
 				AEF36598220B8ACB00ED9827 /* Models */,
+				928D5386221F571B002C6F2B /* Scene */,
 				AEF36584220B6AB100ED9827 /* Shaders */,
+				AE4CA9992214D7D4004704D8 /* Shadows */,
 				AEF36580220B5F2500ED9827 /* GameEngine.swift */,
-				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
