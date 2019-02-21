@@ -31,8 +31,6 @@ class Model {
     
     // Buffers
     var vao: GLuint;
-    var vertexBuffer: GLuint;
-    var indexBuffer: GLuint;
     
     var vertexOffset : Int;
     var indexOffset : Int;
@@ -42,16 +40,18 @@ class Model {
         self.vertices = vertices;
         self.indices = indices;
         vao = 0;
-        vertexBuffer = 0;
-        indexBuffer = 0;
         texture = 0;
         
         vertexOffset = 0;
         indexOffset = 0;
         
+        
+        // Generate a vertex array object
+        glGenVertexArraysOES(1, &vao);
+        
         // Load a crate texture for testing purposes
         // default texture
-        loadTexture(filename: "default-texture.png");
+        //loadTexture(filename: "default-texture.png");
         
         /*
         
@@ -127,15 +127,51 @@ class Model {
         */
     }
     
+    func setupAttributes() {
+        // Vertices
+        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.position.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(vertexOffset * MemoryLayout<Vertex>.size + 0));
+        
+        // Colour
+        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.color.rawValue,
+            4,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(vertexOffset * MemoryLayout<Vertex>.size + 3 * MemoryLayout<GLfloat>.size));
+        
+        // Texture
+        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.texCoord.rawValue,
+            2,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(vertexOffset * MemoryLayout<Vertex>.size + 7 * MemoryLayout<GLfloat>.size))
+        
+        // Normals
+        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.normal.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(vertexOffset * MemoryLayout<Vertex>.size + 9 * MemoryLayout<GLfloat>.size))
+    }
+    
     /**
      * Renders this model.
      */
     func render() {
-        /*
         glBindVertexArrayOES(vao);
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), nil);
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indexOffset * MemoryLayout<GLuint>.size));
         glBindVertexArrayOES(0);
-         */
     }
     
     /**
@@ -194,8 +230,6 @@ class Model {
     deinit {
         // Cleanup
         glDeleteBuffers(1, &vao);
-        glDeleteBuffers(1, &vertexBuffer);
-        glDeleteBuffers(1, &indexBuffer);
         deleteTexture();
     }
 }

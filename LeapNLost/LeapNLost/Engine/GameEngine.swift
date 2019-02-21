@@ -31,7 +31,7 @@ class GameEngine {
     var shadowRenderer : ShadowRenderer;
     
     // Buffers
-    var vao: GLuint;
+    //var vao: GLuint;
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
     
@@ -49,7 +49,7 @@ class GameEngine {
         self.currentScene = Scene(view: view);
         self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
         lastTime = Date().toMillis();
-        vao = 0;
+        //vao = 0;
         vertexBuffer = 0;
         indexBuffer = 0;
         currentVertexOffset = 0;
@@ -60,9 +60,8 @@ class GameEngine {
         let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
         
-        // Generate and bind the vertex array object
-        glGenVertexArraysOES(1, &vao);
-        glBindVertexArrayOES(vao);
+        
+        //glBindVertexArrayOES(vao);
         
         // Generate and bind the vertex buffer
         glGenBuffers(GLsizei(1), &vertexBuffer);
@@ -73,9 +72,10 @@ class GameEngine {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
         // Allocate the vertex and index buffers
-        glBufferData(GLenum(GL_ARRAY_BUFFER), 1000000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 5000000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ARRAY_BUFFER), 500000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
+        /*
         // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
         glVertexAttribPointer(
@@ -113,7 +113,9 @@ class GameEngine {
             GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(9 * MemoryLayout<GLfloat>.size))
         
         // Unbind the vao buffer for now
-        glBindVertexArrayOES(0);
+        //glBindVertexArrayOES(0);
+        //glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
+        //glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
         
         /*
         // Testing
@@ -126,6 +128,7 @@ class GameEngine {
         
         currentScene.gameObjects.append(go);
         currentScene.gameObjects.append(go2);
+        */
         */
         
         currentScene.loadLevel(area: 1, level: 1);
@@ -140,8 +143,9 @@ class GameEngine {
      * model - the model to load
      */
     func loadModel(model : Model) {
-        // Bind the vertex array object
-        glBindVertexArrayOES(vao);
+        // Bind the vertex array object with the index buffer
+        glBindVertexArrayOES(model.vao);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
         // Input vertices into the vertex buffer
         glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentVertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
@@ -153,10 +157,13 @@ class GameEngine {
         model.vertexOffset = currentVertexOffset;
         model.indexOffset = currentIndexOffset;
         
+        // Setup attributes
+        model.setupAttributes();
+        
         // Increment current offset
         currentVertexOffset += model.vertices.count;
         currentIndexOffset += model.indices.count;
-        
+
         // Unbind vertex array object
         glBindVertexArrayOES(0);
         
@@ -189,8 +196,9 @@ class GameEngine {
      */
     func render(_ draw : CGRect) {
         // Render shadows first
-        glBindVertexArrayOES(vao);
+        //glBindVertexArrayOES(vao);
         shadowRenderer.render(scene: currentScene);
+        
         
         // Switch view back to the default frame buffer
         view.bindDrawable();
@@ -246,11 +254,12 @@ class GameEngine {
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             
             
-            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(gameObject.model.indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(gameObject.model.indexOffset * MemoryLayout<GLuint>.size));
-            //gameObject.model.render();
-            print(gameObject.model.vertexOffset);
+            //glDrawElements(GLenum(GL_TRIANGLES), GLsizei(gameObject.model.indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(gameObject.model.indexOffset * MemoryLayout<GLuint>.size));
+            gameObject.model.render();
+            //print(gameObject.model.vertexOffset);
+            
         }
-        
+
         glBindVertexArrayOES(0);
     }
 }
