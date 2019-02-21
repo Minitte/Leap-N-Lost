@@ -81,14 +81,19 @@ class GameEngine {
      * model - the model to load
      */
     func loadModel(model: Model, name: String) {
-        // Bind the vertex array object with the index buffer
-        glBindVertexArrayOES(model.vao);
-        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
-        //Check if this model has already been loaded in
-        if (Model.ModelOffsetCache[name] != nil) {
-            model.offset = Model.ModelOffsetCache[name]!; // Use cached offsets
+        // Check if this model has already been loaded in
+        if (Model.ModelVaoCache[name] != nil) {
+            model.vao = Model.ModelVaoCache[name]!;
+            model.offset = Model.ModelOffsetCache[name]!;
         } else {
+            // Generate a vertex array object
+            glGenVertexArraysOES(1, &model.vao);
+            
+            // Bind the vertex array object with the index buffer
+            glBindVertexArrayOES(model.vao);
+            glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+            
             // Input vertices into the vertex buffer
             glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
             
@@ -98,19 +103,21 @@ class GameEngine {
             // Set the offsets
             model.offset = currentOffset;
             
-            // Put into offset cache
+            // Save to cache
             Model.ModelOffsetCache[name] = currentOffset;
+            Model.ModelVaoCache[name] = model.vao;
             
             // Increment current offset
             currentOffset.vertexOffset += model.vertices.count;
             currentOffset.indexOffset += model.indices.count;
+            
+            // Setup attributes
+            model.setupAttributes();
+            
+            // Unbind vertex array object
+            glBindVertexArrayOES(0);
         }
         
-        // Setup attributes
-        model.setupAttributes();
-
-        // Unbind vertex array object
-        glBindVertexArrayOES(0);
     }
     
     /**
@@ -132,6 +139,8 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
+        print(delta);
+        
     }
     
     /**

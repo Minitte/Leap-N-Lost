@@ -15,8 +15,11 @@ import GLKit
  */
 class Model {
     
-    // Cachce for model buffer offsets
+    // Cache for model buffer offsets
     static var ModelOffsetCache : [String : BufferOffset] = [:];
+    
+    // Cache for model vertex array objects
+    static var ModelVaoCache : [String : GLuint] = [:];
     
     // Primitive types
     enum Primitive {
@@ -46,8 +49,7 @@ class Model {
         texture = 0;
         offset = BufferOffset();
         
-        // Generate a vertex array object
-        glGenVertexArraysOES(1, &vao);
+        
         
         // Default texture
         loadTexture(filename: "default-texture.png");
