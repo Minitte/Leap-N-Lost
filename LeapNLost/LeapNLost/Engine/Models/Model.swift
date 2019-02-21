@@ -49,12 +49,15 @@ class Model {
         texture = 0;
         offset = BufferOffset();
         
-        
-        
         // Default texture
         loadTexture(filename: "default-texture.png");
     }
     
+    /**
+     * Sets up the vertex array object attribute pointers by
+     * enabling each attribute value, and getting the correct offsets
+     * for this model's vertex attributes.
+     */
     func setupAttributes() {
         // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
@@ -157,7 +160,6 @@ class Model {
     
     deinit {
         // Cleanup
-        glDeleteBuffers(1, &vao);
         deleteTexture();
     }
 }

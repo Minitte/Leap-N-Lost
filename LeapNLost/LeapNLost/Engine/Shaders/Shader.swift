@@ -61,5 +61,4 @@ class Shader {
     func setMatrix(variableName: String, value: GLKMatrix4) {
         glUniformMatrix4fv(glGetUniformLocation(self.programHandle, variableName), 1, GLboolean(GL_FALSE), value.array);
     }
-    
 }

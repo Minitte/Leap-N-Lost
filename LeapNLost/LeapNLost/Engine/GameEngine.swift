@@ -139,8 +139,7 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
-        print(delta);
-        
+        print(delta)
     }
     
     /**
@@ -148,9 +147,7 @@ class GameEngine {
      */
     func render(_ draw : CGRect) {
         // Render shadows first
-        //glBindVertexArrayOES(vao);
         shadowRenderer.render(scene: currentScene);
-        
         
         // Switch view back to the default frame buffer
         view.bindDrawable();
@@ -207,8 +204,13 @@ class GameEngine {
             
             gameObject.model.render();
         }
-
-        glBindVertexArrayOES(0);
+    }
+    
+    deinit {
+        // Cleanup
+        for var vao in Model.ModelVaoCache.values {
+            glDeleteBuffers(1, &vao);
+        }
     }
 }
 
