@@ -34,6 +34,9 @@ class Model {
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
     
+    var vertexOffset : Int;
+    var indexOffset : Int;
+    
     init(vertices: [Vertex], indices: [GLuint]) {
         // Initialize properties
         self.vertices = vertices;
@@ -43,9 +46,14 @@ class Model {
         indexBuffer = 0;
         texture = 0;
         
+        vertexOffset = 0;
+        indexOffset = 0;
+        
         // Load a crate texture for testing purposes
         // default texture
         loadTexture(filename: "default-texture.png");
+        
+        /*
         
         // Generate and bind the vertex array object
         glGenVertexArraysOES(1, &vao);
@@ -63,9 +71,18 @@ class Model {
         let count = vertices.count;
         let size =  MemoryLayout<Vertex>.size;
         
+        
+        
         // Load vertices and indices into buffers
-        glBufferData(GLenum(GL_ARRAY_BUFFER), count * size, vertices, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), indices.count * MemoryLayout<GLuint>.size, indices, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ARRAY_BUFFER), 500 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 1000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
+        
+        
+        
+        glBufferSubData(GLenum(GL_ARRAY_BUFFER), 0, MemoryLayout<Vertex>.size * vertices.count, vertices);
+        
+        glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0, MemoryLayout<GLuint>.size * indices.count, indices);
+ 
         
         // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
@@ -107,15 +124,18 @@ class Model {
         glBindVertexArrayOES(0);
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
+        */
     }
     
     /**
      * Renders this model.
      */
     func render() {
+        /*
         glBindVertexArrayOES(vao);
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), nil);
         glBindVertexArrayOES(0);
+         */
     }
     
     /**

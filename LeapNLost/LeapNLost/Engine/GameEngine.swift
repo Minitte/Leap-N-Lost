@@ -30,6 +30,15 @@ class GameEngine {
     // Handles shadow mapping
     var shadowRenderer : ShadowRenderer;
     
+    // Buffers
+    var vao: GLuint;
+    var vertexBuffer: GLuint;
+    var indexBuffer: GLuint;
+    
+    // Current offsets
+    var currentVertexOffset : Int;
+    var currentIndexOffset : Int;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
@@ -40,11 +49,113 @@ class GameEngine {
         self.currentScene = Scene(view: view);
         self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
         lastTime = Date().toMillis();
+        vao = 0;
+        vertexBuffer = 0;
+        indexBuffer = 0;
+        currentVertexOffset = 0;
+        currentIndexOffset = 0;
 
         // Load shaders
         let shaderLoader = ShaderLoader();
         let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
+        
+        // Generate and bind the vertex array object
+        glGenVertexArraysOES(1, &vao);
+        glBindVertexArrayOES(vao);
+        
+        // Generate and bind the vertex buffer
+        glGenBuffers(GLsizei(1), &vertexBuffer);
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer);
+        
+        // Generate and bind the index buffer
+        glGenBuffers(GLsizei(1), &indexBuffer);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Allocate the vertex and index buffers
+        glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
+        
+        // Vertices
+        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.position.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(0));
+        
+        // Colour
+        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.color.rawValue,
+            4,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size));
+        
+        // Texture
+        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.texCoord.rawValue,
+            2,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(7 * MemoryLayout<GLfloat>.size))
+        
+        // Normals
+        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.normal.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(9 * MemoryLayout<GLfloat>.size))
+        
+        // Unbind the vao buffer for now
+        glBindVertexArrayOES(0);
+        
+        // Testing
+        var go = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        var go2 = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+        go2.position = Vector3(0, 1, -2);
+        
+        loadModel(model: go.model);
+        loadModel(model: go2.model);
+        
+        currentScene.gameObjects.append(go);
+        currentScene.gameObjects.append(go2);
+    }
+    
+    func loadModel(model : Model) {
+        // Bind the vertex array object
+        glBindVertexArrayOES(vao);
+        
+        // Input vertices into the vertex buffer
+        glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentVertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
+        
+        // Input indices into the index buffer
+        glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), currentIndexOffset * MemoryLayout<GLuint>.size, MemoryLayout<GLuint>.size * model.indices.count, model.indices);
+        
+        // Set the offsets
+        model.vertexOffset = currentVertexOffset;
+        model.indexOffset = currentIndexOffset;
+        
+        // Increment current offset
+        currentVertexOffset += model.vertices.count;
+        currentIndexOffset += model.indices.count;
+        
+        // Unbind vertex array object
+        glBindVertexArrayOES(0);
+        
+    }
+    
+    /**
+     * Converts and returns an int into an unsafe pointer.
+     * Used for inputting offsets for certain OpenGL functions.
+     */
+    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
+        return UnsafeRawPointer.init(bitPattern: n);
     }
     
     /**
@@ -120,7 +231,11 @@ class GameEngine {
             mainShader.setTexture(textureName: "u_Texture", textureNum: 0, texture: gameObject.model.texture);
             glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
-            gameObject.model.render();
+            
+            glBindVertexArrayOES(vao);
+            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(gameObject.model.indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(gameObject.model.indexOffset * MemoryLayout<GLuint>.size));
+            //gameObject.model.render();
+            glBindVertexArrayOES(0);
         }
     }
 }
