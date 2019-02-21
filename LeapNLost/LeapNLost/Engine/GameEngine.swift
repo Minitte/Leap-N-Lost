@@ -73,8 +73,8 @@ class GameEngine {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
         // Allocate the vertex and index buffers
-        glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ARRAY_BUFFER), 1000000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 5000000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
         // Vertices
         glEnableVertexAttribArray(VertexAttributes.position.rawValue);
@@ -115,6 +115,7 @@ class GameEngine {
         // Unbind the vao buffer for now
         glBindVertexArrayOES(0);
         
+        /*
         // Testing
         var go = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
         var go2 = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
@@ -125,8 +126,19 @@ class GameEngine {
         
         currentScene.gameObjects.append(go);
         currentScene.gameObjects.append(go2);
+        */
+        
+        currentScene.loadLevel(area: 1, level: 1);
+        
+        for gameObject in currentScene.gameObjects {
+            loadModel(model: gameObject.model);
+        }
     }
     
+    /**
+     * Loads a model into the buffers.
+     * model - the model to load
+     */
     func loadModel(model : Model) {
         // Bind the vertex array object
         glBindVertexArrayOES(vao);
@@ -169,7 +181,7 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
-        print(delta);
+        //print(delta);
     }
     
     /**
@@ -177,6 +189,7 @@ class GameEngine {
      */
     func render(_ draw : CGRect) {
         // Render shadows first
+        glBindVertexArrayOES(vao);
         shadowRenderer.render(scene: currentScene);
         
         // Switch view back to the default frame buffer
@@ -232,11 +245,13 @@ class GameEngine {
             glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             
-            glBindVertexArrayOES(vao);
+            
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(gameObject.model.indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(gameObject.model.indexOffset * MemoryLayout<GLuint>.size));
             //gameObject.model.render();
-            glBindVertexArrayOES(0);
+            print(gameObject.model.vertexOffset);
         }
+        
+        glBindVertexArrayOES(0);
     }
 }
 

@@ -55,6 +55,14 @@ class ShadowRenderer {
     }
     
     /**
+     * Converts and returns an int into an unsafe pointer.
+     * Used for inputting offsets for certain OpenGL functions.
+     */
+    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
+        return UnsafeRawPointer.init(bitPattern: n);
+    }
+    
+    /**
      * Renders the depth values of the scene onto the shadow texture.
      */
     func render(scene: Scene) {
@@ -91,7 +99,7 @@ class ShadowRenderer {
             
             // Render the object after passing model view matrix to the shader
             shadowShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            gameObject.model.render();
+            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(gameObject.model.indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(gameObject.model.indexOffset * MemoryLayout<GLuint>.size));gameObject.model.render();
         }
         
         // Unbind the shadow buffer
