@@ -43,10 +43,10 @@ class Scene {
         gameObjects = [GameObject]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
-        let playerGO : PlayerGameObject = PlayerGameObject.init(frogModel);
         playerGO.type = "Player";
+        let playerGO : PlayerGameObject = PlayerGameObject.init(withModel: frogModel);
         gameObjects.append(playerGO);
-        playerGO.position = Vector3(0, 0, 3);
+        playerGO.position = Vector3(0, -3, 0);
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
