@@ -23,11 +23,14 @@ class Scene {
     // List of all game objects in the scene
     var gameObjects : [GameObject];
     
+    // List of all tiles in the scene
+    var tiles : [GameObject]
+    
     // Camera properties
     private(set) var mainCamera : Camera;
     
     // The level
-    private var level : Level;
+    private(set) var level : Level;
     
     // Reference to the game view.
     private var view : GLKView;
@@ -39,8 +42,9 @@ class Scene {
     init(view: GLKView) {
         // Initialize variables
         self.view = view;
-        level = Level();
-        gameObjects = [GameObject]();
+        self.level = Level();
+        self.gameObjects = [GameObject]();
+        self.tiles = [GameObject]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
         
@@ -105,7 +109,7 @@ class Scene {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
                 tile.model.loadTexture(filename: texture);
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
-                gameObjects.append(tile);
+                tiles.append(tile);
             }
         }
     }

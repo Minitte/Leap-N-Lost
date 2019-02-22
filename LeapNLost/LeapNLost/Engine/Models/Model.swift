@@ -13,14 +13,8 @@ import GLKit
  * Class for handling game object models.
  * Most of this code is referenced from https://github.com/skyfe79/LearningOpenGLES2
  */
-class Model {
-    
-    // Cache for model buffer offsets
-    static var ModelOffsetCache : [String : BufferOffset] = [:];
-    
-    // Cache for model vertex array objects
-    static var ModelVaoCache : [String : GLuint] = [:];
-    
+class Model : BufferManager {
+
     // Primitive types
     enum Primitive {
         case Cube;
@@ -41,59 +35,20 @@ class Model {
     // Offsets
     var offset : BufferOffset;
     
-    init(vertices: [Vertex], indices: [GLuint]) {
+    // Name of the model
+    var name : String;
+    
+    init(vertices: [Vertex], indices: [GLuint], modelName: String) {
         // Initialize properties
         self.vertices = vertices;
         self.indices = indices;
-        vao = 0;
-        texture = 0;
-        offset = BufferOffset();
+        self.name = modelName;
+        self.vao = 0;
+        self.texture = 0;
+        self.offset = BufferOffset();
         
         // Default texture
         loadTexture(filename: "default-texture.png");
-    }
-    
-    /**
-     * Sets up the vertex array object attribute pointers by
-     * enabling each attribute value, and getting the correct offsets
-     * for this model's vertex attributes.
-     */
-    func setupAttributes() {
-        // Vertices
-        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.position.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 0));
-        
-        // Colour
-        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.color.rawValue,
-            4,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 3 * MemoryLayout<GLfloat>.size));
-        
-        // Texture
-        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.texCoord.rawValue,
-            2,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 7 * MemoryLayout<GLfloat>.size))
-        
-        // Normals
-        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.normal.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 9 * MemoryLayout<GLfloat>.size))
     }
     
     /**
@@ -133,10 +88,6 @@ class Model {
         }
     }
     
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n);
-    }
-    
     /**
      * Creates a primitive model.
      * primitiveType - the type of primitive to create.
@@ -146,16 +97,18 @@ class Model {
         // Vertices and indices of the model
         var vertices : [Vertex];
         var indices : [GLuint];
+        var name : String;
         
         // Check which primitive type to make
         switch primitiveType {
         case Primitive.Cube:
             vertices = Cube.vertexList;
             indices = Cube.indexList;
+            name = "PrimitiveCube";
             break;
         }
             
-        return Model(vertices: vertices, indices: indices);
+        return Model(vertices: vertices, indices: indices, modelName: name);
     }
     
     deinit {

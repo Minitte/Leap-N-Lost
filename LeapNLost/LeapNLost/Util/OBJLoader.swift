@@ -48,7 +48,7 @@ class OBJLoader {
             }
             
             // create model from extracted data
-            let model : Model = Model.init(vertices: vertices, indices: indices);
+            let model : Model = Model.init(vertices: vertices, indices: indices, modelName: name);
             
             return model;
         } catch {

@@ -13,6 +13,9 @@ class ModelCacheManager {
     
     private static var meshDictionary : [String : MeshSet] = [:];
     
+    // Map for models that have been loaded in by the game engine
+    static var modelDictionary : [String : CachedModel] = [:];
+    
     /**
      * returns a model with the given texture and mesh.
      * If the mesh has not been loaded yet, this will try to load it from file.
@@ -37,7 +40,7 @@ class ModelCacheManager {
             }
         }
         
-        let model : Model = Model.init(vertices: (mesh?.vertices)!, indices: (mesh?.indices)!);
+        let model : Model = Model.init(vertices: mesh!.vertices, indices: mesh!.indices, modelName: meshName);
         
         model.loadTexture(filename: texName);
         
@@ -50,6 +53,18 @@ class ModelCacheManager {
     public static func flushCache() {
         meshDictionary = [:];
     }
+}
+
+/**
+ * Struct for storing information about a cached model.
+ */
+struct CachedModel {
+    
+    // The buffer offsets of the model
+    var offset : BufferOffset;
+    
+    // A shared vertex array object for the model
+    var vao : GLuint;
 }
 
 struct MeshSet {

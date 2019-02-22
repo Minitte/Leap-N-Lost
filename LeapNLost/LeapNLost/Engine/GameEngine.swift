@@ -13,7 +13,7 @@ import GLKit
  * Class for the game engine.
  * Renders and updates all game objects every frame.
  */
-class GameEngine {
+class GameEngine : BufferManager {
     
     // Reference to the game view.
     private var view : GLKView;
@@ -34,6 +34,9 @@ class GameEngine {
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
     
+    // Vertex array object for tiles
+    var tileVao : GLuint;
+    
     // Current offsets
     var currentOffset : BufferOffset;
     
@@ -49,12 +52,17 @@ class GameEngine {
         self.lastTime = Date().toMillis();
         self.vertexBuffer = 0;
         self.indexBuffer = 0;
+        self.tileVao = 0;
         self.currentOffset = BufferOffset();
 
         // Load shaders
         let shaderLoader = ShaderLoader();
         let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
+        
+        // Generate a vertex array object for tiles
+        glGenVertexArraysOES(1, &tileVao);
+        glBindVertexArrayOES(tileVao);
         
         // Generate and bind the vertex buffer
         glGenBuffers(GLsizei(1), &vertexBuffer);
@@ -68,23 +76,65 @@ class GameEngine {
         glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
+        // Setup vertex attribute object attributes
+        setupAttributes();
+        
         // Initialize the first level
         currentScene.loadLevel(area: 1, level: 1);
+        
+        // Load all tiles
+        for tile in currentScene.tiles {
+            loadTile(tile: tile);
+        }
+        
+        // Unbind tile vertex array object for now
+        glBindVertexArrayOES(0);
+        
+        // Load all other game objects
         for gameObject in currentScene.gameObjects {
-            loadModel(model: gameObject.model, name: gameObject.type);
+            loadModel(model: gameObject.model);
         }
     }
     
     /**
+     * Loads a tile into the vertex buffer.
+     * Modifies the vertex position and indices accordingly to offsets
+     * so that it can be rendered directly from the buffer without
+     * having to change any shader uniforms.
+     * tile - the tile to load
+     */
+    func loadTile(tile: GameObject) {
+        let model : Model = tile.model;
+        
+        // Offsets the vertex position by the tile position
+        for i in 0..<model.vertices.count {
+            model.vertices[i].x += tile.position.x;
+            model.vertices[i].y += tile.position.y;
+            model.vertices[i].z += tile.position.z;
+        }
+        
+        // Offset the indices by the current vertex offset
+        for i in 0..<model.indices.count {
+            model.indices[i] += GLuint(currentOffset.vertexOffset);
+        }
+        
+        // Append the model to the buffers
+        appendModel(model: model);
+    }
+    
+    /**
      * Loads a model into the buffers.
+     * Will also check to see if it's in the model cache
+     * before attempting to append the model.
      * model - the model to load
      */
-    func loadModel(model: Model, name: String) {
+    func loadModel(model: Model) {
+        let name : String = model.name;
         
         // Check if this model has already been loaded in
-        if (Model.ModelVaoCache[name] != nil) {
-            model.vao = Model.ModelVaoCache[name]!;
-            model.offset = Model.ModelOffsetCache[name]!;
+        if (ModelCacheManager.modelDictionary[name] != nil) {
+            model.vao = ModelCacheManager.modelDictionary[name]!.vao;
+            model.offset = ModelCacheManager.modelDictionary[name]!.offset;
         } else {
             // Generate a vertex array object
             glGenVertexArraysOES(1, &model.vao);
@@ -92,39 +142,39 @@ class GameEngine {
             // Bind the vertex array object with the index buffer
             glBindVertexArrayOES(model.vao);
             glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
-            
-            // Input vertices into the vertex buffer
-            glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
-            
-            // Input indices into the index buffer
-            glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), currentOffset.indexOffset * MemoryLayout<GLuint>.size, MemoryLayout<GLuint>.size * model.indices.count, model.indices);
-            
+
             // Set the offsets
             model.offset = currentOffset;
             
             // Save to cache
-            Model.ModelOffsetCache[name] = currentOffset;
-            Model.ModelVaoCache[name] = model.vao;
+            ModelCacheManager.modelDictionary[name] = CachedModel(offset: currentOffset, vao: model.vao);
             
-            // Increment current offset
-            currentOffset.vertexOffset += model.vertices.count;
-            currentOffset.indexOffset += model.indices.count;
+            // Append the model to the buffers
+            appendModel(model: model);
             
             // Setup attributes
-            model.setupAttributes();
+            model.setupAttributes(offset: model.offset);
             
             // Unbind vertex array object
             glBindVertexArrayOES(0);
         }
-        
     }
     
     /**
-     * Converts and returns an int into an unsafe pointer.
-     * Used for inputting offsets for certain OpenGL functions.
+     * Appends a model to the vertex and index buffers.
+     * Increments the offsets after appending.
+     * model - the model to append
      */
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n);
+    func appendModel(model: Model) {
+        // Input vertices into the vertex buffer
+        glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
+        
+        // Input indices into the index buffer
+        glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), currentOffset.indexOffset * MemoryLayout<GLuint>.size, MemoryLayout<GLuint>.size * model.indices.count, model.indices);
+        
+        // Increment current offsets
+        currentOffset.vertexOffset += model.vertices.count;
+        currentOffset.indexOffset += model.indices.count;
     }
     
     /**
@@ -163,6 +213,7 @@ class GameEngine {
         mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
+         mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
         
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
@@ -172,6 +223,32 @@ class GameEngine {
         // Switch back to object texture
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
         glActiveTexture(GLenum(GL_TEXTURE0));
+        
+        // Apply all point lights to the rendering of this game object
+        // TODO - Only apply point lights that are within range
+        for i in 0..<currentScene.pointLights.count {
+            currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+        }
+        
+        // Apply directional light
+        currentScene.directionalLight.render(shader: mainShader);
+        
+        // Get information about the level's rows
+        let numberOfRows : Int = currentScene.level.rows.count;
+        let indicesPerRow : Int = currentScene.tiles[0].model.indices.count * Level.tilesPerRow;
+        
+        // Bind the tile vertex array object
+        glBindVertexArrayOES(tileVao);
+        
+        // Render each row
+        for i in 0..<numberOfRows {
+            // Bind the current row's texture, then draw it
+            glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture);
+            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indicesPerRow), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indicesPerRow * i * MemoryLayout<GLuint>.size));
+        }
+        
+        // Unbind vertex array object
+        glBindVertexArrayOES(0);
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -189,15 +266,6 @@ class GameEngine {
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
             
-            // Apply all point lights to the rendering of this game object
-            // TODO - Only apply point lights that are within range
-            for i in 0..<currentScene.pointLights.count {
-                currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
-            }
-            
-            // Apply directional light
-            currentScene.directionalLight.render(shader: mainShader);
-            
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
@@ -208,8 +276,8 @@ class GameEngine {
     
     deinit {
         // Cleanup
-        for var vao in Model.ModelVaoCache.values {
-            glDeleteBuffers(1, &vao);
+        for var cachedModel in ModelCacheManager.modelDictionary.values {
+            glDeleteBuffers(1, &cachedModel.vao);
         }
     }
 }
