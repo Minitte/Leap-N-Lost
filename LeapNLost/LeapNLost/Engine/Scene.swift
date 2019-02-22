@@ -43,8 +43,9 @@ class Scene {
         gameObjects = [GameObject]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
-        playerGO.type = "Player";
+        
         let playerGO : PlayerGameObject = PlayerGameObject.init(withModel: frogModel);
+        playerGO.type = "Player";
         gameObjects.append(playerGO);
         playerGO.position = Vector3(0, -3, 0);
         
