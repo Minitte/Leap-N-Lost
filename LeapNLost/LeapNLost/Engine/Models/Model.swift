@@ -13,7 +13,7 @@ import GLKit
  * Class for handling game object models.
  * Most of this code is referenced from https://github.com/skyfe79/LearningOpenGLES2
  */
-class Model {
+class Model : BufferManager {
     
     // Cache for model buffer offsets
     static var ModelOffsetCache : [String : BufferOffset] = [:];
@@ -54,49 +54,6 @@ class Model {
     }
     
     /**
-     * Sets up the vertex array object attribute pointers by
-     * enabling each attribute value, and getting the correct offsets
-     * for this model's vertex attributes.
-     */
-    func setupAttributes() {
-        // Vertices
-        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.position.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 0));
-        
-        // Colour
-        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.color.rawValue,
-            4,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 3 * MemoryLayout<GLfloat>.size));
-        
-        // Texture
-        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.texCoord.rawValue,
-            2,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 7 * MemoryLayout<GLfloat>.size))
-        
-        // Normals
-        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.normal.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(offset.vertexOffset * MemoryLayout<Vertex>.size + 9 * MemoryLayout<GLfloat>.size))
-    }
-    
-    /**
      * Renders this model.
      */
     func render() {
@@ -131,10 +88,6 @@ class Model {
             let textures : [GLuint] = [GLuint].init(repeating: texture, count: 1);
             glDeleteTextures(1, textures);
         }
-    }
-    
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n);
     }
     
     /**

@@ -13,7 +13,7 @@ import GLKit
  * Class for the game engine.
  * Renders and updates all game objects every frame.
  */
-class GameEngine {
+class GameEngine : BufferManager {
     
     // Reference to the game view.
     private var view : GLKView;
@@ -97,48 +97,6 @@ class GameEngine {
     }
     
     /**
-     * Sets up the vertex array object attribute pointers by
-     * enabling each attribute value and applying the correct offsets.
-     */
-    func setupAttributes() {
-        // Vertices
-        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.position.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(0));
-        
-        // Colour
-        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
-        glVertexAttribPointer(
-            VertexAttributes.color.rawValue,
-            4,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size));
-        
-        // Texture
-        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.texCoord.rawValue,
-            2,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(7 * MemoryLayout<GLfloat>.size))
-        
-        // Normals
-        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
-        glVertexAttribPointer(
-            VertexAttributes.normal.rawValue,
-            3,
-            GLenum(GL_FLOAT),
-            GLboolean(GL_FALSE),
-            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(9 * MemoryLayout<GLfloat>.size))
-    }
-    
-    /**
      * Loads a tile into the vertex buffer.
      * Modifies the vertex position and indices accordingly to offsets
      * so that it can be rendered directly from the buffer without
@@ -195,7 +153,7 @@ class GameEngine {
             appendModel(model: model);
             
             // Setup attributes
-            model.setupAttributes();
+            model.setupAttributes(offset: model.offset);
             
             // Unbind vertex array object
             glBindVertexArrayOES(0);
@@ -217,14 +175,6 @@ class GameEngine {
         // Increment current offsets
         currentOffset.vertexOffset += model.vertices.count;
         currentOffset.indexOffset += model.indices.count;
-    }
-    
-    /**
-     * Converts and returns an int into an unsafe pointer.
-     * Used for inputting offsets for certain OpenGL functions.
-     */
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n);
     }
     
     /**
