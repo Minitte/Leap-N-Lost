@@ -55,14 +55,6 @@ class ShadowRenderer {
     }
     
     /**
-     * Converts and returns an int into an unsafe pointer.
-     * Used for inputting offsets for certain OpenGL functions.
-     */
-    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
-        return UnsafeRawPointer.init(bitPattern: n);
-    }
-    
-    /**
      * Renders the depth values of the scene onto the shadow texture.
      */
     func render(scene: Scene) {
@@ -78,7 +70,7 @@ class ShadowRenderer {
         // Render only back faces, this avoids self shadowing
         glCullFace(GLenum(GL_FRONT));
         
-        // TODO - Change this to a orthographic matrix
+        // Set the projection matrix
         shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.perspectiveMatrix);
         
         // Loop through every object in scene and call render

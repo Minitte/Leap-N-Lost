@@ -138,7 +138,6 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
-        print(delta)
     }
     
     /**
@@ -170,6 +169,10 @@ class GameEngine {
         glActiveTexture(GLenum(GL_TEXTURE1));
         glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
         
+        // Switch back to object texture
+        mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
+        glActiveTexture(GLenum(GL_TEXTURE0));
+        
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
             
@@ -197,8 +200,6 @@ class GameEngine {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
-            glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
             
             gameObject.model.render();

@@ -58,7 +58,7 @@ class Shader {
             // Parse the character array into a string
             var nameString : String = "";
             for char in name {
-                if (char == 0) { // Check for null terminator (
+                if (char == 0) { // Check for null terminator (\0)
                     break;
                 }
                 nameString.append(Character(Unicode.Scalar(Int(char.description)!)!));
@@ -66,7 +66,6 @@ class Shader {
             
             // Append to array of uniform names
             uniformNames.append(nameString);
-            print(nameString);
         }
         
         // Get and store all uniform locations into the uniform map
