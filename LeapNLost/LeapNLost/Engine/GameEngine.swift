@@ -257,7 +257,7 @@ class GameEngine : BufferManager {
         // Render each row
         for i in 0..<numberOfRows {
             // Bind the current row's texture, then draw it
-            glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture);
+            glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture.id);
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indicesPerRow), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indicesPerRow * i * MemoryLayout<GLuint>.size));
         }
         
@@ -282,7 +282,7 @@ class GameEngine : BufferManager {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
+            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
             gameObject.model.render();
         }
