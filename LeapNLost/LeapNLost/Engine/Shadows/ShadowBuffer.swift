@@ -12,7 +12,7 @@ import GLKit
 class ShadowBuffer {
     
     // Length and width of the depth texture
-    let textureSize : GLsizei = 1024;
+    let textureSize : GLsizei = 512;
     
     // The name of the buffer as an int
     var bufferName : GLuint;

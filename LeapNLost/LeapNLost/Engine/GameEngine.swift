@@ -40,6 +40,9 @@ class GameEngine : BufferManager {
     // Current offsets
     var currentOffset : BufferOffset;
     
+    var totalFrames = 0;
+    var totalTime : Float = 0;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
@@ -188,6 +191,17 @@ class GameEngine : BufferManager {
 
         // Update the scene
         currentScene.update(delta: delta);
+        
+        totalTime += delta;
+        totalFrames += 1;
+        
+        if (totalTime >= 1.0) {
+            let fps = Float(totalFrames) / totalTime;
+            print("FPS: \(fps)");
+            
+            totalFrames = 0;
+            totalTime = 0;
+        }
     }
     
     /**
