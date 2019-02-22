@@ -259,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
+				E2DA6518221BCE230065A150 /* PlayerGameObject.swift */,
 				5707397B221CEDAC00F54DB3 /* Car.swift */,
 				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 			);
@@ -269,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				57082062220A9DF9000740D3 /* Level.swift */,
+				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -295,8 +297,6 @@
 				AEF36584220B6AB100ED9827 /* Shaders */,
 				AE4CA9992214D7D4004704D8 /* Shadows */,
 				AEF36580220B5F2500ED9827 /* GameEngine.swift */,
-				E2DA6518221BCE230065A150 /* PlayerGameObject.swift */,
-				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";

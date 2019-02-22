@@ -30,7 +30,7 @@ class Scene {
     private(set) var mainCamera : Camera;
     
     // The level
-    private var level : Level;
+    private(set) var level : Level;
     
     // Reference to the game view.
     private var view : GLKView;
