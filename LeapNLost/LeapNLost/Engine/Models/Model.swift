@@ -14,13 +14,7 @@ import GLKit
  * Most of this code is referenced from https://github.com/skyfe79/LearningOpenGLES2
  */
 class Model : BufferManager {
-    
-    // Cache for model buffer offsets
-    static var ModelOffsetCache : [String : BufferOffset] = [:];
-    
-    // Cache for model vertex array objects
-    static var ModelVaoCache : [String : GLuint] = [:];
-    
+
     // Primitive types
     enum Primitive {
         case Cube;
@@ -41,13 +35,17 @@ class Model : BufferManager {
     // Offsets
     var offset : BufferOffset;
     
-    init(vertices: [Vertex], indices: [GLuint]) {
+    // Name of the model
+    var name : String;
+    
+    init(vertices: [Vertex], indices: [GLuint], modelName: String) {
         // Initialize properties
         self.vertices = vertices;
         self.indices = indices;
-        vao = 0;
-        texture = 0;
-        offset = BufferOffset();
+        self.name = modelName;
+        self.vao = 0;
+        self.texture = 0;
+        self.offset = BufferOffset();
         
         // Default texture
         loadTexture(filename: "default-texture.png");
@@ -99,16 +97,18 @@ class Model : BufferManager {
         // Vertices and indices of the model
         var vertices : [Vertex];
         var indices : [GLuint];
+        var name : String;
         
         // Check which primitive type to make
         switch primitiveType {
         case Primitive.Cube:
             vertices = Cube.vertexList;
             indices = Cube.indexList;
+            name = "PrimitiveCube";
             break;
         }
             
-        return Model(vertices: vertices, indices: indices);
+        return Model(vertices: vertices, indices: indices, modelName: name);
     }
     
     deinit {

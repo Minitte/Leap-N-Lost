@@ -92,7 +92,7 @@ class GameEngine : BufferManager {
         
         // Load all other game objects
         for gameObject in currentScene.gameObjects {
-            loadModel(model: gameObject.model, name: gameObject.type);
+            loadModel(model: gameObject.model);
         }
     }
     
@@ -128,12 +128,13 @@ class GameEngine : BufferManager {
      * before attempting to append the model.
      * model - the model to load
      */
-    func loadModel(model: Model, name: String) {
+    func loadModel(model: Model) {
+        let name : String = model.name;
         
         // Check if this model has already been loaded in
-        if (Model.ModelVaoCache[name] != nil) {
-            model.vao = Model.ModelVaoCache[name]!;
-            model.offset = Model.ModelOffsetCache[name]!;
+        if (ModelCacheManager.modelDictionary[name] != nil) {
+            model.vao = ModelCacheManager.modelDictionary[name]!.vao;
+            model.offset = ModelCacheManager.modelDictionary[name]!.offset;
         } else {
             // Generate a vertex array object
             glGenVertexArraysOES(1, &model.vao);
@@ -146,8 +147,7 @@ class GameEngine : BufferManager {
             model.offset = currentOffset;
             
             // Save to cache
-            Model.ModelOffsetCache[name] = currentOffset;
-            Model.ModelVaoCache[name] = model.vao;
+            ModelCacheManager.modelDictionary[name] = CachedModel(offset: currentOffset, vao: model.vao);
             
             // Append the model to the buffers
             appendModel(model: model);
@@ -276,8 +276,8 @@ class GameEngine : BufferManager {
     
     deinit {
         // Cleanup
-        for var vao in Model.ModelVaoCache.values {
-            glDeleteBuffers(1, &vao);
+        for var cachedModel in ModelCacheManager.modelDictionary.values {
+            glDeleteBuffers(1, &cachedModel.vao);
         }
     }
 }
