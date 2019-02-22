@@ -211,7 +211,6 @@
 				5718CA272203C523000EC054 /* Assets.xcassets */,
 				5718CA292203C523000EC054 /* LaunchScreen.storyboard */,
 				5718CA2C2203C523000EC054 /* Info.plist */,
-				57082062220A9DF9000740D3 /* Level.swift */,
 			);
 			path = LeapNLost;
 			sourceTree = "<group>";
@@ -256,6 +255,24 @@
 			path = Lighting;
 			sourceTree = "<group>";
 		};
+		928D5385221F5536002C6F2B /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				AEF36596220B8AA300ED9827 /* GameObject.swift */,
+				5707397B221CEDAC00F54DB3 /* Car.swift */,
+				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
+			);
+			path = GameObjects;
+			sourceTree = "<group>";
+		};
+		928D5386221F571B002C6F2B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				57082062220A9DF9000740D3 /* Level.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		AD3817222209122E00390CFF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,22 +284,19 @@
 		AD38172922091FBB00390CFF /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				E2DA6515221BC52B0065A150 /* Input */,
-				AE4CA9992214D7D4004704D8 /* Shadows */,
 				57E97AE82212A77F00A10BC9 /* Audio */,
+				AEC69748220D03CF009AA6F1 /* Camera */,
+				928D5385221F5536002C6F2B /* GameObjects */,
+				E2DA6515221BC52B0065A150 /* Input */,
 				92372E6F220F91CB001F5139 /* Lighting */,
 				AEC6974B220D03ED009AA6F1 /* Math */,
-				AEC69748220D03CF009AA6F1 /* Camera */,
 				AEF36598220B8ACB00ED9827 /* Models */,
+				928D5386221F571B002C6F2B /* Scene */,
 				AEF36584220B6AB100ED9827 /* Shaders */,
+				AE4CA9992214D7D4004704D8 /* Shadows */,
 				AEF36580220B5F2500ED9827 /* GameEngine.swift */,
-				AEF36582220B601700ED9827 /* ShaderLoader.swift */,
-				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
-				AEF36596220B8AA300ED9827 /* GameObject.swift */,
-				92372E7822111C04001F5139 /* Shader.swift */,
-				AE4CA9892214CF4C004704D8 /* Scene.swift */,
-				928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */,
 				E2DA6518221BCE230065A150 /* PlayerGameObject.swift */,
+				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -302,6 +316,7 @@
 			children = (
 				ADEF384722123BCF000DEFCB /* OBJLoader.swift */,
 				AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */,
+				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -309,6 +324,7 @@
 		AE4CA9992214D7D4004704D8 /* Shadows */ = {
 			isa = PBXGroup;
 			children = (
+				928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */,
 				AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */,
 			);
 			path = Shadows;
@@ -363,6 +379,8 @@
 		AEF36584220B6AB100ED9827 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				92372E7822111C04001F5139 /* Shader.swift */,
+				AEF36582220B601700ED9827 /* ShaderLoader.swift */,
 				AEF36586220B6ABE00ED9827 /* FragmentShader.glsl */,
 				AEF36585220B6ABE00ED9827 /* VertexShader.glsl */,
 				AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */,
@@ -412,7 +430,6 @@
 				FEF1710A2214AFA800C94A22 /* carBlue.png */,
 				FEF1710B2214AFA800C94A22 /* carGreen.png */,
 				FEF1710C2214AFA800C94A22 /* carRed.png */,
-				5707397B221CEDAC00F54DB3 /* Car.swift */,
 			);
 			path = Car;
 			sourceTree = "<group>";
@@ -423,7 +440,6 @@
 				FEF171162214AFB100C94A22 /* Lilypad.mtl */,
 				FEF171152214AFB100C94A22 /* Lilypad.obj */,
 				FEF171142214AFB100C94A22 /* lilypad.png */,
-				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 			);
 			path = Lilypad;
 			sourceTree = "<group>";

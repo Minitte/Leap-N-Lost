@@ -32,9 +32,6 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
-    // For testing shadows***
-    //var quad : GameObject;
-    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -45,13 +42,8 @@ class Scene {
         level = Level();
         gameObjects = [GameObject]();
         
-        // Initialize a quad for testing purposes ***
-        /*self.quad = GameObject(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-        quad.scale = Vector3(7.0, 7.0, 1.0);
-        quad.position = Vector3(0, 0, -20);
-        gameObjects.append(quad);*/
-        
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
+        playerGO.type = "Player";
         let playerGO : PlayerGameObject = PlayerGameObject.init(withModel: frogModel);
         gameObjects.append(playerGO);
         playerGO.position = Vector3(0, -3, 0);
@@ -68,9 +60,6 @@ class Scene {
         // For testing purposes ***
         mainCamera.translate(xTranslation: 0, yTranslation: -5, zTranslation: -15);
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
-        
-        // Load the first level
-        loadLevel(area: 1, level: 1);
     }
     
     /**

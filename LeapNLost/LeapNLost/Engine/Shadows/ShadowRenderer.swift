@@ -70,7 +70,7 @@ class ShadowRenderer {
         // Render only back faces, this avoids self shadowing
         glCullFace(GLenum(GL_FRONT));
         
-        // TODO - Change this to a orthographic matrix
+        // Set the projection matrix
         shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.perspectiveMatrix);
         
         // Loop through every object in scene and call render

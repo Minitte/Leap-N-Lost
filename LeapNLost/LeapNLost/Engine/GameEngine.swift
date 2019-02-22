@@ -30,6 +30,13 @@ class GameEngine {
     // Handles shadow mapping
     var shadowRenderer : ShadowRenderer;
     
+    // Buffers
+    var vertexBuffer: GLuint;
+    var indexBuffer: GLuint;
+    
+    // Current offsets
+    var currentOffset : BufferOffset;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
@@ -39,12 +46,85 @@ class GameEngine {
         self.view = view;
         self.currentScene = Scene(view: view);
         self.shadowRenderer = ShadowRenderer(lightDirection: currentScene.directionalLight.direction);
-        lastTime = Date().toMillis();
+        self.lastTime = Date().toMillis();
+        self.vertexBuffer = 0;
+        self.indexBuffer = 0;
+        self.currentOffset = BufferOffset();
 
         // Load shaders
         let shaderLoader = ShaderLoader();
         let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
+        
+        // Generate and bind the vertex buffer
+        glGenBuffers(GLsizei(1), &vertexBuffer);
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer);
+        
+        // Generate and bind the index buffer
+        glGenBuffers(GLsizei(1), &indexBuffer);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Allocate the vertex and index buffers (use arbitruary numbers for now)
+        glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
+        
+        // Initialize the first level
+        currentScene.loadLevel(area: 1, level: 1);
+        for gameObject in currentScene.gameObjects {
+            loadModel(model: gameObject.model, name: gameObject.type);
+        }
+    }
+    
+    /**
+     * Loads a model into the buffers.
+     * model - the model to load
+     */
+    func loadModel(model: Model, name: String) {
+        
+        // Check if this model has already been loaded in
+        if (Model.ModelVaoCache[name] != nil) {
+            model.vao = Model.ModelVaoCache[name]!;
+            model.offset = Model.ModelOffsetCache[name]!;
+        } else {
+            // Generate a vertex array object
+            glGenVertexArraysOES(1, &model.vao);
+            
+            // Bind the vertex array object with the index buffer
+            glBindVertexArrayOES(model.vao);
+            glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+            
+            // Input vertices into the vertex buffer
+            glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
+            
+            // Input indices into the index buffer
+            glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), currentOffset.indexOffset * MemoryLayout<GLuint>.size, MemoryLayout<GLuint>.size * model.indices.count, model.indices);
+            
+            // Set the offsets
+            model.offset = currentOffset;
+            
+            // Save to cache
+            Model.ModelOffsetCache[name] = currentOffset;
+            Model.ModelVaoCache[name] = model.vao;
+            
+            // Increment current offset
+            currentOffset.vertexOffset += model.vertices.count;
+            currentOffset.indexOffset += model.indices.count;
+            
+            // Setup attributes
+            model.setupAttributes();
+            
+            // Unbind vertex array object
+            glBindVertexArrayOES(0);
+        }
+        
+    }
+    
+    /**
+     * Converts and returns an int into an unsafe pointer.
+     * Used for inputting offsets for certain OpenGL functions.
+     */
+    func BUFFER_OFFSET(_ n: Int) -> UnsafeRawPointer? {
+        return UnsafeRawPointer.init(bitPattern: n);
     }
     
     /**
@@ -85,9 +165,13 @@ class GameEngine {
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
         
         // Bind shadow map texture
-        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1, texture: shadowRenderer.shadowBuffer.depthTexture);
+        mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
         glActiveTexture(GLenum(GL_TEXTURE1));
         glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
+        
+        // Switch back to object texture
+        mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
+        glActiveTexture(GLenum(GL_TEXTURE0));
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -116,10 +200,16 @@ class GameEngine {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            mainShader.setTexture(textureName: "u_Texture", textureNum: 0, texture: gameObject.model.texture);
-            glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
+            
             gameObject.model.render();
+        }
+    }
+    
+    deinit {
+        // Cleanup
+        for var vao in Model.ModelVaoCache.values {
+            glDeleteBuffers(1, &vao);
         }
     }
 }

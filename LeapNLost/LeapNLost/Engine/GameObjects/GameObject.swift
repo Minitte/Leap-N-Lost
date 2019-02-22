@@ -41,7 +41,7 @@ class GameObject : NSObject {
         position = Vector3(0, 0, 0);
         rotation = Vector3(0, 0, 0);
         scale = Vector3(1, 1, 1);
-        type = "";
+        type = "Default";
     }
     
     /**
