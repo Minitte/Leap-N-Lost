@@ -34,6 +34,9 @@ class GameEngine {
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
     
+    // Vertex array object for tiles
+    var tileVao : GLuint;
+    
     // Current offsets
     var currentOffset : BufferOffset;
     
@@ -49,12 +52,17 @@ class GameEngine {
         self.lastTime = Date().toMillis();
         self.vertexBuffer = 0;
         self.indexBuffer = 0;
+        self.tileVao = 0;
         self.currentOffset = BufferOffset();
 
         // Load shaders
         let shaderLoader = ShaderLoader();
         let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
+        
+        // Generate a vertex array object
+        glGenVertexArraysOES(1, &tileVao);
+        glBindVertexArrayOES(tileVao);
         
         // Generate and bind the vertex buffer
         glGenBuffers(GLsizei(1), &vertexBuffer);
@@ -68,11 +76,88 @@ class GameEngine {
         glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
+        setupAttributes();
+        //
+        
         // Initialize the first level
         currentScene.loadLevel(area: 1, level: 1);
+        
+        for gameObject in currentScene.tiles {
+            loadTile(tile: gameObject);
+        }
+        
         for gameObject in currentScene.gameObjects {
             loadModel(model: gameObject.model, name: gameObject.type);
         }
+    }
+    
+    /**
+     * Sets up the vertex array object attribute pointers by
+     * enabling each attribute value, and getting the correct offsets
+     * for this model's vertex attributes.
+     */
+    func setupAttributes() {
+        // Vertices
+        glEnableVertexAttribArray(VertexAttributes.position.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.position.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(0));
+        
+        // Colour
+        glEnableVertexAttribArray(VertexAttributes.color.rawValue);
+        glVertexAttribPointer(
+            VertexAttributes.color.rawValue,
+            4,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(3 * MemoryLayout<GLfloat>.size));
+        
+        // Texture
+        glEnableVertexAttribArray(VertexAttributes.texCoord.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.texCoord.rawValue,
+            2,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(7 * MemoryLayout<GLfloat>.size))
+        
+        // Normals
+        glEnableVertexAttribArray(VertexAttributes.normal.rawValue)
+        glVertexAttribPointer(
+            VertexAttributes.normal.rawValue,
+            3,
+            GLenum(GL_FLOAT),
+            GLboolean(GL_FALSE),
+            GLsizei(MemoryLayout<Vertex>.size), BUFFER_OFFSET(9 * MemoryLayout<GLfloat>.size))
+    }
+    
+    func loadTile(tile: GameObject) {
+        let model : Model = tile.model;
+        
+        for i in 0..<model.vertices.count {
+            model.vertices[i].x += tile.position.x;
+            model.vertices[i].y += tile.position.y;
+            model.vertices[i].z += tile.position.z;
+        }
+        
+        for i in 0..<model.indices.count {
+            model.indices[i] += GLuint(currentOffset.vertexOffset);
+        }
+        
+        // Input vertices into the vertex buffer
+        glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
+        
+        // Input indices into the index buffer
+        glBufferSubData(GLenum(GL_ELEMENT_ARRAY_BUFFER), currentOffset.indexOffset * MemoryLayout<GLuint>.size, MemoryLayout<GLuint>.size * model.indices.count, model.indices);
+        
+        // Increment current offset
+        currentOffset.vertexOffset += model.vertices.count;
+        currentOffset.indexOffset += model.indices.count;
+        
+        glBindVertexArrayOES(0);
     }
     
     /**
@@ -138,6 +223,7 @@ class GameEngine {
 
         // Update the scene
         currentScene.update(delta: delta);
+        print(delta);
     }
     
     /**
@@ -173,6 +259,27 @@ class GameEngine {
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
         glActiveTexture(GLenum(GL_TEXTURE0));
         
+        // Apply all point lights to the rendering of this game object
+        // TODO - Only apply point lights that are within range
+        for i in 0..<currentScene.pointLights.count {
+            currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+        }
+        
+        // Apply directional light
+        currentScene.directionalLight.render(shader: mainShader);
+        
+        mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
+        
+        glBindVertexArrayOES(tileVao);
+        
+        let totalIndices = currentScene.tiles[0].model.indices.count * currentScene.tiles.count;
+        
+        //glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[0].model.texture);
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(totalIndices), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(0));
+        
+        // Unbind vertex array object
+        glBindVertexArrayOES(0);
+        
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
             
@@ -188,15 +295,6 @@ class GameEngine {
             var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
             objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
             objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
-            
-            // Apply all point lights to the rendering of this game object
-            // TODO - Only apply point lights that are within range
-            for i in 0..<currentScene.pointLights.count {
-                currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
-            }
-            
-            // Apply directional light
-            currentScene.directionalLight.render(shader: mainShader);
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
