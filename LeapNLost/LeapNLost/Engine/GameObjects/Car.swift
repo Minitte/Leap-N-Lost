@@ -46,7 +46,7 @@ class Car: GameObject{
                 // Reset position
                 position.x = Float(-Level.tilesPerRow);
                 // Change texture when car goes off screen
-                model.loadTexture(filename: "car" + Car.randomColor() + ".png");
+                model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
         }
         // If speed is negative, move left
@@ -59,7 +59,7 @@ class Car: GameObject{
                 // Reset position
                 position.x = Float(Level.tilesPerRow);
                 // Change texture when car goes off screen
-                model.loadTexture(filename: "car" + Car.randomColor() + ".png");
+                model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
         }
     }

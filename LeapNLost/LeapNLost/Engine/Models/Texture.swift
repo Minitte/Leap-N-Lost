@@ -17,33 +17,42 @@ class Texture {
     // The id of the texture.
     var id : GLuint;
     
+    // The texture's width.
+    var width : GLsizei;
+    
+    // The texture's height.
+    var height : GLsizei;
+    
     /**
      * Default constructor.
-     * id - the id of the texture
      */
-    init(id: GLuint = 0) {
-        self.id = id;
+    init() {
+        self.id = 0;
+        self.width = 0;
+        self.height = 0;
     }
     
     /**
      * Constructor that loads in a texture by its file name.
-     * filename - the name of the texture file
+     * fileName - the name of the texture file
      */
-    init(filename: String) {
+    init(fileName: String) {
         self.id = 0;
+        self.width = 0;
+        self.height = 0;
         
-        loadTexture(filename: filename);
+        loadTexture(fileName: fileName);
     }
     
     /**
      * Loads a texture.
      * filename - the name of the texture file.
      */
-    func loadTexture(filename: String) {
+    func loadTexture(fileName: String) {
         deleteTexture(); // Delete existing texture if it exists
         
         // Path to the image
-        let path = CFBundleCopyResourceURL(CFBundleGetMainBundle(), filename as NSString, "" as CFString, nil)
+        let path = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as NSString, "" as CFString, nil)
         
         // Create the image source
         let imageSource = CGImageSourceCreateWithURL(path!, nil)
@@ -52,6 +61,10 @@ class Texture {
         // Image dimensions
         let width = GLsizei((image?.width)!)
         let height = GLsizei((image?.height)!)
+        
+        // Update instance dimensions
+        self.width = width;
+        self.height = height;
         
         // Create a rectangle to draw the image onto
         let zero: CGFloat = 0

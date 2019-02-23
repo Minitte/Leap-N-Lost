@@ -11,7 +11,6 @@ import GLKit
 
 /**
  * Class for handling game object models.
- * Most of this code is referenced from https://github.com/skyfe79/LearningOpenGLES2
  */
 class Model : BufferManager {
 
@@ -48,16 +47,20 @@ class Model : BufferManager {
         self.offset = BufferOffset();
         
         // Default texture
-        loadTexture(filename: "default-texture.png");
+        loadTexture(fileName: "default-texture.png");
     }
     
-    func loadTexture(filename: String) {
+    /**
+     * Attempts to load a texture.
+     * fileName - the name of the texture file
+     */
+    func loadTexture(fileName: String) {
         // Only load if the path is valid
-        let path = Bundle.main.path(forResource: filename, ofType: nil);
+        let path = Bundle.main.path(forResource: fileName, ofType: nil);
         if (path != nil) {
-            texture.loadTexture(filename: filename);
+            texture.loadTexture(fileName: fileName);
         } else {
-            print("Invalid image path: \(filename)");
+            print("Invalid image path: \(fileName)");
         }
     }
     
