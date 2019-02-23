@@ -42,7 +42,7 @@ class ModelCacheManager {
         
         let model : Model = Model.init(vertices: mesh!.vertices, indices: mesh!.indices, modelName: meshName);
         
-        model.loadTexture(filename: texName);
+        model.loadTexture(fileName: texName);
         
         return model;
     }

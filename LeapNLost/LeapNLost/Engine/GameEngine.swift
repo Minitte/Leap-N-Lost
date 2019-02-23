@@ -40,6 +40,9 @@ class GameEngine : BufferManager {
     // Current offsets
     var currentOffset : BufferOffset;
     
+    var totalFrames = 0;
+    var totalTime : Float = 0;
+    
     /**
      * Constructor for the game engine.
      * view - Reference to the application view.
@@ -188,6 +191,17 @@ class GameEngine : BufferManager {
 
         // Update the scene
         currentScene.update(delta: delta);
+        
+        totalTime += delta;
+        totalFrames += 1;
+        
+        if (totalTime >= 1.0) {
+            let fps = Float(totalFrames) / totalTime;
+            print("FPS: \(fps)");
+            
+            totalFrames = 0;
+            totalTime = 0;
+        }
     }
     
     /**
@@ -213,7 +227,7 @@ class GameEngine : BufferManager {
         mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
-         mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
+        mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
         
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
@@ -243,7 +257,7 @@ class GameEngine : BufferManager {
         // Render each row
         for i in 0..<numberOfRows {
             // Bind the current row's texture, then draw it
-            glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture);
+            glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture.id);
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indicesPerRow), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indicesPerRow * i * MemoryLayout<GLuint>.size));
         }
         
@@ -268,7 +282,7 @@ class GameEngine : BufferManager {
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
-            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture);
+            glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
             gameObject.model.render();
         }

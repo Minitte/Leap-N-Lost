@@ -31,6 +31,7 @@
 		92372E7722103CE8001F5139 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7622103CE7001F5139 /* Spotlight.swift */; };
 		92372E7922111C04001F5139 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7822111C04001F5139 /* Shader.swift */; };
 		925001252220158600440C3E /* BufferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925001242220158600440C3E /* BufferManager.swift */; };
+		925001272220BEA600440C3E /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925001262220BEA600440C3E /* Texture.swift */; };
 		928D537C2215EEBD002C6F2B /* ShadowRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */; };
 		928D5381221B8EFA002C6F2B /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 928D537E221B8EF9002C6F2B /* water.jpg */; };
 		928D5382221B8EFA002C6F2B /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 928D537F221B8EFA002C6F2B /* grass.jpg */; };
@@ -114,6 +115,7 @@
 		92372E7622103CE7001F5139 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		92372E7822111C04001F5139 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		925001242220158600440C3E /* BufferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferManager.swift; sourceTree = "<group>"; };
+		925001262220BEA600440C3E /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		928D537B2215EEBD002C6F2B /* ShadowRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRenderer.swift; sourceTree = "<group>"; };
 		928D537E221B8EF9002C6F2B /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
 		928D537F221B8EFA002C6F2B /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				AEF36599220B8AD300ED9827 /* Primitives */,
 				AEF3658D220B6DDC00ED9827 /* Model.swift */,
 				AEF36589220B6C1C00ED9827 /* Vertex.swift */,
+				925001262220BEA600440C3E /* Texture.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
 				AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */,
+				925001272220BEA600440C3E /* Texture.swift in Sources */,
 				E2DA6517221BC5460065A150 /* InputManager.swift in Sources */,
 				928D537C2215EEBD002C6F2B /* ShadowRenderer.swift in Sources */,
 				AEF36583220B601700ED9827 /* ShaderLoader.swift in Sources */,

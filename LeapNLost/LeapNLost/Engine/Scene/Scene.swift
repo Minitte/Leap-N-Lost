@@ -107,7 +107,7 @@ class Scene {
             // Generate the row's tiles
             for tileIndex in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.model.loadTexture(filename: texture);
+                tile.model.loadTexture(fileName: texture);
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
