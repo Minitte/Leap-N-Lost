@@ -24,6 +24,7 @@ class PlayerGameObject : GameObject {
     
     private var groundPositionY : Float = -3;
     
+    var currentRow: Int = 0;
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         super.init(model);
         
@@ -35,6 +36,10 @@ class PlayerGameObject : GameObject {
         
         scale = scale * 1.5;
         rotation = Vector3.init(0, Float.pi, 0);
+        self.collider = BoxCollider(scale: Vector3(1,1,1)
+                                    , max: Vector3(1,1,1)
+                                    , min: Vector3(0.1,0.1,0.1));
+        
     }
     
     /**
@@ -64,6 +69,8 @@ class PlayerGameObject : GameObject {
             
             if (position.y < groundPositionY) {
                 position.y = groundPositionY;
+                currentRow += 1;
+                print("Player Landed on: \(currentRow)");
                 hopping = false;
             }
         }
@@ -78,6 +85,7 @@ class PlayerGameObject : GameObject {
         rotation = Vector3.init(0, Float.pi, 0);
         
         hopping = true;
+        
     }
     
     /**

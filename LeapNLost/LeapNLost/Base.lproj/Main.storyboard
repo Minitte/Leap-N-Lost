@@ -225,7 +225,7 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="cartoon-forest" width="810" height="1440"/>
         <image name="frog" width="258" height="265"/>
         <image name="mainmenu" width="256" height="38"/>
     </resources>

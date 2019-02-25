@@ -30,6 +30,9 @@ class GameObject : NSObject {
     // Game object type
     var type : String;
     
+    //Optional collider used for collisions.
+    var collider : Collider?;
+    
     /**
      * Construtor for the game object.
      * model - the model of the game object.

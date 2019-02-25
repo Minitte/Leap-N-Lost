@@ -78,6 +78,7 @@ struct Row : Decodable {
     let type: String;
     let speed: Float;
     
+    
     // Row constructor
     init(){
         id = -1;

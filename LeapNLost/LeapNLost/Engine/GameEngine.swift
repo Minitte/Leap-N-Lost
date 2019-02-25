@@ -202,6 +202,9 @@ class GameEngine : BufferManager {
             totalFrames = 0;
             totalTime = 0;
         }
+       
+        
+        
     }
     
     /**
