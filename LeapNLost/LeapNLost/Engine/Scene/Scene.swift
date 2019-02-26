@@ -35,13 +35,16 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    //Dictionary containing references of objects.
     private var collisionDictionary : [Int: [GameObject]];
     
-    private var player : PlayerGameObject;
+    //Reference to the player object.
+    var player : PlayerGameObject;
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
      */
+    
     init(view: GLKView) {
         // Initialize variables
         self.view = view;
@@ -116,6 +119,7 @@ class Scene {
             for tileIndex in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
                 tile.model.loadTexture(fileName: texture);
+                tile.type = row.type;
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
@@ -135,9 +139,14 @@ class Scene {
             gameObject.update(delta: delta);
         }
         
+        //Check collisions based on which row the player is on.
         for gameObject in collisionDictionary[player.currentRow]!{
-            if(gameObject.collider!.CheckCollision(first: gameObject, second: player)) {
-                print("Died!");
+            if((gameObject.collider!.CheckCollision(first: gameObject, second: player) && gameObject.type != "lilypad") ||
+                tiles[player.currentRow * Level.tilesPerRow].type == "water") {
+                
+                player.isDead = true;
+                
+               
             }
         }
     }

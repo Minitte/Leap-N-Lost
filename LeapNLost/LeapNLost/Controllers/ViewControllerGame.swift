@@ -76,13 +76,27 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         InputManager.nextFrame();
         
-        gameEngine!.update();
+        if(gameEngine!.currentScene.player.isDead) {
+            let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil);
+            let newViewController = storyboard.instantiateViewController(withIdentifier: "ViewControllerMainMenuID");
+            (self as UIViewController).present(newViewController, animated: true, completion: nil);
+            gameEngine = nil;
+        }
+        if (gameEngine != nil) {
+            gameEngine!.update();
+        }
     }
     
     /**
      * Renders the game.
      */
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        gameEngine!.render(rect);
+        if (gameEngine != nil) {
+            gameEngine!.render(rect);
+        }
+    }
+    
+    deinit {
+        EAGLContext.setCurrent(nil);
     }
 }

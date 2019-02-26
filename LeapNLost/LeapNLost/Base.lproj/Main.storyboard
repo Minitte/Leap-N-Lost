@@ -66,7 +66,7 @@
         <!--View Controller Main Menu-->
         <scene sceneID="bQU-LJ-y1V">
             <objects>
-                <viewController id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerMainMenuID" id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hfe-73-Qra">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -225,7 +225,7 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="810" height="1440"/>
+        <image name="cartoon-forest" width="1080" height="1920"/>
         <image name="frog" width="258" height="265"/>
         <image name="mainmenu" width="256" height="38"/>
     </resources>

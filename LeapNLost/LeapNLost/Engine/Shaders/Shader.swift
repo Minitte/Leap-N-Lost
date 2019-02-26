@@ -125,4 +125,9 @@ class Shader {
         }
         glUniformMatrix4fv(uniformMap[variableName]!, 1, GLboolean(GL_FALSE), value.array);
     }
+    
+    deinit {
+        // We don't need the shader anymore.
+        glDeleteShader(programHandle);
+    }
 }

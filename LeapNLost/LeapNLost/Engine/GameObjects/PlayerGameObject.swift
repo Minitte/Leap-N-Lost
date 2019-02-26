@@ -24,8 +24,10 @@ class PlayerGameObject : GameObject {
     
     private var groundPositionY : Float = -3;
     
+    var isDead : Bool;
     var currentRow: Int = 0;
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
+        isDead = false;
         super.init(model);
         
         let h : Float = 9.81 / hl
@@ -36,9 +38,7 @@ class PlayerGameObject : GameObject {
         
         scale = scale * 1.5;
         rotation = Vector3.init(0, Float.pi, 0);
-        self.collider = BoxCollider(scale: Vector3(1,1,1)
-                                    , max: Vector3(1,1,1)
-                                    , min: Vector3(0.1,0.1,0.1));
+        self.collider = BoxCollider(max: Vector3(1,1,1),min:Vector3(0.1,0.1,0.1));
         
     }
     

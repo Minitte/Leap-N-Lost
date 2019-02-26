@@ -18,12 +18,12 @@ class ShadowBuffer {
     var bufferName : GLuint;
     
     // The depth texture
-    var depthTexture : GLuint;
+    var depthTexture : Texture;
     
     init() {
         // Initialize variables
         bufferName = 0;
-        depthTexture = 0;
+        depthTexture = Texture();
         
         // Generate buffers and texture
         generateFrameBuffer();
@@ -38,8 +38,8 @@ class ShadowBuffer {
     
     func generateDepthTexture() {
         // Generate the depth texture
-        glGenTextures(1, &depthTexture);
-        glBindTexture(GLenum(GL_TEXTURE_2D), depthTexture);
+        glGenTextures(1, &depthTexture.id);
+        glBindTexture(GLenum(GL_TEXTURE_2D), depthTexture.id);
         glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_DEPTH_COMPONENT, textureSize, textureSize, 0,GLenum(GL_DEPTH_COMPONENT), GLenum(GL_UNSIGNED_INT), nil);
 
         // Set texture parameters
@@ -51,7 +51,7 @@ class ShadowBuffer {
         glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
  
         // Bind the texture to the buffer
-        glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_DEPTH_ATTACHMENT), GLenum(GL_TEXTURE_2D), depthTexture, 0);
+        glFramebufferTexture2D(GLenum(GL_FRAMEBUFFER), GLenum(GL_DEPTH_ATTACHMENT), GLenum(GL_TEXTURE_2D), depthTexture.id, 0);
         
         // Check if the frame buffer was successfully generated
         if(glCheckFramebufferStatus(GLenum(GL_FRAMEBUFFER)) != GLenum(GL_FRAMEBUFFER_COMPLETE)) {

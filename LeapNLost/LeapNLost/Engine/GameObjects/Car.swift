@@ -33,9 +33,7 @@ class Car: GameObject{
         scale = Vector3(1, 1, 1);
         type = "Car";
         
-        self.collider = BoxCollider(scale: Vector3(1,1,1)
-            ,max:Vector3(1,1,1)
-            ,min:Vector3(0.1,0.1,0.1));
+        self.collider = BoxCollider(max:Vector3(1,1,1), min:Vector3(0.1,0.1,0.1));
     }
     
     // Update function

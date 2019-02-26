@@ -8,8 +8,8 @@
 
 import Foundation
 
+//Protocol used to represents colliders.
 protocol Collider {
-    var scale : Vector3 { get set };
-    
+    // Function used to return a bool to determine if collision occurs.
     func CheckCollision(first: GameObject, second: GameObject) -> Bool;
 }
