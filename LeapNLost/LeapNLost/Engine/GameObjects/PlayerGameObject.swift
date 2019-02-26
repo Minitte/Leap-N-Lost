@@ -24,6 +24,9 @@ class PlayerGameObject : GameObject {
     
     private var groundPositionY : Float = -3;
     
+    // tile position based on x-z where z is forwards and origin is bottom center
+    private var tilePosition : Vector3 = Vector3.init();
+    
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         super.init(model);
         
@@ -77,6 +80,8 @@ class PlayerGameObject : GameObject {
         
         rotation = Vector3.init(0, Float.pi, 0);
         
+        tilePosition.z += 1;
+        
         hopping = true;
     }
     
@@ -84,9 +89,15 @@ class PlayerGameObject : GameObject {
      * hops left
      */
     public func hopLeft() {
+        if (tilePosition.x <= -2) {
+            return;
+        }
+        
         velocity = leapLeft * 1;
         
         rotation = Vector3.init(0, -Float.pi/2.0, 0);
+        
+        tilePosition.x += -1;
         
         hopping = true;
     }
@@ -95,9 +106,15 @@ class PlayerGameObject : GameObject {
      * hops right
      */
     public func hopRight() {
+        if (tilePosition.x >= 2) {
+            return;
+        }
+        
         velocity = leapRight * 1;
         
         rotation = Vector3.init(0, Float.pi/2.0, 0);
+        
+        tilePosition.x += 1;
         
         hopping = true;
     }
