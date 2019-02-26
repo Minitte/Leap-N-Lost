@@ -10,20 +10,24 @@ import Foundation
 
 class CameraFollowTarget : Camera {
     
+    // Gameobject for the camera to follow
+    public var target : GameObject;
+    
     // camera offset from target
     public var offset : Vector3;
     
     /**
      * Ini a camera that follows a target if any
      */
-    init(cameraOffset offset:Vector3) {
+    init(cameraOffset offset:Vector3, trackTarget target:GameObject) {
         self.offset = offset;
+        self.target = target;
         
         super.init();
     }
     
     /**
-     * updates the camera's position with a target (given) and offset (already set)
+     * updates the camera's position with the target and offset
      */
     public func updatePosition(trackingTarget target:GameObject) {
         var newPos : Vector3 = target.position + offset;
