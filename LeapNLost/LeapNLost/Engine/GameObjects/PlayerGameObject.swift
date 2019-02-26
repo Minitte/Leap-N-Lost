@@ -10,18 +10,25 @@ import Foundation
 
 class PlayerGameObject : GameObject {
     
+    // gravity acceralation vector
     private var gravity : Vector3 = Vector3.init(0, -9.81, 0);
     
+    // leap forward velocity vector
     private var leapForward : Vector3 = Vector3.init();
     
+    // leap left velocity vector
     private var leapLeft : Vector3 = Vector3.init();
     
+    // leap right velocity vector
     private var leapRight : Vector3 = Vector3.init();
     
+    // velocity of the hop
     private var velocity : Vector3 = Vector3.init();
-    	
+    
+    // hopping flag to block other input
     private var hopping : Bool = false;
     
+    // ground position y value
     private var groundPositionY : Float = -3;
     
     // tile position based on x-z where z is forwards and origin is bottom center
