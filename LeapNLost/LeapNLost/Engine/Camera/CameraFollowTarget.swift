@@ -30,9 +30,11 @@ class CameraFollowTarget : Camera {
      * updates the camera's position with the target and offset
      */
     public func updatePosition() {
-        var newPos : Vector3 = target.position + offset;
+        var newPos : Vector3 = target.position * -1;
         
-        setPosition(xPosition: newPos.x, yPosition: newPos.y, zPosition: newPos.z);
+        newPos = newPos + offset;
+        
+        setPosition(xPosition: newPos.x, yPosition: offset.y, zPosition: newPos.z);
     }
     
     

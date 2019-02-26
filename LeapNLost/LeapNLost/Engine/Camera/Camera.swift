@@ -29,9 +29,6 @@ class Camera {
     // The viewing angle of the camera
     public var perspectiveMatrix : GLKMatrix4;
     
-    // combined matrix of position, rotation and perspective
-    public var combinedMatrix : GLKMatrix4;
-    
     // combined position and rotation matrix.
     public var transformMatrix : GLKMatrix4;
     
@@ -42,13 +39,11 @@ class Camera {
         positionMatrix = GLKMatrix4Identity;
         rotationMatrix = GLKMatrix4Identity;
         perspectiveMatrix = GLKMatrix4Identity;
-        combinedMatrix = GLKMatrix4Identity;
         transformMatrix = GLKMatrix4Identity;
         
         position = Vector3.init();
         rotation = Vector3.init();
         
-        updateCombined();
         updateTransformMatrix();
     }
     
@@ -59,7 +54,6 @@ class Camera {
         positionMatrix = GLKMatrix4Identity;
         rotationMatrix = GLKMatrix4Identity;
         perspectiveMatrix = GLKMatrix4Identity;
-        combinedMatrix = GLKMatrix4Identity; 
         transformMatrix = GLKMatrix4Identity;
         
         // Set the position matrix
@@ -70,7 +64,6 @@ class Camera {
         position = Vector3(-x, -y, -z);
         rotation = Vector3.init();
         
-        updateCombined();
         updateTransformMatrix();
     }
     
@@ -82,7 +75,6 @@ class Camera {
         
         position = Vector3(x, y, z);
         
-        updateCombined();
         updateTransformMatrix();
     }
     
@@ -94,7 +86,6 @@ class Camera {
         
         position = position + Vector3(-x, -y, -z);
         
-        updateCombined();
         updateTransformMatrix();
     }
     
@@ -108,7 +99,6 @@ class Camera {
         
         rotation = Vector3(x, y, z);
         
-        updateCombined();
         updateTransformMatrix();
     }
     
@@ -121,8 +111,7 @@ class Camera {
         rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, z);
         
         rotation = rotation + Vector3(x, y, z);
-        
-        updateCombined();
+    
         updateTransformMatrix();
     }
     
@@ -131,8 +120,6 @@ class Camera {
      */
     public func setPerspectiveMatrix(perspective m:GLKMatrix4) {
         perspectiveMatrix = m;
-        
-        updateCombined();
     }
     
     /**
@@ -144,17 +131,9 @@ class Camera {
     }
     
     /**
-     * Updates the combined matrix by multiplying position, rotation and perspective together.
-     */
-    private func updateCombined() {
-        combinedMatrix = GLKMatrix4Multiply(positionMatrix, rotationMatrix);
-        combinedMatrix = GLKMatrix4Multiply(perspectiveMatrix, combinedMatrix);
-    }
-    
-    /**
      * Updates the transform matrix by multiplying position and rotation.
      */
     private func updateTransformMatrix() {
-        transformMatrix = GLKMatrix4Multiply(positionMatrix, rotationMatrix);
+        transformMatrix = GLKMatrix4Multiply(rotationMatrix, positionMatrix);
     }
 }
