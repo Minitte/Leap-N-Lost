@@ -11,7 +11,7 @@ import Foundation
 class CameraFollowTarget : Camera {
     
     // Gameobject for the camera to follow
-    public var target : GameObject;
+    public var target : GameObject?;
     
     // camera offset from target
     public var offset : Vector3;
@@ -19,7 +19,7 @@ class CameraFollowTarget : Camera {
     /**
      * Ini a camera that follows a target if any
      */
-    init(cameraOffset offset:Vector3, trackTarget target:GameObject) {
+    init(cameraOffset offset:Vector3, trackTarget target:GameObject?) {
         self.offset = offset;
         self.target = target;
         
@@ -30,7 +30,11 @@ class CameraFollowTarget : Camera {
      * updates the camera's position with the target and offset
      */
     public func updatePosition() {
-        var newPos : Vector3 = target.position * -1;
+        if (target == nil) {
+            return;
+        }
+        
+        var newPos : Vector3 = target!.position * -1;
         
         newPos = newPos + offset;
         
