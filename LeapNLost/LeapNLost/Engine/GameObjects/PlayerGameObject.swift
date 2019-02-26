@@ -10,22 +10,33 @@ import Foundation
 
 class PlayerGameObject : GameObject {
     
+    // gravity acceralation vector
     private var gravity : Vector3 = Vector3.init(0, -9.81, 0);
     
+    // leap forward velocity vector
     private var leapForward : Vector3 = Vector3.init();
     
+    // leap left velocity vector
     private var leapLeft : Vector3 = Vector3.init();
     
+    // leap right velocity vector
     private var leapRight : Vector3 = Vector3.init();
     
+    // velocity of the hop
     private var velocity : Vector3 = Vector3.init();
-    	
+    
+    // hopping flag to block other input
     private var hopping : Bool = false;
     
+    // ground position y value
     private var groundPositionY : Float = -3;
-    
     var isDead : Bool;
     var currentRow: Int = 0;
+
+    // tile position based on x-z where z is forwards and origin is bottom center
+    private var tilePosition : Vector3 = Vector3.init();
+    
+
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         isDead = false;
         super.init(model);
@@ -84,6 +95,8 @@ class PlayerGameObject : GameObject {
         
         rotation = Vector3.init(0, Float.pi, 0);
         
+        tilePosition.z += 1;
+        
         hopping = true;
         
     }
@@ -92,9 +105,15 @@ class PlayerGameObject : GameObject {
      * hops left
      */
     public func hopLeft() {
+        if (tilePosition.x <= -2) {
+            return;
+        }
+        
         velocity = leapLeft * 1;
         
         rotation = Vector3.init(0, -Float.pi/2.0, 0);
+        
+        tilePosition.x += -1;
         
         hopping = true;
     }
@@ -103,9 +122,15 @@ class PlayerGameObject : GameObject {
      * hops right
      */
     public func hopRight() {
+        if (tilePosition.x >= 2) {
+            return;
+        }
+        
         velocity = leapRight * 1;
         
         rotation = Vector3.init(0, Float.pi/2.0, 0);
+        
+        tilePosition.x += 1;
         
         hopping = true;
     }
