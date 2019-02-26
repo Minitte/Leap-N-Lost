@@ -29,7 +29,7 @@ class CameraFollowTarget : Camera {
     /**
      * updates the camera's position with the target and offset
      */
-    public func updatePosition(trackingTarget target:GameObject) {
+    public func updatePosition() {
         var newPos : Vector3 = target.position + offset;
         
         setPosition(xPosition: newPos.x, yPosition: newPos.y, zPosition: newPos.z);
