@@ -130,14 +130,26 @@ class Scene {
      * Checks for collisions between the player and other game objects.
      */
     func checkCollisions() {
+        var onLilypad : Bool = false;
         
         // Iterate through every game object in the player's current row
         for gameObject in collisionDictionary[Int(player.tilePosition.z)]!{
             
-            if((gameObject.collider!.CheckCollision(first: gameObject, second: player) && gameObject.type != "lilypad") ||
-                tiles[Int(player.tilePosition.z) * Level.tilesPerRow].type == "water") {
-                player.isDead = true;
+            if((gameObject.collider!.CheckCollision(first: gameObject, second: player))) {
+                
+                if (gameObject.type == "Lilypad") {
+                    player.position = gameObject.position + Vector3(0, 0.5, 0);
+                    onLilypad = true;
+                    break;
+                } else {
+                    player.isDead = true;
+                }
             }
+        }
+        
+        // Check if the player landed on water
+        if (tiles[Int(player.tilePosition.z) * Level.tilesPerRow].type == "water" && !onLilypad) {
+            player.isDead = true;
         }
     }
     

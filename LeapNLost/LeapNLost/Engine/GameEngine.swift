@@ -306,7 +306,6 @@ class GameEngine : BufferManager {
         glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);
         
         // Flush model cache
-        ModelCacheManager.modelDictionary = [:];
         ModelCacheManager.flushCache();
     }
 }

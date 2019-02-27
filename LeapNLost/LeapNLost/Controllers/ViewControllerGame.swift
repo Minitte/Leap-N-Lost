@@ -79,13 +79,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         
         gameEngine?.update();
         
-        if ((gameEngine?.currentScene.player.isDead)!) {
-            EAGLContext.setCurrent(nil);
-            
+        if (gameEngine!.currentScene.player.isDead) {
             let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil);
             let newViewController = storyboard.instantiateViewController(withIdentifier: "ViewControllerMainMenuID");
             (self as UIViewController).present(newViewController, animated: true, completion: nil);
             gameEngine = nil;
+            EAGLContext.setCurrent(nil);
         }
     }
     
