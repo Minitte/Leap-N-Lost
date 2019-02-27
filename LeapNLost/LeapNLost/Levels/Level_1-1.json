@@ -52,13 +52,13 @@
         },
         {
             "id": 9,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": 2.0
         },
         {
             "id": 10,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": -2.0
         },
         {
             "id": 11,
@@ -67,8 +67,8 @@
         },
         {
             "id": 12,
-            "type": "grass",
-            "speed": 1.0
+            "type": "water",
+            "speed": 1.5
         },
         {
             "id": 13,
@@ -77,13 +77,13 @@
         },
         {
             "id": 14,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": 2.5
         },
         {
             "id": 15,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": -2.5
         },
         {
             "id": 16,
@@ -92,17 +92,17 @@
         },
         {
             "id": 17,
-            "type": "grass",
+            "type": "water",
             "speed": 1.0
         },
         {
             "id": 18,
-            "type": "grass",
-            "speed": 1.0
+            "type": "water",
+            "speed": -1.0
         },
         {
             "id": 19,
-            "type": "grass",
+            "type": "water",
             "speed": 1.0
         },
         {
@@ -112,13 +112,13 @@
         },
         {
             "id": 21.0,
-            "type": "grass",
+            "type": "road",
             "speed": 1.0
         },
         {
             "id": 22,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": -1.0
         },
         {
             "id": 23,
@@ -127,28 +127,28 @@
         },
         {
             "id": 24,
-            "type": "grass",
+            "type": "water",
             "speed": 1.0
         },
         {
             "id": 25,
-            "type": "grass",
-            "speed": 1.0
+            "type": "water",
+            "speed": -1.5
         },
         {
             "id": 26,
             "type": "grass",
-            "speed": 1.0
+            "speed": -1.0
         },
         {
             "id": 27,
-            "type": "grass",
+            "type": "road",
             "speed": 1.0
         },
         {
             "id": 28,
-            "type": "grass",
-            "speed": 1.0
+            "type": "road",
+            "speed": -1.0
         },
         {
             "id": 29,
