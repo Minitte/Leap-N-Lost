@@ -52,6 +52,7 @@ class ModelCacheManager {
      */
     public static func flushCache() {
         meshDictionary = [:];
+        
     }
 }
 

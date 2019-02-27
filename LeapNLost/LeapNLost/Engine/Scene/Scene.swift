@@ -35,23 +35,30 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    //Dictionary containing references of objects.
+    private var collisionDictionary : [Int: [GameObject]];
+    
+    //Reference to the player object.
+    var player : PlayerGameObject;
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
      */
+    
     init(view: GLKView) {
         // Initialize variables
         self.view = view;
         self.level = Level();
         self.gameObjects = [GameObject]();
         self.tiles = [GameObject]();
+        self.collisionDictionary = [Int:[GameObject]]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
         
-        let playerGO : PlayerGameObject = PlayerGameObject.init(withModel: frogModel);
-        playerGO.type = "Player";
-        gameObjects.append(playerGO);
-        playerGO.position = Vector3(0, -3, 0);
+        player = PlayerGameObject.init(withModel: frogModel);
+        player.type = "Player";
+        gameObjects.append(player);
+        player.position = Vector3(0, -3, 0);
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
@@ -82,7 +89,7 @@ class Scene {
             let row = self.level.rows[rowIndex];
             var texture : String;
             var depth : Float;
-            
+            var currentObjects : [GameObject] = [GameObject]();
             // Spawn things
             switch(row.type){
             case "road":
@@ -92,6 +99,9 @@ class Scene {
                 // Create car object
                 let car = Car.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
                 gameObjects.append(car);
+                currentObjects.append(car)
+                
+                
             case "water":
                 depth = -5.5;
                 
@@ -99,15 +109,17 @@ class Scene {
                 let lilypad = Lilypad.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
                 texture = "water.jpg";
                 gameObjects.append(lilypad);
+                currentObjects.append(lilypad);
             default:
                 depth = -5;
                 texture = "grass.jpg";
             }
-            
+            collisionDictionary[rowIndex] = currentObjects;
             // Generate the row's tiles
             for tileIndex in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
                 tile.model.loadTexture(fileName: texture);
+                tile.type = row.type;
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
@@ -127,6 +139,16 @@ class Scene {
             gameObject.update(delta: delta);
         }
         
+        //Check collisions based on which row the player is on.
+        for gameObject in collisionDictionary[player.currentRow]!{
+            if((gameObject.collider!.CheckCollision(first: gameObject, second: player) && gameObject.type != "lilypad") ||
+                tiles[player.currentRow * Level.tilesPerRow].type == "water") {
+                
+                player.isDead = true;
+                
+               
+            }
+        }
         mainCamera.updatePosition();
     }
 }

@@ -48,6 +48,7 @@ class GameEngine : BufferManager {
      * view - Reference to the application view.
      */
     init(_ view : GLKView) {
+        print("INIT");
         // Initialize variables
         self.view = view;
         self.currentScene = Scene(view: view);
@@ -202,6 +203,9 @@ class GameEngine : BufferManager {
             totalFrames = 0;
             totalTime = 0;
         }
+       
+        
+        
     }
     
     /**
@@ -232,7 +236,7 @@ class GameEngine : BufferManager {
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
         glActiveTexture(GLenum(GL_TEXTURE1));
-        glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture);
+        glBindTexture(GLenum(GL_TEXTURE_2D), shadowRenderer.shadowBuffer.depthTexture.id);
         
         // Switch back to object texture
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
@@ -289,10 +293,26 @@ class GameEngine : BufferManager {
     }
     
     deinit {
+        print("Engine deinit");
         // Cleanup
         for var cachedModel in ModelCacheManager.modelDictionary.values {
             glDeleteBuffers(1, &cachedModel.vao);
         }
+        
+        // Unbind everything
+        glBindVertexArrayOES(0);
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
+        
+        // Free all the buffers
+        glDeleteBuffers(1, &tileVao);
+        glDeleteBuffers(1, &vertexBuffer);
+        glDeleteBuffers(1, &indexBuffer);
+        glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);
+        
+        // Flush model cache
+        ModelCacheManager.modelDictionary = [:];
+        ModelCacheManager.flushCache();
     }
 }
 

@@ -66,7 +66,7 @@
         <!--View Controller Main Menu-->
         <scene sceneID="bQU-LJ-y1V">
             <objects>
-                <viewController id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerMainMenuID" id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hfe-73-Qra">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
