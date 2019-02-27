@@ -96,6 +96,11 @@ class PlayerGameObject : GameObject {
         
         tilePosition.z += 1;
         
+        // hardcoded stage end for alpha
+        if (tilePosition.z >= 10) {
+            isDead = true;
+        }
+        
         hopping = true;
         
     }
