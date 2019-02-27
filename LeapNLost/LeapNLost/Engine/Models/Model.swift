@@ -97,8 +97,7 @@ class Model : BufferManager {
     }
     
     deinit {
-        print("Model deinit");
-        glDeleteBuffers(1, &vao);
+        glDeleteVertexArraysOES(1, &vao);
     }
 }
 

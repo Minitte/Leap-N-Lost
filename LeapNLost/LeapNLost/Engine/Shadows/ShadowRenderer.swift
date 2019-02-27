@@ -44,11 +44,11 @@ class ShadowRenderer {
      */
     func setupCamera(lightDirection : Vector3) {
         let nearPlane : Float = 1;
-        let farPlane : Float = 40;
+        let farPlane : Float = 60;
         
         // Create the orthographic camera
         // TODO - Create it without hardcoding the view parameters
-        let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-15, 15, -15, 15, nearPlane, farPlane);
+        let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-20, 20, -20, 25, nearPlane, farPlane);
         let lightInvDirection = -lightDirection;
         let lightView : GLKMatrix4 = GLKMatrix4MakeLookAt(lightInvDirection.x, lightInvDirection.y, lightInvDirection.z, 0, 0, 0, 0, 1, 0);
         shadowCamera.perspectiveMatrix = GLKMatrix4Multiply(lightProjection, lightView);
