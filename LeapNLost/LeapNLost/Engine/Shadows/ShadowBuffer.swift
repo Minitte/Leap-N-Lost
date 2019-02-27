@@ -65,4 +65,8 @@ class ShadowBuffer {
         // Go back to default frame buffer
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), 0);
     }
+    
+    deinit {
+        glDeleteFramebuffers(1, &bufferName);
+    }
 }

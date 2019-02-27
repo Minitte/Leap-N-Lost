@@ -26,16 +26,16 @@ class PlayerGameObject : GameObject {
     private var velocity : Vector3 = Vector3.init();
     
     // hopping flag to block other input
-    private var hopping : Bool = false;
+    var hopping : Bool = false;
     
     // ground position y value
     private var groundPositionY : Float = -3;
+    
+    // Flag to represent if the player is dead
     var isDead : Bool;
-    var currentRow: Int = 0;
 
     // tile position based on x-z where z is forwards and origin is bottom center
-    private var tilePosition : Vector3 = Vector3.init();
-    
+    var tilePosition : Vector3 = Vector3.init();
 
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         isDead = false;
@@ -80,8 +80,7 @@ class PlayerGameObject : GameObject {
             
             if (position.y < groundPositionY) {
                 position.y = groundPositionY;
-                currentRow += 1;
-                print("Player Landed on: \(currentRow)");
+                print("Player Landed on: \(tilePosition)");
                 hopping = false;
             }
         }

@@ -51,7 +51,8 @@ class ModelCacheManager {
      * Remove all in cache
      */
     public static func flushCache() {
-        meshDictionary = [:];
+        meshDictionary.removeAll();
+        modelDictionary.removeAll();
         
     }
 }

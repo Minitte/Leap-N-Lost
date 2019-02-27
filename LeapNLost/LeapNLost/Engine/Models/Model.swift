@@ -95,6 +95,11 @@ class Model : BufferManager {
             
         return Model(vertices: vertices, indices: indices, modelName: name);
     }
+    
+    deinit {
+        print("Model deinit");
+        glDeleteBuffers(1, &vao);
+    }
 }
 
 /**
