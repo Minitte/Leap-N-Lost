@@ -40,32 +40,32 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         // Start the engine
         gameEngine = GameEngine(self.view as! GLKView);
     }
-
+    
+    /**
+     * Sends us back to the main menu.
+     */
+    func dismissScene() {
+        // Dismiss this scene
+        navigationController?.popViewController(animated: true);
+        dismiss(animated: true, completion: nil);
+    }
     
     @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
         if (sender.state == .ended) {
-//            NSLog("tapped");
-            
             let tapPos : CGPoint = sender.location(in: self.view);
-            
             let tapPosVec : Vector3 = Vector3.init(Float(tapPos.x), Float(tapPos.y), 0);
-            
             InputManager.registerSingleTap(at: tapPosVec);
         }
     }
 
     @IBAction func OnSwipeRight(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
-//            NSLog("Swiped right");
-            
             InputManager.registerRightSwipe();
         }
     }
     
     @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
-//            NSLog("Swiped left");
-            
             InputManager.registerLeftSwipe();
         }
     }
@@ -75,16 +75,11 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      */
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         InputManager.nextFrame();
-        
         gameEngine?.update();
         
+        // Check if the player is dead
         if ((gameEngine?.currentScene.player.isDead)!) {
-            let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil);
-            let newViewController = storyboard.instantiateViewController(withIdentifier: "ViewControllerMainMenuID");
-            (self as UIViewController).present(newViewController, animated: true, completion: nil);
-            gameEngine = nil;
-            EAGLContext.setCurrent(nil);
-            glkView = nil;
+            dismissScene();
         }
     }
     
@@ -97,6 +92,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     deinit {
         print("ViewControllerGame deinit");
+        gameEngine = nil;
+        glkView = nil;
         EAGLContext.setCurrent(nil);
     }
 }
