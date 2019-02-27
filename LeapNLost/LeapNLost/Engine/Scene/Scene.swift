@@ -27,7 +27,7 @@ class Scene {
     var tiles : [GameObject]
     
     // Camera properties
-    private(set) var mainCamera : Camera;
+    private(set) var mainCamera : CameraFollowTarget;
     
     // The level
     private(set) var level : Level;
@@ -67,10 +67,10 @@ class Scene {
         directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
-        mainCamera = Camera();
+        let camOffset : Vector3 = Vector3(0, -10, -8.5);
+        mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: playerGO);
         
         // For testing purposes ***
-        mainCamera.translate(xTranslation: 0, yTranslation: -5, zTranslation: -15);
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
     }
     
@@ -149,5 +149,6 @@ class Scene {
                
             }
         }
+        mainCamera.updatePosition();
     }
 }

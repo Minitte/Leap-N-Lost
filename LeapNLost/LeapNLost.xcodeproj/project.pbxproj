@@ -45,6 +45,7 @@
 		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
 		AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */; };
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
+		AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */; };
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
 		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
 		AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA9892214CF4C004704D8 /* Scene.swift */; };
@@ -131,6 +132,7 @@
 		AD606C2C220BC75E008B1517 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScoreboard.swift; sourceTree = "<group>"; };
 		AD606C2E220BC75E008B1517 /* PlayerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
+		AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFollowTarget.swift; sourceTree = "<group>"; };
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
 		AE4CA9892214CF4C004704D8 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				AEC69749220D03CF009AA6F1 /* Camera.swift */,
+				AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				5707397E221CF50B00F54DB3 /* Lilypad.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
+				AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */,
 				AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */,
 				88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */,
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
