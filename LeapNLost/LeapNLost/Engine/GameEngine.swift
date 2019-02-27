@@ -48,7 +48,7 @@ class GameEngine : BufferManager {
      * view - Reference to the application view.
      */
     init(_ view : GLKView) {
-        print("INIT");
+        print("Engine Init");
         // Initialize variables
         self.view = view;
         self.currentScene = Scene(view: view);
@@ -294,11 +294,6 @@ class GameEngine : BufferManager {
     
     deinit {
         print("Engine deinit");
-        // Cleanup
-        for var cachedModel in ModelCacheManager.modelDictionary.values {
-            glDeleteBuffers(1, &cachedModel.vao);
-        }
-        
         // Unbind everything
         glBindVertexArrayOES(0);
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);

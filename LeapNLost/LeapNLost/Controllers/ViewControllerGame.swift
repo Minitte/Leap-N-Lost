@@ -20,6 +20,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        print("OZMA");
         setupGL();
     }
     
@@ -76,14 +77,15 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         InputManager.nextFrame();
         
-        if(gameEngine!.currentScene.player.isDead) {
+        gameEngine?.update();
+        
+        if ((gameEngine?.currentScene.player.isDead)!) {
+            EAGLContext.setCurrent(nil);
+            
             let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil);
             let newViewController = storyboard.instantiateViewController(withIdentifier: "ViewControllerMainMenuID");
             (self as UIViewController).present(newViewController, animated: true, completion: nil);
             gameEngine = nil;
-        }
-        if (gameEngine != nil) {
-            gameEngine!.update();
         }
     }
     
@@ -91,12 +93,11 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
      * Renders the game.
      */
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        if (gameEngine != nil) {
-            gameEngine!.render(rect);
-        }
+        gameEngine?.render(rect);
     }
     
     deinit {
+        print("ViewControllerGame deinit");
         EAGLContext.setCurrent(nil);
     }
 }
