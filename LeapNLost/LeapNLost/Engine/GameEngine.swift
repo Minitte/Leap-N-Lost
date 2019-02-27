@@ -300,7 +300,7 @@ class GameEngine : BufferManager {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
         
         // Free all the buffers
-        glDeleteBuffers(1, &tileVao);
+        glDeleteVertexArraysOES(1, &tileVao);
         glDeleteBuffers(1, &vertexBuffer);
         glDeleteBuffers(1, &indexBuffer);
         glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);
