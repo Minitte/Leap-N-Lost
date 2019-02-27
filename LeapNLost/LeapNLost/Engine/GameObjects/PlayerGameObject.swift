@@ -49,7 +49,7 @@ class PlayerGameObject : GameObject {
         
         scale = scale * 1.5;
         rotation = Vector3.init(0, Float.pi, 0);
-        self.collider = BoxCollider(max: Vector3(1,1,1),min:Vector3(0.1,0.1,0.1));
+        self.collider = BoxCollider(halfLengths: Vector3.init(0.5, 0.5, 0.5));
         
     }
     
