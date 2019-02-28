@@ -11,7 +11,7 @@ import Foundation
 //Box collider used for collision and implements the Collider protocol.
 class BoxCollider : Collider {
     
-    var model : Model;
+    var model : Model?;
     
     var halfLengths : Vector3;
     
@@ -47,6 +47,6 @@ class BoxCollider : Collider {
         self.halfLengths = halfLengths;
         
         self.model = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
-        model.name = "Box";
+        model!.name = "Box";
     }
 }
