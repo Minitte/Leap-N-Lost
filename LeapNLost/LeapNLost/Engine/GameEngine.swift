@@ -21,6 +21,9 @@ class GameEngine : BufferManager {
     // Reference to the shader
     private var mainShader : Shader;
     
+    // Reference to the collider shader
+    private var colliderShader : Shader;
+    
     // The current scene
     var currentScene : Scene;
     
@@ -61,8 +64,10 @@ class GameEngine : BufferManager {
 
         // Load shaders
         let shaderLoader = ShaderLoader();
-        let programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
+        var programHandle : GLuint = shaderLoader.compile(vertexShader: "VertexShader.glsl", fragmentShader: "FragmentShader.glsl");
         self.mainShader = Shader(programHandle: programHandle);
+        programHandle = shaderLoader.compile(vertexShader: "ColliderVertexShader.glsl", fragmentShader: "ColliderFragmentShader.glsl");
+        self.colliderShader = Shader(programHandle: programHandle);
         
         // Generate a vertex array object for tiles
         glGenVertexArraysOES(1, &tileVao);
@@ -97,6 +102,7 @@ class GameEngine : BufferManager {
         // Load all other game objects
         for gameObject in currentScene.gameObjects {
             loadModel(model: gameObject.model);
+            loadModel(model: (gameObject.collider as! BoxCollider).model);
         }
     }
     
@@ -289,6 +295,37 @@ class GameEngine : BufferManager {
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
             gameObject.model.render();
+        }
+        
+        // Unbind textures
+        glBindTexture(GLenum(GL_TEXTURE_2D), 0);
+        // Switch to collider shader
+        glUseProgram(colliderShader.programHandle);
+        glEnable(GLenum(GL_BLEND));
+        glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA));
+        
+        colliderShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+        
+        // Loop through every object in scene and call render
+        for gameObject in currentScene.gameObjects {
+            
+            // Get the game object's rotation as a matrix
+            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
+            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
+            
+            // Get the game object's position as a matrix
+            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
+            
+            // Multiply together to get transformation matrix
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
+            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
+            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
+            
+            // Render the object after passing model view matrix and texture to the shader
+            mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            
+            (gameObject.collider as! BoxCollider).model.render();
         }
     }
     

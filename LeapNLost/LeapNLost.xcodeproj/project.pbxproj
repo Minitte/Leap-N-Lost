@@ -48,6 +48,9 @@
 		AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */; };
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
 		ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = ADEF384B221243A2000DEFCB /* model_cube.obj */; };
+		AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE1B20AA22288E3B0053CE35 /* ColliderVertexShader.glsl */; };
+		AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */; };
+		AE1B20AF2228A16A0053CE35 /* PhysicsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1B20AE2228A16A0053CE35 /* PhysicsEngine.swift */; };
 		AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA9892214CF4C004704D8 /* Scene.swift */; };
 		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
@@ -135,6 +138,9 @@
 		AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFollowTarget.swift; sourceTree = "<group>"; };
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		ADEF384B221243A2000DEFCB /* model_cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_cube.obj; sourceTree = "<group>"; };
+		AE1B20AA22288E3B0053CE35 /* ColliderVertexShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ColliderVertexShader.glsl; sourceTree = "<group>"; };
+		AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ColliderFragmentShader.glsl; sourceTree = "<group>"; };
+		AE1B20AE2228A16A0053CE35 /* PhysicsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsEngine.swift; sourceTree = "<group>"; };
 		AE4CA9892214CF4C004704D8 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
@@ -259,6 +265,7 @@
 			children = (
 				88FF863C2222401E00BDEE9F /* Collider.swift */,
 				88FF863E2222410600BDEE9F /* BoxCollider.swift */,
+				AE1B20AE2228A16A0053CE35 /* PhysicsEngine.swift */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -407,6 +414,8 @@
 				AEF36585220B6ABE00ED9827 /* VertexShader.glsl */,
 				AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */,
 				AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */,
+				AE1B20AA22288E3B0053CE35 /* ColliderVertexShader.glsl */,
+				AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -588,6 +597,8 @@
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 				FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */,
+				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
+				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +655,7 @@
 				57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
+				AE1B20AF2228A16A0053CE35 /* PhysicsEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

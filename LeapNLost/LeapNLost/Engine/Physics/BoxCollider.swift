@@ -10,7 +10,9 @@ import Foundation
 
 //Box collider used for collision and implements the Collider protocol.
 class BoxCollider : Collider {
-
+    
+    var model : Model;
+    
     var halfLengths : Vector3;
     
     func CheckCollision(first: GameObject, second: GameObject) -> Bool {
@@ -41,12 +43,10 @@ class BoxCollider : Collider {
         
     }
     
-    init() {
-        halfLengths = Vector3(0.5,0.5,0.5);
-    
-    }
-    
-    init(halfLengths: Vector3) {
+    init(halfLengths: Vector3 = Vector3(0.5,0.5,0.5)) {
         self.halfLengths = halfLengths;
+        
+        self.model = Model.CreatePrimitive(primitiveType: Model.Primitive.Cube);
+        model.name = "Box";
     }
 }
