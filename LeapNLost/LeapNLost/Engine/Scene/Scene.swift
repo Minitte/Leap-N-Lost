@@ -159,11 +159,19 @@ class Scene {
      */
     func update(delta: Float) {
         // Create a projection matrix
-        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
+        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 50);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
             gameObject.update(delta: delta);
+            
+            // Check if gameObject is out of view
+            if(gameObject.position.z > player.position.z + 50 ||
+                gameObject.position.z < player.position.z - 10){
+                gameObject.model.inView = false;
+            } else {
+                gameObject.model.inView = true;
+            }
         }
         
         //Check collisions based on which row the player is on.

@@ -37,6 +37,9 @@ class Model : BufferManager {
     // Name of the model
     var name : String;
     
+    // Is the model visible on screen?
+    var inView : Bool;
+    
     init(vertices: [Vertex], indices: [GLuint], modelName: String) {
         // Initialize properties
         self.vertices = vertices;
@@ -45,6 +48,7 @@ class Model : BufferManager {
         self.vao = 0;
         self.texture = Texture();
         self.offset = BufferOffset();
+        self.inView = true;
         
         // Default texture
         loadTexture(fileName: "default-texture.png");

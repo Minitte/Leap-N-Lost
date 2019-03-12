@@ -288,7 +288,10 @@ class GameEngine : BufferManager {
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
-            gameObject.model.render();
+            // Only render gameObject if it is in view
+            if(gameObject.model.inView){
+                gameObject.model.render();
+            }
         }
     }
     
