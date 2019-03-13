@@ -26,6 +26,12 @@ class Scene {
     // List of all tiles in the scene
     var tiles : [GameObject]
     
+    // Reference to the player object.
+    var player : PlayerGameObject;
+    
+    // Dictionary containing references of objects.
+    var collisionDictionary : [Int: [GameObject]];
+    
     // Camera properties
     private(set) var mainCamera : CameraFollowTarget;
     
@@ -35,16 +41,10 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
-    //Dictionary containing references of objects.
-    private var collisionDictionary : [Int: [GameObject]];
-    
-    //Reference to the player object.
-    var player : PlayerGameObject;
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
      */
-    
     init(view: GLKView) {
         // Initialize variables
         self.view = view;
@@ -114,7 +114,9 @@ class Scene {
                 depth = -5;
                 texture = "grass.jpg";
             }
+            
             collisionDictionary[rowIndex] = currentObjects;
+            
             // Generate the row's tiles
             for tileIndex in 0..<Level.tilesPerRow {
                 let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
@@ -123,33 +125,6 @@ class Scene {
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
-        }
-    }
-    
-    /**
-     * Checks for collisions between the player and other game objects.
-     */
-    func checkCollisions() {
-        var onLilypad : Bool = false;
-        
-        // Iterate through every game object in the player's current row
-        for gameObject in collisionDictionary[Int(player.tilePosition.z)]!{
-            
-            if((gameObject.collider!.CheckCollision(first: gameObject, second: player))) {
-                
-                if (gameObject.type == "Lilypad") {
-                    player.position = gameObject.position + Vector3(0, 0.5, 0);
-                    onLilypad = true;
-                    break;
-                } else {
-                    player.isDead = true;
-                }
-            }
-        }
-        
-        // Check if the player landed on water
-        if (tiles[Int(player.tilePosition.z) * Level.tilesPerRow].type == "water" && !onLilypad) {
-            player.isDead = true;
         }
     }
     
@@ -175,10 +150,6 @@ class Scene {
             gameObject.update(delta: delta);
         }
         
-        //Check collisions based on which row the player is on.
-        if (!player.hopping) {
-            checkCollisions();
-        }
         mainCamera.updatePosition();
     }
 }

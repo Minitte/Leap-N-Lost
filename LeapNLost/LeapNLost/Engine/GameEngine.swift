@@ -21,6 +21,8 @@ class GameEngine : BufferManager {
     // Reference to the shader
     private var mainShader : Shader;
     
+    private var physicsEngine : PhysicsEngine;
+    
     // The current scene
     var currentScene : Scene;
     
@@ -58,6 +60,7 @@ class GameEngine : BufferManager {
         self.indexBuffer = 0;
         self.tileVao = 0;
         self.currentOffset = BufferOffset();
+        self.physicsEngine = PhysicsEngine(currentScene: currentScene);
 
         // Load shaders
         let shaderLoader = ShaderLoader();
@@ -97,6 +100,7 @@ class GameEngine : BufferManager {
         // Load all other game objects
         for gameObject in currentScene.gameObjects {
             loadModel(model: gameObject.model);
+            loadModel(model: gameObject.collider!.model!);
         }
     }
     
@@ -193,6 +197,9 @@ class GameEngine : BufferManager {
         // Update the scene
         currentScene.update(delta: delta);
         
+        // Update the physics engine
+        physicsEngine.update(delta: delta);
+        
         totalTime += delta;
         totalFrames += 1;
         
@@ -203,9 +210,6 @@ class GameEngine : BufferManager {
             totalFrames = 0;
             totalTime = 0;
         }
-       
-        
-        
     }
     
     /**
@@ -293,6 +297,9 @@ class GameEngine : BufferManager {
                 gameObject.model.render();
             }
         }
+        
+        // Call render on physics engine
+        physicsEngine.render();
     }
     
     deinit {
