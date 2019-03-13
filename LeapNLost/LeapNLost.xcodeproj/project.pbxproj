@@ -253,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */,
-				6F8665FB2214D8B200E6C75A /* intro.json */,
 			);
 			path = Cutscenes;
 			sourceTree = "<group>";
@@ -368,6 +367,7 @@
 		AEB2B13B2239AAF400BE18A0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2B1462239B0CC00BE18A0 /* Cutscenes */,
 				5708206C220AE502000740D3 /* Levels */,
 				57E97AEB2212CBA200A10BC9 /* Audio */,
 				AEC6977D220D15FB009AA6F1 /* Textures */,
@@ -426,6 +426,14 @@
 				AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */,
 			);
 			path = Collider;
+			sourceTree = "<group>";
+		};
+		AEB2B1462239B0CC00BE18A0 /* Cutscenes */ = {
+			isa = PBXGroup;
+			children = (
+				6F8665FB2214D8B200E6C75A /* intro.json */,
+			);
+			path = Cutscenes;
 			sourceTree = "<group>";
 		};
 		AEC69748220D03CF009AA6F1 /* Camera */ = {
