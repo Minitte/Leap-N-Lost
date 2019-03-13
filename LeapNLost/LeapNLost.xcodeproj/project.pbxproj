@@ -370,7 +370,7 @@
 				AEB2B1462239B0CC00BE18A0 /* Cutscenes */,
 				5708206C220AE502000740D3 /* Levels */,
 				57E97AEB2212CBA200A10BC9 /* Audio */,
-				AEC6977D220D15FB009AA6F1 /* Textures */,
+				AEC6977D220D15FB009AA6F1 /* Sprites */,
 				AEB2B13C2239AB0100BE18A0 /* Models */,
 			);
 			path = Assets;
@@ -462,11 +462,11 @@
 			path = MathTests;
 			sourceTree = "<group>";
 		};
-		AEC6977D220D15FB009AA6F1 /* Textures */ = {
+		AEC6977D220D15FB009AA6F1 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Textures;
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 		AEF36584220B6AB100ED9827 /* Shaders */ = {
