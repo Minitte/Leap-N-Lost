@@ -15,12 +15,15 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // The openGL game engine.
     private var gameEngine : GameEngine?;
     
+    @IBOutlet weak var winView: UIView!
     // This view as a GLKView
     private var glkView : GLKView?;
     
     override func viewDidLoad() {
         super.viewDidLoad();
         setupGL();
+        winView.layer.borderWidth = 5.0;
+        winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
     }
     
     /**

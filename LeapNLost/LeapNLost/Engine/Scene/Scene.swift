@@ -151,5 +151,10 @@ class Scene {
         }
         
         mainCamera.updatePosition();
+        
+        if (player.tilePosition.z >= 30) {
+            
+        }
+        
     }
 }

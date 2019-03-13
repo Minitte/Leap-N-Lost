@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -156,8 +156,96 @@
                     <view key="view" contentMode="scaleToFill" id="uMy-LC-6gp" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-6Q-6xY" userLabel="WinView">
+                                <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HT-Fv-IMn">
+                                        <rect key="frame" x="54" y="37" width="132" height="30"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Bte-kd-wE1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Go To Next Level">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvl-u4-CnW">
+                                        <rect key="frame" x="54" y="105" width="132" height="31"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Level Select">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnK-Yx-enC">
+                                        <rect key="frame" x="54" y="173" width="132" height="31"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Main Menu">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98338880164249409" green="1" blue="0.64552305253701214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="trailing" secondItem="Zvl-u4-CnW" secondAttribute="trailing" id="Bsk-ry-Ej3"/>
+                                    <constraint firstItem="Zvl-u4-CnW" firstAttribute="top" secondItem="4HT-Fv-IMn" secondAttribute="bottom" constant="38" id="P7u-6W-c1h"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="top" secondItem="p7z-6Q-6xY" secondAttribute="top" constant="37" id="S0G-hX-6Ff"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="leading" secondItem="xnK-Yx-enC" secondAttribute="leading" id="Yns-0R-odC"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="centerX" secondItem="p7z-6Q-6xY" secondAttribute="centerX" id="beI-iP-IEL"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="leading" secondItem="p7z-6Q-6xY" secondAttribute="leading" constant="54" id="kH5-Fh-Qj9"/>
+                                    <constraint firstItem="xnK-Yx-enC" firstAttribute="top" secondItem="Zvl-u4-CnW" secondAttribute="bottom" constant="37" id="oqI-4k-TUT"/>
+                                    <constraint firstAttribute="height" constant="240" id="pkh-Ry-ive"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="trailing" secondItem="xnK-Yx-enC" secondAttribute="trailing" id="tdu-c4-bIC"/>
+                                    <constraint firstItem="4HT-Fv-IMn" firstAttribute="leading" secondItem="Zvl-u4-CnW" secondAttribute="leading" id="vpg-37-jjh"/>
+                                    <constraint firstAttribute="width" constant="240" id="yjZ-QY-mRx"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONGRATULATIONS!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="802-sB-ZQ9">
+                                <rect key="frame" x="90" y="167" width="195" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="SNg-QA-WnP"/>
+                                    <constraint firstAttribute="width" constant="195" id="ptt-kJ-Nm7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
+                                <color key="textColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="FDg-vd-9ni"/>
+                            <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="MmK-Tz-mgC"/>
+                            <constraint firstItem="802-sB-ZQ9" firstAttribute="centerX" secondItem="p7z-6Q-6xY" secondAttribute="centerX" id="Qjr-H2-8Oq"/>
+                            <constraint firstItem="p7z-6Q-6xY" firstAttribute="top" secondItem="802-sB-ZQ9" secondAttribute="bottom" constant="17.5" id="X3D-H9-JT6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6gj-gu-tBq"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="CBt-ej-6hc" appends="YES" id="uOO-c9-DSE"/>
@@ -165,6 +253,9 @@
                             <outletCollection property="gestureRecognizers" destination="hpp-NF-Oig" appends="YES" id="mLy-Fm-zDB"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DRY-Mi-mdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="CBt-ej-6hc">
@@ -183,7 +274,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2147" y="31"/>
+            <point key="canvasLocation" x="2146.4000000000001" y="30.134932533733135"/>
         </scene>
         <!--View Controller Cutscene-->
         <scene sceneID="gR7-g2-UZO">
