@@ -51,7 +51,7 @@ class ShadowRenderer {
         let lightProjection : GLKMatrix4 = GLKMatrix4MakeOrtho(-20, 20, -20, 25, nearPlane, farPlane);
         let lightInvDirection = -lightDirection;
         let lightView : GLKMatrix4 = GLKMatrix4MakeLookAt(lightInvDirection.x, lightInvDirection.y, lightInvDirection.z, 0, 0, 0, 0, 1, 0);
-        shadowCamera.perspectiveMatrix = GLKMatrix4Multiply(lightProjection, lightView);
+        shadowCamera.projectionMatrix = GLKMatrix4Multiply(lightProjection, lightView);
     }
     
     /**
@@ -71,7 +71,7 @@ class ShadowRenderer {
         glCullFace(GLenum(GL_FRONT));
         
         // Set the projection matrix
-        shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.perspectiveMatrix);
+        shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.projectionMatrix);
         
         // Loop through every object in scene and call render
         for gameObject in scene.gameObjects {

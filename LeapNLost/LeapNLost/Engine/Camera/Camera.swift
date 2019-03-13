@@ -27,7 +27,7 @@ class Camera {
     private(set) var rotation : Vector3;
     
     // The viewing angle of the camera
-    public var perspectiveMatrix : GLKMatrix4;
+    public var projectionMatrix : GLKMatrix4;
     
     // combined position and rotation matrix.
     public var transformMatrix : GLKMatrix4;
@@ -38,7 +38,7 @@ class Camera {
     init() {
         positionMatrix = GLKMatrix4Identity;
         rotationMatrix = GLKMatrix4Identity;
-        perspectiveMatrix = GLKMatrix4Identity;
+        projectionMatrix = GLKMatrix4Identity;
         transformMatrix = GLKMatrix4Identity;
         
         position = Vector3.init();
@@ -53,7 +53,7 @@ class Camera {
     init(posX x:Float, posY y:Float, posZ z:Float) {
         positionMatrix = GLKMatrix4Identity;
         rotationMatrix = GLKMatrix4Identity;
-        perspectiveMatrix = GLKMatrix4Identity;
+        projectionMatrix = GLKMatrix4Identity;
         transformMatrix = GLKMatrix4Identity;
         
         // Set the position matrix
@@ -119,7 +119,7 @@ class Camera {
      * Sets the perspective matrix.
      */
     public func setPerspectiveMatrix(perspective m:GLKMatrix4) {
-        perspectiveMatrix = m;
+        projectionMatrix = m;
     }
     
     /**
@@ -127,7 +127,34 @@ class Camera {
      */
     public func calculatePerspectiveMatrix(viewWidth w:Int, viewHeight h:Int, fieldOfView fov:Int, nearClipZ nearZ:Int, farClipZ farZ:Int) {
         let aspect = Float(w) / Float(h);
-        perspectiveMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, Float(nearZ), Float(farZ));
+        projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(60), aspect, Float(nearZ), Float(farZ));
+    }
+    
+    /**
+     * Calculates a orthographic projection matrix based on the arguments.
+     * viewWidth - the width of the screen
+     * viewHeight - the height of the screen
+     * orthoWidth - desired width of the orthographic camera
+     * orthoHeight - desired height of the orthographic camera
+     * nearClipZ - how close objects need to be from the camera before being clipped out
+     * farClipZ - how far objects need to be from the camera before being clipped out
+     */
+    public func calculateOrthographicMatrix(viewWidth:Int, viewHeight:Int, orthoWidth: Float, orthoHeight: Float, nearClipZ nearZ: Float, farClipz farZ: Float) {
+        let aspect : Float = Float(viewWidth) / Float(viewHeight);
+        
+        // Calculate half width and height of the camera
+        var halfWidth = orthoWidth / 2;
+        var halfHeight = orthoHeight / 2;
+        
+        // Adjust width and height by aspect ratio
+        if (aspect >= 1.0) {
+            halfWidth *= aspect;
+        } else {
+            halfHeight /= aspect;
+        }
+        
+        // Set the projection matrix to orthographic
+        projectionMatrix = GLKMatrix4MakeOrtho(-halfWidth, halfWidth, -halfHeight, halfHeight, nearZ, farZ);
     }
     
     /**

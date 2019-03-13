@@ -226,15 +226,15 @@ class GameEngine : BufferManager {
         // Clear screen and buffers, set viewport to correct size
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
-        glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
+        glViewport(0, 0, GLsizei(Float(view.drawableWidth)), GLsizei(view.drawableHeight));
         
         // Switch back to regular back face culling
         glCullFace(GLenum(GL_BACK));
         
         // Set camera variables in shader
         mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
-        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
-        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.projectionMatrix);
+        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.projectionMatrix);
         mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
         
         // Bind shadow map texture
@@ -278,7 +278,7 @@ class GameEngine : BufferManager {
             // Get the game object's rotation as a matrix
             var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
             rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
+            rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, gameObject.rotation.z);
             
             // Get the game object's position as a matrix
             let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
