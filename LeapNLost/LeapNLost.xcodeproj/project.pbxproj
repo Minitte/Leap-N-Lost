@@ -105,10 +105,10 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
-		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Engine/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
-		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Engine/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
-		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Engine/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
-		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
+		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Assets/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
+		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Assets/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
+		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Assets/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
+		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Assets/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		57E97AE92212A8D400A10BC9 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
 		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
