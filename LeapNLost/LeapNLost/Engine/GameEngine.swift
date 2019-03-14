@@ -35,9 +35,7 @@ class GameEngine : BufferManager {
     // Buffers
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
-    
-    // Vertex array object for tiles
-    var tileVao : GLuint;
+    var vertexArrayObject : GLuint;
     
     // Current offsets
     var currentOffset : BufferOffset;
@@ -58,7 +56,7 @@ class GameEngine : BufferManager {
         self.lastTime = Date().toMillis();
         self.vertexBuffer = 0;
         self.indexBuffer = 0;
-        self.tileVao = 0;
+        self.vertexArrayObject = 0;
         self.currentOffset = BufferOffset();
         self.physicsEngine = PhysicsEngine(currentScene: currentScene);
 
@@ -68,8 +66,8 @@ class GameEngine : BufferManager {
         self.mainShader = Shader(programHandle: programHandle);
         
         // Generate a vertex array object for tiles
-        glGenVertexArraysOES(1, &tileVao);
-        glBindVertexArrayOES(tileVao);
+        glGenVertexArraysOES(1, &vertexArrayObject);
+        glBindVertexArrayOES(vertexArrayObject);
         
         // Generate and bind the vertex buffer
         glGenBuffers(GLsizei(1), &vertexBuffer);
@@ -121,11 +119,6 @@ class GameEngine : BufferManager {
             model.vertices[i].z += tile.position.z;
         }
         
-        // Offset the indices by the current vertex offset
-        for i in 0..<model.indices.count {
-            model.indices[i] += GLuint(currentOffset.vertexOffset);
-        }
-        
         // Append the model to the buffers
         appendModel(model: model);
     }
@@ -141,30 +134,19 @@ class GameEngine : BufferManager {
         
         // Check if this model has already been loaded in
         if (ModelCacheManager.modelDictionary[name] != nil) {
-            model.vao = ModelCacheManager.modelDictionary[name]!.vao;
-            model.offset = ModelCacheManager.modelDictionary[name]!.offset;
+            model.offset = ModelCacheManager.modelDictionary[name]!;
+            
+            // Offset the indices by the model's vertex offset
+            for i in 0..<model.indices.count {
+                model.indices[i] += GLuint(model.offset.vertexOffset);
+            }
+            
         } else {
-            // Generate a vertex array object
-            glGenVertexArraysOES(1, &model.vao);
-            
-            // Bind the vertex array object with the index buffer
-            glBindVertexArrayOES(model.vao);
-            glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
-
-            // Set the offsets
-            model.offset = currentOffset;
-            
             // Save to cache
-            ModelCacheManager.modelDictionary[name] = CachedModel(offset: currentOffset, vao: model.vao);
+            ModelCacheManager.modelDictionary[name] = currentOffset;
             
             // Append the model to the buffers
             appendModel(model: model);
-            
-            // Setup attributes
-            model.setupAttributes(offset: model.offset);
-            
-            // Unbind vertex array object
-            glBindVertexArrayOES(0);
         }
     }
     
@@ -174,6 +156,16 @@ class GameEngine : BufferManager {
      * model - the model to append
      */
     func appendModel(model: Model) {
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Set the model's offset
+        model.offset = currentOffset;
+        
+        // Offset the model's indices by the current vertex offset
+        for i in 0..<model.indices.count {
+            model.indices[i] += GLuint(currentOffset.vertexOffset);
+        }
+        
         // Input vertices into the vertex buffer
         glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
         
@@ -259,8 +251,8 @@ class GameEngine : BufferManager {
         let numberOfRows : Int = currentScene.level.rows.count;
         let indicesPerRow : Int = currentScene.tiles[0].model.indices.count * Level.tilesPerRow;
         
-        // Bind the tile vertex array object
-        glBindVertexArrayOES(tileVao);
+        // Bind the vertex array object
+        glBindVertexArrayOES(vertexArrayObject);
         
         // Render each row
         for i in 0..<numberOfRows {
@@ -268,9 +260,6 @@ class GameEngine : BufferManager {
             glBindTexture(GLenum(GL_TEXTURE_2D), currentScene.tiles[i * Level.tilesPerRow].model.texture.id);
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indicesPerRow), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indicesPerRow * i * MemoryLayout<GLuint>.size));
         }
-        
-        // Unbind vertex array object
-        glBindVertexArrayOES(0);
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
@@ -292,6 +281,7 @@ class GameEngine : BufferManager {
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
+            // Render the object
             gameObject.model.render();
         }
         
@@ -307,7 +297,7 @@ class GameEngine : BufferManager {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
         
         // Free all the buffers
-        glDeleteVertexArraysOES(1, &tileVao);
+        glDeleteVertexArraysOES(1, &vertexArrayObject);
         glDeleteBuffers(1, &vertexBuffer);
         glDeleteBuffers(1, &indexBuffer);
         glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);

@@ -59,8 +59,8 @@ class ShadowRenderer {
      */
     func render(scene: Scene) {
         // Set viewport, shader, and frame buffer to shadow mappping settings
-        glViewport(0, 0, shadowBuffer.textureSize, shadowBuffer.textureSize);
         glUseProgram(shadowShader.programHandle);
+        glViewport(0, 0, shadowBuffer.textureSize, shadowBuffer.textureSize);
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), shadowBuffer.bufferName);
         
         // Clear screen and depth buffer

@@ -14,7 +14,7 @@ class ModelCacheManager {
     private static var meshDictionary : [String : MeshSet] = [:];
     
     // Map for models that have been loaded in by the game engine
-    static var modelDictionary : [String : CachedModel] = [:];
+    static var modelDictionary : [String : BufferOffset] = [:];
     
     /**
      * returns a model with the given texture and mesh.
@@ -55,18 +55,6 @@ class ModelCacheManager {
         modelDictionary.removeAll();
         
     }
-}
-
-/**
- * Struct for storing information about a cached model.
- */
-struct CachedModel {
-    
-    // The buffer offsets of the model
-    var offset : BufferOffset;
-    
-    // A shared vertex array object for the model
-    var vao : GLuint;
 }
 
 struct MeshSet {
