@@ -86,7 +86,7 @@ class PhysicsEngine {
             glEnable(GLenum(GL_BLEND));
             glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA));
             
-            colliderShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
+            colliderShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.projectionMatrix);
             
             // Loop through every object in scene and call render
             for gameObject in currentScene.gameObjects {

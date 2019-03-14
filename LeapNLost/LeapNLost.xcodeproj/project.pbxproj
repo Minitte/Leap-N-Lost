@@ -22,7 +22,6 @@
 		57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E97AE92212A8D400A10BC9 /* Audio.swift */; };
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
 		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
-		6F8665FE2214D8B200E6C75A /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FC2214D8B200E6C75A /* Cutscene.swift */; };
 		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
 		88FF863D2222401E00BDEE9F /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863C2222401E00BDEE9F /* Collider.swift */; };
 		88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863E2222410600BDEE9F /* BoxCollider.swift */; };
@@ -55,6 +54,7 @@
 		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
 		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
+		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
 		AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEC6977E220D1613009AA6F1 /* crate.jpg */; };
@@ -105,14 +105,13 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
-		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Engine/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
-		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Engine/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
-		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Engine/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
-		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Engine/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
+		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Assets/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
+		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Assets/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
+		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Assets/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
+		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Assets/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		57E97AE92212A8D400A10BC9 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
 		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
-		6F8665FC2214D8B200E6C75A /* Cutscene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
 		88FF863C2222401E00BDEE9F /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
 		88FF863E2222410600BDEE9F /* BoxCollider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCollider.swift; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
 		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
+		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC69775220D1153009AA6F1 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
@@ -215,12 +215,11 @@
 		5718CA1F2203C522000EC054 /* LeapNLost */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2B13B2239AAF400BE18A0 /* Assets */,
 				6F8665FA2214D86D00E6C75A /* Cutscenes */,
 				ADEF384622123B32000DEFCB /* Util */,
-				57E97AEB2212CBA200A10BC9 /* Audio */,
 				AD606C2B220BC744008B1517 /* Player */,
 				AE84400D220BB5E6000891C0 /* Controllers */,
-				5708206C220AE502000740D3 /* Levels */,
 				AD38172922091FBB00390CFF /* Engine */,
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
 				5718CA242203C522000EC054 /* Main.storyboard */,
@@ -253,9 +252,7 @@
 		6F8665FA2214D86D00E6C75A /* Cutscenes */ = {
 			isa = PBXGroup;
 			children = (
-				6F8665FC2214D8B200E6C75A /* Cutscene.swift */,
-				6F8665FB2214D8B200E6C75A /* intro.json */,
-				6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */,
+				AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */,
 			);
 			path = Cutscenes;
 			sourceTree = "<group>";
@@ -342,9 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				ADEF384722123BCF000DEFCB /* OBJLoader.swift */,
-				AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */,
 				AEF3658B220B6C8E00ED9827 /* GLKExtension.swift */,
-				925001242220158600440C3E /* BufferManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -364,8 +359,81 @@
 				5718CA222203C522000EC054 /* ViewControllerTitle.swift */,
 				5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */,
 				AD381727220919F500390CFF /* ViewControllerGame.swift */,
+				6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AEB2B13B2239AAF400BE18A0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				AEB2B1462239B0CC00BE18A0 /* Cutscenes */,
+				5708206C220AE502000740D3 /* Levels */,
+				57E97AEB2212CBA200A10BC9 /* Audio */,
+				AEC6977D220D15FB009AA6F1 /* Sprites */,
+				AEB2B13C2239AB0100BE18A0 /* Models */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		AEB2B13C2239AB0100BE18A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FEF1711A2214B3D000C94A22 /* Tree */,
+				AEB2B13E2239AB5300BE18A0 /* Cube */,
+				FEF171092214AF2600C94A22 /* Lilypad */,
+				FEF171082214AF1800C94A22 /* Car */,
+				57793E5A220D016F00943230 /* Frog */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AEB2B13E2239AB5300BE18A0 /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				ADEF384B221243A2000DEFCB /* model_cube.obj */,
+				AD08FB232214CFED00C0B689 /* default-texture.png */,
+				928D537F221B8EFA002C6F2B /* grass.jpg */,
+				928D5380221B8EFA002C6F2B /* road.jpg */,
+				928D537E221B8EF9002C6F2B /* water.jpg */,
+				AEC6977E220D1613009AA6F1 /* crate.jpg */,
+			);
+			path = Cube;
+			sourceTree = "<group>";
+		};
+		AEB2B13F2239AC1A00BE18A0 /* Shadow */ = {
+			isa = PBXGroup;
+			children = (
+				AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */,
+				AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */,
+			);
+			path = Shadow;
+			sourceTree = "<group>";
+		};
+		AEB2B1402239AC2B00BE18A0 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				AEF36586220B6ABE00ED9827 /* FragmentShader.glsl */,
+				AEF36585220B6ABE00ED9827 /* VertexShader.glsl */,
+			);
+			path = Default;
+			sourceTree = "<group>";
+		};
+		AEB2B1412239AC3900BE18A0 /* Collider */ = {
+			isa = PBXGroup;
+			children = (
+				AE1B20AA22288E3B0053CE35 /* ColliderVertexShader.glsl */,
+				AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */,
+			);
+			path = Collider;
+			sourceTree = "<group>";
+		};
+		AEB2B1462239B0CC00BE18A0 /* Cutscenes */ = {
+			isa = PBXGroup;
+			children = (
+				6F8665FB2214D8B200E6C75A /* intro.json */,
+			);
+			path = Cutscenes;
 			sourceTree = "<group>";
 		};
 		AEC69748220D03CF009AA6F1 /* Camera */ = {
@@ -394,28 +462,21 @@
 			path = MathTests;
 			sourceTree = "<group>";
 		};
-		AEC6977D220D15FB009AA6F1 /* Textures */ = {
+		AEC6977D220D15FB009AA6F1 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
-				928D537F221B8EFA002C6F2B /* grass.jpg */,
-				928D5380221B8EFA002C6F2B /* road.jpg */,
-				928D537E221B8EF9002C6F2B /* water.jpg */,
-				AEC6977E220D1613009AA6F1 /* crate.jpg */,
 			);
-			path = Textures;
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 		AEF36584220B6AB100ED9827 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2B1402239AC2B00BE18A0 /* Default */,
+				AEB2B1412239AC3900BE18A0 /* Collider */,
+				AEB2B13F2239AC1A00BE18A0 /* Shadow */,
 				92372E7822111C04001F5139 /* Shader.swift */,
 				AEF36582220B601700ED9827 /* ShaderLoader.swift */,
-				AEF36586220B6ABE00ED9827 /* FragmentShader.glsl */,
-				AEF36585220B6ABE00ED9827 /* VertexShader.glsl */,
-				AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */,
-				AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */,
-				AE1B20AA22288E3B0053CE35 /* ColliderVertexShader.glsl */,
-				AE1B20AC22288EC70053CE35 /* ColliderFragmentShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -423,17 +484,12 @@
 		AEF36598220B8ACB00ED9827 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AD08FB232214CFED00C0B689 /* default-texture.png */,
-				ADEF384B221243A2000DEFCB /* model_cube.obj */,
-				FEF1711A2214B3D000C94A22 /* Tree */,
-				FEF171092214AF2600C94A22 /* Lilypad */,
-				FEF171082214AF1800C94A22 /* Car */,
-				AEC6977D220D15FB009AA6F1 /* Textures */,
-				57793E5A220D016F00943230 /* Frog */,
 				AEF36599220B8AD300ED9827 /* Primitives */,
 				AEF3658D220B6DDC00ED9827 /* Model.swift */,
 				AEF36589220B6C1C00ED9827 /* Vertex.swift */,
 				925001262220BEA600440C3E /* Texture.swift */,
+				AD177D402214C40E00EC72C5 /* ModelCacheManager.swift */,
+				925001242220158600440C3E /* BufferManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -627,6 +683,7 @@
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
 				92372E75221033A4001F5139 /* PointLight.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
+				AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */,
 				5707397E221CF50B00F54DB3 /* Lilypad.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
@@ -636,7 +693,6 @@
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
 				92372E7722103CE8001F5139 /* Spotlight.swift in Sources */,
-				6F8665FE2214D8B200E6C75A /* Cutscene.swift in Sources */,
 				925001252220158600440C3E /* BufferManager.swift in Sources */,
 				AD177D412214C40E00EC72C5 /* ModelCacheManager.swift in Sources */,
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
