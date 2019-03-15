@@ -264,18 +264,8 @@ class GameEngine : BufferManager {
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
             
-            // Get the game object's rotation as a matrix
-            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
-            rotationMatrix = GLKMatrix4RotateZ(rotationMatrix, gameObject.rotation.z);
-            
-            // Get the game object's position as a matrix
-            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
-            
             // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
-            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
-            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
+            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, gameObject.transformMatrix);
             
             // Render the object after passing model view matrix and texture to the shader
             mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
