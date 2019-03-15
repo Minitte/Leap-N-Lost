@@ -70,27 +70,15 @@ class ShadowRenderer {
         // Render only back faces, this avoids self shadowing
         glCullFace(GLenum(GL_FRONT));
         
-        // Set the projection matrix
+        // Set the camera matrices
         shadowShader.setMatrix(variableName: "u_ProjectionMatrix", value: shadowCamera.projectionMatrix);
+        shadowShader.setMatrix(variableName: "u_ViewMatrix", value: scene.mainCamera.transformMatrix);
         
         // Loop through every object in scene and call render
         for gameObject in scene.gameObjects {
             
-            // Get the game object's rotation as a matrix
-            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
-            
-            // Get the game object's position as a matrix
-            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
-            
-            // Multiply together to get transformation matrix, use the main camera's transform matrix here
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(scene.mainCamera.transformMatrix, positionMatrix);
-            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
-            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
-            
-            // Render the object after passing model view matrix to the shader
-            shadowShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            // Render the object after passing model matrix to the shader
+            shadowShader.setMatrix(variableName: "u_ModelMatrix", value: gameObject.transformMatrix);
             gameObject.model.render();
         }
         

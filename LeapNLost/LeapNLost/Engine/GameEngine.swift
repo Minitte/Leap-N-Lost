@@ -227,7 +227,7 @@ class GameEngine : BufferManager {
         mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
         mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.projectionMatrix);
         mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.projectionMatrix);
-        mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
+        mainShader.setMatrix(variableName: "u_ViewMatrix", value: currentScene.mainCamera.transformMatrix);
         
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
@@ -254,6 +254,9 @@ class GameEngine : BufferManager {
         // Bind the vertex array object
         glBindVertexArrayOES(vertexArrayObject);
         
+        // Model matrix for tiles is identity
+        mainShader.setMatrix(variableName: "u_ModelMatrix", value: GLKMatrix4Identity);
+        
         // Render each row
         for i in 0..<numberOfRows {
             // Bind the current row's texture, then draw it
@@ -263,12 +266,10 @@ class GameEngine : BufferManager {
         
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
+            // Set transformation matrix
+            mainShader.setMatrix(variableName: "u_ModelMatrix", value: gameObject.transformMatrix);
             
-            // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, gameObject.transformMatrix);
-            
-            // Render the object after passing model view matrix and texture to the shader
-            mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            // Set texture
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
             // Render the object
