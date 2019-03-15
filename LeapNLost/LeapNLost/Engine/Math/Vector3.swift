@@ -12,7 +12,7 @@ import GLKit
 /**
  * This is a class for vector objects that contain three floating point numbers.
  */
-class Vector3 : CustomStringConvertible {
+struct Vector3 : CustomStringConvertible {
     
     // Minimum difference for checking if two Floats are equal.
     fileprivate static let Epsilon : Float = 0.001;
