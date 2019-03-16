@@ -1,5 +1,6 @@
 // Camera matrices, passed in from the engine
-uniform highp mat4 u_ModelViewMatrix;
+uniform highp mat4 u_ModelMatrix;
+uniform highp mat4 u_ViewMatrix;
 uniform highp mat4 u_ProjectionMatrix;
 uniform highp mat4 u_LightSpaceMatrix;
 
@@ -21,13 +22,13 @@ void main(void) {
     frag_Color = a_Color;
     frag_TexCoord = a_TexCoord;
     
-    // Calculate world normal and position
-    frag_Normal = (u_ModelViewMatrix * vec4(a_Normal, 0)).xyz;
-    frag_Position = (u_ModelViewMatrix * a_Position).xyz;
+    // Calculate normal and position
+    frag_Normal = (u_ViewMatrix * u_ModelMatrix * vec4(a_Normal, 0)).xyz;
+    frag_Position = (u_ModelMatrix * a_Position).xyz;
     
     // Shadow mapping coordinates
-    frag_LightSpacePosition = u_LightSpaceMatrix * vec4(frag_Position, 1.0);
+    frag_LightSpacePosition = u_LightSpaceMatrix * vec4((u_ViewMatrix * vec4(frag_Position, 1.0)).xyz, 1.0);
     
     // Pass position after being multiplied by MVP matrix to fragment shader
-    gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * a_Position;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
 }

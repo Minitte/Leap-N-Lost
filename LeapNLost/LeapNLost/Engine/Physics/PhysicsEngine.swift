@@ -86,7 +86,9 @@ class PhysicsEngine {
             glEnable(GLenum(GL_BLEND));
             glBlendFunc(GLenum(GL_SRC_ALPHA), GLenum(GL_ONE_MINUS_SRC_ALPHA));
             
+            // Set camera matrices in shader
             colliderShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.projectionMatrix);
+            colliderShader.setMatrix(variableName: "u_ViewMatrix", value: currentScene.mainCamera.transformMatrix);
             
             // Loop through every object in scene and call render
             for gameObject in currentScene.gameObjects {
@@ -98,11 +100,10 @@ class PhysicsEngine {
                 let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
                 
                 // Multiply together to get transformation matrix
-                var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
-                objectMatrix = GLKMatrix4Scale(objectMatrix, collider.halfLengths.x, collider.halfLengths.y, collider.halfLengths.z); // Scaling
+                let objectMatrix = GLKMatrix4Scale(positionMatrix, collider.halfLengths.x, collider.halfLengths.y, collider.halfLengths.z); // Scaling
                 
                 // Render the object after passing model view matrix and texture to the shader
-                colliderShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+                colliderShader.setMatrix(variableName: "u_ModelMatrix", value: objectMatrix);
                 
                 // Render the collider
                 collider.model!.render();

@@ -28,9 +28,6 @@ class Model : BufferManager {
     // The model's texture
     var texture : Texture;
     
-    // Vertex array object
-    var vao: GLuint;
-    
     // Offsets
     var offset : BufferOffset;
     
@@ -42,7 +39,6 @@ class Model : BufferManager {
         self.vertices = vertices;
         self.indices = indices;
         self.name = modelName;
-        self.vao = 0;
         self.texture = Texture();
         self.offset = BufferOffset();
         
@@ -68,9 +64,7 @@ class Model : BufferManager {
      * Renders this model.
      */
     func render() {
-        glBindVertexArrayOES(vao);
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(offset.indexOffset * MemoryLayout<GLuint>.size));
-        glBindVertexArrayOES(0);
     }
 
     /**
@@ -94,10 +88,6 @@ class Model : BufferManager {
         }
             
         return Model(vertices: vertices, indices: indices, modelName: name);
-    }
-    
-    deinit {
-        glDeleteVertexArraysOES(1, &vao);
     }
 }
 
