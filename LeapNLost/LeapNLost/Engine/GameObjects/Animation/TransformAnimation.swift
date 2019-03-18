@@ -64,7 +64,7 @@ class TransformAnimation {
         keyframes.append(kf);
         
         // sort the keyframes by time
-        keyframes.sort(by: {$0.atTime > $1.atTime});
+        keyframes.sort(by: {$0.atTime < $1.atTime});
     }
     
     /**
@@ -117,7 +117,7 @@ class TransformAnimation {
         
         currentKeyFrameTime += delta;
         
-        if (currentKeyFrameTime > currentFrame.atTime) {
+        if (currentKeyFrameTime >= currentFrame.atTime) {
             playingIndex += 1;
         }
     }
