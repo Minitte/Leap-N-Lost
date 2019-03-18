@@ -111,9 +111,11 @@ class TransformAnimation {
         
         let currentFrame : TransformKeyframe = keyframes[playingIndex];
         
-        position = position + (currentFrame.position * delta);
-        rotation = rotation + (currentFrame.rotation * delta);
-        scale = scale + (currentFrame.scale * delta);
+        let animationFactor : Float = delta / currentFrame.atTime;
+        
+        position = position + (currentFrame.position * animationFactor);
+        rotation = rotation + (currentFrame.rotation * animationFactor);
+        scale = scale + (currentFrame.scale * animationFactor);
         
         currentKeyFrameTime += delta;
         
