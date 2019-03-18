@@ -33,12 +33,16 @@ class PlayerGameObject : GameObject {
     
     // Flag to represent if the player is dead
     var isDead : Bool;
+    
+    // Flag to represent if the game is over
+    var isGameOver: Bool;
 
     // tile position based on x-z where z is forwards and origin is bottom center
     var tilePosition : Vector3 = Vector3.init();
 
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         isDead = false;
+        isGameOver = false;
         super.init(model);
         
         let h : Float = 9.81 / hl
@@ -50,7 +54,6 @@ class PlayerGameObject : GameObject {
         scale = scale * 1.5;
         rotation = Vector3.init(0, Float.pi, 0);
         self.collider = BoxCollider(halfLengths: Vector3.init(0.5, 0.5, 0.5));
-        
     }
     
     /**
@@ -90,6 +93,9 @@ class PlayerGameObject : GameObject {
      * hops forward
      */
     public func hopForward() {
+        if(!isGameOver && !isDead){
+            return;
+        }
         velocity = leapForward * 1;
         
         rotation = Vector3.init(0, Float.pi, 0);
@@ -97,6 +103,7 @@ class PlayerGameObject : GameObject {
         tilePosition.z += 1;
         
         hopping = true;
+
         
     }
     
@@ -104,7 +111,7 @@ class PlayerGameObject : GameObject {
      * hops left
      */
     public func hopLeft() {
-        if (tilePosition.x <= -2) {
+        if (tilePosition.x <= -2 || isGameOver || isDead) {
             return;
         }
         
@@ -121,7 +128,7 @@ class PlayerGameObject : GameObject {
      * hops right
      */
     public func hopRight() {
-        if (tilePosition.x >= 2) {
+        if (tilePosition.x >= 2 || isGameOver || isDead) {
             return;
         }
         

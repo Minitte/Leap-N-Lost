@@ -41,6 +41,12 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    // Current area
+    var currArea: Int;
+    
+    // Current level
+    var currLevel: Int;
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -52,6 +58,8 @@ class Scene {
         self.gameObjects = [GameObject]();
         self.tiles = [GameObject]();
         self.collisionDictionary = [Int:[GameObject]]();
+        self.currArea = -1;
+        self.currLevel = -1;
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
         
@@ -83,7 +91,8 @@ class Scene {
         // Parse the level
         let data = self.level.readLevel(withArea: area, withLevel: level);
         self.level = self.level.parseJSON(data: data);
-        
+        self.currLevel = self.level.info.area;
+        self.currArea = self.level.info.level;
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
             let row = self.level.rows[rowIndex];
@@ -155,7 +164,7 @@ class Scene {
         mainCamera.updatePosition();
         
         if (player.tilePosition.z >= 30) {
-            
+            player.isGameOver = true;
         }
         
     }

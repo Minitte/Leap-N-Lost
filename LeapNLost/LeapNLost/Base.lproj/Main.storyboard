@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,7 +82,7 @@
                                 </state>
                                 <connections>
                                     <action selector="playButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="UvN-eW-wEh"/>
-                                    <segue destination="cyD-kn-t94" kind="showDetail" id="Yhs-EQ-tdt"/>
+                                    <segue destination="ARL-fj-hd5" kind="show" id="mah-cH-Nnh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-ov-cV2">
@@ -176,6 +176,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="NextLevelButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="njI-lI-sme"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvl-u4-CnW">
                                         <rect key="frame" x="54" y="105" width="132" height="31"/>
@@ -190,6 +193,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="LevelSelectButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="lfd-GL-QCr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnK-Yx-enC">
                                         <rect key="frame" x="54" y="173" width="132" height="31"/>
@@ -204,6 +210,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="MainMenuButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="YCA-Bl-71m"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98338880164249409" green="1" blue="0.64552305253701214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,7 +243,6 @@
                                     <constraint firstAttribute="width" constant="195" id="ptt-kJ-Nm7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
-                                <color key="textColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -254,6 +262,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="LYL-e8-rd9"/>
+                        <outlet property="winText" destination="802-sB-ZQ9" id="avP-DZ-VoH"/>
                         <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
                     </connections>
                 </viewController>
@@ -275,6 +285,143 @@
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2146.4000000000001" y="30.134932533733135"/>
+        </scene>
+        <!--View Controller Level Select-->
+        <scene sceneID="9ij-k9-VxY">
+            <objects>
+                <viewController storyboardIdentifier="ViewControllerLevelSelectID" title="View Controller Level Select" id="ARL-fj-hd5" customClass="ViewControllerLevelSelect" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UqI-lg-hrJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoon-forest" translatesAutoresizingMaskIntoConstraints="NO" id="2MY-em-TLY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phr-nc-aVw">
+                                <rect key="frame" x="121.5" y="216" width="132" height="31"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Level 1-1">
+                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="ejB-ju-rzM"/>
+                                    <segue destination="cyD-kn-t94" kind="show" id="si8-k0-QO9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOD-Pv-qaV">
+                                <rect key="frame" x="121.5" y="267" width="132" height="31"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Level 1-2">
+                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="level2_2:" destination="ARL-fj-hd5" eventType="touchUpInside" id="Mz5-ei-7CE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQv-J5-kjD">
+                                <rect key="frame" x="121.5" y="318" width="132" height="31"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Level 1-3">
+                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XR-CI-vSO">
+                                <rect key="frame" x="121.5" y="369" width="132" height="31"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Level 1-4">
+                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5L-Vm-Gua">
+                                <rect key="frame" x="121.5" y="420" width="132" height="31"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Level 1-5 💀">
+                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
+                                <rect key="frame" x="283" y="297" width="72" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="chevron"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEVEL SELECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syY-Ea-w0h">
+                                <rect key="frame" x="121.5" y="137" width="132" height="29"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2MY-em-TLY" firstAttribute="top" secondItem="UqI-lg-hrJ" secondAttribute="top" id="0ES-qR-dw4"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="centerY" secondItem="2MY-em-TLY" secondAttribute="centerY" id="18k-je-aaP"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="top" secondItem="GOD-Pv-qaV" secondAttribute="bottom" constant="20" id="230-Tr-2kC"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="syY-Ea-w0h" secondAttribute="trailing" id="2rc-SF-Bi0"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="Phr-nc-aVw" secondAttribute="leading" id="7Dk-zI-aGR"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="GOD-Pv-qaV" secondAttribute="trailing" id="A4D-pc-FMq"/>
+                            <constraint firstItem="6XR-CI-vSO" firstAttribute="top" secondItem="MQv-J5-kjD" secondAttribute="bottom" constant="20" id="CFY-87-kfk"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="6XR-CI-vSO" secondAttribute="leading" id="ChN-2e-FtU"/>
+                            <constraint firstItem="Phr-nc-aVw" firstAttribute="top" secondItem="syY-Ea-w0h" secondAttribute="bottom" constant="50" id="E8x-cH-ltF"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="syY-Ea-w0h" secondAttribute="leading" id="EXm-t1-Rd5"/>
+                            <constraint firstItem="GOD-Pv-qaV" firstAttribute="top" secondItem="Phr-nc-aVw" secondAttribute="bottom" constant="20" id="ICm-Pg-a4X"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="Phr-nc-aVw" secondAttribute="trailing" id="KZa-c0-rrC"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="g5L-Vm-Gua" secondAttribute="trailing" id="MNZ-4G-fHE"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="GOD-Pv-qaV" secondAttribute="leading" id="Yik-L8-SXE"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="g5L-Vm-Gua" secondAttribute="leading" id="YxI-t4-2vK"/>
+                            <constraint firstItem="2MY-em-TLY" firstAttribute="bottom" secondItem="1o6-gl-20h" secondAttribute="bottom" id="b6p-om-JeH"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="6XR-CI-vSO" secondAttribute="trailing" id="bMU-Kb-M8s"/>
+                            <constraint firstItem="2MY-em-TLY" firstAttribute="leading" secondItem="UqI-lg-hrJ" secondAttribute="leading" id="dpn-ls-Q1s"/>
+                            <constraint firstItem="MQv-J5-kjD" firstAttribute="centerX" secondItem="2MY-em-TLY" secondAttribute="centerX" id="h2U-fx-cH0"/>
+                            <constraint firstItem="g5L-Vm-Gua" firstAttribute="top" secondItem="6XR-CI-vSO" secondAttribute="bottom" constant="20" id="nyb-Iz-1W8"/>
+                            <constraint firstAttribute="trailing" secondItem="2MY-em-TLY" secondAttribute="trailing" id="x1z-VR-Q6V"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1o6-gl-20h"/>
+                    </view>
+                    <connections>
+                        <outlet property="level11Button" destination="Phr-nc-aVw" id="v0b-jH-kh7"/>
+                        <outlet property="level12Button" destination="GOD-Pv-qaV" id="GBp-XT-taO"/>
+                        <outlet property="level13Button" destination="MQv-J5-kjD" id="hY8-7c-Bci"/>
+                        <outlet property="level14Button" destination="6XR-CI-vSO" id="B4i-lB-fus"/>
+                        <outlet property="level15Button" destination="g5L-Vm-Gua" id="l0y-co-xBW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaY-iy-Yc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="723"/>
         </scene>
         <!--View Controller Cutscene-->
         <scene sceneID="gR7-g2-UZO">
@@ -316,7 +463,8 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="cartoon-forest" width="810" height="1440"/>
+        <image name="chevron" width="72" height="72"/>
         <image name="frog" width="258" height="265"/>
         <image name="mainmenu" width="256" height="38"/>
     </resources>

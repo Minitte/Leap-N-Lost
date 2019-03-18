@@ -49,7 +49,7 @@ class GameEngine : BufferManager {
      * Constructor for the game engine.
      * view - Reference to the application view.
      */
-    init(_ view : GLKView) {
+    init(_ view : GLKView, area: Int, level: Int) {
         print("Engine Init");
         // Initialize variables
         self.view = view;
@@ -87,7 +87,7 @@ class GameEngine : BufferManager {
         setupAttributes();
         
         // Initialize the first level
-        currentScene.loadLevel(area: 1, level: 1);
+        currentScene.loadLevel(area: area, level: level);
         
         // Load all tiles
         for tile in currentScene.tiles {

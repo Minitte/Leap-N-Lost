@@ -49,6 +49,16 @@ struct Level : Decodable {
         
         return level;
     }
+    
+    // Does the level exist?
+    func levelExists(num: Int, num2: Int) -> Bool{
+        let path = Bundle.main.path(forResource: "Level_" + String(num) + "-" + String(num2), ofType: "json", inDirectory: "Levels");
+        let fileManager = FileManager.default;
+        if(fileManager.fileExists(atPath: path!)){
+            return true;
+        }
+        return false;
+    }
 }
 
 // Info struct
