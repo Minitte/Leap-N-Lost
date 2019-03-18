@@ -28,6 +28,8 @@ class PlayerGameObject : GameObject {
     // hopping flag to block other input
     var hopping : Bool = false;
     
+    var prepingHop : Bool = false;
+    
     // ground position y value
     private var groundPositionY : Float = -3;
     
@@ -37,6 +39,12 @@ class PlayerGameObject : GameObject {
     // tile position based on x-z where z is forwards and origin is bottom center
     var tilePosition : Vector3 = Vector3.init();
 
+    // Animation for pre hop
+    private var preHopAnimation : TransformAnimation = TransformAnimation();
+    
+    /**
+     * Inits the player object with a model
+     */
     init(withModel model: Model, hopLength hl: Float = 2, hopTime ht: Float = 0.5) {
         isDead = false;
         super.init(model);
@@ -51,6 +59,11 @@ class PlayerGameObject : GameObject {
         rotation = Vector3.init(0, Float.pi, 0);
         self.collider = BoxCollider(halfLengths: Vector3.init(0.5, 0.5, 0.5));
         
+        // animation setup
+        preHopAnimation.originalScale = self.scale;
+        
+        // add keyframes
+        preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.15));
     }
     
     /**
@@ -58,8 +71,17 @@ class PlayerGameObject : GameObject {
      */
     override func update(delta: Float) {
         if (!hopping) {
+            if (InputManager.touched) {
+                if (!prepingHop) {
+                    preHopAnimation.playFromStart();
+                }
+                
+                prepingHop = true;
+            }
+            
             if (InputManager.singleTap) {
                 hopForward();
+                stopPrepingHop();
             }
             
             if (InputManager.leftSwipe) {
@@ -69,6 +91,12 @@ class PlayerGameObject : GameObject {
             if (InputManager.rightSwipe) {
                 hopRight();
             }
+        }
+        
+        if (prepingHop) {
+            preHopAnimation.update(delta: delta);
+            
+            self.scale = preHopAnimation.scale;
         }
         
         if (hopping) {
@@ -102,7 +130,6 @@ class PlayerGameObject : GameObject {
         }
         
         hopping = true;
-        
     }
     
     /**
@@ -137,6 +164,16 @@ class PlayerGameObject : GameObject {
         tilePosition.x += 1;
         
         hopping = true;
+    }
+    
+    /**
+     * Undos the prehop animation
+     */
+    private func stopPrepingHop() {
+        prepingHop = false;
+        preHopAnimation.stop();
+        
+        self.scale = preHopAnimation.originalScale;
     }
     
 }
