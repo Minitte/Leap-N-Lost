@@ -70,6 +70,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        InputManager.registerTouch()
+    }
+    
     /**
      * Updates the game.
      */
