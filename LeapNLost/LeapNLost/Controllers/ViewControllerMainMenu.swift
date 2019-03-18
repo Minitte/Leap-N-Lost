@@ -18,7 +18,6 @@ class ViewControllerMainMenu: UIViewController {
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
         initAudio.play(loop: false);
-        
         if(PlayerProfile.profileExists()){
             NSLog("Loading save...");
             profile = PlayerProfile.loadFromFile()!;

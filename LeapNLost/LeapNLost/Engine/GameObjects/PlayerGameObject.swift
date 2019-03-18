@@ -93,7 +93,7 @@ class PlayerGameObject : GameObject {
      * hops forward
      */
     public func hopForward() {
-        if(!isGameOver && !isDead){
+        if(isGameOver || isDead){
             return;
         }
         velocity = leapForward * 1;

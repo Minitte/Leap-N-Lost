@@ -20,7 +20,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     @IBOutlet weak var winView: UIView!
     @IBOutlet weak var winText: UILabel!
+    @IBOutlet weak var loseText: UILabel!
+    @IBOutlet weak var loseView: UIView!
     @IBOutlet weak var nextLevelButton: UIButton!
+    
     
     // This view as a GLKView
     private var glkView : GLKView?;
@@ -48,23 +51,6 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         
         // Start the engine
         gameEngine = GameEngine(self.view as! GLKView, area: area, level: level);
-    }
-    
-    /**
-     * Sends us back to the main menu.
-     */
-    func dismissScene() {
-        // Dismiss this scene
-        navigationController?.popViewController(animated: true);
-        dismiss(animated: true, completion: nil);
-    }
-    
-    func revealWinUI(){
-        winView.isHidden = false;
-    }
-    
-    func hideWinUI(){
-        winView.isHidden = true;
     }
     
     @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
@@ -95,11 +81,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     }
     
     @IBAction func LevelSelectButton(_ sender: Any) {
-        dismissScene();
+        dismiss(animated: true, completion: nil);
     }
     
     @IBAction func MainMenuButton(_ sender: Any) {
-        dismissScene();
+        self.presentingViewController!.dismiss(animated: false, completion: nil);
+        self.presentingViewController!.dismiss(animated: true, completion: nil);
     }
     /**
      * Updates the game.
@@ -110,7 +97,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         
         // Check if the player is dead
         if ((gameEngine?.currentScene.player.isDead)!) {
-            dismissScene();
+            loseText.isHidden = false;
+            loseView.isHidden = false;
         }
         
         // Check if the game is over
@@ -120,7 +108,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
                 num2: (gameEngine?.currentScene.currLevel)!+1))!)){
                 nextLevelButton.isHidden = true;
             }
-            revealWinUI();
+            winText.isHidden = false;
+            winView.isHidden = false;
         }
     }
     
@@ -130,6 +119,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         gameEngine?.render(rect);
     }
+
     
     deinit {
         print("ViewControllerGame deinit");

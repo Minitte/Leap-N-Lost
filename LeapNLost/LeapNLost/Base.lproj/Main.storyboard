@@ -13,7 +13,7 @@
         <!--View Controller Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewControllerTitle" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="title" id="BYZ-38-t0r" customClass="ViewControllerTitle" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,7 +66,7 @@
         <!--View Controller Main Menu-->
         <scene sceneID="bQU-LJ-y1V">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerMainMenuID" id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainMenu" id="50b-uE-2Sx" customClass="ViewControllerMainMenu" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hfe-73-Qra">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,12 +152,12 @@
         <!--View Controller Game-->
         <scene sceneID="pIS-LM-G8f">
             <objects>
-                <viewController title="View Controller Game" id="cyD-kn-t94" customClass="ViewControllerGame" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game" title="View Controller Game" id="cyD-kn-t94" customClass="ViewControllerGame" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uMy-LC-6gp" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-6Q-6xY" userLabel="WinView">
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7z-6Q-6xY" userLabel="WinView">
                                 <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HT-Fv-IMn">
@@ -236,7 +236,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONGRATULATIONS!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="802-sB-ZQ9">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONGRATULATIONS!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="802-sB-ZQ9">
                                 <rect key="frame" x="90" y="167" width="195" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="SNg-QA-WnP"/>
@@ -245,14 +245,106 @@
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oU-0u-Y1q" userLabel="LoseView">
+                                <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeQ-54-ipZ">
+                                        <rect key="frame" x="54" y="37" width="132" height="30"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jk7-N6-okL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Try Again">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="NextLevelButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="QBc-4n-7Kp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wsb-Oj-TEQ">
+                                        <rect key="frame" x="54" y="105" width="132" height="31"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Level Select">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="LevelSelectButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="oDp-LR-CPK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZK-MM-YGf">
+                                        <rect key="frame" x="54" y="173" width="132" height="31"/>
+                                        <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                        <state key="normal" title="Main Menu">
+                                            <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="MainMenuButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="7wy-TT-A29"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98338880159999997" green="1" blue="0.64552305249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Wsb-Oj-TEQ" firstAttribute="top" secondItem="xeQ-54-ipZ" secondAttribute="bottom" constant="38" id="JA4-QL-SVf"/>
+                                    <constraint firstAttribute="height" constant="240" id="M8V-kx-WG3"/>
+                                    <constraint firstItem="cZK-MM-YGf" firstAttribute="top" secondItem="Wsb-Oj-TEQ" secondAttribute="bottom" constant="37" id="OI4-Qe-WkN"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="trailing" secondItem="cZK-MM-YGf" secondAttribute="trailing" id="QUd-9c-5GN"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="centerX" secondItem="8oU-0u-Y1q" secondAttribute="centerX" id="SGD-uf-7Nn"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="leading" secondItem="8oU-0u-Y1q" secondAttribute="leading" constant="54" id="VQ2-uN-PPl"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="top" secondItem="8oU-0u-Y1q" secondAttribute="top" constant="37" id="oCw-rh-hLL"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="leading" secondItem="Wsb-Oj-TEQ" secondAttribute="leading" id="oZy-RN-M7w"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="trailing" secondItem="Wsb-Oj-TEQ" secondAttribute="trailing" id="q0C-gh-SLW"/>
+                                    <constraint firstAttribute="width" constant="240" id="r3P-Ut-LBq"/>
+                                    <constraint firstItem="xeQ-54-ipZ" firstAttribute="leading" secondItem="cZK-MM-YGf" secondAttribute="leading" id="uGE-wz-2sc"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Lost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjQ-3A-6UH">
+                                <rect key="frame" x="90" y="167" width="195" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="7nb-fV-hMg"/>
+                                    <constraint firstAttribute="width" constant="195" id="Lzn-sZ-UU3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="jjQ-3A-6UH" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="7Vz-mW-YpF"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="FDg-vd-9ni"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="MmK-Tz-mgC"/>
                             <constraint firstItem="802-sB-ZQ9" firstAttribute="centerX" secondItem="p7z-6Q-6xY" secondAttribute="centerX" id="Qjr-H2-8Oq"/>
+                            <constraint firstItem="8oU-0u-Y1q" firstAttribute="top" secondItem="jjQ-3A-6UH" secondAttribute="bottom" constant="17.5" id="W3w-cK-G4W"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="top" secondItem="802-sB-ZQ9" secondAttribute="bottom" constant="17.5" id="X3D-H9-JT6"/>
+                            <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="tH0-nC-aX6"/>
+                            <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="v04-sP-GW1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6gj-gu-tBq"/>
                         <connections>
@@ -262,7 +354,9 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="LYL-e8-rd9"/>
+                        <outlet property="loseText" destination="jjQ-3A-6UH" id="PxV-en-RQr"/>
+                        <outlet property="loseView" destination="8oU-0u-Y1q" id="bmn-im-1Qq"/>
+                        <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="7nH-EP-xPL"/>
                         <outlet property="winText" destination="802-sB-ZQ9" id="avP-DZ-VoH"/>
                         <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
                     </connections>
@@ -289,7 +383,7 @@
         <!--View Controller Level Select-->
         <scene sceneID="9ij-k9-VxY">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerLevelSelectID" title="View Controller Level Select" id="ARL-fj-hd5" customClass="ViewControllerLevelSelect" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="levelselect" title="View Controller Level Select" id="ARL-fj-hd5" customClass="ViewControllerLevelSelect" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UqI-lg-hrJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,9 +468,12 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
-                                <rect key="frame" x="283" y="297" width="72" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
+                                <rect key="frame" x="283" y="297.5" width="72" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="0Bv-MJ-UNh"/>
+                                    <constraint firstAttribute="height" constant="72" id="7kN-Ff-CHU"/>
+                                </constraints>
                                 <state key="normal" image="chevron"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEVEL SELECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syY-Ea-w0h">
@@ -391,6 +488,7 @@
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="centerY" secondItem="2MY-em-TLY" secondAttribute="centerY" id="18k-je-aaP"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="top" secondItem="GOD-Pv-qaV" secondAttribute="bottom" constant="20" id="230-Tr-2kC"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="syY-Ea-w0h" secondAttribute="trailing" id="2rc-SF-Bi0"/>
+                            <constraint firstItem="mLT-lb-bGX" firstAttribute="centerY" secondItem="UqI-lg-hrJ" secondAttribute="centerY" id="6wB-W5-1Nw"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="Phr-nc-aVw" secondAttribute="leading" id="7Dk-zI-aGR"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="GOD-Pv-qaV" secondAttribute="trailing" id="A4D-pc-FMq"/>
                             <constraint firstItem="6XR-CI-vSO" firstAttribute="top" secondItem="MQv-J5-kjD" secondAttribute="bottom" constant="20" id="CFY-87-kfk"/>
@@ -406,6 +504,7 @@
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="6XR-CI-vSO" secondAttribute="trailing" id="bMU-Kb-M8s"/>
                             <constraint firstItem="2MY-em-TLY" firstAttribute="leading" secondItem="UqI-lg-hrJ" secondAttribute="leading" id="dpn-ls-Q1s"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="centerX" secondItem="2MY-em-TLY" secondAttribute="centerX" id="h2U-fx-cH0"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="mLT-lb-bGX" secondAttribute="trailing" constant="20" id="n4o-xl-62V"/>
                             <constraint firstItem="g5L-Vm-Gua" firstAttribute="top" secondItem="6XR-CI-vSO" secondAttribute="bottom" constant="20" id="nyb-Iz-1W8"/>
                             <constraint firstAttribute="trailing" secondItem="2MY-em-TLY" secondAttribute="trailing" id="x1z-VR-Q6V"/>
                         </constraints>
@@ -426,7 +525,7 @@
         <!--View Controller Cutscene-->
         <scene sceneID="gR7-g2-UZO">
             <objects>
-                <viewController id="mJx-y9-31j" customClass="ViewControllerCutscene" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cutscene" id="mJx-y9-31j" customClass="ViewControllerCutscene" customModule="LeapNLost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8dp-Al-J2X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
