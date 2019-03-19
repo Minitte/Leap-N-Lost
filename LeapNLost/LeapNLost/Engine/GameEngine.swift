@@ -84,9 +84,6 @@ class GameEngine : BufferManager {
         // Setup vertex attribute object attributes
         setupAttributes();
         
-        // Initialize the first level
-        currentScene.loadLevel(area: 1, level: 1);
-        
         // Load all tiles
         for tile in currentScene.tiles {
             loadTile(tile: tile);

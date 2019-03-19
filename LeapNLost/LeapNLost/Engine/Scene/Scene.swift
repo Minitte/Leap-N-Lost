@@ -24,7 +24,7 @@ class Scene {
     var gameObjects : [GameObject];
     
     // List of all tiles in the scene
-    var tiles : [GameObject]
+    var tiles : [Tile];
     
     // Reference to the player object.
     var player : PlayerGameObject;
@@ -50,7 +50,7 @@ class Scene {
         self.view = view;
         self.level = Level();
         self.gameObjects = [GameObject]();
-        self.tiles = [GameObject]();
+        self.tiles = [Tile]();
         self.collisionDictionary = [Int:[GameObject]]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
@@ -58,7 +58,6 @@ class Scene {
         player = PlayerGameObject.init(withModel: frogModel);
         player.type = "Player";
         gameObjects.append(player);
-        player.position = Vector3(0, -3, 0);
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
@@ -72,6 +71,27 @@ class Scene {
         
         // For testing purposes ***
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
+        
+        // Load the first level ***
+        loadLevel(area: 1, level: 1);
+        
+        // Have to set current scene here because of swift
+        player.currentScene = self;
+        
+        // Set player position
+        player.teleportToTile(tile: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
+    
+    /**
+     * Gets a tile from the given row and column
+     */
+    func getTile(row: Int, column: Int) -> Tile? {
+        // Check if row and column are valid
+        if (row >= 0 && row < level.rows.count && column >= 0 && column < Level.tilesPerRow) {
+            return tiles[Level.tilesPerRow * row + column];
+        }
+        
+        return nil;
     }
     
     /**
@@ -119,9 +139,12 @@ class Scene {
             
             // Generate the row's tiles
             for tileIndex in 0..<Level.tilesPerRow {
-                let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
+                let tile = Tile(model: Model.CreatePrimitive(primitiveType: Model.Primitive.Cube), row: rowIndex, column: tileIndex);
                 tile.model.loadTexture(fileName: texture);
+                
+                // Set the type
                 tile.type = row.type;
+                
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
