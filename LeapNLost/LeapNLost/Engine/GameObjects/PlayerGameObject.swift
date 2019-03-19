@@ -33,8 +33,11 @@ class PlayerGameObject : GameObject {
     // tile position based on x-z where z is forwards and origin is bottom center
     //var tilePosition : Vector3 = Vector3.init();
     
-    // The current tile that the player is on, includes lilypads
+    // The current tile that the player is on
     var currentTile : Tile?;
+    
+    // The current target object to home into
+    var targetObject : GameObject?;
     
     // Reference to the current scene
     weak var currentScene : Scene?;
@@ -111,6 +114,11 @@ class PlayerGameObject : GameObject {
             self.scale = preHopAnimation.scale;
         }
         
+        // Riding the lilypad
+        if (!hopping && targetObject != nil) {
+            self.position = targetObject!.position + Vector3(0, 0.5, 0);
+        }
+        
         if (hopping) {
             hopTime = hopTime + delta;
             
@@ -120,6 +128,11 @@ class PlayerGameObject : GameObject {
                 limitedDelta = limitedDelta - (maxHopTime - hopTime);
             }
             
+            // Targeting a lilypad
+            if (targetObject != nil) {
+                jumpToTarget(target: targetObject!.position + Vector3(0, 0.5, 0), resetY: false);
+            }
+            
             velocity = velocity + (gravity * limitedDelta);
             
             let scaledVelocity : Vector3 = velocity * limitedDelta;
@@ -127,7 +140,10 @@ class PlayerGameObject : GameObject {
             position = position + scaledVelocity;
             
             if (hopTime >= maxHopTime) {
-                teleportToTile(tile: currentTile!);
+                if (targetObject == nil) {
+                    teleportToTile(tile: currentTile!);
+                }
+                
                 print("Player Landed on: \(currentTile!.position)");
                 hopping = false;
             }
@@ -138,23 +154,47 @@ class PlayerGameObject : GameObject {
      * hops forward
      */
     public func hopForward() {
-        let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row + 1, column: currentTile!.column);
+        var targetTile : Tile? = currentScene!.getTile(row: currentTile!.row + 1, column: currentTile!.column);
+        
+        // If we are on a lilypad already
+        if (targetObject != nil) {
+            targetTile = currentScene!.getTile(row: currentTile!.row + 1, column: Int((targetObject!.position.x + Float(Level.tilesPerRow)) / 2.0 - 0.5));
+        }
         
         if (targetTile == nil) {
             return;
         }
         
+        targetObject = nil;
+        
         // copy velocity for y velocity for hopping
         velocity = hopVelocity;
         
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
-        
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
-        
+        if (targetTile!.type == "water") {
+            let lilypads : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
+            
+            var closestDist : Float = 1000000.0;
+            
+            var closest : GameObject?;
+            
+            for lilypad in lilypads {
+                let dist : Float = (lilypad.position - self.position).magnitude();
+                
+                if (dist < 2.5 && dist < closestDist) {
+                    closestDist = dist;
+                    closest = lilypad;
+                }
+            }
+            
+            if (closest != nil) {
+                targetObject = closest;
+            } else {
+                jumpToTarget(target: targetTile!.position);
+            }
+        } else {
+            
+            jumpToTarget(target: targetTile!.position);
+        }
         rotation = Vector3.init(0, Float.pi, 0);
         
         currentTile = targetTile;
@@ -176,15 +216,9 @@ class PlayerGameObject : GameObject {
             return;
         }
         
-        velocity = hopVelocity;
+        targetObject = nil;
         
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
-        
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
+        jumpToTarget(target: targetTile!.position);
         
         rotation = Vector3.init(0, -Float.pi/2.0, 0);
         
@@ -205,15 +239,9 @@ class PlayerGameObject : GameObject {
             return;
         }
         
-        velocity = hopVelocity;
+        targetObject = nil;
         
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
-        
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
+        jumpToTarget(target: targetTile!.position);
         
         rotation = Vector3.init(0, Float.pi/2.0, 0);
         
@@ -232,6 +260,32 @@ class PlayerGameObject : GameObject {
         preHopAnimation.stop();
         
         self.scale = preHopAnimation.originalScale;
+    }
+    
+    private func jumpToTarget(target : Vector3, resetY : Bool = true) {
+        if (resetY) {
+            velocity = hopVelocity;
+        }
+            
+        // the difference between our tile and the next
+        var tileVelocity : Vector3 = target - self.position;
+        tileVelocity = tileVelocity / maxHopTime;
+        
+        // copy values into velocity
+        velocity.x = tileVelocity.x;
+        velocity.z = tileVelocity.z;
+        
+        if (resetY) {
+            hopTime = 0.0;
+        }
+        
+        // scale velocity by time leftover
+        var hopTimeLeft : Float = maxHopTime - hopTime;
+        
+        hopTimeLeft /= maxHopTime;
+        
+        velocity.x /= hopTimeLeft;
+        velocity.z /= hopTimeLeft;
     }
     
 }

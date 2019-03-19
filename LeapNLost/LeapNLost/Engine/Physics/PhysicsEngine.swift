@@ -46,7 +46,7 @@ class PhysicsEngine {
             if((gameObject.collider!.CheckCollision(first: player, second: gameObject))) {
                 
                 if (gameObject.type == "Lilypad") {
-                    player.position = gameObject.position + Vector3(0, 0.5, 0);
+                    //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onLilypad = true;
                     break;
                 } else {
