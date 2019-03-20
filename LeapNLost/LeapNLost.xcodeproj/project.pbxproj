@@ -23,6 +23,7 @@
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
 		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
 		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
+		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
 		88FF863D2222401E00BDEE9F /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863C2222401E00BDEE9F /* Collider.swift */; };
 		88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863E2222410600BDEE9F /* BoxCollider.swift */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
@@ -116,6 +117,7 @@
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
 		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
 		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
+		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
 		88FF863C2222401E00BDEE9F /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
 		88FF863E2222410600BDEE9F /* BoxCollider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCollider.swift; sourceTree = "<group>"; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
@@ -263,6 +265,14 @@
 			path = Cutscenes;
 			sourceTree = "<group>";
 		};
+		88E184D1224301E900B59E24 /* memory-fragment */ = {
+			isa = PBXGroup;
+			children = (
+				88E184D22243031E00B59E24 /* Prism.obj */,
+			);
+			path = "memory-fragment";
+			sourceTree = "<group>";
+		};
 		88FF863B22223FF600BDEE9F /* Physics */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +397,7 @@
 		AEB2B13C2239AB0100BE18A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				88E184D1224301E900B59E24 /* memory-fragment */,
 				FEF1711A2214B3D000C94A22 /* Tree */,
 				AEB2B13E2239AB5300BE18A0 /* Cube */,
 				FEF171092214AF2600C94A22 /* Lilypad */,
@@ -670,6 +681,7 @@
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 				FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */,
+				88E184D32243031E00B59E24 /* Prism.obj in Resources */,
 				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
 				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,
 			);
