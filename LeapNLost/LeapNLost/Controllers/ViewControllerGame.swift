@@ -106,6 +106,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         loseView.isHidden = true;
         loseText.isHidden = true;
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        InputManager.registerTouch()
+    }
+    
     /**
      * Updates the game.
      */

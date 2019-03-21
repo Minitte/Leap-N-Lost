@@ -46,7 +46,7 @@ uniform lowp vec3 view_Position; // Position of the camera
 // Variables that are passed in from the vertex shader
 varying lowp vec4 frag_Color; // Fragment color
 varying lowp vec2 frag_TexCoord; // Texture coordinate
-varying lowp vec3 frag_Normal; // World normal
+varying lowp vec3 frag_Normal; // Normal relative to the camera
 varying lowp vec3 frag_Position; // World position
 varying highp vec4 frag_LightSpacePosition; // Shadow map coordinate
 
