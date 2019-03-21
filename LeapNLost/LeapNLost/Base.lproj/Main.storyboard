@@ -265,7 +265,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="NextLevelButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="QBc-4n-7Kp"/>
+                                            <action selector="TryAgainButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="qW3-SZ-K4m"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wsb-Oj-TEQ">
@@ -282,7 +282,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="LevelSelectButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="oDp-LR-CPK"/>
+                                            <action selector="LevelSelectButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="uzH-1P-S6d"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZK-MM-YGf">
@@ -299,7 +299,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="MainMenuButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="7wy-TT-A29"/>
+                                            <action selector="MainMenuButton:" destination="cyD-kn-t94" eventType="touchUpInside" id="fgy-83-1pP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -406,7 +406,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="ejB-ju-rzM"/>
-                                    <segue destination="cyD-kn-t94" kind="show" id="si8-k0-QO9"/>
+                                    <segue destination="cyD-kn-t94" kind="show" identifier="levelSelected" id="si8-k0-QO9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOD-Pv-qaV">
@@ -423,7 +423,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="level2_2:" destination="ARL-fj-hd5" eventType="touchUpInside" id="Mz5-ei-7CE"/>
+                                    <action selector="level1_2:" destination="ARL-fj-hd5" eventType="touchUpInside" id="ilG-fV-h2B"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQv-J5-kjD">

@@ -25,6 +25,7 @@ class ViewControllerMainMenu: UIViewController {
             NSLog("No save file. Making default save...");
             profile.saveToFile();
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

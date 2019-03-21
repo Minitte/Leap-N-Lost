@@ -163,7 +163,7 @@ class Scene {
         
         mainCamera.updatePosition();
         
-        if (player.tilePosition.z >= 5) {
+        if (player.tilePosition.z >= 30) {
             player.isGameOver = true;
         }
         

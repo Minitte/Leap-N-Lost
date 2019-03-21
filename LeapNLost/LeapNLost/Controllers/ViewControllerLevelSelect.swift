@@ -30,7 +30,22 @@ class ViewControllerLevelSelect: UIViewController {
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
         initAudio.play(loop: false);
-        
+        for(index, button) in levelButtons.enumerated(){
+            if(profile.reachedLevel >= index+1){
+                button.alpha = 1.0;
+                button.isEnabled = true;
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if(PlayerProfile.profileExists()){
+            NSLog("Loading save...");
+            profile = PlayerProfile.loadFromFile()!;
+        } else{
+            NSLog("No save file. Making default save...");
+            profile.saveToFile();
+        }
         for(index, button) in levelButtons.enumerated(){
             if(profile.reachedLevel >= index+1){
                 button.alpha = 1.0;
@@ -46,8 +61,11 @@ class ViewControllerLevelSelect: UIViewController {
             let vc = segue.destination as? ViewControllerGame
             vc?.area = area;
             vc?.level = level;
+            vc?.profile = profile;
         }
+        
     }
+
     
     @IBAction func level1_1(_ sender: Any) {
         buttonAudio.play(loop: false);
@@ -58,13 +76,14 @@ class ViewControllerLevelSelect: UIViewController {
         level = 1;
     }
     
-    @IBAction func level2_2(_ sender: Any) {
+    @IBAction func level1_2(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
         AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
         AudioPlayers.shared.play(index: 0, loop: true);
         area = 1;
         level = 2;
+        performSegue(withIdentifier: "levelSelected", sender: self)
     }
     
     /*
