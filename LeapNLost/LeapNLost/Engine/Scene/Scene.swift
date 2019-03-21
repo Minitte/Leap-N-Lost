@@ -117,8 +117,8 @@ class Scene {
             let row = self.level.rows[rowIndex];
             
             // Parse row and tile objects based on the level's theme
-            var rowObjects : [GameObject] = theme!.parseRowObjects(row: row, rowIndex: rowIndex);
-            var rowTiles : [Tile] = theme!.parseRowTiles(row: row, rowIndex: rowIndex);
+            let rowObjects : [GameObject] = theme!.parseRowObjects(row: row, rowIndex: rowIndex);
+            let rowTiles : [Tile] = theme!.parseRowTiles(row: row, rowIndex: rowIndex);
             
             // Save to collision dictionary
             collisionDictionary[rowIndex] = rowObjects;
@@ -126,50 +126,6 @@ class Scene {
             // Append objects and tiles to the level
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
-            
-            /*
-            var texture : String;
-            var depth : Float;
-            var currentObjects : [GameObject] = [GameObject]();
-            // Spawn things
-            switch(row.type){
-            case "road":
-                depth = -5;
-                texture = "road.jpg";
-                
-                // Create car object
-                let car = Car.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                gameObjects.append(car);
-                currentObjects.append(car)
-                
-                
-            case "water":
-                depth = -5.5;
-                
-                // Create lilypad object
-                let lilypad = Lilypad.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                texture = "water.jpg";
-                gameObjects.append(lilypad);
-                currentObjects.append(lilypad);
-            default:
-                depth = -5;
-                texture = "grass.jpg";
-            }
-            
-            collisionDictionary[rowIndex] = currentObjects;
-            
-            // Generate the row's tiles
-            for tileIndex in 0..<Level.tilesPerRow {
-                let tile = Tile(model: Model.CreatePrimitive(primitiveType: Model.Primitive.Cube), row: rowIndex, column: tileIndex);
-                tile.model.loadTexture(fileName: texture);
-                
-                // Set the type
-                tile.type = row.type;
-                
-                tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
-                tiles.append(tile);
-            }
-            */
         }
     }
     

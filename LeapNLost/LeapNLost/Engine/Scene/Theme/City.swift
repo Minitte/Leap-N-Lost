@@ -14,18 +14,19 @@ import Foundation
 class City : Theme {
     
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
-        let rowName : String = row.type;
+        let rowType : String = row.type;
         
         // Initialize an empty game objects array
         var gameObjects : [GameObject] = [];
         
-        switch rowName {
+        // Generate game objects depending on row type
+        switch rowType {
         case "road":
             // Create and append car object
             gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
         case "water":
             // Create and append lilypad object
-            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -2.5, -Float(rowIndex) * 2), speed: row.speed));
         case "grass":
             break; // Do nothing
         default:
@@ -37,14 +38,15 @@ class City : Theme {
     
     func parseRowTiles(row: Row, rowIndex: Int) -> [Tile] {
         // Row properties
-        let rowName : String = row.type;
+        let rowType : String = row.type;
         var rowDepth : Float = 0.0;
-        var textureName : String? = nil;
+        var textureName : String?;
         
         // Initialize an empty game objects array
         var tiles : [Tile] = [];
         
-        switch rowName {
+        // Change texture and tile depth depending on row type
+        switch rowType {
         case "road":
             textureName = "road.jpg";
             rowDepth = -5;
