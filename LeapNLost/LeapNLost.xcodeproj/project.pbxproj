@@ -21,6 +21,8 @@
 		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E97AE92212A8D400A10BC9 /* Audio.swift */; };
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
+		6F4F9715224435EE00AA2873 /* MemoryFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F9714224435EE00AA2873 /* MemoryFragment.swift */; };
+		6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F971622443EC700AA2873 /* memoryfragment.jpg */; };
 		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
 		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
 		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
@@ -115,6 +117,8 @@
 		57793E57220D014D00943230 /* frogMTL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogMTL.h; path = LeapNLost/Assets/Models/Frog/frogMTL.h; sourceTree = SOURCE_ROOT; };
 		57E97AE92212A8D400A10BC9 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
+		6F4F9714224435EE00AA2873 /* MemoryFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryFragment.swift; sourceTree = "<group>"; };
+		6F4F971622443EC700AA2873 /* memoryfragment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = memoryfragment.jpg; sourceTree = "<group>"; };
 		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
 		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
 		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 		88E184D1224301E900B59E24 /* memory-fragment */ = {
 			isa = PBXGroup;
 			children = (
+				6F4F971622443EC700AA2873 /* memoryfragment.jpg */,
 				88E184D22243031E00B59E24 /* Prism.obj */,
 			);
 			path = "memory-fragment";
@@ -300,6 +305,7 @@
 				E2F0383A223F4E3C0050B312 /* Animation */,
 				AEF36596220B8AA300ED9827 /* GameObject.swift */,
 				E2DA6518221BCE230065A150 /* PlayerGameObject.swift */,
+				6F4F9714224435EE00AA2873 /* MemoryFragment.swift */,
 				5707397B221CEDAC00F54DB3 /* Car.swift */,
 				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 				AD6581E422406C8800C2D41D /* Tile.swift */,
@@ -669,6 +675,7 @@
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
+				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
@@ -741,6 +748,7 @@
 				5707397C221CEDAC00F54DB3 /* Car.swift in Sources */,
 				57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
+				6F4F9715224435EE00AA2873 /* MemoryFragment.swift in Sources */,
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
 				AD6581E522406C8800C2D41D /* Tile.swift in Sources */,
 				AE1B20AF2228A16A0053CE35 /* PhysicsEngine.swift in Sources */,
@@ -907,14 +915,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5DX2233PCT;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
+				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.Jma.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -928,14 +936,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5DX2233PCT;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
+				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.Jma.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
