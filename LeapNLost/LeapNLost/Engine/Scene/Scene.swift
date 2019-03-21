@@ -80,6 +80,7 @@ class Scene {
         
         // Set player position
         player.teleportToTile(tile: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+        
     }
     
     /**
@@ -149,6 +150,12 @@ class Scene {
                 tiles.append(tile);
             }
         }
+        
+        //Creating a MemoryFragment and appending to gameobjects.
+        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0));
+
+        gameObjects.append(memoryFragment);
+        
     }
     
     /**
