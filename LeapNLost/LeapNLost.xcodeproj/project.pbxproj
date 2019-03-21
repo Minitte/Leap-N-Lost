@@ -55,6 +55,8 @@
 		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
 		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
+		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
+		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
@@ -148,6 +150,8 @@
 		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
 		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
+		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +304,7 @@
 		928D5386221F571B002C6F2B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				AEAF40852244323F00BBAB72 /* Theme */,
 				57082062220A9DF9000740D3 /* Level.swift */,
 				AE4CA9892214CF4C004704D8 /* Scene.swift */,
 			);
@@ -370,6 +375,15 @@
 				6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AEAF40852244323F00BBAB72 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				AEAF40832244323800BBAB72 /* Theme.swift */,
+				AEAF40862244340B00BBAB72 /* City.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		AEB2B13B2239AAF400BE18A0 /* Assets */ = {
@@ -700,6 +714,7 @@
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
 				92372E75221033A4001F5139 /* PointLight.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
+				AEAF40872244340B00BBAB72 /* City.swift in Sources */,
 				AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */,
 				5707397E221CF50B00F54DB3 /* Lilypad.swift in Sources */,
 				5718CA232203C522000EC054 /* ViewControllerTitle.swift in Sources */,
@@ -726,6 +741,7 @@
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,
 				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
+				AEAF40842244323800BBAB72 /* Theme.swift in Sources */,
 				5707397C221CEDAC00F54DB3 /* Car.swift in Sources */,
 				57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,

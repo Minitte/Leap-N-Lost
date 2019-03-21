@@ -103,10 +103,31 @@ class Scene {
         // Parse the level
         let data = self.level.readLevel(withArea: area, withLevel: level);
         self.level = self.level.parseJSON(data: data);
+        var theme : Theme? = nil;
+        
+        switch (self.level.info.theme) {
+        case "City":
+            theme = City();
+        default:
+            print("ERROR: Invalid level theme");
+        }
         
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
             let row = self.level.rows[rowIndex];
+            
+            // Parse row and tile objects based on the level's theme
+            var rowObjects : [GameObject] = theme!.parseRowObjects(row: row, rowIndex: rowIndex);
+            var rowTiles : [Tile] = theme!.parseRowTiles(row: row, rowIndex: rowIndex);
+            
+            // Save to collision dictionary
+            collisionDictionary[rowIndex] = rowObjects;
+            
+            // Append objects and tiles to the level
+            self.gameObjects.append(contentsOf: rowObjects);
+            self.tiles.append(contentsOf: rowTiles);
+            
+            /*
             var texture : String;
             var depth : Float;
             var currentObjects : [GameObject] = [GameObject]();
@@ -148,6 +169,7 @@ class Scene {
                 tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
                 tiles.append(tile);
             }
+            */
         }
     }
     
