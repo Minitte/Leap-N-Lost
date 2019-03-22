@@ -14,6 +14,7 @@ class Lilypad: GameObject{
     
     init(pos: Vector3, speed: Float){
         self.speed = speed;
+        self.speed *= 2; // ***
         super.init(ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true)!);
         
         // Spawn in a random position for testing purposes
@@ -30,7 +31,7 @@ class Lilypad: GameObject{
         // If speed is positive, move right
         if(speed > 0.0){
             // If x pos is smaller than farthest right tile
-            if(position.x < Float(Level.tilesPerRow)/2){
+            if(position.x < Float(Level.tilesPerRow)){
                 position.x += 1 * delta * speed;
             } else {
                 position.x = Float(-Level.tilesPerRow);
@@ -38,7 +39,7 @@ class Lilypad: GameObject{
         }
         // If speed is negative, move left
         else{
-            if(position.x > Float(-Level.tilesPerRow)/2){
+            if(position.x > Float(-Level.tilesPerRow)){
                 position.x += 1 * delta * speed;
             } else {
                 position.x = Float(Level.tilesPerRow);
