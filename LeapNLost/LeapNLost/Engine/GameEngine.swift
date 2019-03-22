@@ -77,26 +77,47 @@ class GameEngine : BufferManager {
         glGenBuffers(GLsizei(1), &indexBuffer);
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
-        // Allocate the vertex and index buffers (use arbitruary numbers for now)
-        glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
-        
         // Setup vertex attribute object attributes
         setupAttributes();
         
-        // Initialize the first level
-        currentScene.loadLevel(area: area, level: level);
+        // Load the scene
+        loadScene(scene: currentScene);
+    }
+    
+    /**
+     * Loads a scene by appending all models into the buffers.
+     * Also initializes the buffers, existing data will be invalidated.
+     * scene - the scene to load
+     */
+    func loadScene(scene: Scene) {
+        var totalVertices : Int = 0;
+        var totalIndices : Int = 0;
+        
+        // Count total number of vertices and indices
+        for gameObject in scene.gameObjects {
+            totalVertices += gameObject.model.vertices.count;
+            totalIndices += gameObject.model.indices.count;
+        }
+        for tile in scene.tiles {
+            totalVertices += tile.model.vertices.count;
+            totalIndices += tile.model.indices.count;
+        }
+        
+        // Bind vertex and index buffers
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Allocate the vertex and index buffers
+        glBufferData(GLenum(GL_ARRAY_BUFFER), totalVertices * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), totalIndices * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
         // Load all tiles
-        for tile in currentScene.tiles {
+        for tile in scene.tiles {
             loadTile(tile: tile);
         }
         
-        // Unbind tile vertex array object for now
-        glBindVertexArrayOES(0);
-        
         // Load all other game objects
-        for gameObject in currentScene.gameObjects {
+        for gameObject in scene.gameObjects {
             loadModel(model: gameObject.model);
             loadModel(model: gameObject.collider!.model!);
         }
@@ -296,7 +317,7 @@ class GameEngine : BufferManager {
         glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);
         
         // Flush model cache
-        ModelCacheManager.flushCache();
+        ModelCacheManager.modelDictionary.removeAll();
     }
 }
 
