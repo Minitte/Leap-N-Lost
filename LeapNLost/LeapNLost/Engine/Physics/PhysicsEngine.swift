@@ -12,7 +12,7 @@ import GLKit
 class PhysicsEngine {
     
     // Toggle for enabling debug buxes
-    private(set) var debug : Bool = true;
+    private(set) var debug : Bool = false;
     
     // Reference to the collider shader
     private var colliderShader : Shader;
