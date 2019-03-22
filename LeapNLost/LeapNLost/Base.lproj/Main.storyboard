@@ -25,25 +25,32 @@
                                 <rect key="frame" x="59.5" y="527" width="256" height="38"/>
                                 <state key="normal" image="TapToStart"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="frog" translatesAutoresizingMaskIntoConstraints="NO" id="uMN-dm-Yqr">
-                                <rect key="frame" x="67" y="211" width="240" height="240"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frog" translatesAutoresizingMaskIntoConstraints="NO" id="uMN-dm-Yqr">
+                                <rect key="frame" x="67.5" y="223.5" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="SCR-oC-8Dx"/>
+                                    <constraint firstAttribute="height" constant="240" id="W2w-r3-JKz"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="LeapNLostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="H3P-AA-ACP">
-                                <rect key="frame" x="35" y="72" width="304" height="67"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="LeapNLostLogo" translatesAutoresizingMaskIntoConstraints="NO" id="H3P-AA-ACP">
+                                <rect key="frame" x="35.5" y="70" width="304" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="tLD-xK-hN7"/>
+                                    <constraint firstAttribute="width" constant="304" id="zXX-QQ-N3u"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H3P-AA-ACP" secondAttribute="trailing" constant="1" id="A7A-rP-S7J"/>
                             <constraint firstItem="uMN-dm-Yqr" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Csr-6c-jz3"/>
+                            <constraint firstItem="H3P-AA-ACP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="D0p-TV-owd"/>
                             <constraint firstItem="19h-N7-0VQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="FU3-ph-BOI"/>
                             <constraint firstItem="19h-N7-0VQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Isl-eB-4Dx"/>
                             <constraint firstItem="akM-cJ-liu" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ks4-6L-Owh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="akM-cJ-liu" secondAttribute="bottom" constant="102" id="awa-Ju-dkt"/>
-                            <constraint firstItem="H3P-AA-ACP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="1" id="hHu-jV-Aqd"/>
-                            <constraint firstItem="H3P-AA-ACP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="n73-8o-Nwi"/>
                             <constraint firstItem="uMN-dm-Yqr" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nVa-4p-ZDp"/>
+                            <constraint firstItem="H3P-AA-ACP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="suu-Bn-aQE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -74,73 +81,87 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cartoon-forest" translatesAutoresizingMaskIntoConstraints="NO" id="2f1-sJ-hs6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s26-mk-068">
+                                <rect key="frame" x="131.5" y="189.5" width="112" height="29"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GfP-Ck-MCp">
-                                <rect key="frame" x="100" y="278.5" width="175" height="30"/>
-                                <color key="backgroundColor" red="0.8236987348" green="1" blue="0.75828911330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="100" y="268.5" width="175" height="30"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="Lae-MF-4Cq"/>
+                                    <constraint firstAttribute="height" constant="30" id="yk4-th-ar0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Play">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="playButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="UvN-eW-wEh"/>
                                     <segue destination="ARL-fj-hd5" kind="show" id="mah-cH-Nnh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-ov-cV2">
-                                <rect key="frame" x="100" y="337" width="175" height="30"/>
-                                <color key="backgroundColor" red="0.8236987348" green="1" blue="0.75828911330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-ov-cV2">
+                                <rect key="frame" x="100" y="318.5" width="175" height="30"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="IiO-Yt-k6T"/>
+                                    <constraint firstAttribute="width" constant="175" id="akp-wc-zZy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Settings">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="settingsButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="FZg-EA-yPJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-4t-YeJ">
-                                <rect key="frame" x="100" y="387" width="175" height="30"/>
-                                <color key="backgroundColor" red="0.8236987348" green="1" blue="0.75828911330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-4t-YeJ">
+                                <rect key="frame" x="100" y="368.5" width="175" height="30"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="4T8-vb-swf"/>
+                                    <constraint firstAttribute="height" constant="30" id="vxp-U1-qVV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Highscore">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="highScoreButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="03U-Xc-1lZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpq-Mk-E5l">
-                                <rect key="frame" x="100" y="437" width="175" height="30"/>
-                                <color key="backgroundColor" red="0.8236987348" green="1" blue="0.75828911330000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpq-Mk-E5l">
+                                <rect key="frame" x="100" y="418.5" width="175" height="30"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.99215686274509807" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Dcb-CJ-5b7"/>
+                                    <constraint firstAttribute="width" constant="175" id="lGU-B0-SWP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Exit">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="exitApp:" destination="50b-uE-2Sx" eventType="touchUpInside" id="mn4-as-Hhr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="mainmenu" translatesAutoresizingMaskIntoConstraints="NO" id="mCB-UH-WPE">
-                                <rect key="frame" x="83" y="167" width="208" height="39"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ulH-4t-YeJ" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="2Al-66-AfY"/>
-                            <constraint firstItem="Zpq-Mk-E5l" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="4zM-gZ-bbl"/>
-                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="96c-EG-uID"/>
-                            <constraint firstItem="Zpq-Mk-E5l" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="GAJ-09-W4i"/>
-                            <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="Zpq-Mk-E5l" secondAttribute="trailing" constant="100" id="JDL-aY-jsS"/>
-                            <constraint firstItem="Y15-ov-cV2" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="Q5P-Cy-cYN"/>
+                            <constraint firstItem="Zpq-Mk-E5l" firstAttribute="centerX" secondItem="hfe-73-Qra" secondAttribute="centerX" id="7dK-wl-c99"/>
+                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="top" secondItem="s26-mk-068" secondAttribute="bottom" constant="50" id="9p0-44-ANC"/>
+                            <constraint firstItem="ulH-4t-YeJ" firstAttribute="top" secondItem="Y15-ov-cV2" secondAttribute="bottom" constant="20" id="Fq0-VC-UkV"/>
+                            <constraint firstItem="Y15-ov-cV2" firstAttribute="top" secondItem="GfP-Ck-MCp" secondAttribute="bottom" constant="20" id="LWq-S0-hq5"/>
+                            <constraint firstItem="Y15-ov-cV2" firstAttribute="centerX" secondItem="hfe-73-Qra" secondAttribute="centerX" id="MD0-W2-VNX"/>
+                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="centerX" secondItem="hfe-73-Qra" secondAttribute="centerX" id="MtW-bP-PY1"/>
+                            <constraint firstItem="s26-mk-068" firstAttribute="centerX" secondItem="hfe-73-Qra" secondAttribute="centerX" id="Nhh-GS-sdc"/>
                             <constraint firstItem="2f1-sJ-hs6" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="QKv-tS-TNW"/>
-                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="cKz-FF-koH"/>
-                            <constraint firstItem="mCB-UH-WPE" firstAttribute="centerX" secondItem="mBE-HV-cn7" secondAttribute="centerX" id="gSU-7j-AXO"/>
-                            <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="ulH-4t-YeJ" secondAttribute="trailing" constant="100" id="glf-tN-NMS"/>
-                            <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="GfP-Ck-MCp" secondAttribute="trailing" constant="100" id="hRr-k0-o3l"/>
-                            <constraint firstItem="Y15-ov-cV2" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="i1l-jJ-8c8"/>
-                            <constraint firstItem="GfP-Ck-MCp" firstAttribute="top" secondItem="mCB-UH-WPE" secondAttribute="bottom" constant="72.5" id="m4T-Xu-ug0"/>
-                            <constraint firstItem="ulH-4t-YeJ" firstAttribute="top" secondItem="Y15-ov-cV2" secondAttribute="bottom" constant="20" id="n7v-Cd-5NS"/>
-                            <constraint firstItem="Y15-ov-cV2" firstAttribute="top" secondItem="GfP-Ck-MCp" secondAttribute="bottom" constant="20" id="nCr-Jc-wHj"/>
-                            <constraint firstItem="mBE-HV-cn7" firstAttribute="trailing" secondItem="Y15-ov-cV2" secondAttribute="trailing" constant="100" id="s5P-SF-rt2"/>
-                            <constraint firstItem="ulH-4t-YeJ" firstAttribute="leading" secondItem="mBE-HV-cn7" secondAttribute="leading" constant="100" id="tP7-6f-uCS"/>
-                            <constraint firstItem="Zpq-Mk-E5l" firstAttribute="top" secondItem="ulH-4t-YeJ" secondAttribute="bottom" constant="20" id="ulW-9X-HC6"/>
-                            <constraint firstItem="Y15-ov-cV2" firstAttribute="centerY" secondItem="mBE-HV-cn7" secondAttribute="centerY" id="xyN-Vg-BTE"/>
+                            <constraint firstItem="Y15-ov-cV2" firstAttribute="centerY" secondItem="hfe-73-Qra" secondAttribute="centerY" id="Yun-pf-nPU"/>
+                            <constraint firstItem="Zpq-Mk-E5l" firstAttribute="top" secondItem="ulH-4t-YeJ" secondAttribute="bottom" constant="20" id="ZZQ-aI-RMY"/>
                             <constraint firstItem="2f1-sJ-hs6" firstAttribute="centerY" secondItem="mBE-HV-cn7" secondAttribute="centerY" id="yJK-l1-sxZ"/>
+                            <constraint firstItem="ulH-4t-YeJ" firstAttribute="centerX" secondItem="hfe-73-Qra" secondAttribute="centerX" id="zGA-RH-90G"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mBE-HV-cn7"/>
                     </view>
@@ -396,7 +417,7 @@
                                 <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Level 1-1">
-                                    <color key="titleColor" red="0.3533908966" green="0.70946000649999996" blue="0.30385282600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -584,6 +605,5 @@
         <image name="chevron" width="72" height="72"/>
         <image name="chevronLeft" width="72" height="72"/>
         <image name="frog" width="258" height="265"/>
-        <image name="mainmenu" width="256" height="38"/>
     </resources>
 </document>
