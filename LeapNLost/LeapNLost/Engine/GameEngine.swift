@@ -47,7 +47,7 @@ class GameEngine : BufferManager {
      * Constructor for the game engine.
      * view - Reference to the application view.
      */
-    init(_ view : GLKView) {
+    init(_ view : GLKView, area: Int, level: Int) {
         print("Engine Init");
         // Initialize variables
         self.view = view;
@@ -83,6 +83,9 @@ class GameEngine : BufferManager {
         
         // Setup vertex attribute object attributes
         setupAttributes();
+        
+        // Initialize the first level
+        currentScene.loadLevel(area: area, level: level);
         
         // Load all tiles
         for tile in currentScene.tiles {
@@ -269,8 +272,10 @@ class GameEngine : BufferManager {
             // Set texture
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
-            // Render the object
-            gameObject.model.render();
+            // Only render gameObject if it is in view
+            if(gameObject.model.inView){
+                gameObject.model.render();
+            }
         }
         
         // Call render on physics engine

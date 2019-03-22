@@ -95,6 +95,18 @@ struct Vector3 : CustomStringConvertible {
         let dotProduct = self.dot(other: other);
         return other * (dotProduct / (powf(other.magnitude(), 2)));
     }
+    
+    /**
+     * Interpolates the vector3 between the two given vectors.
+     * original - original vector
+     * target - the target vector to move towards from the original
+     * time - the time ratio between the two vectors. 0 = original 1 = target
+     */
+    static func lerp(original: Vector3, target: Vector3, time: Float) -> Vector3 {
+        let difference: Vector3 = target - original;
+        
+        return original + (difference * time);
+    }
 }
 
 /**

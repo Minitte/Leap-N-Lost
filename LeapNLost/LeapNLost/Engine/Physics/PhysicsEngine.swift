@@ -12,7 +12,7 @@ import GLKit
 class PhysicsEngine {
     
     // Toggle for enabling debug buxes
-    private(set) var debug : Bool = true;
+    private(set) var debug : Bool = false;
     
     // Reference to the collider shader
     private var colliderShader : Shader;
@@ -41,12 +41,12 @@ class PhysicsEngine {
         let collisionDictionary = currentScene.collisionDictionary;
         
         // Iterate through every game object in the player's current row
-        for gameObject in collisionDictionary[Int(player.currentTile!.row)]!{
+        for gameObject in collisionDictionary[Int(player.tileRow)]!{
             
             if((gameObject.collider!.CheckCollision(first: player, second: gameObject))) {
                 
                 if (gameObject.type == "Lilypad") {
-                    player.position = gameObject.position + Vector3(0, 0.5, 0);
+                    //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onLilypad = true;
                     break;
                 } else {
@@ -56,7 +56,7 @@ class PhysicsEngine {
         }
         
         // Check if the player landed on water
-        if (currentScene.tiles[Int(currentScene.player.currentTile!.row) * Level.tilesPerRow].type == "water" && !onLilypad) {
+        if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onLilypad) {
             player.isDead = true;
         }
     }

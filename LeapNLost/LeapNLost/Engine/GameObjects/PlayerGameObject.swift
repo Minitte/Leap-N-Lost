@@ -25,16 +25,21 @@ class PlayerGameObject : GameObject {
     // hopping flag to block other input
     var hopping : Bool = false;
     
+    // preparing a hop
     var prepingHop : Bool = false;
     
     // Flag to represent if the player is dead
     var isDead : Bool;
+    
+    // Flag to represent if the game is over
+    var isGameOver: Bool;
 
     // tile position based on x-z where z is forwards and origin is bottom center
-    //var tilePosition : Vector3 = Vector3.init();
+    var tileRow : Int = 0;
+    var tileCol : Int = 0;
     
-    // The current tile that the player is on, includes lilypads
-    var currentTile : Tile?;
+    // The current target object to home into
+    var targetObject : GameObject?;
     
     // Reference to the current scene
     weak var currentScene : Scene?;
@@ -50,6 +55,7 @@ class PlayerGameObject : GameObject {
      */
     init(withModel model: Model, hopTime ht: Float = 0.5) {
         isDead = false;
+        isGameOver = false;
         
         maxHopTime = ht;
         
@@ -67,15 +73,6 @@ class PlayerGameObject : GameObject {
         
         // add keyframes
         preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.15));
-    }
-    
-    /**
-     * Sets the player's position directly on top of the given tile.
-     * tile - the tile to teleport onto
-     */
-    func teleportToTile(tile : Tile) {
-        currentTile = tile;
-        self.position = tile.position + Vector3(0, 2, 0);
     }
     
     /**
@@ -111,6 +108,17 @@ class PlayerGameObject : GameObject {
             self.scale = preHopAnimation.scale;
         }
         
+        var topOffset : Vector3 = Vector3(0, 2, 0);
+        
+        if (targetObject!.type == "Lilypad") {
+            topOffset = Vector3(0, 0.5, 0);
+        }
+        
+        // stick to the targetObject position
+        if (!hopping) {
+            self.position = targetObject!.position + topOffset;
+        }
+        
         if (hopping) {
             hopTime = hopTime + delta;
             
@@ -120,15 +128,30 @@ class PlayerGameObject : GameObject {
                 limitedDelta = limitedDelta - (maxHopTime - hopTime);
             }
             
+            // hop ratio time 0 - 1
+            var hopTimeRatio : Float = hopTime / maxHopTime;
+            
+            // limit to 1 max
+            if (hopTimeRatio > 1.0) {
+                hopTimeRatio = 1.0;
+            }
+            
+            // interpolate between target object and current
+            let lerpPosition : Vector3 = Vector3.lerp(original: self.position, target: targetObject!.position + topOffset, time: hopTimeRatio);
+            
+            // change x and z
+            position.x = lerpPosition.x;
+            position.z = lerpPosition.z;
+            
+            // update position with velocity
+            position = position + velocity * limitedDelta;
+            
+            // update velocity
             velocity = velocity + (gravity * limitedDelta);
             
-            let scaledVelocity : Vector3 = velocity * limitedDelta;
-            
-            position = position + scaledVelocity;
-            
             if (hopTime >= maxHopTime) {
-                teleportToTile(tile: currentTile!);
-                print("Player Landed on: \(currentTile!.position)");
+                positionToTilePosition();
+                print("Player Landed on: r:\(tileRow) c:\(tileCol)");
                 hopping = false;
             }
         }
@@ -138,90 +161,76 @@ class PlayerGameObject : GameObject {
      * hops forward
      */
     public func hopForward() {
-        let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row + 1, column: currentTile!.column);
+        positionToTilePosition();
+        let targetTile : Tile? = currentScene!.getTile(row: tileRow + 1, column: tileCol);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         
-        // copy velocity for y velocity for hopping
-        velocity = hopVelocity;
+        var targetObjectToJumpTo : GameObject = targetTile!;
         
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
+        // special case for water
+        if (targetTile!.type == "water") {
+            // list of lilypads infront of the frog(player)
+            let lilypads : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
+            
+            // closest distance between the frog(player) and the lily pad
+            var closestDist : Float = 1000000.0;
+            var closest : GameObject?;
+            
+            // find closest
+            for lilypad in lilypads {
+                let dist : Float = (lilypad.position - self.position).magnitude();
+                
+                if (dist < 2.5 && dist < closestDist) {
+                    closestDist = dist;
+                    closest = lilypad;
+                }
+            }
+            
+            // check if there was a closest lilypad
+            if (closest != nil) {
+                targetObjectToJumpTo = closest!;
+            }
+        }
         
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
+        // jump to the target
+        jumpToTarget(target: targetObjectToJumpTo);
         
         rotation = Vector3.init(0, Float.pi, 0);
-        
-        currentTile = targetTile;
-        
-        // TODO: handle special case for targetTile.water == "water"
-        
-        hopTime = 0.0;
-        
-        hopping = true;
     }
     
     /**
      * hops left
      */
     public func hopLeft() {
-        let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row, column: currentTile!.column - 1);
+        positionToTilePosition();
+        let targetTile : Tile? = currentScene!.getTile(row: tileRow, column: tileCol - 1);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         
-        velocity = hopVelocity;
-        
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
-        
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
+        jumpToTarget(target: targetTile!);
         
         rotation = Vector3.init(0, -Float.pi/2.0, 0);
-        
-        currentTile = targetTile;
-        
-        hopTime = 0.0;
-        
-        hopping = true;
     }
     
     /**
      * hops right
      */
     public func hopRight() {
-        let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row, column: currentTile!.column + 1);
+        positionToTilePosition();
+        let targetTile : Tile? = currentScene!.getTile(row: tileRow, column: tileCol + 1);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         
-        velocity = hopVelocity;
-        
-        // the difference between our tile and the next
-        var tileVelocity : Vector3 = targetTile!.position - currentTile!.position;
-        tileVelocity = tileVelocity / maxHopTime;
-        
-        // copy values into velocity
-        velocity.x = tileVelocity.x;
-        velocity.z = tileVelocity.z;
+        jumpToTarget(target: targetTile!);
         
         rotation = Vector3.init(0, Float.pi/2.0, 0);
-        
-        currentTile = targetTile;
-        
-        hopTime = 0.0;
-        
-        hopping = true;
     }
     
     /**
@@ -232,6 +241,39 @@ class PlayerGameObject : GameObject {
         preHopAnimation.stop();
         
         self.scale = preHopAnimation.originalScale;
+    }
+    
+    
+    /**
+     * Sets the player's position directly on top of the given tile.
+     * tile - the tile to teleport onto
+     */
+    func teleportToTarget(target : GameObject) {
+        targetObject = target;
+        self.position = target.position + Vector3(0, 2, 0);
+        positionToTilePosition();
+    }
+    
+    /**
+     * Begin a basic hop to the tile
+     */
+    private func jumpToTarget(target : GameObject) {
+        velocity = hopVelocity;
+            
+        targetObject = target;
+        
+        hopTime = 0.0;
+        
+        hopping = true;
+    }
+    
+    /**
+     * Estimates the tileposition based on world position
+     */
+    private func positionToTilePosition() {
+//        tileCol = Int(position.x);
+        tileCol = Int((self.position.x + Float(Level.tilesPerRow)) / 2.0 - 0.5)
+        tileRow = -Int(position.z / 2.0 - 0.5);
     }
     
 }

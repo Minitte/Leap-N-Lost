@@ -41,6 +41,12 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
+    // Current area
+    var currArea: Int;
+    
+    // Current level
+    var currLevel: Int;
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -52,6 +58,8 @@ class Scene {
         self.gameObjects = [GameObject]();
         self.tiles = [Tile]();
         self.collisionDictionary = [Int:[GameObject]]();
+        self.currArea = -1;
+        self.currLevel = -1;
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
         
@@ -79,7 +87,7 @@ class Scene {
         player.currentScene = self;
         
         // Set player position
-        player.teleportToTile(tile: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
@@ -111,7 +119,10 @@ class Scene {
         default:
             print("ERROR: Invalid level theme");
         }
-        
+      
+        self.currLevel = self.level.info.area;
+        self.currArea = self.level.info.level;
+      
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
             let row = self.level.rows[rowIndex];
@@ -127,6 +138,12 @@ class Scene {
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
         }
+        
+        //Creating a MemoryFragment and appending to gameobjects.
+        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0));
+
+        gameObjects.append(memoryFragment);
+        
     }
     
     /**
@@ -141,9 +158,23 @@ class Scene {
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
+            // Check if gameObject is out of view
+            if(gameObject.position.z > player.position.z + 50 ||
+                gameObject.position.z < player.position.z - 50)
+            {
+                gameObject.model.inView = false;
+            } else {
+                gameObject.model.inView = true;
+            }
+            
             gameObject.update(delta: delta);
         }
         
         mainCamera.updatePosition();
+        
+        if ((player.currentTile?.row)! >= 30) {
+            player.isGameOver = true;
+        }
+        
     }
 }
