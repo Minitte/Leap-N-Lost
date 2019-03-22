@@ -95,13 +95,17 @@ class Texture {
         
         // Load the image onto the texture
         glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, width, height, 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), imageData);
-        glGenerateMipmap(GLenum(GL_TEXTURE_2D))
+        
+        // Only generate mipmaps for textures that are a power of 2
+        if ((width & width-1) == 0 && (height & height-1) == 0) {
+            glGenerateMipmap(GLenum(GL_TEXTURE_2D));
+        }
         
         // Deallocate memory that was used for the image
         free(imageData);
         
         // Unbind the texture for now
-        glBindTexture(GLenum(GL_TEXTURE_2D), 0)
+        glBindTexture(GLenum(GL_TEXTURE_2D), 0);
         
         /*
          let path = Bundle.main.path(forResource: filename, ofType: nil)!

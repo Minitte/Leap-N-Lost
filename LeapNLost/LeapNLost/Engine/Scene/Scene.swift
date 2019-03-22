@@ -111,52 +111,32 @@ class Scene {
         // Parse the level
         let data = self.level.readLevel(withArea: area, withLevel: level);
         self.level = self.level.parseJSON(data: data);
+        var theme : Theme? = nil;
+        
+        switch (self.level.info.theme) {
+        case "City":
+            theme = City();
+        default:
+            print("ERROR: Invalid level theme");
+        }
+      
         self.currLevel = self.level.info.area;
         self.currArea = self.level.info.level;
+      
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
             let row = self.level.rows[rowIndex];
-            var texture : String;
-            var depth : Float;
-            var currentObjects : [GameObject] = [GameObject]();
-            // Spawn things
-            switch(row.type){
-            case "road":
-                depth = -5;
-                texture = "road.jpg";
-                
-                // Create car object
-                let car = Car.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                gameObjects.append(car);
-                currentObjects.append(car)
-                
-                
-            case "water":
-                depth = -5.5;
-                
-                // Create lilypad object
-                let lilypad = Lilypad.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                texture = "water.jpg";
-                gameObjects.append(lilypad);
-                currentObjects.append(lilypad);
-            default:
-                depth = -5;
-                texture = "grass.jpg";
-            }
             
-            collisionDictionary[rowIndex] = currentObjects;
+            // Parse row and tile objects based on the level's theme
+            let rowObjects : [GameObject] = theme!.parseRowObjects(row: row, rowIndex: rowIndex);
+            let rowTiles : [Tile] = theme!.parseRowTiles(row: row, rowIndex: rowIndex);
             
-            // Generate the row's tiles
-            for tileIndex in 0..<Level.tilesPerRow {
-                let tile = Tile(model: Model.CreatePrimitive(primitiveType: Model.Primitive.Cube), row: rowIndex, column: tileIndex);
-                tile.model.loadTexture(fileName: texture);
-                
-                // Set the type
-                tile.type = row.type;
-                
-                tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
-                tiles.append(tile);
-            }
+            // Save to collision dictionary
+            collisionDictionary[rowIndex] = rowObjects;
+            
+            // Append objects and tiles to the level
+            self.gameObjects.append(contentsOf: rowObjects);
+            self.tiles.append(contentsOf: rowTiles);
         }
         
         //Creating a MemoryFragment and appending to gameobjects.
