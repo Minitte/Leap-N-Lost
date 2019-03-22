@@ -26,7 +26,7 @@ class City : Theme {
             gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
         case "water":
             // Create and append lilypad object
-            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -2.5, -Float(rowIndex) * 2), speed: row.speed));
+            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
         case "grass":
             break; // Do nothing
         default:

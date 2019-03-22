@@ -108,7 +108,7 @@ class PlayerGameObject : GameObject {
             self.scale = preHopAnimation.scale;
         }
         
-        var topOffset : Vector3 = Vector3(0, 2, 0);
+        var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
         if (targetObject!.type == "Lilypad") {
             topOffset = Vector3(0, 0.5, 0);
@@ -183,7 +183,7 @@ class PlayerGameObject : GameObject {
             for lilypad in lilypads {
                 let dist : Float = (lilypad.position - self.position).magnitude();
                 
-                if (dist < 2.5 && dist < closestDist) {
+                if (dist < 3 && dist < closestDist) {
                     closestDist = dist;
                     closest = lilypad;
                 }
