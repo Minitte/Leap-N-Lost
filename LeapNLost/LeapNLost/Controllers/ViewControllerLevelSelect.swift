@@ -11,8 +11,8 @@ import UIKit
 class ViewControllerLevelSelect: UIViewController {
     let buttonAudio = Audio();
     let initAudio = Audio();
-    var area: Int = 0;
-    var level: Int = 0;
+    var area: Int = 1;
+    var level: Int = 1;
     var profile = PlayerProfile.init();
     
     // Level buttons
@@ -21,6 +21,9 @@ class ViewControllerLevelSelect: UIViewController {
     @IBOutlet weak var level13Button: UIButton!
     @IBOutlet weak var level14Button: UIButton!
     @IBOutlet weak var level15Button: UIButton!
+    @IBOutlet weak var nextAreaButton: UIButton!
+    @IBOutlet weak var previousAreaButton: UIButton!
+    
     var levelButtons: [UIButton] = [];
     override func viewDidLoad() {
         levelButtons = [level11Button, level12Button, level13Button, level14Button, level15Button];
@@ -30,12 +33,6 @@ class ViewControllerLevelSelect: UIViewController {
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
         initAudio.play(loop: false);
-        for(index, button) in levelButtons.enumerated(){
-            if(profile.reachedLevel >= index+1){
-                button.alpha = 1.0;
-                button.isEnabled = true;
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,11 +43,24 @@ class ViewControllerLevelSelect: UIViewController {
             NSLog("No save file. Making default save...");
             profile.saveToFile();
         }
+        if(profile.reachedArea > area){
+            nextAreaButton.isEnabled = true;
+            nextAreaButton.alpha = 1.0;
+        } else{
+            nextAreaButton.isEnabled = false;
+            nextAreaButton.alpha = 0.5;
+        }
         for(index, button) in levelButtons.enumerated(){
             if(profile.reachedLevel >= index+1){
                 button.alpha = 1.0;
                 button.isEnabled = true;
+            }else{
+                button.alpha = 0.5;
+                button.isEnabled = false;
             }
+        }
+        if(area > 1){
+            previousAreaButton.isHidden = false;
         }
     }
     
@@ -72,7 +82,6 @@ class ViewControllerLevelSelect: UIViewController {
         AudioPlayers.shared.stop(index: 0);
         AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
         AudioPlayers.shared.play(index: 0, loop: true);
-        area = 1;
         level = 1;
     }
     
@@ -81,11 +90,45 @@ class ViewControllerLevelSelect: UIViewController {
         AudioPlayers.shared.stop(index: 0);
         AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
         AudioPlayers.shared.play(index: 0, loop: true);
-        area = 1;
         level = 2;
         performSegue(withIdentifier: "levelSelected", sender: self)
     }
     
+    // For next area
+    @IBAction func nextArea(_ sender: Any) {
+        area += 1;
+        for(index, button) in levelButtons.enumerated(){
+            if(profile.reachedLevel >= index+1){
+                if(index+1 == 5){
+                    button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
+                }else{
+                    button.setTitle("Level " + String(area) + "-" + String(index+1), for: .normal);
+                }
+                button.alpha = 1.0;
+                button.isEnabled = true;
+            }else{
+                button.alpha = 0.5;
+                button.isEnabled = false;
+            }
+        }
+        nextAreaButton.isEnabled = false;
+        nextAreaButton.alpha = 0.5;
+        
+    }
+    
+    @IBAction func previousArea(_ sender: Any) {
+        area -= 1;
+        for(index, button) in levelButtons.enumerated(){
+            if(index+1 == 5){
+                button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
+            }else{
+                button.setTitle("Level " + String(area) + "-" + String(index+1), for: .normal);
+            }
+            button.alpha = 1.0;
+            button.isEnabled = true;
+        }
+        previousAreaButton.isHidden = true;
+    }
     /*
     // MARK: - Navigation
 

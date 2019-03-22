@@ -468,19 +468,33 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
                                 <rect key="frame" x="283" y="297.5" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="0Bv-MJ-UNh"/>
                                     <constraint firstAttribute="height" constant="72" id="7kN-Ff-CHU"/>
                                 </constraints>
                                 <state key="normal" image="chevron"/>
+                                <connections>
+                                    <action selector="nextArea:" destination="ARL-fj-hd5" eventType="touchUpInside" id="lGD-Hi-Nqr"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEVEL SELECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syY-Ea-w0h">
                                 <rect key="frame" x="121.5" y="137" width="132" height="29"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tua-vl-KGZ" userLabel="Previous Area">
+                                <rect key="frame" x="20" y="297.5" width="72" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="Cck-OA-whB"/>
+                                    <constraint firstAttribute="width" constant="72" id="LPY-Cs-kk3"/>
+                                </constraints>
+                                <state key="normal" image="chevronLeft"/>
+                                <connections>
+                                    <action selector="previousArea:" destination="ARL-fj-hd5" eventType="touchUpInside" id="BSb-JY-XIj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -502,11 +516,13 @@
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="g5L-Vm-Gua" secondAttribute="leading" id="YxI-t4-2vK"/>
                             <constraint firstItem="2MY-em-TLY" firstAttribute="bottom" secondItem="1o6-gl-20h" secondAttribute="bottom" id="b6p-om-JeH"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="6XR-CI-vSO" secondAttribute="trailing" id="bMU-Kb-M8s"/>
+                            <constraint firstItem="tua-vl-KGZ" firstAttribute="centerY" secondItem="UqI-lg-hrJ" secondAttribute="centerY" id="dOY-Df-AWQ"/>
                             <constraint firstItem="2MY-em-TLY" firstAttribute="leading" secondItem="UqI-lg-hrJ" secondAttribute="leading" id="dpn-ls-Q1s"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="centerX" secondItem="2MY-em-TLY" secondAttribute="centerX" id="h2U-fx-cH0"/>
                             <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="mLT-lb-bGX" secondAttribute="trailing" constant="20" id="n4o-xl-62V"/>
                             <constraint firstItem="g5L-Vm-Gua" firstAttribute="top" secondItem="6XR-CI-vSO" secondAttribute="bottom" constant="20" id="nyb-Iz-1W8"/>
                             <constraint firstAttribute="trailing" secondItem="2MY-em-TLY" secondAttribute="trailing" id="x1z-VR-Q6V"/>
+                            <constraint firstItem="tua-vl-KGZ" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="20" id="xwF-rf-Pl6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1o6-gl-20h"/>
                     </view>
@@ -516,6 +532,8 @@
                         <outlet property="level13Button" destination="MQv-J5-kjD" id="hY8-7c-Bci"/>
                         <outlet property="level14Button" destination="6XR-CI-vSO" id="B4i-lB-fus"/>
                         <outlet property="level15Button" destination="g5L-Vm-Gua" id="l0y-co-xBW"/>
+                        <outlet property="nextAreaButton" destination="mLT-lb-bGX" id="kk9-aM-PxD"/>
+                        <outlet property="previousAreaButton" destination="tua-vl-KGZ" id="kyE-zx-4iy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AaY-iy-Yc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -564,6 +582,7 @@
         <image name="TapToStart" width="256" height="38"/>
         <image name="cartoon-forest" width="810" height="1440"/>
         <image name="chevron" width="72" height="72"/>
+        <image name="chevronLeft" width="72" height="72"/>
         <image name="frog" width="258" height="265"/>
         <image name="mainmenu" width="256" height="38"/>
     </resources>
