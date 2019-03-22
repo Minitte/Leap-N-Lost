@@ -47,6 +47,7 @@ class Scene {
     // Current level
     var currLevel: Int;
     
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -137,6 +138,12 @@ class Scene {
             // Append objects and tiles to the level
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
+            
+            if(rowIndex % 3 == 0) {
+                let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0));
+                gameObjects.append(coin);
+            }
         }
         
         //Creating a MemoryFragment and appending to gameobjects.

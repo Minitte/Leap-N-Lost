@@ -24,6 +24,9 @@
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
 		6F4F9715224435EE00AA2873 /* MemoryFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F9714224435EE00AA2873 /* MemoryFragment.swift */; };
 		6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F971622443EC700AA2873 /* memoryfragment.jpg */; };
+		6F7F5EEC224482CD00743B56 /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F5EEA224482CD00743B56 /* coin.jpg */; };
+		6F7F5EEF224482F000743B56 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F5EEE224482F000743B56 /* Coin.swift */; };
+		6F7F5EF122448A0B00743B56 /* coin.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F5EF022448A0B00743B56 /* coin.obj */; };
 		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
 		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
 		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
@@ -123,6 +126,9 @@
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
 		6F4F9714224435EE00AA2873 /* MemoryFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryFragment.swift; sourceTree = "<group>"; };
 		6F4F971622443EC700AA2873 /* memoryfragment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = memoryfragment.jpg; sourceTree = "<group>"; };
+		6F7F5EEA224482CD00743B56 /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
+		6F7F5EEE224482F000743B56 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		6F7F5EF022448A0B00743B56 /* coin.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin.obj; sourceTree = "<group>"; };
 		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
 		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
 		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
@@ -267,6 +273,15 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		6F7F5EE92244825500743B56 /* Coin */ = {
+			isa = PBXGroup;
+			children = (
+				6F7F5EF022448A0B00743B56 /* coin.obj */,
+				6F7F5EEA224482CD00743B56 /* coin.jpg */,
+			);
+			path = Coin;
+			sourceTree = "<group>";
+		};
 		6F8665FA2214D86D00E6C75A /* Cutscenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +330,7 @@
 				5707397B221CEDAC00F54DB3 /* Car.swift */,
 				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 				AD6581E422406C8800C2D41D /* Tile.swift */,
+				6F7F5EEE224482F000743B56 /* Coin.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -420,6 +436,7 @@
 		AEB2B13C2239AB0100BE18A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6F7F5EE92244825500743B56 /* Coin */,
 				88E184D1224301E900B59E24 /* memory-fragment */,
 				FEF1711A2214B3D000C94A22 /* Tree */,
 				AEB2B13E2239AB5300BE18A0 /* Cube */,
@@ -691,10 +708,12 @@
 				928D5382221B8EFA002C6F2B /* grass.jpg in Resources */,
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */,
+				6F7F5EF122448A0B00743B56 /* coin.obj in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
+				6F7F5EEC224482CD00743B56 /* coin.jpg in Resources */,
 				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
 				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
@@ -755,6 +774,7 @@
 				88FF863D2222401E00BDEE9F /* Collider.swift in Sources */,
 				AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */,
 				AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */,
+				6F7F5EEF224482F000743B56 /* Coin.swift in Sources */,
 				AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */,
 				925001272220BEA600440C3E /* Texture.swift in Sources */,
 				E2DA6517221BC5460065A150 /* InputManager.swift in Sources */,
@@ -937,7 +957,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5DX2233PCT;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -961,7 +981,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5DX2233PCT;
 				INFOPLIST_FILE = LeapNLost/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
