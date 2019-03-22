@@ -97,6 +97,12 @@
                                 <state key="normal" title="Play">
                                     <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="playButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="UvN-eW-wEh"/>
                                     <segue destination="ARL-fj-hd5" kind="show" id="mah-cH-Nnh"/>
@@ -113,6 +119,12 @@
                                 <state key="normal" title="Settings">
                                     <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="settingsButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="FZg-EA-yPJ"/>
                                 </connections>
@@ -128,6 +140,12 @@
                                 <state key="normal" title="Highscore">
                                     <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="highScoreButton:" destination="50b-uE-2Sx" eventType="touchUpInside" id="03U-Xc-1lZ"/>
                                 </connections>
@@ -143,6 +161,12 @@
                                 <state key="normal" title="Exit">
                                     <color key="titleColor" red="0.3529411764705882" green="0.70980392156862748" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="exitApp:" destination="50b-uE-2Sx" eventType="touchUpInside" id="mn4-as-Hhr"/>
                                 </connections>
