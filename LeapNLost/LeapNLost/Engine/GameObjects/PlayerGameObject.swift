@@ -29,6 +29,9 @@ class PlayerGameObject : GameObject {
     
     // Flag to represent if the player is dead
     var isDead : Bool;
+    
+    // Flag to represent if the game is over
+    var isGameOver: Bool;
 
     // tile position based on x-z where z is forwards and origin is bottom center
     //var tilePosition : Vector3 = Vector3.init();
@@ -50,6 +53,7 @@ class PlayerGameObject : GameObject {
      */
     init(withModel model: Model, hopTime ht: Float = 0.5) {
         isDead = false;
+        isGameOver = false;
         
         maxHopTime = ht;
         
@@ -140,7 +144,7 @@ class PlayerGameObject : GameObject {
     public func hopForward() {
         let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row + 1, column: currentTile!.column);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         
@@ -172,7 +176,7 @@ class PlayerGameObject : GameObject {
     public func hopLeft() {
         let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row, column: currentTile!.column - 1);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         
@@ -201,7 +205,7 @@ class PlayerGameObject : GameObject {
     public func hopRight() {
         let targetTile : Tile? = currentScene!.getTile(row: currentTile!.row, column: currentTile!.column + 1);
         
-        if (targetTile == nil) {
+        if (targetTile == nil || isGameOver || isDead) {
             return;
         }
         

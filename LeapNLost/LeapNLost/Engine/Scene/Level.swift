@@ -49,6 +49,15 @@ struct Level : Decodable {
         
         return level;
     }
+    
+    // Does the level exist?
+    func levelExists(num: Int, num2: Int) -> Bool{
+        if (Bundle.main.path(forResource: "Level_" + String(num) + "-" + String(num2), ofType: "json", inDirectory: "Levels") != nil)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 // Info struct

@@ -32,8 +32,8 @@ class PlayerProfile : Codable {
      */
     init () {
         coins = 0;
-        reachedArea = 0;
-        reachedLevel = 0;
+        reachedArea = 1;
+        reachedLevel = 1;
         lastArea = 0;
         lastLevel = 0;
         scoreboard = Scoreboard.init();
@@ -121,5 +121,38 @@ class PlayerProfile : Codable {
         }
         
         return nil;
+    }
+    
+    // Checks if profile exists
+    public static func profileExists() -> Bool{
+        //this is the file. we will write to and read from it
+        let file = "playerprofile0.sav";
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let fileURL = dir.appendingPathComponent(file);
+            
+            //reading
+            do {
+                // text of the json file
+                let text = try String(contentsOf: fileURL, encoding: .utf8);
+                
+                // convert to json data
+                let profileData : Data? = text.data(using: .utf8);
+                
+                // check if success
+                if (profileData == nil) {
+                    NSLog("No player profile!");
+                    return false;
+                }
+                
+                
+            } catch {
+                NSLog("Error reading a player profile!");
+                return false;
+            }
+        }
+        return true;
+        
     }
 }
