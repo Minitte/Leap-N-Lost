@@ -39,6 +39,9 @@ class GameObject : NSObject {
         }
     };
     
+    // This object's forward vector
+    private(set) var forward : Vector3;
+    
     // This game object's transformation matrix.
     var transformMatrix : GLKMatrix4;
     
@@ -54,6 +57,7 @@ class GameObject : NSObject {
      */
     init(_ model : Model) {
         self.model = model;
+        self.forward = Vector3(0, 0, 1);
         self.transformMatrix = GLKMatrix4Identity;
         
         // Spawn in a random position for testing purposes
@@ -88,5 +92,8 @@ class GameObject : NSObject {
         // Calculate transformation matrix
         transformMatrix = GLKMatrix4Multiply(positionMatrix, rotationMatrix);
         transformMatrix = GLKMatrix4Scale(transformMatrix, scale.x, scale.y, scale.z); // Scaling
+        
+        // Update forward vector
+        forward = Vector3(rotationMatrix.m02, rotationMatrix.m12, rotationMatrix.m22);
     }
 }
