@@ -41,7 +41,7 @@ class PhysicsEngine {
         let collisionDictionary = currentScene.collisionDictionary;
         
         // Iterate through every game object in the player's current row
-        for gameObject in collisionDictionary[Int(player.currentTile!.row)]!{
+        for gameObject in collisionDictionary[Int(player.tileRow)]!{
             
             if((gameObject.collider!.CheckCollision(first: player, second: gameObject))) {
                 
@@ -56,7 +56,7 @@ class PhysicsEngine {
         }
         
         // Check if the player landed on water
-        if (currentScene.tiles[Int(currentScene.player.currentTile!.row) * Level.tilesPerRow].type == "water" && !onLilypad) {
+        if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onLilypad) {
             player.isDead = true;
         }
     }
