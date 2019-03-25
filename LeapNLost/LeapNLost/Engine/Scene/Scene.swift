@@ -69,9 +69,8 @@ class Scene {
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
-        pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
         
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.01, diffuseIntensity: 0.01, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         let camOffset : Vector3 = Vector3(0, -10, -8.5);
@@ -143,6 +142,14 @@ class Scene {
         let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0));
 
         gameObjects.append(memoryFragment);
+        
+        // Add all headlights
+        for gameObject in gameObjects {
+            if (gameObject is Car) {
+                let car : Car = gameObject as! Car;
+                pointLights.append(car.headlight);
+            }
+        }
         
     }
     

@@ -259,6 +259,9 @@ class GameEngine : BufferManager {
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
         glActiveTexture(GLenum(GL_TEXTURE0));
         
+        // Set total number of lights
+        mainShader.setInt(variableName: "u_totalPointLights", value: currentScene.pointLights.count);
+        
         // Apply all point lights to the rendering of this game object
         // TODO - Only apply point lights that are within range
         for i in 0..<currentScene.pointLights.count {

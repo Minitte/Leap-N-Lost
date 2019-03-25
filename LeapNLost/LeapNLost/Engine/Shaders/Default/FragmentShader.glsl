@@ -28,20 +28,26 @@ struct PointLight {
 };
 
 /**
- * Maximum number of point lights that can affect
- * a fragment is defined here.
+ * Maximum number of lights that can affect
+ * a fragment are defined here.
  */
-#define NR_POINT_LIGHTS 1
+#define MAX_POINT_LIGHTS 32
+#define MAX_SPOT_LIGHTS 32
 
 // Lighting variables
-uniform PointLight pointLights[NR_POINT_LIGHTS];
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform DirLight dirLight;
+
+uniform int u_totalPointLights;
+uniform int u_totalSpotLights;
 
 // The texture map
 uniform sampler2D u_Texture;
 uniform sampler2D u_ShadowMap;
 
 uniform lowp vec3 view_Position; // Position of the camera
+
+
 
 // Variables that are passed in from the vertex shader
 varying lowp vec4 frag_Color; // Fragment color
@@ -63,11 +69,11 @@ void main(void) {
     // Calculate total lighting
     lowp vec4 lighting = calcDirLighting(normal, viewDir);
     
-    /*
-    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
-        lighting +=calcPointLighting(pointLights[i], normal, viewDir);
+    
+    for (int i = 0; i < u_totalPointLights; i++) {
+        lighting += calcPointLighting(pointLights[i], normal, viewDir);
     }
-    */
+    
     
     // Calculate shadows
     lowp float shadow = calcShadow();
