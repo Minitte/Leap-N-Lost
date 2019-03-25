@@ -24,6 +24,8 @@ class ViewControllerLevelSelect: UIViewController {
     @IBOutlet weak var nextAreaButton: UIButton!
     @IBOutlet weak var previousAreaButton: UIButton!
     
+    @IBOutlet weak var currentAnimalTextView: UITextView!
+    
     var levelButtons: [UIButton] = [];
     override func viewDidLoad() {
         levelButtons = [level11Button, level12Button, level13Button, level14Button, level15Button];
@@ -128,6 +130,18 @@ class ViewControllerLevelSelect: UIViewController {
             button.isEnabled = true;
         }
         previousAreaButton.isHidden = true;
+    }
+    
+    //
+    // Animal Selection
+    //
+    
+    @IBAction func onPrevAnimalBtnPressed() {
+        currentAnimalTextView.text = "PREV";
+    }
+    
+    @IBAction func onNextAnimalBtnPressed() {
+        currentAnimalTextView.text = "NEXT";
     }
     /*
     // MARK: - Navigation
