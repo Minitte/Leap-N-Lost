@@ -49,6 +49,8 @@
 		AD606C2F220BC75E008B1517 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2C220BC75E008B1517 /* Scoreboard.swift */; };
 		AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */; };
 		AD606C31220BC75E008B1517 /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD606C2E220BC75E008B1517 /* PlayerProfile.swift */; };
+		AD622A5022498DA200CA4A94 /* AnimalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD622A4F22498DA200CA4A94 /* AnimalList.swift */; };
+		AD622A5222498DE100CA4A94 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD622A5122498DE100CA4A94 /* Animal.swift */; };
 		AD6581E522406C8800C2D41D /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6581E422406C8800C2D41D /* Tile.swift */; };
 		AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */; };
 		ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEF384722123BCF000DEFCB /* OBJLoader.swift */; };
@@ -149,6 +151,8 @@
 		AD606C2C220BC75E008B1517 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScoreboard.swift; sourceTree = "<group>"; };
 		AD606C2E220BC75E008B1517 /* PlayerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
+		AD622A4F22498DA200CA4A94 /* AnimalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalList.swift; sourceTree = "<group>"; };
+		AD622A5122498DE100CA4A94 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		AD6581E422406C8800C2D41D /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFollowTarget.swift; sourceTree = "<group>"; };
 		ADEF384722123BCF000DEFCB /* OBJLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 				AD606C2D220BC75E008B1517 /* LevelScoreboard.swift */,
 				AD606C2E220BC75E008B1517 /* PlayerProfile.swift */,
 				AD606C2C220BC75E008B1517 /* Scoreboard.swift */,
+				AD622A4F22498DA200CA4A94 /* AnimalList.swift */,
+				AD622A5122498DE100CA4A94 /* Animal.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -747,6 +753,7 @@
 				57082063220A9DF9000740D3 /* Level.swift in Sources */,
 				E2F0383E223F50B90050B312 /* TransformKeyframe.swift in Sources */,
 				AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */,
+				AD622A5222498DE100CA4A94 /* Animal.swift in Sources */,
 				AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */,
 				88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */,
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
@@ -770,6 +777,7 @@
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 				AEAF40842244323800BBAB72 /* Theme.swift in Sources */,
 				5707397C221CEDAC00F54DB3 /* Car.swift in Sources */,
+				AD622A5022498DA200CA4A94 /* AnimalList.swift in Sources */,
 				57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */,
 				9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */,
 				6F4F9715224435EE00AA2873 /* MemoryFragment.swift in Sources */,
