@@ -9,11 +9,13 @@
 import Foundation
 
 class Animal : Codable {
-    
+    // animal name
     var animalName : String;
     
+    // animal's model file name
     var modelFileName : String;
     
+    // unlocked flag
     var unlocked : Bool;
     
     init(animalName : String, modelFileName : String, unlocked : Bool) {
