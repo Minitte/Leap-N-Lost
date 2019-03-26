@@ -16,8 +16,11 @@ class Car: GameObject{
     // Color of the car
     var color: String;
     
+    var headlight : SpotLight;
+    
     init(pos: Vector3, speed: Float){
         self.speed = speed;
+        self.headlight = SpotLight(color: Vector3(1, 1, 0.8), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(), direction: Vector3(), innerRadius: Float.pi / 3, outerRadius: Float.pi / 3 + 0.2, constant: 1.0, linear: 0.8, quadratic: 0.5);
         color = Car.randomColor();
         super.init(ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + color + ".png", saveToCache: true)!);
         
@@ -64,6 +67,10 @@ class Car: GameObject{
                 model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
         }
+        
+        // Update headlight position and direction
+        headlight.position = position + forward + Vector3(0, -0.5, 0);
+        headlight.direction = forward;
     }
     
     // Pick a random color

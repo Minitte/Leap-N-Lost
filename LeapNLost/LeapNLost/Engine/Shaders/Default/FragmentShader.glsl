@@ -28,14 +28,40 @@ struct PointLight {
 };
 
 /**
- * Maximum number of point lights that can affect
- * a fragment is defined here.
+ * Structure that holds spot light variables.
+ * See SpotLight.swift
  */
-#define NR_POINT_LIGHTS 1
+struct SpotLight {
+    lowp vec3 color;
+    lowp vec3 position;
+    lowp vec3 direction;
+    
+    lowp float innerRadius;
+    lowp float outerRadius;
+    
+    lowp float constant;
+    lowp float linear;
+    lowp float quadratic;
+    
+    lowp float ambientIntensity;
+    lowp float diffuseIntensity;
+    lowp float specularIntensity;
+};
+
+/**
+ * Maximum number of lights that can affect
+ * a fragment are defined here.
+ */
+#define MAX_POINT_LIGHTS 32
+#define MAX_SPOT_LIGHTS 32
 
 // Lighting variables
-uniform PointLight pointLights[NR_POINT_LIGHTS];
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 uniform DirLight dirLight;
+
+uniform int u_totalPointLights;
+uniform int u_totalSpotLights;
 
 // The texture map
 uniform sampler2D u_Texture;
@@ -54,20 +80,25 @@ varying highp vec4 frag_LightSpacePosition; // Shadow map coordinate
 lowp float calcShadow();
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 viewDir);
+lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 viewDir);
 
 void main(void) {
     // Properties
     lowp vec3 normal = normalize(frag_Normal);
     lowp vec3 viewDir = normalize(view_Position - frag_Position);
     
-    // Calculate total lighting
+    // Calculate directional lighting
     lowp vec4 lighting = calcDirLighting(normal, viewDir);
     
-    /*
-    for (int i = 0; i < NR_POINT_LIGHTS; i++) {
-        lighting +=calcPointLighting(pointLights[i], normal, viewDir);
+    // Calculate point lighting
+    for (int i = 0; i < u_totalPointLights; i++) {
+        lighting += calcPointLighting(pointLights[i], normal, viewDir);
     }
-    */
+    
+    // Calculate spot lighting
+    for (int i = 0; i < u_totalSpotLights; i++) {
+        lighting += calcSpotLighting(spotLights[i], normal, viewDir);
+    }
     
     // Calculate shadows
     lowp float shadow = calcShadow();
@@ -140,4 +171,44 @@ lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 v
     
     // Combine results
     return vec4((ambientColor + diffuseColor + specularColor) * attenuation, 1.0);
+}
+
+/**
+ * Calculates and returns the effect that spot lighting will have on this fragment.
+ * pointLight - the point light being calculated
+ * normal - the normal vector of this fragment
+ * viewDir - the viewing direction from the camera to this fragment
+ */
+lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 viewDir) {
+    
+    // Vector from the light source to the fragment
+    lowp vec3 fragDirection = frag_Position - spotLight.position;
+    lowp float fragDistance = length(fragDirection);
+    
+    // Normalize the fragment direction
+    fragDirection = normalize(fragDirection);
+    
+    lowp float attenuation = 1.0 / (spotLight.constant + spotLight.linear * fragDistance +
+                                    spotLight.quadratic * (fragDistance * fragDistance));
+    
+    lowp float theta = acos(dot(fragDirection, spotLight.direction));
+    lowp float epsilon = spotLight.innerRadius - spotLight.outerRadius;
+    lowp float intensity = clamp((theta - spotLight.outerRadius) / epsilon, 0.0, 1.0) * attenuation;
+    
+    // Ambient
+    lowp vec3 ambientColor = spotLight.color * spotLight.ambientIntensity;
+    
+    // Diffuse
+    lowp float diffuseFactor = max(dot(normal, -fragDirection), 0.0);
+    lowp vec3 diffuseColor = spotLight.color * spotLight.diffuseIntensity * diffuseFactor;
+    
+    // Specular
+    lowp vec3 reflection = reflect(fragDirection, normal);
+    lowp float specularFactor = pow(max(dot(reflection, viewDir), 0.0), 16.0);
+    lowp vec3 specularColor = spotLight.color * spotLight.specularIntensity * specularFactor;
+    
+    // Combine results
+    return vec4((ambientColor + diffuseColor + specularColor) * vec3(intensity), 1.0);
+        
+    
 }

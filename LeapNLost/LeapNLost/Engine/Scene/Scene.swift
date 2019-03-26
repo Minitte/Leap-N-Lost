@@ -17,8 +17,11 @@ class Scene {
     // The directional light in the scene, i.e. the sun
     var directionalLight : DirectionalLight;
     
-    // Arrays of all lights in the scene.
+    // Array of all point lights in the scene
     var pointLights : [PointLight];
+    
+    // Array of all spot lights in the scene
+    var spotLights : [SpotLight];
 
     // List of all game objects in the scene
     var gameObjects : [GameObject];
@@ -64,6 +67,8 @@ class Scene {
         self.collisionDictionary = [Int:[GameObject]]();
         self.currArea = -1;
         self.currLevel = -1;
+        self.pointLights = [PointLight]();
+        self.spotLights = [SpotLight]();
         
         let animal : Animal = PlayerProfile.loadFromFile()!.animalList.getCurrentAnimal();
         
@@ -73,11 +78,7 @@ class Scene {
         player.type = "Player";
         gameObjects.append(player);
         
-        // Initialize some test lighting ***
-        pointLights = [PointLight]();
-        pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
-        
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         let camOffset : Vector3 = Vector3(0, -10, -8.5);
@@ -86,14 +87,8 @@ class Scene {
         // For testing purposes ***
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0);
         
-        // Load the first level ***
-        loadLevel(area: 1, level: 1);
-        
         // Have to set current scene here because of swift
         player.currentScene = self;
-        
-        // Set player position
-        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
@@ -157,6 +152,22 @@ class Scene {
 
         gameObjects.append(memoryFragment);
         collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
+
+        // Apply night settings if it's a night level
+        if (self.level.info.night == true) {
+            // Dim the directional light
+            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.0, diffuseIntensity: 0.02, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
+            
+            // Add the theme's night lights.
+            pointLights.append(contentsOf: theme!.setupPointLights(gameObjects: gameObjects));
+            spotLights.append(contentsOf: theme!.setupSpotLights(gameObjects: gameObjects));
+            
+            // Add the player's light
+            pointLights.append(player.nightLight);
+        }
+        
+        // Set player position
+        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**

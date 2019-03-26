@@ -3,6 +3,7 @@
         "area": 1,
         "level": 1,
         "theme": "City",
+        "night": true,
         "desc": ""
     },
     "rows": [

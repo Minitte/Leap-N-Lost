@@ -11,9 +11,15 @@ import Foundation
 class MemoryFragment : GameObject {
     // Game Object velocity
     var velocity : Vector3;
+  
+    // Glow effect for night levels
+    var glow : PointLight;
+  
     var row : Int;
+  
     init(position: Vector3, row : Int) {
         self.velocity = Vector3.init(0,0.3,0);
+        self.glow = PointLight(color: Vector3(0.2, 0.4, 1.0), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1, linear: 1, quadratic: 1);
         self.row = row;
         super.init(ModelCacheManager.loadModel(withMeshName: "Prism", withTextureName: "memoryfragment.jpg", saveToCache: true)!);
         
@@ -31,5 +37,8 @@ class MemoryFragment : GameObject {
         if(Double(exactly:self.rotation.z)! > (2.0 * Double.pi)) {
             rotation.z = 0;
         }
+        
+        // Update glow light position
+        glow.position = position;
     }
 }

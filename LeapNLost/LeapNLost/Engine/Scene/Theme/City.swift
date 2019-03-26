@@ -75,4 +75,41 @@ class City : Theme {
         return tiles;
     }
     
+    func setupPointLights(gameObjects : [GameObject]) -> [PointLight] {
+        var pointLights : [PointLight] = [];
+        
+        for gameObject in gameObjects {
+            
+            // Add lilypad point lights
+            if (gameObject is Lilypad) {
+                let lilypad : Lilypad = gameObject as! Lilypad;
+                pointLights.append(lilypad.glow);
+            }
+            
+            // Add memory fragment point lights
+            if (gameObject is MemoryFragment) {
+                let memoryFragment : MemoryFragment = gameObject as! MemoryFragment;
+                pointLights.append(memoryFragment.glow);
+            }
+        }
+        
+        return pointLights;
+    }
+
+    func setupSpotLights(gameObjects : [GameObject]) -> [SpotLight] {
+        var spotLights : [SpotLight] = [];
+        
+        for gameObject in gameObjects {
+            
+            // Add car headlights
+            if (gameObject is Car) {
+                let car : Car = gameObject as! Car;
+                spotLights.append(car.headlight);
+            }
+        }
+        
+        return spotLights;
+    }
+    
+    
 }

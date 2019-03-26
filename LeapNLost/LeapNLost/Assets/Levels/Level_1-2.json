@@ -2,6 +2,8 @@
     "info": {
         "area": 1,
         "level": 2,
+        "theme": "City",
+        "night": true,
         "desc": ""
     },
     "rows": [

@@ -65,6 +65,7 @@ struct Info : Decodable {
     let area: Int;
     let level: Int;
     let theme: String;
+    let night: Bool;
     let desc: String;
     
     // If you want the fields to be a specific name
@@ -79,6 +80,7 @@ struct Info : Decodable {
         area = -1;
         level = -1;
         theme = "";
+        night = false;
         desc = "";
     }
 }
