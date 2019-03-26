@@ -20,9 +20,9 @@ class AnimalList : Codable {
         
         // ANIMAL LIST
         
-        animals.append(Animal(animalName: "Frog", modelFileName: "frog", unlocked: true));
+        animals.append(Animal(animalName: "Frog", modelFileName: "frog", textureFileName: "frogtex.png", unlocked: true));
         
-        animals.append(Animal(animalName: "Rabbit", modelFileName: "rabbit", unlocked: false));
+        animals.append(Animal(animalName: "Rabbit", modelFileName: "rabbit", textureFileName: "rabbit.png", unlocked: true));
         
         // END OF ANIMAL LIST
         
@@ -65,5 +65,12 @@ class AnimalList : Codable {
         }
         
         return animalIndex;
+    }
+    
+    /**
+     * Returns the current animal from the current index.
+     */
+    func getCurrentAnimal() -> Animal {
+        return animals[animalIndex];
     }
 }

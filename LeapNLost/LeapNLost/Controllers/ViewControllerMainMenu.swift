@@ -20,7 +20,18 @@ class ViewControllerMainMenu: UIViewController {
         initAudio.play(loop: false);
         if(PlayerProfile.profileExists()){
             NSLog("Loading save...");
-            profile = PlayerProfile.loadFromFile()!;
+            
+            let pp : PlayerProfile? = PlayerProfile.loadFromFile();
+            
+            if (pp != nil) {
+                NSLog("Successfully loaded a save file!");
+                profile = pp!;
+            } else {
+                NSLog("Failed to load a save file! Making default save...");
+                profile = PlayerProfile();
+                profile.saveToFile();
+            }
+            
         } else{
             NSLog("No save file. Making default save...");
             profile.saveToFile();

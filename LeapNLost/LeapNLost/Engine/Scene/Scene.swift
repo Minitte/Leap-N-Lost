@@ -61,7 +61,9 @@ class Scene {
         self.currArea = -1;
         self.currLevel = -1;
         
-        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
+        let animal : Animal = PlayerProfile.loadFromFile()!.animalList.getCurrentAnimal();
+        
+        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: animal.modelFileName, withTextureName: animal.textureFileName)!;
         
         player = PlayerGameObject.init(withModel: frogModel);
         player.type = "Player";

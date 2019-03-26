@@ -15,13 +15,17 @@ class Animal : Codable {
     // animal's model file name
     var modelFileName : String;
     
+    var textureFileName : String;
+    
     // unlocked flag
     var unlocked : Bool;
     
-    init(animalName : String, modelFileName : String, unlocked : Bool) {
+    init(animalName : String, modelFileName : String, textureFileName : String, unlocked : Bool) {
         self.animalName = animalName;
         
         self.modelFileName = modelFileName;
+        
+        self.textureFileName = textureFileName;
         
         self.unlocked = unlocked;
     }
