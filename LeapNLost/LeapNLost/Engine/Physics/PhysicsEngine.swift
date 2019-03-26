@@ -51,8 +51,15 @@ class PhysicsEngine {
                     break;
                 }else if(gameObject.type == "Coin") {
                     player.pickup(object: gameObject);
+                    
+                    // increment score by 5
+                    currentScene.score += 5;
+                    print("Picked up a coin");
                 }else if(gameObject.type == "MemoryFragment") {
                     player.pickup(object: gameObject);
+                    
+                    // save score
+                    currentScene.saveScoreToScoreboard();
                     
                 } else {
                     currentScene.player.isDead = true;

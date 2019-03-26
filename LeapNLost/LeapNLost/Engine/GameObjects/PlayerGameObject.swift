@@ -151,6 +151,7 @@ class PlayerGameObject : GameObject {
             
             if (hopTime >= maxHopTime) {
                 positionToTilePosition();
+                
                 print("Player Landed on: r:\(tileRow) c:\(tileCol)");
                 hopping = false;
             }
@@ -199,6 +200,8 @@ class PlayerGameObject : GameObject {
         jumpToTarget(target: targetObjectToJumpTo);
         
         rotation = Vector3.init(0, Float.pi, 0);
+        
+        currentScene?.score += 1;
     }
     
     /**
