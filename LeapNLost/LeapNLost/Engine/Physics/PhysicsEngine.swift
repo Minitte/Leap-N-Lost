@@ -49,6 +49,11 @@ class PhysicsEngine {
                     //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onLilypad = true;
                     break;
+                }else if(gameObject.type == "Coin") {
+                    player.pickup(object: gameObject);
+                }else if(gameObject.type == "MemoryFragment") {
+                    player.pickup(object: gameObject);
+                    
                 } else {
                     currentScene.player.isDead = true;
                 }
