@@ -63,6 +63,8 @@ class Scene {
         self.collisionDictionary = [Int:[GameObject]]();
         self.currArea = -1;
         self.currLevel = -1;
+        self.pointLights = [PointLight]();
+        self.spotLights = [SpotLight]();
         
         let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
         
@@ -70,11 +72,7 @@ class Scene {
         player.type = "Player";
         gameObjects.append(player);
         
-        // Initialize some test lighting ***
-        pointLights = [PointLight]();
-        spotLights = [SpotLight]();
-        
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 0.01, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         let camOffset : Vector3 = Vector3(0, -10, -8.5);
@@ -116,6 +114,8 @@ class Scene {
         self.level = self.level.parseJSON(data: data);
         var theme : Theme? = nil;
         
+        
+        
         switch (self.level.info.theme) {
         case "City":
             theme = City();
@@ -147,13 +147,23 @@ class Scene {
 
         gameObjects.append(memoryFragment);
         
-        // Add all headlights
-        for gameObject in gameObjects {
-            if (gameObject is Car) {
-                let car : Car = gameObject as! Car;
-                spotLights.append(car.headlight);
+        // Apply night settings if it's a night level
+        if (self.level.info.night == true) {
+            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.1, diffuseIntensity: 0.1, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
+            
+            // Add the player's light
+            pointLights.append(player.nightLight);
+            
+            // Add all headlights
+            for gameObject in gameObjects {
+                if (gameObject is Car) {
+                    let car : Car = gameObject as! Car;
+                    spotLights.append(car.headlight);
+                }
             }
         }
+        
+        
         
     }
     

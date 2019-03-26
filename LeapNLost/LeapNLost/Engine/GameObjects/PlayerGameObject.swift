@@ -41,6 +41,8 @@ class PlayerGameObject : GameObject {
     // The current target object to home into
     var targetObject : GameObject?;
     
+    var nightLight : PointLight;
+    
     // Reference to the current scene
     weak var currentScene : Scene?;
 
@@ -49,14 +51,14 @@ class PlayerGameObject : GameObject {
     
     // Time to check hop time
     private var hopTime : Float = 0.0;
-    
+
     /**
      * Inits the player object with a model
      */
     init(withModel model: Model, hopTime ht: Float = 0.5) {
         isDead = false;
         isGameOver = false;
-        
+        nightLight = PointLight(color: Vector3(1, 1, 1), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1.0, linear: 0.5, quadratic: 0.3);
         maxHopTime = ht;
         
         super.init(model);
@@ -155,6 +157,9 @@ class PlayerGameObject : GameObject {
                 hopping = false;
             }
         }
+        
+        // Update night light position to current player position
+        nightLight.position = position;
     }
     
     /**

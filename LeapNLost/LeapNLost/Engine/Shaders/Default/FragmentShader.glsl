@@ -184,26 +184,24 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
     // Normalize the fragment direction
     fragDirection = normalize(fragDirection);
     
-    lowp float innerTheta = acos(dot(fragDirection, spotLight.direction));
+    lowp float theta = acos(dot(fragDirection, spotLight.direction));
+    lowp float epsilon = spotLight.innerRadius - spotLight.outerRadius;
+    lowp float intensity = clamp((theta - spotLight.outerRadius) / epsilon, 0.0, 1.0) * (0.5 / fragDistance);
     
-    // Dont light objects that are not in the spotlight radius or are too far away
-    if (innerTheta < spotLight.innerRadius && fragDistance < 4.0) {
-        // Ambient
-        lowp vec3 ambientColor = spotLight.color * spotLight.ambientIntensity;
+    // Ambient
+    lowp vec3 ambientColor = spotLight.color * spotLight.ambientIntensity;
+    
+    // Diffuse
+    lowp float diffuseFactor = max(dot(normal, -fragDirection), 0.0);
+    lowp vec3 diffuseColor = spotLight.color * spotLight.diffuseIntensity * diffuseFactor;
+    
+    // Specular
+    lowp vec3 reflection = reflect(fragDirection, normal);
+    lowp float specularFactor = pow(max(dot(reflection, viewDir), 0.0), 16.0);
+    lowp vec3 specularColor = spotLight.color * spotLight.specularIntensity * specularFactor;
+    
+    // Combine results
+    return vec4((ambientColor + diffuseColor + specularColor) * vec3(intensity), 1.0);
         
-        // Diffuse
-        lowp float diffuseFactor = max(dot(normal, -fragDirection), 0.0);
-        lowp vec3 diffuseColor = spotLight.color * spotLight.diffuseIntensity * diffuseFactor;
-        
-        // Specular
-        lowp vec3 reflection = reflect(fragDirection, normal);
-        lowp float specularFactor = pow(max(dot(reflection, viewDir), 0.0), 16.0);
-        lowp vec3 specularColor = spotLight.color * spotLight.specularIntensity * specularFactor;
-        
-        // Combine results
-        return vec4((ambientColor + diffuseColor + specularColor), 1.0);
-        
-    } else {
-        return vec4(0.0); // Not in spotlight
-    }
+    
 }
