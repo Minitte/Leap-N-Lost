@@ -114,8 +114,6 @@ class Scene {
         self.level = self.level.parseJSON(data: data);
         var theme : Theme? = nil;
         
-        
-        
         switch (self.level.info.theme) {
         case "City":
             theme = City();
@@ -149,22 +147,16 @@ class Scene {
         
         // Apply night settings if it's a night level
         if (self.level.info.night == true) {
+            // Dim the directional light
             directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.1, diffuseIntensity: 0.1, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
+            
+            // Add the theme's night lights.
+            pointLights.append(contentsOf: theme!.setupPointLights(gameObjects: gameObjects));
+            spotLights.append(contentsOf: theme!.setupSpotLights(gameObjects: gameObjects));
             
             // Add the player's light
             pointLights.append(player.nightLight);
-            
-            // Add all headlights
-            for gameObject in gameObjects {
-                if (gameObject is Car) {
-                    let car : Car = gameObject as! Car;
-                    spotLights.append(car.headlight);
-                }
-            }
         }
-        
-        
-        
     }
     
     /**

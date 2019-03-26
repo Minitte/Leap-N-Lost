@@ -12,9 +12,12 @@ class Lilypad: GameObject{
     // Game object speed
     var speed : Float;
     
+    // Glow effect for night levels
+    var glow : PointLight;
+    
     init(pos: Vector3, speed: Float){
         self.speed = speed;
-        self.speed *= 2; // ***
+        self.glow = PointLight(color: Vector3(0.2, 1, 0.2), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1, linear: 1, quadratic: 1);
         super.init(ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true)!);
         
         // Spawn in a random position for testing purposes
@@ -45,5 +48,8 @@ class Lilypad: GameObject{
                 position.x = Float(Level.tilesPerRow);
             }
         }
+        
+        // Update glow light position
+        glow.position = position;
     }
 }
