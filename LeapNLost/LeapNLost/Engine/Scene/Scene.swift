@@ -88,7 +88,7 @@ class Scene {
         player.currentScene = self;
         
         // Set player position
-        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+        player.teleportToTarget(target: getTile(row: 28, column: Level.tilesPerRow / 2)!);
     }
     
     /**
@@ -141,16 +141,17 @@ class Scene {
             
             if(rowIndex % 3 == 0) {
                 let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
-                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0));
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
                 gameObjects.append(coin);
+                collisionDictionary[rowIndex]!.append(coin);
             }
         }
         
         //Creating a MemoryFragment and appending to gameobjects.
-        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0));
+        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
 
         gameObjects.append(memoryFragment);
-        
+        collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
     }
     
     /**

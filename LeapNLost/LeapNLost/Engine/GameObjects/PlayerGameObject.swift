@@ -276,4 +276,26 @@ class PlayerGameObject : GameObject {
         tileRow = -Int(position.z / 2.0 - 0.5);
     }
     
+    /**
+     * Picking up coins and removing it from the scene.
+     */
+    func pickup(object: GameObject) {
+        //For loop checking list of all gameobject for this object.
+        //Detect if yes.
+        //Remove from list.
+        let index = currentScene!.gameObjects.firstIndex(of: object)!;
+        currentScene!.gameObjects.remove(at: index);
+        
+        //Remove the collider in the collision dictionairy.
+        if object is Coin {
+            let rowIndex : Int = (object as! Coin).row;
+            
+            currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
+        }else if object is MemoryFragment {
+            let rowIndex : Int = (object as! MemoryFragment).row;
+            currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
+        }
+        
+    }
+    
 }
