@@ -24,6 +24,8 @@ class ViewControllerLevelSelect: UIViewController {
     @IBOutlet weak var nextAreaButton: UIButton!
     @IBOutlet weak var previousAreaButton: UIButton!
     
+    @IBOutlet weak var currentAnimalTextView: UITextView!
+    
     var levelButtons: [UIButton] = [];
     override func viewDidLoad() {
         levelButtons = [level11Button, level12Button, level13Button, level14Button, level15Button];
@@ -43,6 +45,9 @@ class ViewControllerLevelSelect: UIViewController {
             NSLog("No save file. Making default save...");
             profile.saveToFile();
         }
+        
+        currentAnimalTextView.text = profile.animalList.getCurrentAnimal().animalName;
+        
         if(profile.reachedArea > area){
             nextAreaButton.isEnabled = true;
             nextAreaButton.alpha = 1.0;
@@ -50,6 +55,7 @@ class ViewControllerLevelSelect: UIViewController {
             nextAreaButton.isEnabled = false;
             nextAreaButton.alpha = 0.5;
         }
+        
         for(index, button) in levelButtons.enumerated(){
             if(profile.reachedLevel >= index+1){
                 button.alpha = 1.0;
@@ -129,6 +135,31 @@ class ViewControllerLevelSelect: UIViewController {
         }
         previousAreaButton.isHidden = true;
     }
+    
+    //
+    // Animal Selection
+    //
+    
+    @IBAction func onPrevAnimalBtnPressed() {
+        profile.animalList.prevUnlockedAnimal();
+        
+        profile.saveToFile();
+        
+        let animal : Animal = profile.animalList.getCurrentAnimal();
+        
+        currentAnimalTextView.text = animal.animalName;
+    }
+    
+    @IBAction func onNextAnimalBtnPressed() {
+        profile.animalList.nextUnlockedAnimal();
+        
+        profile.saveToFile();
+        
+        let animal : Animal = profile.animalList.getCurrentAnimal();
+        
+        currentAnimalTextView.text = animal.animalName;
+    }
+    
     /*
     // MARK: - Navigation
 

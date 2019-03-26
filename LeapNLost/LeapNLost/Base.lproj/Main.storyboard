@@ -513,6 +513,54 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEh-rm-vN0">
+                                <rect key="frame" x="40" y="557" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1iM-eW-jnJ"/>
+                                    <constraint firstAttribute="width" constant="120" id="ivf-I4-yq0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Prev Animal">
+                                    <color key="titleColor" red="0.35294117650000001" green="0.70980392160000005" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="DV4-KU-bdS"/>
+                                    <action selector="onPrevAnimalBtnPressed" destination="ARL-fj-hd5" eventType="touchUpInside" id="rPZ-a9-JSA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJU-Dr-DAb">
+                                <rect key="frame" x="215" y="557" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.61176470589999998" green="0.99215686270000003" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0at-Gs-l4G"/>
+                                    <constraint firstAttribute="width" constant="120" id="9Pb-Nx-1uW"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="9zx-QH-Myk"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="LBa-fB-cOs"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="UaJ-JY-Gp3"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="t9a-5B-i6w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Next Animal">
+                                    <color key="titleColor" red="0.35294117650000001" green="0.70980392160000005" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="hLb-Kj-anE"/>
+                                    <action selector="onNextAnimalBtnPressed" destination="ARL-fj-hd5" eventType="touchUpInside" id="iIi-d9-ppe"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
                                 <rect key="frame" x="283" y="297.5" width="72" height="72"/>
                                 <constraints>
@@ -540,6 +588,15 @@
                                     <action selector="previousArea:" destination="ARL-fj-hd5" eventType="touchUpInside" id="BSb-JY-XIj"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="&lt;ANIMAL&gt;" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpL-JT-XVR">
+                                <rect key="frame" x="40" y="519" width="295" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="L1b-AH-6Fg"/>
+                                    <constraint firstAttribute="height" constant="30" id="afm-XE-Hbt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -554,24 +611,33 @@
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="6XR-CI-vSO" secondAttribute="leading" id="ChN-2e-FtU"/>
                             <constraint firstItem="Phr-nc-aVw" firstAttribute="top" secondItem="syY-Ea-w0h" secondAttribute="bottom" constant="50" id="E8x-cH-ltF"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="syY-Ea-w0h" secondAttribute="leading" id="EXm-t1-Rd5"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="bottom" secondItem="tEh-rm-vN0" secondAttribute="bottom" constant="80" id="HhX-cK-nWw"/>
                             <constraint firstItem="GOD-Pv-qaV" firstAttribute="top" secondItem="Phr-nc-aVw" secondAttribute="bottom" constant="20" id="ICm-Pg-a4X"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="Phr-nc-aVw" secondAttribute="trailing" id="KZa-c0-rrC"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="g5L-Vm-Gua" secondAttribute="trailing" id="MNZ-4G-fHE"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="bottom" secondItem="oJU-Dr-DAb" secondAttribute="bottom" constant="80" id="MW6-VB-hrv"/>
+                            <constraint firstItem="UpL-JT-XVR" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="40" id="QKl-L0-edu"/>
+                            <constraint firstItem="tEh-rm-vN0" firstAttribute="top" secondItem="UpL-JT-XVR" secondAttribute="bottom" constant="8" id="VGg-Z6-lV4"/>
+                            <constraint firstItem="tEh-rm-vN0" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="40" id="Ycj-xf-28x"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="GOD-Pv-qaV" secondAttribute="leading" id="Yik-L8-SXE"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="g5L-Vm-Gua" secondAttribute="leading" id="YxI-t4-2vK"/>
                             <constraint firstItem="2MY-em-TLY" firstAttribute="bottom" secondItem="1o6-gl-20h" secondAttribute="bottom" id="b6p-om-JeH"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="6XR-CI-vSO" secondAttribute="trailing" id="bMU-Kb-M8s"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="UpL-JT-XVR" secondAttribute="trailing" constant="40" id="by8-Ck-ZGC"/>
                             <constraint firstItem="tua-vl-KGZ" firstAttribute="centerY" secondItem="UqI-lg-hrJ" secondAttribute="centerY" id="dOY-Df-AWQ"/>
                             <constraint firstItem="2MY-em-TLY" firstAttribute="leading" secondItem="UqI-lg-hrJ" secondAttribute="leading" id="dpn-ls-Q1s"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="centerX" secondItem="2MY-em-TLY" secondAttribute="centerX" id="h2U-fx-cH0"/>
                             <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="mLT-lb-bGX" secondAttribute="trailing" constant="20" id="n4o-xl-62V"/>
                             <constraint firstItem="g5L-Vm-Gua" firstAttribute="top" secondItem="6XR-CI-vSO" secondAttribute="bottom" constant="20" id="nyb-Iz-1W8"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="oJU-Dr-DAb" secondAttribute="trailing" constant="40" id="r3R-yK-RsX"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="oJU-Dr-DAb" secondAttribute="trailing" constant="40" id="ua0-qR-zC1"/>
                             <constraint firstAttribute="trailing" secondItem="2MY-em-TLY" secondAttribute="trailing" id="x1z-VR-Q6V"/>
                             <constraint firstItem="tua-vl-KGZ" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="20" id="xwF-rf-Pl6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1o6-gl-20h"/>
                     </view>
                     <connections>
+                        <outlet property="currentAnimalTextView" destination="UpL-JT-XVR" id="pH0-Px-ZJF"/>
                         <outlet property="level11Button" destination="Phr-nc-aVw" id="v0b-jH-kh7"/>
                         <outlet property="level12Button" destination="GOD-Pv-qaV" id="GBp-XT-taO"/>
                         <outlet property="level13Button" destination="MQv-J5-kjD" id="hY8-7c-Bci"/>
@@ -583,7 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AaY-iy-Yc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1414" y="723"/>
+            <point key="canvasLocation" x="1413.5999999999999" y="722.78860569715152"/>
         </scene>
         <!--View Controller Cutscene-->
         <scene sceneID="gR7-g2-UZO">
@@ -625,9 +691,9 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="810" height="1440"/>
-        <image name="chevron" width="72" height="72"/>
-        <image name="chevronLeft" width="72" height="72"/>
+        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="chevron" width="96" height="96"/>
+        <image name="chevronLeft" width="96" height="96"/>
         <image name="frog" width="258" height="265"/>
     </resources>
 </document>
