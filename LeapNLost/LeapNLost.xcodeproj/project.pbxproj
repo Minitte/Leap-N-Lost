@@ -67,6 +67,11 @@
 		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
 		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
+		AE63DE87224AEFC40025B1F6 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE86224AEFC40025B1F6 /* Log.swift */; };
+		AE63DE8C224AF0BE0025B1F6 /* log.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE8A224AF0BE0025B1F6 /* log.obj */; };
+		AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE8B224AF0BE0025B1F6 /* log.png */; };
+		AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE91224AF1CB0025B1F6 /* rock.obj */; };
+		AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE92224AF1CB0025B1F6 /* rock.png */; };
 		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
@@ -161,7 +166,7 @@
 		AD622A4F22498DA200CA4A94 /* AnimalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalList.swift; sourceTree = "<group>"; };
 		AD622A5122498DE100CA4A94 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		AD622A5D2249B2B400CA4A94 /* rabbit.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rabbit.mtl; sourceTree = "<group>"; };
-		AD622A5E2249B2B400CA4A94 /* rabbit.obj */ = {isa = PBXFileReference; lastKnownFileType = file; path = rabbit.obj; sourceTree = "<group>"; };
+		AD622A5E2249B2B400CA4A94 /* rabbit.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = rabbit.obj; sourceTree = "<group>"; };
 		AD622A5F2249B2B400CA4A94 /* rabbit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rabbit.png; sourceTree = "<group>"; };
 		AD6581E422406C8800C2D41D /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFollowTarget.swift; sourceTree = "<group>"; };
@@ -174,6 +179,11 @@
 		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
 		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
+		AE63DE86224AEFC40025B1F6 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		AE63DE8A224AF0BE0025B1F6 /* log.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.obj; sourceTree = "<group>"; };
+		AE63DE8B224AF0BE0025B1F6 /* log.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log.png; sourceTree = "<group>"; };
+		AE63DE91224AF1CB0025B1F6 /* rock.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rock.obj; sourceTree = "<group>"; };
+		AE63DE92224AF1CB0025B1F6 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
@@ -341,6 +351,7 @@
 				5707397B221CEDAC00F54DB3 /* Car.swift */,
 				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 				AD6581E422406C8800C2D41D /* Tile.swift */,
+				AE63DE86224AEFC40025B1F6 /* Log.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -422,6 +433,24 @@
 			path = Shadows;
 			sourceTree = "<group>";
 		};
+		AE63DE89224AF03A0025B1F6 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				AE63DE8A224AF0BE0025B1F6 /* log.obj */,
+				AE63DE8B224AF0BE0025B1F6 /* log.png */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		AE63DE90224AF1C30025B1F6 /* Rock */ = {
+			isa = PBXGroup;
+			children = (
+				AE63DE91224AF1CB0025B1F6 /* rock.obj */,
+				AE63DE92224AF1CB0025B1F6 /* rock.png */,
+			);
+			path = Rock;
+			sourceTree = "<group>";
+		};
 		AE84400D220BB5E6000891C0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +487,8 @@
 		AEB2B13C2239AB0100BE18A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AE63DE90224AF1C30025B1F6 /* Rock */,
+				AE63DE89224AF03A0025B1F6 /* Log */,
 				AD622A5C2249B29F00CA4A94 /* Rabbit */,
 				6FCCE49722498D1C001BD702 /* Coin */,
 				88E184D1224301E900B59E24 /* memory-fragment */,
@@ -719,11 +750,13 @@
 				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
 				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
+				AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */,
 				AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */,
 				57E97AEC2212CBA200A10BC9 /* Audio in Resources */,
 				6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */,
 				5708206D220AE502000740D3 /* Levels in Resources */,
 				928D5383221B8EFA002C6F2B /* road.jpg in Resources */,
+				AE63DE8C224AF0BE0025B1F6 /* log.obj in Resources */,
 				ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AD622A602249B2B400CA4A94 /* rabbit.mtl in Resources */,
@@ -741,6 +774,7 @@
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
+				AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
 				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
 				AD08FB242214CFED00C0B689 /* default-texture.png in Resources */,
@@ -750,6 +784,7 @@
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 				FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */,
+				AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */,
 				88E184D32243031E00B59E24 /* Prism.obj in Resources */,
 				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
 				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,
@@ -778,6 +813,7 @@
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
 				AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */,
+				AE63DE87224AEFC40025B1F6 /* Log.swift in Sources */,
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
 				92372E75221033A4001F5139 /* PointLight.swift in Sources */,
 				5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */,
