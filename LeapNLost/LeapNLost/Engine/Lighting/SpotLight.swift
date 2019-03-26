@@ -1,5 +1,5 @@
 //
-//  Spotlight.swift
+//  SpotLight.swift
 //  LeapNLost
 //
 //  Created by Anthony Wong on 2019-02-10.
@@ -11,7 +11,7 @@ import Foundation
 /**
  * Class for lights that have a direction but limited radius.
  */
-class Spotlight : Light {
+class SpotLight : Light {
     
     // Position of the spotlight
     var position : Vector3;
@@ -59,9 +59,17 @@ class Spotlight : Light {
     }
     
     /**
-     * TODO
+     * Renders this spot light by setting all the spot
+     * light variables in the shaders.
      */
-    func render(shader: Shader) {
-        preconditionFailure("Spotlights are currently not implemented");
+    func render(shader: Shader, lightNumber : Int) {
+        shader.setVector(variableName: "spotLights[" + String(lightNumber) + "].color", value: color);
+        shader.setVector(variableName: "spotLights[" + String(lightNumber) + "].position", value: position);
+        shader.setVector(variableName: "spotLights[" + String(lightNumber) + "].direction", value: direction);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].innerRadius", value: innerRadius);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].outerRadius", value: outerRadius);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].ambientIntensity", value: ambientIntensity);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].diffuseIntensity", value: diffuseIntensity);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].specularIntensity", value: specularIntensity);
     }
 }

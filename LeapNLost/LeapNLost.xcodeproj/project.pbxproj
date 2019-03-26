@@ -34,7 +34,7 @@
 		92372E71220F92EC001F5139 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E70220F92EC001F5139 /* Light.swift */; };
 		92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7222102F44001F5139 /* DirectionalLight.swift */; };
 		92372E75221033A4001F5139 /* PointLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E74221033A4001F5139 /* PointLight.swift */; };
-		92372E7722103CE8001F5139 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7622103CE7001F5139 /* Spotlight.swift */; };
+		92372E7722103CE8001F5139 /* SpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7622103CE7001F5139 /* SpotLight.swift */; };
 		92372E7922111C04001F5139 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92372E7822111C04001F5139 /* Shader.swift */; };
 		925001252220158600440C3E /* BufferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925001242220158600440C3E /* BufferManager.swift */; };
 		925001272220BEA600440C3E /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925001262220BEA600440C3E /* Texture.swift */; };
@@ -134,7 +134,7 @@
 		92372E70220F92EC001F5139 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		92372E7222102F44001F5139 /* DirectionalLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalLight.swift; sourceTree = "<group>"; };
 		92372E74221033A4001F5139 /* PointLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointLight.swift; sourceTree = "<group>"; };
-		92372E7622103CE7001F5139 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
+		92372E7622103CE7001F5139 /* SpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotLight.swift; sourceTree = "<group>"; };
 		92372E7822111C04001F5139 /* Shader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		925001242220158600440C3E /* BufferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferManager.swift; sourceTree = "<group>"; };
 		925001262220BEA600440C3E /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 				92372E70220F92EC001F5139 /* Light.swift */,
 				92372E7222102F44001F5139 /* DirectionalLight.swift */,
 				92372E74221033A4001F5139 /* PointLight.swift */,
-				92372E7622103CE7001F5139 /* Spotlight.swift */,
+				92372E7622103CE7001F5139 /* SpotLight.swift */,
 			);
 			path = Lighting;
 			sourceTree = "<group>";
@@ -752,7 +752,7 @@
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,
 				E2F0383C223F4E5B0050B312 /* TransformAnimation.swift in Sources */,
 				AEF3658A220B6C1C00ED9827 /* Vertex.swift in Sources */,
-				92372E7722103CE8001F5139 /* Spotlight.swift in Sources */,
+				92372E7722103CE8001F5139 /* SpotLight.swift in Sources */,
 				925001252220158600440C3E /* BufferManager.swift in Sources */,
 				AD177D412214C40E00EC72C5 /* ModelCacheManager.swift in Sources */,
 				AEF3659B220B8B4700ED9827 /* Cube.swift in Sources */,
@@ -948,7 +948,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.Jma.LeapNLost;
+				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -972,7 +972,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.Jma.LeapNLost;
+				PRODUCT_BUNDLE_IDENTIFIER = bcit.redlights.LeapNLost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

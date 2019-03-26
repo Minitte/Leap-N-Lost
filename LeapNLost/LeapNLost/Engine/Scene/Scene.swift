@@ -17,8 +17,11 @@ class Scene {
     // The directional light in the scene, i.e. the sun
     var directionalLight : DirectionalLight;
     
-    // Arrays of all lights in the scene.
+    // Array of all point lights in the scene
     var pointLights : [PointLight];
+    
+    // Array of all spot lights in the scene
+    var spotLights : [SpotLight];
 
     // List of all game objects in the scene
     var gameObjects : [GameObject];
@@ -69,8 +72,9 @@ class Scene {
         
         // Initialize some test lighting ***
         pointLights = [PointLight]();
+        spotLights = [SpotLight]();
         
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.01, diffuseIntensity: 0.01, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 0.01, specularIntensity: 0.1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         let camOffset : Vector3 = Vector3(0, -10, -8.5);
@@ -147,7 +151,7 @@ class Scene {
         for gameObject in gameObjects {
             if (gameObject is Car) {
                 let car : Car = gameObject as! Car;
-                pointLights.append(car.headlight);
+                spotLights.append(car.headlight);
             }
         }
         

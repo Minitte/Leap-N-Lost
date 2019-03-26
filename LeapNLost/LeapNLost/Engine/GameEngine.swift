@@ -261,11 +261,18 @@ class GameEngine : BufferManager {
         
         // Set total number of lights
         mainShader.setInt(variableName: "u_totalPointLights", value: currentScene.pointLights.count);
+        mainShader.setInt(variableName: "u_totalSpotLights", value: currentScene.spotLights.count);
         
         // Apply all point lights to the rendering of this game object
         // TODO - Only apply point lights that are within range
         for i in 0..<currentScene.pointLights.count {
             currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+        }
+        
+        // Apply all spot lights to the rendering of this game object
+        // TODO - Only apply spot lights that are within range
+        for i in 0..<currentScene.spotLights.count {
+            currentScene.spotLights[i].render(shader: mainShader, lightNumber: i);
         }
         
         // Apply directional light
