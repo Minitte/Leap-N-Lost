@@ -81,6 +81,7 @@ class GameEngine : BufferManager {
         setupAttributes();
         
         // Load the scene
+        currentScene.loadLevel(area: area, level: level);
         loadScene(scene: currentScene);
     }
     

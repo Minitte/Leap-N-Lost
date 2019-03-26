@@ -81,14 +81,8 @@ class Scene {
         // For testing purposes ***
         mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
         
-        // Load the first level ***
-        loadLevel(area: 1, level: 1);
-        
         // Have to set current scene here because of swift
         player.currentScene = self;
-        
-        // Set player position
-        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
@@ -157,6 +151,9 @@ class Scene {
             // Add the player's light
             pointLights.append(player.nightLight);
         }
+        
+        // Set player position
+        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
