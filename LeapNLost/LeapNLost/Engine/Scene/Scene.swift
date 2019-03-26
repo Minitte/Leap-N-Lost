@@ -50,6 +50,10 @@ class Scene {
     // Current level
     var currLevel: Int;
     
+    // The current score
+    var score : Int = 0;
+    
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
@@ -66,7 +70,9 @@ class Scene {
         self.pointLights = [PointLight]();
         self.spotLights = [SpotLight]();
         
-        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
+        let animal : Animal = PlayerProfile.loadFromFile()!.animalList.getCurrentAnimal();
+        
+        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: animal.modelFileName, withTextureName: animal.textureFileName)!;
         
         player = PlayerGameObject.init(withModel: frogModel);
         player.type = "Player";
@@ -79,7 +85,7 @@ class Scene {
         mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: player);
         
         // For testing purposes ***
-        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
+        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0);
         
         // Have to set current scene here because of swift
         player.currentScene = self;
@@ -132,13 +138,21 @@ class Scene {
             // Append objects and tiles to the level
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
+            
+            if(rowIndex % 3 == 0) {
+                let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
+                gameObjects.append(coin);
+                collisionDictionary[rowIndex]!.append(coin);
+            }
         }
         
         //Creating a MemoryFragment and appending to gameobjects.
-        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0));
+        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
 
         gameObjects.append(memoryFragment);
-        
+        collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
+
         // Apply night settings if it's a night level
         if (self.level.info.night == true) {
             // Dim the directional light
@@ -186,5 +200,15 @@ class Scene {
             player.isGameOver = true;
         }
         
+    }
+    
+    func saveScoreToScoreboard() {
+        let pp : PlayerProfile = PlayerProfile.loadFromFile()!;
+        
+        pp.scoreboard.getLevelScoreboard(forWorld: currArea - 1, forLevel: currLevel - 1).tryInsertScore(withScore: score);
+        
+        pp.saveToFile();
+        
+        print("End of level, saving to scoreboard if possible \(score)");
     }
 }

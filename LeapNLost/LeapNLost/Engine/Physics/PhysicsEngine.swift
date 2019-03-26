@@ -12,7 +12,7 @@ import GLKit
 class PhysicsEngine {
     
     // Toggle for enabling debug buxes
-    private(set) var debug : Bool = false;
+    private(set) var debug : Bool = true;
     
     // Reference to the collider shader
     private var colliderShader : Shader;
@@ -43,14 +43,28 @@ class PhysicsEngine {
         // Iterate through every game object in the player's current row
         for gameObject in collisionDictionary[Int(player.tileRow)]!{
             
-            if((gameObject.collider!.CheckCollision(first: player, second: gameObject))) {
+            if ((gameObject.collider!.CheckCollision(first: player, second: gameObject))) {
+                
+                if (gameObject.type == "Coin") {
+                    player.pickup(object: gameObject);
+                    
+                    // increment score by 5
+                    currentScene.score += 5;
+                    print("Picked up a coin");
+                } else if(gameObject.type == "MemoryFragment") {
+                    player.pickup(object: gameObject);
+                    
+                    // save score
+                    currentScene.saveScoreToScoreboard();
+                }
                 
                 if (gameObject.type == "Lilypad") {
                     //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onLilypad = true;
-                    break;
-                } else {
-                    currentScene.player.isDead = true;
+                }
+                
+                if (gameObject.type == "Car") {
+                    player.isDead = true;
                 }
             }
         }
