@@ -182,6 +182,10 @@ class PlayerGameObject : GameObject {
             
             // find closest
             for lilypad in lilypads {
+                if (lilypad.type != "Lilypad") {
+                    continue;
+                }
+                
                 let dist : Float = (lilypad.position - self.position).magnitude();
                 
                 if (dist < 3 && dist < closestDist) {
