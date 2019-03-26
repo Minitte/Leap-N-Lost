@@ -47,6 +47,9 @@ class Scene {
     // Current level
     var currLevel: Int;
     
+    // The current score
+    var score : Int = 0;
+    
     
     /**
      * Constructor, initializes the scene.
@@ -81,7 +84,7 @@ class Scene {
         mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: player);
         
         // For testing purposes ***
-        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
+        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0);
         
         // Load the first level ***
         loadLevel(area: 1, level: 1);
@@ -186,5 +189,15 @@ class Scene {
             player.isGameOver = true;
         }
         
+    }
+    
+    func saveScoreToScoreboard() {
+        let pp : PlayerProfile = PlayerProfile.loadFromFile()!;
+        
+        pp.scoreboard.getLevelScoreboard(forWorld: currArea - 1, forLevel: currLevel - 1).tryInsertScore(withScore: score);
+        
+        pp.saveToFile();
+        
+        print("End of level, saving to scoreboard if possible \(score)");
     }
 }

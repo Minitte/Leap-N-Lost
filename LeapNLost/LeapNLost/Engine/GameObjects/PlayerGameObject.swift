@@ -151,6 +151,7 @@ class PlayerGameObject : GameObject {
             
             if (hopTime >= maxHopTime) {
                 positionToTilePosition();
+                
                 print("Player Landed on: r:\(tileRow) c:\(tileCol)");
                 hopping = false;
             }
@@ -181,6 +182,10 @@ class PlayerGameObject : GameObject {
             
             // find closest
             for lilypad in lilypads {
+                if (lilypad.type != "Lilypad") {
+                    continue;
+                }
+                
                 let dist : Float = (lilypad.position - self.position).magnitude();
                 
                 if (dist < 3 && dist < closestDist) {
@@ -199,6 +204,8 @@ class PlayerGameObject : GameObject {
         jumpToTarget(target: targetObjectToJumpTo);
         
         rotation = Vector3.init(0, Float.pi, 0);
+        
+        currentScene?.score += 1;
     }
     
     /**

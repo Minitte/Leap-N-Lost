@@ -24,7 +24,11 @@ class ViewControllerTitle: UIViewController {
             self.startButton.alpha = 1.0
         }, completion: nil)
         
+        let pp : PlayerProfile = PlayerProfile.loadFromFile()!;
+        
     }
+    
+    
     
 }
 
