@@ -20,7 +20,7 @@ class Car: GameObject{
     
     init(pos: Vector3, speed: Float){
         self.speed = speed;
-        self.headlight = SpotLight(color: Vector3(1, 1, 0.8), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: pos, direction: pos, innerRadius: Float.pi / 3, outerRadius: Float.pi / 3 + 0.2);
+        self.headlight = SpotLight(color: Vector3(1, 1, 0.8), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(), direction: Vector3(), innerRadius: Float.pi / 3, outerRadius: Float.pi / 3 + 0.2, constant: 1.0, linear: 0.8, quadratic: 0.5);
         color = Car.randomColor();
         super.init(ModelCacheManager.loadModel(withMeshName: "car", withTextureName: "car" + color + ".png", saveToCache: true)!);
         

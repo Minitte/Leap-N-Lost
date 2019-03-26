@@ -25,6 +25,16 @@ class SpotLight : Light {
     // Radius of the outer ring
     var outerRadius : Float;
     
+    // The constant attenuation term, Kc
+    var constant : Float;
+    
+    // The linear attenuation term, Kl
+    var linear : Float;
+    
+    // The quadratic attenuation term, Kq
+    var quadratic : Float;
+    
+    
     /**
      * Default constructor, initializes all variables to zero.
      */
@@ -33,6 +43,9 @@ class SpotLight : Light {
         self.direction = Vector3();
         self.innerRadius = 0;
         self.outerRadius = 0;
+        self.constant = 0;
+        self.linear = 0;
+        self.quadratic = 0;
         super.init();
     }
     
@@ -47,13 +60,20 @@ class SpotLight : Light {
      * direction - the direction of the light
      * innerRadius - radius of the inner cone
      * outerRadius - radius of the outer cone
+     * constant - the constant term, Kc
+     * linear - the linear term, Kl
+     * quadratic - the quadratic term, kq
      */
     init(color: Vector3, ambientIntensity: Float, diffuseIntensity: Float, specularIntensity: Float,
-         position: Vector3, direction: Vector3, innerRadius: Float, outerRadius: Float) {
+         position: Vector3, direction: Vector3, innerRadius: Float, outerRadius: Float,
+         constant: Float, linear: Float, quadratic: Float) {
         self.position = position;
         self.direction = direction;
         self.innerRadius = innerRadius;
         self.outerRadius = outerRadius;
+        self.constant = constant;
+        self.linear = linear;
+        self.quadratic = quadratic;
         super.init(color: color, ambientIntensity: ambientIntensity,
                    diffuseIntensity: diffuseIntensity, specularIntensity: specularIntensity);
     }
@@ -68,6 +88,9 @@ class SpotLight : Light {
         shader.setVector(variableName: "spotLights[" + String(lightNumber) + "].direction", value: direction);
         shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].innerRadius", value: innerRadius);
         shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].outerRadius", value: outerRadius);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].constant", value: constant);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].linear", value: linear);
+        shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].quadratic", value: quadratic);
         shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].ambientIntensity", value: ambientIntensity);
         shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].diffuseIntensity", value: diffuseIntensity);
         shader.setFloat(variableName: "spotLights[" + String(lightNumber) + "].specularIntensity", value: specularIntensity);

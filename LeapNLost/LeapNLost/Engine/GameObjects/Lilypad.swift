@@ -17,7 +17,7 @@ class Lilypad: GameObject{
     
     init(pos: Vector3, speed: Float){
         self.speed = speed;
-        self.glow = PointLight(color: Vector3(0.2, 1, 0.2), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1, linear: 1, quadratic: 1);
+        self.glow = PointLight(color: Vector3(0.2, 1, 0.2), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(), constant: 2.0, linear: 1.5, quadratic: 1);
         super.init(ModelCacheManager.loadModel(withMeshName: "Lilypad", withTextureName: "lilypad.png", saveToCache: true)!);
         
         // Spawn in a random position for testing purposes

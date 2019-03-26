@@ -59,7 +59,7 @@ class PlayerGameObject : GameObject {
     init(withModel model: Model, hopTime ht: Float = 0.5) {
         isDead = false;
         isGameOver = false;
-        nightLight = PointLight(color: Vector3(1, 1, 1), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, 0), constant: 1.0, linear: 0.8, quadratic: 0.6);
+        nightLight = PointLight(color: Vector3(1, 1, 1), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(), constant: 1.0, linear: 0.8, quadratic: 0.6);
         maxHopTime = ht;
         
         super.init(model);

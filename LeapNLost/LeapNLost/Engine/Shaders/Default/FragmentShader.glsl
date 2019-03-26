@@ -39,6 +39,10 @@ struct SpotLight {
     lowp float innerRadius;
     lowp float outerRadius;
     
+    lowp float constant;
+    lowp float linear;
+    lowp float quadratic;
+    
     lowp float ambientIntensity;
     lowp float diffuseIntensity;
     lowp float specularIntensity;
@@ -184,9 +188,12 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
     // Normalize the fragment direction
     fragDirection = normalize(fragDirection);
     
+    lowp float attenuation = 1.0 / (spotLight.constant + spotLight.linear * fragDistance +
+                                    spotLight.quadratic * (fragDistance * fragDistance));
+    
     lowp float theta = acos(dot(fragDirection, spotLight.direction));
     lowp float epsilon = spotLight.innerRadius - spotLight.outerRadius;
-    lowp float intensity = clamp((theta - spotLight.outerRadius) / epsilon, 0.0, 1.0) * (0.5 / fragDistance);
+    lowp float intensity = clamp((theta - spotLight.outerRadius) / epsilon, 0.0, 1.0) * attenuation;
     
     // Ambient
     lowp vec3 ambientColor = spotLight.color * spotLight.ambientIntensity;
