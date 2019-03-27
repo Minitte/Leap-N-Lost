@@ -57,7 +57,7 @@ extension UITextView {
 }
 
 extension Cutscene {
-    func readCutscene(json: String) -> Data {
+    func readCutscene(json: String) -> Data? {
         let path = Bundle.main.path(forResource: json, ofType: "json");
         var result = Data();
         
@@ -106,13 +106,16 @@ class ViewControllerCutscene: UIViewController {
         var cutscene = Cutscene();
         //Load intro.
         let data = cutscene.readCutscene(json: "\(currentArea)-\(currentLevel)");
-        cutscene = cutscene.parseCutscene(data: data);
-        let lines : String = cutscene.combineLines(lines: cutscene);
-        //Call animate to show cutscene.
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: cutscene.picture)!);
-        self.image(data: cutscene);
-        dialogController.animate(text: lines, label: dialogSpeaker , delay: 0.039, view: self);
-        
+        if(data != nil) {
+            cutscene = cutscene.parseCutscene(data: data!);
+            let lines : String = cutscene.combineLines(lines: cutscene);
+                //Call animate to show cutscene.
+                //self.view.backgroundColor = UIColor(patternImage: UIImage(named: cutscene.picture)!);
+                self.image(data: cutscene);
+                dialogController.animate(text: lines, label: dialogSpeaker , delay: 0.039, view: self);
+        }
+        self.navigationController?.popViewController(animated: true);
+        self.dismiss(animated: false, completion: nil);
         
     }
     
