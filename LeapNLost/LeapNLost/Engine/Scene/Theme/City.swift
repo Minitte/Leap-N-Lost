@@ -27,7 +27,7 @@ class City : Theme {
             let sectionWidth : Float = Float(Level.tilesPerRow) / 3.0 * 2.0;
             
             for i in 1...3 {
-                gameObjects.append(Car(pos: Vector3(-Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+                gameObjects.append(Car(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
             }
         case "water":
             // Create and append lilypad object
