@@ -285,7 +285,7 @@ class PlayerGameObject : GameObject {
      */
     private func positionToTilePosition() {
 //        tileCol = Int(position.x);
-        tileCol = Int(roundf((self.position.x + Float(Level.tilesPerRow)) / 2.0))
+        tileCol = Int((self.position.x + Float(Level.tilesPerRow)) / 2.0);
         tileRow = -Int(position.z / 2.0 - 0.5);
     }
     
