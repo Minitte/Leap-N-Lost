@@ -1,17 +1,17 @@
 //
-//  City.swift
+//  Jungle.swift
 //  LeapNLost
 //
-//  Created by Anthony Wong on 2019-03-21.
+//  Created by Anthony Wong on 2019-03-26.
 //  Copyright © 2019 bcit. All rights reserved.
 //
 
 import Foundation
 
 /**
- * Parses rows and returns the appropriate game object types for a city theme.
+ * Parses rows and returns the appropriate game object types for a jungle theme.
  */
-class City : Theme {
+class Jungle : Theme {
     
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
@@ -26,7 +26,7 @@ class City : Theme {
             gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
         case "water":
             // Create and append lilypad object
-            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
+            gameObjects.append(Log(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
         case "grass":
             break; // Do nothing
         default:
@@ -81,9 +81,9 @@ class City : Theme {
         for gameObject in gameObjects {
             
             // Add lilypad point lights
-            if (gameObject is Lilypad) {
-                let lilypad : Lilypad = gameObject as! Lilypad;
-                pointLights.append(lilypad.glow);
+            if (gameObject is Log) {
+                let log : Log = gameObject as! Log;
+                pointLights.append(log.glow);
             }
             
             // Add memory fragment point lights
@@ -95,7 +95,7 @@ class City : Theme {
         
         return pointLights;
     }
-
+    
     func setupSpotLights(gameObjects : [GameObject]) -> [SpotLight] {
         var spotLights : [SpotLight] = [];
         

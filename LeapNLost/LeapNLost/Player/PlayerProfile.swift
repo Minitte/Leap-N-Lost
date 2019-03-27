@@ -36,8 +36,12 @@ class PlayerProfile : Codable {
      */
     init () {
         coins = 0;
-        reachedArea = 1;
-        reachedLevel = 1;
+        
+        // For debug purposes ***
+        reachedArea = 4;
+        reachedLevel = 5;
+        // ***
+        
         lastArea = 0;
         lastLevel = 0;
         scoreboard = Scoreboard.init();

@@ -36,7 +36,7 @@ class PhysicsEngine {
      * Checks for collisions between the player and other game objects.
      */
     func checkCollisions() {
-        var onLilypad : Bool = false;
+        var onFloatingObject : Bool = false;
         let player = currentScene.player;
         let collisionDictionary = currentScene.collisionDictionary;
         
@@ -58,9 +58,9 @@ class PhysicsEngine {
                     currentScene.saveScoreToScoreboard();
                 }
                 
-                if (gameObject.type == "Lilypad") {
+                if (gameObject.type == "Lilypad" || gameObject.type == "Log") {
                     //player.position = gameObject.position + Vector3(0, 0.5, 0);
-                    onLilypad = true;
+                    onFloatingObject = true;
                 }
                 
                 if (gameObject.type == "Car") {
@@ -70,7 +70,7 @@ class PhysicsEngine {
         }
         
         // Check if the player landed on water
-        if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onLilypad) {
+        if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onFloatingObject) {
             player.isDead = true;
         }
     }

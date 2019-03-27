@@ -72,6 +72,7 @@
 		AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE8B224AF0BE0025B1F6 /* log.png */; };
 		AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE91224AF1CB0025B1F6 /* rock.obj */; };
 		AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE92224AF1CB0025B1F6 /* rock.png */; };
+		AE63DE96224AF22A0025B1F6 /* Jungle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE95224AF22A0025B1F6 /* Jungle.swift */; };
 		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
@@ -184,6 +185,7 @@
 		AE63DE8B224AF0BE0025B1F6 /* log.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log.png; sourceTree = "<group>"; };
 		AE63DE91224AF1CB0025B1F6 /* rock.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rock.obj; sourceTree = "<group>"; };
 		AE63DE92224AF1CB0025B1F6 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
+		AE63DE95224AF22A0025B1F6 /* Jungle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jungle.swift; sourceTree = "<group>"; };
 		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			children = (
 				AEAF40832244323800BBAB72 /* Theme.swift */,
 				AEAF40862244340B00BBAB72 /* City.swift */,
+				AE63DE95224AF22A0025B1F6 /* Jungle.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE63DE96224AF22A0025B1F6 /* Jungle.swift in Sources */,
 				6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */,
 				92372E7922111C04001F5139 /* Shader.swift in Sources */,
 				E2DA6519221BCE230065A150 /* PlayerGameObject.swift in Sources */,
