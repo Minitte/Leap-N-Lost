@@ -207,6 +207,12 @@ class GameEngine : BufferManager {
         let date : Date = Date();
         let delta : Float = Float(date.toMillis() - lastTime) / 1000; // Convert milliseconds to seconds
         lastTime = date.toMillis();
+        
+        // Don't update if the game is too laggy
+        if (delta > 1.0) {
+            print("Delta was greater than 1.0, cancelling update");
+            return;
+        }
 
         // Update the scene
         currentScene.update(delta: delta);
@@ -260,20 +266,36 @@ class GameEngine : BufferManager {
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
         glActiveTexture(GLenum(GL_TEXTURE0));
         
+        // Array of lights to render
+        var pointLights : [PointLight] = [];
+        var spotLights : [SpotLight] = [];
+        
+        for pointLight in currentScene.pointLights {
+            // Only render point lights that are in range
+            if ((pointLight.position - currentScene.player.position).magnitude() < 20.0) {
+                pointLights.append(pointLight);
+            }
+        }
+        
+        for spotLight in currentScene.spotLights {
+            // Only render spot lights that are in range
+            if ((spotLight.position - currentScene.player.position).magnitude() < 20.0) {
+                spotLights.append(spotLight);
+            }
+        }
+        
         // Set total number of lights
-        mainShader.setInt(variableName: "u_totalPointLights", value: currentScene.pointLights.count);
-        mainShader.setInt(variableName: "u_totalSpotLights", value: currentScene.spotLights.count);
+        mainShader.setInt(variableName: "u_totalPointLights", value: pointLights.count);
+        mainShader.setInt(variableName: "u_totalSpotLights", value: spotLights.count);
         
         // Apply all point lights to the rendering of this game object
-        // TODO - Only apply point lights that are within range
-        for i in 0..<currentScene.pointLights.count {
-            currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+        for i in 0..<pointLights.count {
+            pointLights[i].render(shader: mainShader, lightNumber: i);
         }
         
         // Apply all spot lights to the rendering of this game object
-        // TODO - Only apply spot lights that are within range
-        for i in 0..<currentScene.spotLights.count {
-            currentScene.spotLights[i].render(shader: mainShader, lightNumber: i);
+        for i in 0..<spotLights.count {
+            spotLights[i].render(shader: mainShader, lightNumber: i);
         }
         
         // Apply directional light

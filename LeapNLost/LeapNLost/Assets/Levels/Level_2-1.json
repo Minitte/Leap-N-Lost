@@ -1,8 +1,8 @@
 {
     "info": {
-        "area": 1,
-        "level": 2,
-        "theme": "City",
+        "area": 2,
+        "level": 1,
+        "theme": "Jungle",
         "night": true,
         "desc": ""
     },
@@ -39,7 +39,7 @@
         },
         {
             "id": 6,
-            "type": "road",
+            "type": "water",
             "speed": 2.0
         },
         {
@@ -90,7 +90,7 @@
         {
             "id": 16,
             "type": "road",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 17,
@@ -100,12 +100,12 @@
         {
             "id": 18,
             "type": "water",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 19,
             "type": "water",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 20,

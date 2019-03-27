@@ -1,21 +1,21 @@
 //
-//  City.swift
+//  Jungle.swift
 //  LeapNLost
 //
-//  Created by Anthony Wong on 2019-03-21.
+//  Created by Anthony Wong on 2019-03-26.
 //  Copyright © 2019 bcit. All rights reserved.
 //
 
 import Foundation
 
 /**
- * Parses rows and returns the appropriate game object types for a city theme.
+ * Parses rows and returns the appropriate game object types for a jungle theme.
  */
-class City : Theme {
+class Jungle : Theme {
     
     // Specify number of objects per row here
-    private let carsPerRow : Int = 2;
-    private let lilypadsPerRow : Int = 3;
+    private let bouldersPerRow : Int = 2;
+    private let logsPerRow : Int = 3;
     
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
@@ -26,20 +26,20 @@ class City : Theme {
         // Generate game objects depending on row type
         switch rowType {
         case "road":
-            // Two cars per row
-            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(carsPerRow);
+            // Section for each boulder
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(bouldersPerRow);
             
-            // Create and append car objects
-            for i in 0...1 {
-                gameObjects.append(Car(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2 + 0.5), speed: row.speed));
+            // Create and append car object
+            for i in 0...bouldersPerRow - 1 {
+                gameObjects.append(Boulder(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
             }
         case "water":
-            // Three lilypads per row
-            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(lilypadsPerRow);
+            // Section for each log
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(logsPerRow);
             
-            // Create and append lilypad objects
-            for i in 0...2 {
-                gameObjects.append(Lilypad(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
+            // Create and append log object
+            for i in 0...logsPerRow - 1 {
+                gameObjects.append(Log(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));
             }
         case "grass":
             break; // Do nothing
@@ -62,7 +62,7 @@ class City : Theme {
         // Change texture and tile depth depending on row type
         switch rowType {
         case "road":
-            textureName = "road.jpg";
+            textureName = "dirt.jpg";
             rowDepth = -5;
         case "water":
             textureName = "water.jpg";
@@ -95,9 +95,9 @@ class City : Theme {
         for gameObject in gameObjects {
             
             // Add lilypad point lights
-            if (gameObject is Lilypad) {
-                let lilypad : Lilypad = gameObject as! Lilypad;
-                pointLights.append(lilypad.glow);
+            if (gameObject is Log) {
+                let log : Log = gameObject as! Log;
+                pointLights.append(log.glow);
             }
             
             // Add memory fragment point lights
@@ -105,23 +105,19 @@ class City : Theme {
                 let memoryFragment : MemoryFragment = gameObject as! MemoryFragment;
                 pointLights.append(memoryFragment.glow);
             }
+            
+            if (gameObject is Boulder) {
+                let boulder : Boulder = gameObject as! Boulder;
+                pointLights.append(boulder.glow);
+            }
         }
         
         return pointLights;
     }
-
+    
     func setupSpotLights(gameObjects : [GameObject]) -> [SpotLight] {
-        var spotLights : [SpotLight] = [];
-        
-        for gameObject in gameObjects {
-            
-            // Add car headlights
-            if (gameObject is Car) {
-                let car : Car = gameObject as! Car;
-                spotLights.append(car.headlight);
-            }
-        }
-        
+        let spotLights : [SpotLight] = [];
+        // No spotlights in jungle theme
         return spotLights;
     }
 }

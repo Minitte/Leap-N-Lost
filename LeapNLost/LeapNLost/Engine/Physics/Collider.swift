@@ -12,6 +12,9 @@ import Foundation
 protocol Collider {
     var model : Model? { get set };
     
+    // Can this collider kill the player?
+    var lethal : Bool? { get set };
+    
     // Function used to return a bool to determine if collision occurs.
     func CheckCollision(first: GameObject, second: GameObject) -> Bool;
 }

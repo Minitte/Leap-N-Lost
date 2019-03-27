@@ -113,7 +113,7 @@ class PlayerGameObject : GameObject {
         
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
-        if (targetObject!.type == "Lilypad") {
+        if (targetObject!.type == "Lilypad" || targetObject!.type == "Log") {
             topOffset = Vector3(0, 0.5, 0);
         }
         
@@ -179,24 +179,24 @@ class PlayerGameObject : GameObject {
         
         // special case for water
         if (targetTile!.type == "water") {
-            // list of lilypads infront of the frog(player)
-            let lilypads : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
+            // list of water objects infront of the frog(player)
+            let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
             
             // closest distance between the frog(player) and the lily pad
             var closestDist : Float = 1000000.0;
             var closest : GameObject?;
             
             // find closest
-            for lilypad in lilypads {
-                if (lilypad.type != "Lilypad") {
+            for gameObject in waterObjects {
+                if (gameObject.type != "Lilypad" && gameObject.type != "Log") {
                     continue;
                 }
                 
-                let dist : Float = (lilypad.position - self.position).magnitude();
+                let dist : Float = (gameObject.position - self.position).magnitude();
                 
                 if (dist < 3 && dist < closestDist) {
                     closestDist = dist;
-                    closest = lilypad;
+                    closest = gameObject;
                 }
             }
             

@@ -36,7 +36,7 @@ class Car: GameObject{
         scale = Vector3(1, 1, 1);
         type = "Car";
         
-        self.collider = BoxCollider(halfLengths: Vector3(1.25,1.25,1.25));
+        self.collider = BoxCollider(halfLengths: Vector3(1.25,1.25,1.25), canKillPlayer: true);
     }
     
     // Update function
@@ -44,12 +44,12 @@ class Car: GameObject{
         // If speed is positive, move right
         if(speed > 0.0){
             // If x pos is smaller than farthest right tile
-            if(position.x < Float(Level.tilesPerRow)/2){
+            if(position.x < Float(Level.tilesPerRow)){
                 // Move right
                 position.x += 1 * delta * speed;
             } else {
                 // Reset position
-                position.x = Float(-Level.tilesPerRow);
+                position.x = Float(-Level.tilesPerRow) + (position.x - Float(Level.tilesPerRow));
                 // Change texture when car goes off screen
                 model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
@@ -57,12 +57,12 @@ class Car: GameObject{
         // If speed is negative, move left
         else{
             // If x pos is larger than farthest left tile
-            if(position.x > Float(-Level.tilesPerRow)/2){
+            if(position.x > Float(-Level.tilesPerRow)){
                 // Move left
                 position.x += 1 * delta * speed;
             } else {
                 // Reset position
-                position.x = Float(Level.tilesPerRow);
+                position.x = Float(Level.tilesPerRow) + (position.x + Float(Level.tilesPerRow));
                 // Change texture when car goes off screen
                 model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }

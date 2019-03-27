@@ -117,6 +117,8 @@ class Scene {
         switch (self.level.info.theme) {
         case "City":
             theme = City();
+        case "Jungle":
+            theme = Jungle();
         default:
             print("ERROR: Invalid level theme");
         }

@@ -52,7 +52,7 @@ struct SpotLight {
  * Maximum number of lights that can affect
  * a fragment are defined here.
  */
-#define MAX_POINT_LIGHTS 32
+#define MAX_POINT_LIGHTS 64
 #define MAX_SPOT_LIGHTS 32
 
 // Lighting variables
