@@ -24,11 +24,19 @@ class ViewControllerLevelSelect: UIViewController {
     @IBOutlet weak var nextAreaButton: UIButton!
     @IBOutlet weak var previousAreaButton: UIButton!
     
-    @IBOutlet weak var currentAnimalTextView: UITextView!
+    @IBOutlet weak var level11Score: UILabel!
+    @IBOutlet weak var level12Score: UILabel!
+    @IBOutlet weak var level13Score: UILabel!
+    @IBOutlet weak var level14Score: UILabel!
+    @IBOutlet weak var level15Score: UILabel!
+
+    @IBOutlet weak var currentAnimalLabel: UILabel!
     
     var levelButtons: [UIButton] = [];
+    var levelScores: [UILabel] = [];
     override func viewDidLoad() {
         levelButtons = [level11Button, level12Button, level13Button, level14Button, level15Button];
+        levelScores = [level11Score, level12Score, level13Score, level14Score, level15Score];
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -46,7 +54,7 @@ class ViewControllerLevelSelect: UIViewController {
             profile.saveToFile();
         }
         
-        currentAnimalTextView.text = profile.animalList.getCurrentAnimal().animalName;
+        currentAnimalLabel.text = profile.animalList.getCurrentAnimal().animalName;
         
         if(profile.reachedArea > area){
             nextAreaButton.isEnabled = true;
@@ -65,9 +73,18 @@ class ViewControllerLevelSelect: UIViewController {
                 button.isEnabled = false;
             }
         }
+        for(index, score) in levelScores.enumerated(){
+            if(profile.reachedLevel >= index+1){
+                let tempScore = profile.scoreboard.getLevelScoreboard(forWorld: area, forLevel: level).scoreArray[0];
+                score.text = String(tempScore);
+            }else{
+                score.text = "0";
+            }
+        }
         if(area > 1){
             previousAreaButton.isHidden = false;
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -117,9 +134,14 @@ class ViewControllerLevelSelect: UIViewController {
                 button.isEnabled = false;
             }
         }
-        nextAreaButton.isEnabled = false;
-        nextAreaButton.alpha = 0.5;
-        
+        if(profile.reachedArea > area){
+            nextAreaButton.isEnabled = true;
+            nextAreaButton.alpha = 1.0;
+        } else{
+            nextAreaButton.isEnabled = false;
+            nextAreaButton.alpha = 0.5;
+        }
+        previousAreaButton.isHidden = false;
     }
     
     @IBAction func previousArea(_ sender: Any) {
@@ -133,7 +155,11 @@ class ViewControllerLevelSelect: UIViewController {
             button.alpha = 1.0;
             button.isEnabled = true;
         }
-        previousAreaButton.isHidden = true;
+        if(area == 1){
+            previousAreaButton.isHidden = true;
+        }
+        nextAreaButton.isEnabled = true;
+        nextAreaButton.alpha = 1.0;
     }
     
     //
@@ -147,7 +173,7 @@ class ViewControllerLevelSelect: UIViewController {
         
         let animal : Animal = profile.animalList.getCurrentAnimal();
         
-        currentAnimalTextView.text = animal.animalName;
+        currentAnimalLabel.text = animal.animalName;
     }
     
     @IBAction func onNextAnimalBtnPressed() {
@@ -157,7 +183,7 @@ class ViewControllerLevelSelect: UIViewController {
         
         let animal : Animal = profile.animalList.getCurrentAnimal();
         
-        currentAnimalTextView.text = animal.animalName;
+        currentAnimalLabel.text = animal.animalName;
     }
     
     /*
