@@ -88,6 +88,19 @@ class Shader {
     }
     
     /**
+     * Sets a int variable in the shader.
+     * variableName - the name of the variable
+     * value - the int value
+     */
+    func setInt(variableName: String, value: Int) {
+        // If the int isn't already in the uniform map, add it
+        if (uniformMap[variableName] == nil) {
+            uniformMap[variableName] = glGetUniformLocation(self.programHandle, variableName);
+        }
+        glUniform1i(uniformMap[variableName]!, GLint(value));
+    }
+    
+    /**
      * Sets a float variable in the shader.
      * variableName - the name of the variable
      * value - the float value

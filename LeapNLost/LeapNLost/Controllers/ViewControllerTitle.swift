@@ -23,8 +23,9 @@ class ViewControllerTitle: UIViewController {
             ], animations: {
             self.startButton.alpha = 1.0
         }, completion: nil)
-        
     }
+    
+    
     
 }
 

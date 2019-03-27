@@ -28,23 +28,23 @@ class Model : BufferManager {
     // The model's texture
     var texture : Texture;
     
-    // Vertex array object
-    var vao: GLuint;
-    
     // Offsets
     var offset : BufferOffset;
     
     // Name of the model
     var name : String;
     
+    // Is the model visible on screen?
+    var inView : Bool;
+    
     init(vertices: [Vertex], indices: [GLuint], modelName: String) {
         // Initialize properties
         self.vertices = vertices;
         self.indices = indices;
         self.name = modelName;
-        self.vao = 0;
         self.texture = Texture();
         self.offset = BufferOffset();
+        self.inView = true;
         
         // Default texture
         loadTexture(fileName: "default-texture.png");
@@ -68,9 +68,7 @@ class Model : BufferManager {
      * Renders this model.
      */
     func render() {
-        glBindVertexArrayOES(vao);
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indices.count), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(offset.indexOffset * MemoryLayout<GLuint>.size));
-        glBindVertexArrayOES(0);
     }
 
     /**
@@ -94,10 +92,6 @@ class Model : BufferManager {
         }
             
         return Model(vertices: vertices, indices: indices, modelName: name);
-    }
-    
-    deinit {
-        glDeleteVertexArraysOES(1, &vao);
     }
 }
 

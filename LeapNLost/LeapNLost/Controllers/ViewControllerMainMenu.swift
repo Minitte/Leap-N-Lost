@@ -11,12 +11,41 @@ import UIKit
 class ViewControllerMainMenu: UIViewController {
     let buttonAudio = Audio();
     let initAudio = Audio();
+    var profile = PlayerProfile.init();
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
         initAudio.play(loop: false);
+        if(PlayerProfile.profileExists()){
+            NSLog("Loading save...");
+            
+            let pp : PlayerProfile? = PlayerProfile.loadFromFile();
+            
+            if (pp != nil) {
+                NSLog("Successfully loaded a save file!");
+                profile = pp!;
+            } else {
+                NSLog("Failed to load a save file! Making default save...");
+                profile = PlayerProfile();
+                profile.saveToFile();
+            }
+            
+        } else{
+            NSLog("No save file. Making default save...");
+            profile.saveToFile();
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is ViewControllerLevelSelect
+        {
+            let vc = segue.destination as? ViewControllerLevelSelect
+            vc?.profile = profile;
+        }
     }
     
     /*@IBAction func testJSON(_ sender: Any) {
@@ -27,9 +56,6 @@ class ViewControllerMainMenu: UIViewController {
     }*/
     @IBAction func playButton(_ sender: Any) {
         buttonAudio.play(loop: false);
-        AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
-        AudioPlayers.shared.play(index: 0, loop: true);
     }
     
     @IBAction func settingsButton(_ sender: Any) {

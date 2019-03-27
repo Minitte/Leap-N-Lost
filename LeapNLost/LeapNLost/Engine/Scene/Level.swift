@@ -49,12 +49,23 @@ struct Level : Decodable {
         
         return level;
     }
+    
+    // Does the level exist?
+    func levelExists(num: Int, num2: Int) -> Bool{
+        if (Bundle.main.path(forResource: "Level_" + String(num) + "-" + String(num2), ofType: "json", inDirectory: "Levels") != nil)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 // Info struct
 struct Info : Decodable {
     let area: Int;
     let level: Int;
+    let theme: String;
+    let night: Bool;
     let desc: String;
     
     // If you want the fields to be a specific name
@@ -68,6 +79,8 @@ struct Info : Decodable {
     init(){
         area = -1;
         level = -1;
+        theme = "";
+        night = false;
         desc = "";
     }
 }

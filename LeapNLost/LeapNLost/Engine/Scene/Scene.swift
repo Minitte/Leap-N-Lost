@@ -17,14 +17,23 @@ class Scene {
     // The directional light in the scene, i.e. the sun
     var directionalLight : DirectionalLight;
     
-    // Arrays of all lights in the scene.
+    // Array of all point lights in the scene
     var pointLights : [PointLight];
+    
+    // Array of all spot lights in the scene
+    var spotLights : [SpotLight];
 
     // List of all game objects in the scene
     var gameObjects : [GameObject];
     
     // List of all tiles in the scene
-    var tiles : [GameObject]
+    var tiles : [Tile];
+    
+    // Reference to the player object.
+    var player : PlayerGameObject;
+    
+    // Dictionary containing references of objects.
+    var collisionDictionary : [Int: [GameObject]];
     
     // Camera properties
     private(set) var mainCamera : CameraFollowTarget;
@@ -35,43 +44,63 @@ class Scene {
     // Reference to the game view.
     private var view : GLKView;
     
-    //Dictionary containing references of objects.
-    private var collisionDictionary : [Int: [GameObject]];
+    // Current area
+    var currArea: Int;
     
-    //Reference to the player object.
-    var player : PlayerGameObject;
+    // Current level
+    var currLevel: Int;
+    
+    // The current score
+    var score : Int = 0;
+    
+    
     /**
      * Constructor, initializes the scene.
      * view - reference to the game view
      */
-    
     init(view: GLKView) {
         // Initialize variables
         self.view = view;
         self.level = Level();
         self.gameObjects = [GameObject]();
-        self.tiles = [GameObject]();
+        self.tiles = [Tile]();
         self.collisionDictionary = [Int:[GameObject]]();
+        self.currArea = -1;
+        self.currLevel = -1;
+        self.pointLights = [PointLight]();
+        self.spotLights = [SpotLight]();
         
-        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: "frog", withTextureName: "frogtex.png")!;
+        let animal : Animal = PlayerProfile.loadFromFile()!.animalList.getCurrentAnimal();
+        
+        let frogModel : Model = ModelCacheManager.loadModel(withMeshName: animal.modelFileName, withTextureName: animal.textureFileName)!;
         
         player = PlayerGameObject.init(withModel: frogModel);
         player.type = "Player";
         gameObjects.append(player);
-        player.position = Vector3(0, -3, 0);
         
-        // Initialize some test lighting ***
-        pointLights = [PointLight]();
-        pointLights.append(PointLight(color: Vector3(1, 0, 1), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(0, 0, -10), constant: 1.0, linear: 0.2, quadratic: 0.1));
-        
-        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.2, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
+        directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
         let camOffset : Vector3 = Vector3(0, -10, -8.5);
         mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: player);
         
         // For testing purposes ***
-        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0)
+        mainCamera.rotate(xRotation: Float.pi / 4, yRotation: 0, zRotation: 0);
+        
+        // Have to set current scene here because of swift
+        player.currentScene = self;
+    }
+    
+    /**
+     * Gets a tile from the given row and column
+     */
+    func getTile(row: Int, column: Int) -> Tile? {
+        // Check if row and column are valid
+        if (row >= 0 && row < level.rows.count && column >= 0 && column < Level.tilesPerRow) {
+            return tiles[Level.tilesPerRow * row + column];
+        }
+        
+        return nil;
     }
     
     /**
@@ -83,74 +112,64 @@ class Scene {
         // Parse the level
         let data = self.level.readLevel(withArea: area, withLevel: level);
         self.level = self.level.parseJSON(data: data);
+        var theme : Theme? = nil;
         
+        switch (self.level.info.theme) {
+        case "City":
+            theme = City();
+        case "Jungle":
+            theme = Jungle();
+        default:
+            print("ERROR: Invalid level theme");
+        }
+      
+        self.currLevel = self.level.info.area;
+        self.currArea = self.level.info.level;
+      
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
             let row = self.level.rows[rowIndex];
-            var texture : String;
-            var depth : Float;
-            var currentObjects : [GameObject] = [GameObject]();
-            // Spawn things
-            switch(row.type){
-            case "road":
-                depth = -5;
-                texture = "road.jpg";
-                
-                // Create car object
-                let car = Car.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                gameObjects.append(car);
-                currentObjects.append(car)
-                
-                
-            case "water":
-                depth = -5.5;
-                
-                // Create lilypad object
-                let lilypad = Lilypad.init(pos: Vector3(Float(-Level.tilesPerRow), depth + 2, -Float(rowIndex) * 2), speed: row.speed);
-                texture = "water.jpg";
-                gameObjects.append(lilypad);
-                currentObjects.append(lilypad);
-            default:
-                depth = -5;
-                texture = "grass.jpg";
-            }
-            collisionDictionary[rowIndex] = currentObjects;
-            // Generate the row's tiles
-            for tileIndex in 0..<Level.tilesPerRow {
-                let tile = GameObject.init(Model.CreatePrimitive(primitiveType: Model.Primitive.Cube));
-                tile.model.loadTexture(fileName: texture);
-                tile.type = row.type;
-                tile.position = Vector3(Float(tileIndex - Level.tilesPerRow / 2) * 2, depth, -Float(rowIndex) * 2);
-                tiles.append(tile);
-            }
-        }
-    }
-    
-    /**
-     * Checks for collisions between the player and other game objects.
-     */
-    func checkCollisions() {
-        var onLilypad : Bool = false;
-        
-        // Iterate through every game object in the player's current row
-        for gameObject in collisionDictionary[Int(player.tilePosition.z)]!{
             
-            if((gameObject.collider!.CheckCollision(first: gameObject, second: player))) {
-                
-                if (gameObject.type == "Lilypad") {
-                    player.position = gameObject.position + Vector3(0, 0.5, 0);
-                    onLilypad = true;
-                    break;
-                } else {
-                    player.isDead = true;
-                }
+            // Parse row and tile objects based on the level's theme
+            let rowObjects : [GameObject] = theme!.parseRowObjects(row: row, rowIndex: rowIndex);
+            let rowTiles : [Tile] = theme!.parseRowTiles(row: row, rowIndex: rowIndex);
+            
+            // Save to collision dictionary
+            collisionDictionary[rowIndex] = rowObjects;
+            
+            // Append objects and tiles to the level
+            self.gameObjects.append(contentsOf: rowObjects);
+            self.tiles.append(contentsOf: rowTiles);
+            
+            if(rowIndex % 3 == 0) {
+                let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
+                gameObjects.append(coin);
+                collisionDictionary[rowIndex]!.append(coin);
             }
         }
         
-        // Check if the player landed on water
-        if (tiles[Int(player.tilePosition.z) * Level.tilesPerRow].type == "water" && !onLilypad) {
-            player.isDead = true;
+        //Creating a MemoryFragment and appending to gameobjects.
+        let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
+
+        gameObjects.append(memoryFragment);
+        collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
+
+        // Apply night settings if it's a night level
+        if (self.level.info.night == true) {
+            // Dim the directional light
+            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.0, diffuseIntensity: 0.02, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
+            
+            // Add the theme's night lights.
+            pointLights.append(contentsOf: theme!.setupPointLights(gameObjects: gameObjects));
+            spotLights.append(contentsOf: theme!.setupSpotLights(gameObjects: gameObjects));
+            
+            // Add the player's light
+            pointLights.append(player.nightLight);
         }
+        
+        // Set player position
+        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
@@ -159,17 +178,39 @@ class Scene {
      */
     func update(delta: Float) {
         // Create a projection matrix
-        mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
+        //mainCamera.calculatePerspectiveMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, fieldOfView: 60, nearClipZ: 1, farClipZ: 40);
+        //mainCamera.calculateOrthographicMatrix(viewWidth: Int(view.window!.frame.width), viewHeight: Int(view.window!.frame.height), nearClipZ: 0.1, farClipz: 50);
+        mainCamera.calculateOrthographicMatrix(viewWidth: view.drawableWidth, viewHeight: view.drawableHeight, orthoWidth: 10, orthoHeight: 10, nearClipZ: 0.1, farClipz: 50);
         
         // Loop through every object in scene and call update
         for gameObject in gameObjects {
+            // Check if gameObject is out of view
+            if(gameObject.position.z > player.position.z + 50 ||
+                gameObject.position.z < player.position.z - 50)
+            {
+                gameObject.model.inView = false;
+            } else {
+                gameObject.model.inView = true;
+            }
+            
             gameObject.update(delta: delta);
         }
         
-        //Check collisions based on which row the player is on.
-        if (!player.hopping) {
-            checkCollisions();
-        }
         mainCamera.updatePosition();
+        
+        if (player.tileRow >= 30) {
+            player.isGameOver = true;
+        }
+        
+    }
+    
+    func saveScoreToScoreboard() {
+        let pp : PlayerProfile = PlayerProfile.loadFromFile()!;
+        
+        pp.scoreboard.getLevelScoreboard(forWorld: currArea - 1, forLevel: currLevel - 1).tryInsertScore(withScore: score);
+        
+        pp.saveToFile();
+        
+        print("End of level, saving to scoreboard if possible \(score)");
     }
 }

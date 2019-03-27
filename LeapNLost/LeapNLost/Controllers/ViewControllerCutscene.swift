@@ -12,7 +12,7 @@ import UIKit
 //Adding typewritter effect function to UITextView
 extension UITextView {
     //animate will take in a string and sets the UITextView's text
-    func animate(text: String, label: UILabel, delay: TimeInterval) {
+    func animate(text: String, label: UILabel, delay: TimeInterval, view: UIViewController) {
         //Sets a block of code for asynchronous execution
         DispatchQueue.main.async {
             //Set the text to blank.
@@ -38,6 +38,9 @@ extension UITextView {
                             //Make the local String blank.
                             currentSpeaker = "";
                         }
+                    }else if(character == "\t") {
+                        view.navigationController?.popViewController(animated: true);
+                        view.dismiss(animated: false, completion: nil);
                     }else {
                         //If character is not @ symbol. Display character in UITextField
                         if(!isSpeaker) {
@@ -54,8 +57,11 @@ extension UITextView {
 }
 
 extension Cutscene {
-    func readCutscene(json: String) -> Data {
+    func readCutscene(json: String) -> Data? {
         let path = Bundle.main.path(forResource: json, ofType: "json");
+        if(path == nil) {
+            return nil;
+        }
         var result = Data();
         
         do {
@@ -92,20 +98,44 @@ extension Cutscene {
 }
 class ViewControllerCutscene: UIViewController {
     @IBOutlet weak var dialogController: UITextView!;
-    
     @IBOutlet weak var dialogSpeaker: UILabel!
+    var currentArea : Int = 0;
+    var currentLevel : Int = 0;
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         //Create Cutscene object.
         var cutscene = Cutscene();
         //Load intro.
-        let data = cutscene.readCutscene(json: "intro");
-        cutscene = cutscene.parseCutscene(data: data);
-        let lines : String = cutscene.combineLines(lines: cutscene);
-        //Call animate to show cutscene.
-        dialogController.animate(text: lines, label: dialogSpeaker , delay: 0.6);
+        
+        let data = cutscene.readCutscene(json: "\(currentArea)-\(currentLevel)");
+        if(data != nil) {
+            cutscene = cutscene.parseCutscene(data: data!);
+            let lines : String = cutscene.combineLines(lines: cutscene);
+                //Call animate to show cutscene.
+                //self.view.backgroundColor = UIColor(patternImage: UIImage(named: cutscene.picture)!);
+                self.image(data: cutscene);
+                dialogController.animate(text: lines, label: dialogSpeaker , delay: 0.039, view: self);
+        }
+        self.navigationController?.popViewController(animated: true);
+        self.dismiss(animated: false, completion: nil);
         
     }
     
-   
+    func image(data: Cutscene) {
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds);
+        backgroundImage.image = UIImage(named: data.picture);
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0);
+    }
+    
+    func fileExist(area: Int, level: Int)-> Bool {
+        var cutscene = Cutscene();
+        let data = cutscene.readCutscene(json: "\(area)-\(level)");
+        if(data == nil) {
+            return false;
+        }
+        return true;
+    }
 }

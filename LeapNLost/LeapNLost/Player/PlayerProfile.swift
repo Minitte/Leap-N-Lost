@@ -25,30 +25,40 @@ class PlayerProfile : Codable {
     // Player's last level that they played
     var lastLevel : Int;
     
+    // scoreboard object for the player
     var scoreboard : Scoreboard;
+    
+    // animallist object for the player
+    var animalList : AnimalList;
     
     /**
      * Initalization of a player profile where all the values are zero
      */
     init () {
         coins = 0;
-        reachedArea = 0;
-        reachedLevel = 0;
+        
+        // For debug purposes ***
+        reachedArea = 4;
+        reachedLevel = 5;
+        // ***
+        
         lastArea = 0;
         lastLevel = 0;
         scoreboard = Scoreboard.init();
+        animalList = AnimalList();
     }
     
     /**
      * Initalization of a player profile where the values are given
      */
-    init (coinCount c:Int, reachedArea ra:Int, reachedLevel rl:Int, lastArea la:Int, lastLevel ll:Int, scoreboard sb:Scoreboard) {
+    init (coinCount c:Int, reachedArea ra:Int, reachedLevel rl:Int, lastArea la:Int, lastLevel ll:Int, scoreboard sb:Scoreboard, animalList al:AnimalList) {
         coins = c;
         reachedArea = ra;
         reachedLevel = rl;
         lastArea = la;
         lastLevel = ll;
         scoreboard = sb;
+        animalList = al;
     }
     
     /**
@@ -121,5 +131,38 @@ class PlayerProfile : Codable {
         }
         
         return nil;
+    }
+    
+    // Checks if profile exists
+    public static func profileExists() -> Bool{
+        //this is the file. we will write to and read from it
+        let file = "playerprofile0.sav";
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let fileURL = dir.appendingPathComponent(file);
+            
+            //reading
+            do {
+                // text of the json file
+                let text = try String(contentsOf: fileURL, encoding: .utf8);
+                
+                // convert to json data
+                let profileData : Data? = text.data(using: .utf8);
+                
+                // check if success
+                if (profileData == nil) {
+                    NSLog("No player profile!");
+                    return false;
+                }
+                
+                
+            } catch {
+                NSLog("Error reading a player profile!");
+                return false;
+            }
+        }
+        return true;
+        
     }
 }

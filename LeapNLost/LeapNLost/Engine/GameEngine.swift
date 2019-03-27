@@ -21,6 +21,8 @@ class GameEngine : BufferManager {
     // Reference to the shader
     private var mainShader : Shader;
     
+    var physicsEngine : PhysicsEngine;
+    
     // The current scene
     var currentScene : Scene;
     
@@ -33,9 +35,7 @@ class GameEngine : BufferManager {
     // Buffers
     var vertexBuffer: GLuint;
     var indexBuffer: GLuint;
-    
-    // Vertex array object for tiles
-    var tileVao : GLuint;
+    var vertexArrayObject : GLuint;
     
     // Current offsets
     var currentOffset : BufferOffset;
@@ -47,7 +47,7 @@ class GameEngine : BufferManager {
      * Constructor for the game engine.
      * view - Reference to the application view.
      */
-    init(_ view : GLKView) {
+    init(_ view : GLKView, area: Int, level: Int) {
         print("Engine Init");
         // Initialize variables
         self.view = view;
@@ -56,8 +56,9 @@ class GameEngine : BufferManager {
         self.lastTime = Date().toMillis();
         self.vertexBuffer = 0;
         self.indexBuffer = 0;
-        self.tileVao = 0;
+        self.vertexArrayObject = 0;
         self.currentOffset = BufferOffset();
+        self.physicsEngine = PhysicsEngine(currentScene: currentScene);
 
         // Load shaders
         let shaderLoader = ShaderLoader();
@@ -65,8 +66,8 @@ class GameEngine : BufferManager {
         self.mainShader = Shader(programHandle: programHandle);
         
         // Generate a vertex array object for tiles
-        glGenVertexArraysOES(1, &tileVao);
-        glBindVertexArrayOES(tileVao);
+        glGenVertexArraysOES(1, &vertexArrayObject);
+        glBindVertexArrayOES(vertexArrayObject);
         
         // Generate and bind the vertex buffer
         glGenBuffers(GLsizei(1), &vertexBuffer);
@@ -76,27 +77,50 @@ class GameEngine : BufferManager {
         glGenBuffers(GLsizei(1), &indexBuffer);
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
         
-        // Allocate the vertex and index buffers (use arbitruary numbers for now)
-        glBufferData(GLenum(GL_ARRAY_BUFFER), 100000 * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), 500000 * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
-        
         // Setup vertex attribute object attributes
         setupAttributes();
         
-        // Initialize the first level
-        currentScene.loadLevel(area: 1, level: 1);
+        // Load the scene
+        currentScene.loadLevel(area: area, level: level);
+        loadScene(scene: currentScene);
+    }
+    
+    /**
+     * Loads a scene by appending all models into the buffers.
+     * Also initializes the buffers, existing data will be invalidated.
+     * scene - the scene to load
+     */
+    func loadScene(scene: Scene) {
+        var totalVertices : Int = 0;
+        var totalIndices : Int = 0;
+        
+        // Count total number of vertices and indices
+        for gameObject in scene.gameObjects {
+            totalVertices += gameObject.model.vertices.count;
+            totalIndices += gameObject.model.indices.count;
+        }
+        for tile in scene.tiles {
+            totalVertices += tile.model.vertices.count;
+            totalIndices += tile.model.indices.count;
+        }
+        
+        // Bind vertex and index buffers
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer);
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Allocate the vertex and index buffers
+        glBufferData(GLenum(GL_ARRAY_BUFFER), totalVertices * MemoryLayout<Vertex>.size, nil, GLenum(GL_STATIC_DRAW));
+        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), totalIndices * MemoryLayout<GLuint>.size, nil, GLenum(GL_STATIC_DRAW));
         
         // Load all tiles
-        for tile in currentScene.tiles {
+        for tile in scene.tiles {
             loadTile(tile: tile);
         }
         
-        // Unbind tile vertex array object for now
-        glBindVertexArrayOES(0);
-        
         // Load all other game objects
-        for gameObject in currentScene.gameObjects {
+        for gameObject in scene.gameObjects {
             loadModel(model: gameObject.model);
+            loadModel(model: gameObject.collider!.model!);
         }
     }
     
@@ -117,11 +141,6 @@ class GameEngine : BufferManager {
             model.vertices[i].z += tile.position.z;
         }
         
-        // Offset the indices by the current vertex offset
-        for i in 0..<model.indices.count {
-            model.indices[i] += GLuint(currentOffset.vertexOffset);
-        }
-        
         // Append the model to the buffers
         appendModel(model: model);
     }
@@ -137,30 +156,19 @@ class GameEngine : BufferManager {
         
         // Check if this model has already been loaded in
         if (ModelCacheManager.modelDictionary[name] != nil) {
-            model.vao = ModelCacheManager.modelDictionary[name]!.vao;
-            model.offset = ModelCacheManager.modelDictionary[name]!.offset;
+            model.offset = ModelCacheManager.modelDictionary[name]!;
+            
+            // Offset the indices by the model's vertex offset
+            for i in 0..<model.indices.count {
+                model.indices[i] += GLuint(model.offset.vertexOffset);
+            }
+            
         } else {
-            // Generate a vertex array object
-            glGenVertexArraysOES(1, &model.vao);
-            
-            // Bind the vertex array object with the index buffer
-            glBindVertexArrayOES(model.vao);
-            glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
-
-            // Set the offsets
-            model.offset = currentOffset;
-            
             // Save to cache
-            ModelCacheManager.modelDictionary[name] = CachedModel(offset: currentOffset, vao: model.vao);
+            ModelCacheManager.modelDictionary[name] = currentOffset;
             
             // Append the model to the buffers
             appendModel(model: model);
-            
-            // Setup attributes
-            model.setupAttributes(offset: model.offset);
-            
-            // Unbind vertex array object
-            glBindVertexArrayOES(0);
         }
     }
     
@@ -170,6 +178,16 @@ class GameEngine : BufferManager {
      * model - the model to append
      */
     func appendModel(model: Model) {
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer);
+        
+        // Set the model's offset
+        model.offset = currentOffset;
+        
+        // Offset the model's indices by the current vertex offset
+        for i in 0..<model.indices.count {
+            model.indices[i] += GLuint(currentOffset.vertexOffset);
+        }
+        
         // Input vertices into the vertex buffer
         glBufferSubData(GLenum(GL_ARRAY_BUFFER), currentOffset.vertexOffset * MemoryLayout<Vertex>.size, MemoryLayout<Vertex>.size * model.vertices.count, model.vertices);
         
@@ -189,9 +207,18 @@ class GameEngine : BufferManager {
         let date : Date = Date();
         let delta : Float = Float(date.toMillis() - lastTime) / 1000; // Convert milliseconds to seconds
         lastTime = date.toMillis();
+        
+        // Don't update if the game is too laggy
+        if (delta > 1.0) {
+            print("Delta was greater than 1.0, cancelling update");
+            return;
+        }
 
         // Update the scene
         currentScene.update(delta: delta);
+        
+        // Update the physics engine
+        physicsEngine.update(delta: delta);
         
         totalTime += delta;
         totalFrames += 1;
@@ -203,9 +230,6 @@ class GameEngine : BufferManager {
             totalFrames = 0;
             totalTime = 0;
         }
-       
-        
-        
     }
     
     /**
@@ -222,16 +246,16 @@ class GameEngine : BufferManager {
         // Clear screen and buffers, set viewport to correct size
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
-        glViewport(0, 0, GLsizei(Float(draw.width * 2)), GLsizei(draw.height * 2));
+        glViewport(0, 0, GLsizei(Float(view.drawableWidth)), GLsizei(view.drawableHeight));
         
         // Switch back to regular back face culling
         glCullFace(GLenum(GL_BACK));
         
         // Set camera variables in shader
         mainShader.setVector(variableName: "view_Position", value: currentScene.mainCamera.position);
-        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.perspectiveMatrix);
-        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.perspectiveMatrix);
-        mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: currentScene.mainCamera.transformMatrix);
+        mainShader.setMatrix(variableName: "u_ProjectionMatrix", value: currentScene.mainCamera.projectionMatrix);
+        mainShader.setMatrix(variableName: "u_LightSpaceMatrix", value: shadowRenderer.shadowCamera.projectionMatrix);
+        mainShader.setMatrix(variableName: "u_ViewMatrix", value: currentScene.mainCamera.transformMatrix);
         
         // Bind shadow map texture
         mainShader.setTexture(textureName: "u_ShadowMap", textureNum: 1);
@@ -242,10 +266,36 @@ class GameEngine : BufferManager {
         mainShader.setTexture(textureName: "u_Texture", textureNum: 0);
         glActiveTexture(GLenum(GL_TEXTURE0));
         
+        // Array of lights to render
+        var pointLights : [PointLight] = [];
+        var spotLights : [SpotLight] = [];
+        
+        for pointLight in currentScene.pointLights {
+            // Only render point lights that are in range
+            if ((pointLight.position - currentScene.player.position).magnitude() < 20.0) {
+                pointLights.append(pointLight);
+            }
+        }
+        
+        for spotLight in currentScene.spotLights {
+            // Only render spot lights that are in range
+            if ((spotLight.position - currentScene.player.position).magnitude() < 20.0) {
+                spotLights.append(spotLight);
+            }
+        }
+        
+        // Set total number of lights
+        mainShader.setInt(variableName: "u_totalPointLights", value: pointLights.count);
+        mainShader.setInt(variableName: "u_totalSpotLights", value: spotLights.count);
+        
         // Apply all point lights to the rendering of this game object
-        // TODO - Only apply point lights that are within range
-        for i in 0..<currentScene.pointLights.count {
-            currentScene.pointLights[i].render(shader: mainShader, lightNumber: i);
+        for i in 0..<pointLights.count {
+            pointLights[i].render(shader: mainShader, lightNumber: i);
+        }
+        
+        // Apply all spot lights to the rendering of this game object
+        for i in 0..<spotLights.count {
+            spotLights[i].render(shader: mainShader, lightNumber: i);
         }
         
         // Apply directional light
@@ -255,8 +305,11 @@ class GameEngine : BufferManager {
         let numberOfRows : Int = currentScene.level.rows.count;
         let indicesPerRow : Int = currentScene.tiles[0].model.indices.count * Level.tilesPerRow;
         
-        // Bind the tile vertex array object
-        glBindVertexArrayOES(tileVao);
+        // Bind the vertex array object
+        glBindVertexArrayOES(vertexArrayObject);
+        
+        // Model matrix for tiles is identity
+        mainShader.setMatrix(variableName: "u_ModelMatrix", value: GLKMatrix4Identity);
         
         // Render each row
         for i in 0..<numberOfRows {
@@ -265,31 +318,22 @@ class GameEngine : BufferManager {
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(indicesPerRow), GLenum(GL_UNSIGNED_INT), BUFFER_OFFSET(indicesPerRow * i * MemoryLayout<GLuint>.size));
         }
         
-        // Unbind vertex array object
-        glBindVertexArrayOES(0);
-        
         // Loop through every object in scene and call render
         for gameObject in currentScene.gameObjects {
+            // Set transformation matrix
+            mainShader.setMatrix(variableName: "u_ModelMatrix", value: gameObject.transformMatrix);
             
-            // Get the game object's rotation as a matrix
-            var rotationMatrix : GLKMatrix4 = GLKMatrix4RotateX(GLKMatrix4Identity, gameObject.rotation.x);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.y);
-            rotationMatrix = GLKMatrix4RotateY(rotationMatrix, gameObject.rotation.z);
-            
-            // Get the game object's position as a matrix
-            let positionMatrix : GLKMatrix4 = GLKMatrix4Translate(GLKMatrix4Identity, gameObject.position.x, gameObject.position.y, gameObject.position.z);
-            
-            // Multiply together to get transformation matrix
-            var objectMatrix : GLKMatrix4 = GLKMatrix4Multiply(currentScene.mainCamera.transformMatrix, positionMatrix);
-            objectMatrix = GLKMatrix4Multiply(objectMatrix, rotationMatrix);
-            objectMatrix = GLKMatrix4Scale(objectMatrix, gameObject.scale.x, gameObject.scale.y, gameObject.scale.z); // Scaling
-            
-            // Render the object after passing model view matrix and texture to the shader
-            mainShader.setMatrix(variableName: "u_ModelViewMatrix", value: objectMatrix);
+            // Set texture
             glBindTexture(GLenum(GL_TEXTURE_2D), gameObject.model.texture.id);
             
-            gameObject.model.render();
+            // Only render gameObject if it is in view
+            if(gameObject.model.inView){
+                gameObject.model.render();
+            }
         }
+        
+        // Call render on physics engine
+        physicsEngine.render();
     }
     
     deinit {
@@ -300,13 +344,13 @@ class GameEngine : BufferManager {
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), 0);
         
         // Free all the buffers
-        glDeleteVertexArraysOES(1, &tileVao);
+        glDeleteVertexArraysOES(1, &vertexArrayObject);
         glDeleteBuffers(1, &vertexBuffer);
         glDeleteBuffers(1, &indexBuffer);
         glDeleteBuffers(1, &shadowRenderer.shadowBuffer.bufferName);
         
         // Flush model cache
-        ModelCacheManager.flushCache();
+        ModelCacheManager.modelDictionary.removeAll();
     }
 }
 

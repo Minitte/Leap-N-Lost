@@ -13,24 +13,28 @@ class Audio {
     
     private var player: AVAudioPlayer?;
     private var url: URL;
+    public var fileName: String;
     var volume : Float;
     
     // Initialize variables
     internal init() {
         url = URL(fileURLWithPath: "");
         volume = 1.0;
+        fileName = "";
     }
     
     // Initialize variables
     internal init(fileName: String, fileType: String) {
         url = Bundle.main.url(forResource: fileName, withExtension: fileType, subdirectory: "Audio")!;
         volume = 1.0;
+        self.fileName = fileName;
     }
     
     // Initialize with values
     internal init(fileName: String, fileType: String, gameVolume: Float){
         url = Bundle.main.url(forResource: fileName, withExtension: fileType, subdirectory: "Audio")!;
         volume = gameVolume;
+        self.fileName = fileName;
     }
     
     
@@ -61,6 +65,7 @@ class Audio {
     
     func setURL(fileName: String, fileType: String){
         url = Bundle.main.url(forResource: fileName, withExtension: fileType, subdirectory: "Audio")!;
+        self.fileName = fileName;
     }
 }
 

@@ -12,7 +12,7 @@ import GLKit
 /**
  * This is a class for vector objects that contain three floating point numbers.
  */
-class Vector3 : CustomStringConvertible {
+struct Vector3 : CustomStringConvertible {
     
     // Minimum difference for checking if two Floats are equal.
     fileprivate static let Epsilon : Float = 0.001;
@@ -94,6 +94,18 @@ class Vector3 : CustomStringConvertible {
     func project(other: Vector3) -> Vector3 {
         let dotProduct = self.dot(other: other);
         return other * (dotProduct / (powf(other.magnitude(), 2)));
+    }
+    
+    /**
+     * Interpolates the vector3 between the two given vectors.
+     * original - original vector
+     * target - the target vector to move towards from the original
+     * time - the time ratio between the two vectors. 0 = original 1 = target
+     */
+    static func lerp(original: Vector3, target: Vector3, time: Float) -> Vector3 {
+        let difference: Vector3 = target - original;
+        
+        return original + (difference * time);
     }
 }
 
