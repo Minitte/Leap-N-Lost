@@ -119,12 +119,12 @@ class Scene {
             theme = City();
         case "Jungle":
             theme = Jungle();
-        default:
+        default:	
             print("ERROR: Invalid level theme");
         }
       
-        self.currLevel = self.level.info.area;
-        self.currArea = self.level.info.level;
+        self.currLevel = self.level.info.level;
+        self.currArea = self.level.info.area;
       
         // Generate tiles for each row
         for rowIndex in 0..<self.level.rows.count {
@@ -211,6 +211,6 @@ class Scene {
         
         pp.saveToFile();
         
-        print("End of level, saving to scoreboard if possible \(score)");
+        print("End of level, saving to scoreboard if possible \(score) for \(currArea)-\(currLevel)");
     }
 }
