@@ -1,31 +1,31 @@
 {
-    "title": "Intro",
-    "picture": "No picture for now",
+    "title": "cutscene-1-1",
+    "picture": "1-1.png",
     "dialog": [
         {
             "id": 1,
-            "speaker": "Jackee",
+            "speaker": "???",
             "lines": "Who am I?\n"
         },
         {
             "id": 2,
-            "speaker": "Lin",
+            "speaker": "???",
             "lines": "How did I get here?\n"
         },
         {
             "id": 3,
-            "speaker": "Jackee",
+            "speaker": "???",
             "lines": "I need to go back.\n"
         },
         {
             "id": 4,
-            "speaker": "Lin",
+            "speaker": "???",
             "lines": "but, go back where?\n"
         },
         {
             "id": 5,
-            "speaker": "Jackee",
-            "lines": "For now I need to get out of here.\n"
+            "speaker": "???",
+            "lines": "Guess i'll leave for now.                                      \t"
         }
     ]
 }
