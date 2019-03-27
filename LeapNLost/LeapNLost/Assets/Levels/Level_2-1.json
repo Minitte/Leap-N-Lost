@@ -29,12 +29,12 @@
         },
         {
             "id": 4,
-            "type": "water",
+            "type": "grass",
             "speed": -1.5
         },
         {
             "id": 5,
-            "type": "water",
+            "type": "grass",
             "speed": 1.0
         },
         {

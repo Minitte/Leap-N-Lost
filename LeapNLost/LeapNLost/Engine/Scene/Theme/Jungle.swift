@@ -23,7 +23,7 @@ class Jungle : Theme {
         switch rowType {
         case "road":
             // Create and append car object
-            gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            gameObjects.append(Boulder(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
         case "water":
             // Create and append log object
             gameObjects.append(Log(pos: Vector3(Float(-Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));

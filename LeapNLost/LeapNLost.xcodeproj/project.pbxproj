@@ -73,6 +73,7 @@
 		AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE91224AF1CB0025B1F6 /* rock.obj */; };
 		AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE92224AF1CB0025B1F6 /* rock.png */; };
 		AE63DE96224AF22A0025B1F6 /* Jungle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE95224AF22A0025B1F6 /* Jungle.swift */; };
+		AE63DE9C224B0A680025B1F6 /* Boulder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE9B224B0A680025B1F6 /* Boulder.swift */; };
 		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
@@ -186,6 +187,7 @@
 		AE63DE91224AF1CB0025B1F6 /* rock.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rock.obj; sourceTree = "<group>"; };
 		AE63DE92224AF1CB0025B1F6 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		AE63DE95224AF22A0025B1F6 /* Jungle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jungle.swift; sourceTree = "<group>"; };
+		AE63DE9B224B0A680025B1F6 /* Boulder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boulder.swift; sourceTree = "<group>"; };
 		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				5707397D221CF50B00F54DB3 /* Lilypad.swift */,
 				AD6581E422406C8800C2D41D /* Tile.swift */,
 				AE63DE86224AEFC40025B1F6 /* Log.swift */,
+				AE63DE9B224B0A680025B1F6 /* Boulder.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -829,6 +832,7 @@
 				E2F0383E223F50B90050B312 /* TransformKeyframe.swift in Sources */,
 				AD76B1F02224B9E100039ACD /* CameraFollowTarget.swift in Sources */,
 				AD622A5222498DE100CA4A94 /* Animal.swift in Sources */,
+				AE63DE9C224B0A680025B1F6 /* Boulder.swift in Sources */,
 				AD606C30220BC75E008B1517 /* LevelScoreboard.swift in Sources */,
 				88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */,
 				AEF3658E220B6DDC00ED9827 /* Model.swift in Sources */,

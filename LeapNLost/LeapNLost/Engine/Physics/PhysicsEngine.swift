@@ -63,7 +63,7 @@ class PhysicsEngine {
                     onFloatingObject = true;
                 }
                 
-                if (gameObject.type == "Car") {
+                if (gameObject.collider?.lethal == true) {
                     player.isDead = true;
                 }
             }
