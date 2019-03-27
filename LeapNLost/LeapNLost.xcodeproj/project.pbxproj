@@ -794,7 +794,7 @@
 				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
-				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
+				6F8665FD2214D8B200E6C75A /* 1-1.json in Resources */,
 				AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */,
 				6F8665FD2214D8B200E6C75A /* 1-1.json in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,

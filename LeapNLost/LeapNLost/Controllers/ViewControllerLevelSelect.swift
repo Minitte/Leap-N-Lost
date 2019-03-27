@@ -73,14 +73,9 @@ class ViewControllerLevelSelect: UIViewController {
                 button.isEnabled = false;
             }
         }
-        for(index, score) in levelScores.enumerated(){
-            if(profile.reachedLevel >= index+1){
-                let tempScore = profile.scoreboard.getLevelScoreboard(forWorld: area, forLevel: level).scoreArray[0];
-                score.text = String(tempScore);
-            }else{
-                score.text = "0";
-            }
-        }
+        
+        updateHighScorelabels();
+        
         if(area > 1){
             previousAreaButton.isHidden = false;
         }
@@ -142,6 +137,8 @@ class ViewControllerLevelSelect: UIViewController {
             nextAreaButton.alpha = 0.5;
         }
         previousAreaButton.isHidden = false;
+        
+        updateHighScorelabels();
     }
     
     @IBAction func previousArea(_ sender: Any) {
@@ -160,6 +157,8 @@ class ViewControllerLevelSelect: UIViewController {
         }
         nextAreaButton.isEnabled = true;
         nextAreaButton.alpha = 1.0;
+        
+        updateHighScorelabels();
     }
     
     //
@@ -184,6 +183,22 @@ class ViewControllerLevelSelect: UIViewController {
         let animal : Animal = profile.animalList.getCurrentAnimal();
         
         currentAnimalLabel.text = animal.animalName;
+    }
+    
+    func updateHighScorelabels() {
+        
+        var lvl = 0;
+        
+        for(index, score) in levelScores.enumerated(){
+            if(profile.reachedLevel >= index+1){
+                let tempScore = profile.scoreboard.getLevelScoreboard(forWorld: area - 1, forLevel: lvl).scoreArray[0];
+                score.text = String(tempScore);
+                
+                lvl += 1;
+            }else{
+                score.text = "0";
+            }
+        }
     }
     
     /*

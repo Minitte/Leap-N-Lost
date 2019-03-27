@@ -58,6 +58,7 @@ class PhysicsEngine {
                     // save score
                     currentScene.saveScoreToScoreboard();
                     isMemoryFragment = true;
+                    print(currentScene.score);
                     
                     
                     
