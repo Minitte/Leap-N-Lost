@@ -56,7 +56,7 @@ class PlayerGameObject : GameObject {
     /**
      * Inits the player object with a model
      */
-    init(withModel model: Model, hopTime ht: Float = 0.5) {
+    init(withModel model: Model, hopTime ht: Float = 0.25) {
         isDead = false;
         isGameOver = false;
         nightLight = PointLight(color: Vector3(1, 1, 1), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: Vector3(), constant: 1.0, linear: 0.8, quadratic: 0.6);
@@ -75,7 +75,7 @@ class PlayerGameObject : GameObject {
         preHopAnimation.originalScale = self.scale;
         
         // add keyframes
-        preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.15));
+        preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.10));
     }
     
     /**
@@ -285,7 +285,7 @@ class PlayerGameObject : GameObject {
      */
     private func positionToTilePosition() {
 //        tileCol = Int(position.x);
-        tileCol = Int((self.position.x + Float(Level.tilesPerRow)) / 2.0 - 0.5)
+        tileCol = Int((self.position.x + Float(Level.tilesPerRow)) / 2.0);
         tileRow = -Int(position.z / 2.0 - 0.5);
     }
     
