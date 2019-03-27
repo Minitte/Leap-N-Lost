@@ -210,7 +210,7 @@ class GameEngine : BufferManager {
         
         // Don't update if the game is too laggy
         if (delta > 1.0) {
-            print("Lag");
+            print("Delta was greater than 1.0, cancelling update");
             return;
         }
 
@@ -297,8 +297,6 @@ class GameEngine : BufferManager {
         for i in 0..<spotLights.count {
             spotLights[i].render(shader: mainShader, lightNumber: i);
         }
-        
-        print("numPointLights: \(pointLights.count)      numSpotLights: \(spotLights.count)");
         
         // Apply directional light
         currentScene.directionalLight.render(shader: mainShader);
