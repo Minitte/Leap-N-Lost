@@ -161,7 +161,7 @@
 		AD622A4F22498DA200CA4A94 /* AnimalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalList.swift; sourceTree = "<group>"; };
 		AD622A5122498DE100CA4A94 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		AD622A5D2249B2B400CA4A94 /* rabbit.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rabbit.mtl; sourceTree = "<group>"; };
-		AD622A5E2249B2B400CA4A94 /* rabbit.obj */ = {isa = PBXFileReference; lastKnownFileType = file; path = rabbit.obj; sourceTree = "<group>"; };
+		AD622A5E2249B2B400CA4A94 /* rabbit.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = rabbit.obj; sourceTree = "<group>"; };
 		AD622A5F2249B2B400CA4A94 /* rabbit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rabbit.png; sourceTree = "<group>"; };
 		AD6581E422406C8800C2D41D /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		AD76B1EF2224B9E100039ACD /* CameraFollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFollowTarget.swift; sourceTree = "<group>"; };
