@@ -163,8 +163,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
             
             vc.currentArea = (gameEngine?.currentScene.currArea)!;
             vc.currentLevel = (gameEngine?.currentScene.currLevel)!;
+            
             gameEngine?.physicsEngine.isMemoryFragment = false;
-            self.present(vc, animated: false, completion: nil);
+            if(vc.fileExist(area: vc.currentArea, level: vc.currentLevel)) {
+                self.present(vc, animated: false, completion: nil);
+                
+            }
             gameEngine?.currentScene.player.isDead = true;
         }
     }

@@ -59,6 +59,9 @@ extension UITextView {
 extension Cutscene {
     func readCutscene(json: String) -> Data? {
         let path = Bundle.main.path(forResource: json, ofType: "json");
+        if(path == nil) {
+            return nil;
+        }
         var result = Data();
         
         do {
@@ -105,6 +108,7 @@ class ViewControllerCutscene: UIViewController {
         //Create Cutscene object.
         var cutscene = Cutscene();
         //Load intro.
+        
         let data = cutscene.readCutscene(json: "\(currentArea)-\(currentLevel)");
         if(data != nil) {
             cutscene = cutscene.parseCutscene(data: data!);
@@ -124,5 +128,14 @@ class ViewControllerCutscene: UIViewController {
         backgroundImage.image = UIImage(named: data.picture);
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0);
+    }
+    
+    func fileExist(area: Int, level: Int)-> Bool {
+        var cutscene = Cutscene();
+        let data = cutscene.readCutscene(json: "\(area)-\(level)");
+        if(data == nil) {
+            return false;
+        }
+        return true;
     }
 }
