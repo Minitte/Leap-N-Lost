@@ -558,7 +558,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLT-lb-bGX" userLabel="Next Area">
-                                <rect key="frame" x="283" y="297.5" width="72" height="72"/>
+                                <rect key="frame" x="293" y="297.5" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="0Bv-MJ-UNh"/>
                                     <constraint firstAttribute="height" constant="72" id="7kN-Ff-CHU"/>
@@ -574,7 +574,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tua-vl-KGZ" userLabel="Previous Area">
-                                <rect key="frame" x="20" y="297.5" width="72" height="72"/>
+                                <rect key="frame" x="10" y="297.5" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Cck-OA-whB"/>
                                     <constraint firstAttribute="width" constant="72" id="LPY-Cs-kk3"/>
@@ -585,37 +585,37 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highscores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-lf-WuQ">
-                                <rect key="frame" x="280.5" y="176" width="74" height="19"/>
+                                <rect key="frame" x="253.5" y="176" width="74" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEN-uB-JXc" userLabel="Level11 Score">
-                                <rect key="frame" x="312.5" y="222" width="10" height="19"/>
+                                <rect key="frame" x="285.5" y="222" width="10" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-Kc-Aqh" userLabel="Level12 Score">
-                                <rect key="frame" x="312.5" y="273" width="10" height="19"/>
+                                <rect key="frame" x="285.5" y="273" width="10" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHX-ym-KqC" userLabel="Level13 Score">
-                                <rect key="frame" x="312.5" y="324" width="10" height="19"/>
+                                <rect key="frame" x="285.5" y="324" width="10" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVj-qi-8W6" userLabel="Level14 Score">
-                                <rect key="frame" x="312.5" y="375" width="10" height="19"/>
+                                <rect key="frame" x="285.5" y="375" width="10" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQG-tp-Jwi" userLabel="Level15 Score">
-                                <rect key="frame" x="312.5" y="426" width="10" height="19"/>
+                                <rect key="frame" x="285.5" y="426" width="10" height="19"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -648,7 +648,7 @@
                             <constraint firstItem="pVj-qi-8W6" firstAttribute="centerY" secondItem="6XR-CI-vSO" secondAttribute="centerY" id="GDg-vG-0Xs"/>
                             <constraint firstItem="GOD-Pv-qaV" firstAttribute="top" secondItem="Phr-nc-aVw" secondAttribute="bottom" constant="20" id="ICm-Pg-a4X"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="Phr-nc-aVw" secondAttribute="trailing" id="KZa-c0-rrC"/>
-                            <constraint firstItem="rMt-lf-WuQ" firstAttribute="leading" secondItem="syY-Ea-w0h" secondAttribute="trailing" constant="27" id="LhG-xm-TtX"/>
+                            <constraint firstItem="rMt-lf-WuQ" firstAttribute="leading" secondItem="syY-Ea-w0h" secondAttribute="trailing" id="LhG-xm-TtX"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="trailing" secondItem="g5L-Vm-Gua" secondAttribute="trailing" id="MNZ-4G-fHE"/>
                             <constraint firstItem="tEh-rm-vN0" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="40" id="SbM-1H-1Tb"/>
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="leading" secondItem="GOD-Pv-qaV" secondAttribute="leading" id="Yik-L8-SXE"/>
@@ -663,14 +663,14 @@
                             <constraint firstItem="MQv-J5-kjD" firstAttribute="centerX" secondItem="2MY-em-TLY" secondAttribute="centerX" id="h2U-fx-cH0"/>
                             <constraint firstItem="UGd-d6-97M" firstAttribute="centerX" secondItem="UqI-lg-hrJ" secondAttribute="centerX" id="iBj-AI-G16"/>
                             <constraint firstItem="CSA-Kc-Aqh" firstAttribute="centerY" secondItem="GOD-Pv-qaV" secondAttribute="centerY" id="l7H-l2-K99"/>
-                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="mLT-lb-bGX" secondAttribute="trailing" constant="20" id="n4o-xl-62V"/>
+                            <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="mLT-lb-bGX" secondAttribute="trailing" constant="10" id="n4o-xl-62V"/>
                             <constraint firstItem="g5L-Vm-Gua" firstAttribute="top" secondItem="6XR-CI-vSO" secondAttribute="bottom" constant="20" id="nyb-Iz-1W8"/>
                             <constraint firstItem="wHX-ym-KqC" firstAttribute="centerY" secondItem="MQv-J5-kjD" secondAttribute="centerY" id="oq3-cA-lap"/>
                             <constraint firstItem="1o6-gl-20h" firstAttribute="trailing" secondItem="oJU-Dr-DAb" secondAttribute="trailing" constant="40" id="paz-BK-52b"/>
                             <constraint firstItem="rMt-lf-WuQ" firstAttribute="top" secondItem="syY-Ea-w0h" secondAttribute="bottom" constant="10" id="pxx-IG-How"/>
                             <constraint firstItem="HEN-uB-JXc" firstAttribute="centerX" secondItem="rMt-lf-WuQ" secondAttribute="centerX" id="t7o-J8-gcJ"/>
                             <constraint firstAttribute="trailing" secondItem="2MY-em-TLY" secondAttribute="trailing" id="x1z-VR-Q6V"/>
-                            <constraint firstItem="tua-vl-KGZ" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="20" id="xwF-rf-Pl6"/>
+                            <constraint firstItem="tua-vl-KGZ" firstAttribute="leading" secondItem="1o6-gl-20h" secondAttribute="leading" constant="10" id="xwF-rf-Pl6"/>
                             <constraint firstItem="wHX-ym-KqC" firstAttribute="centerX" secondItem="rMt-lf-WuQ" secondAttribute="centerX" id="yST-D7-JFG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1o6-gl-20h"/>
