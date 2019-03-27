@@ -23,7 +23,12 @@ class City : Theme {
         switch rowType {
         case "road":
             // Create and append car object
-            gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            
+            let sectionWidth : Float = Float(Level.tilesPerRow) / 3.0 * 2.0;
+            
+            for i in 1...3 {
+                gameObjects.append(Car(pos: Vector3(-Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            }
         case "water":
             // Create and append lilypad object
             gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));

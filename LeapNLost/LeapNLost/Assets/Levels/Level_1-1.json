@@ -15,22 +15,22 @@
         {
             "id": 1,
             "type": "road",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 2,
             "type": "road",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 3,
             "type": "road",
-            "speed": 1.5
+            "speed": 3.0
         },
         {
             "id": 4,
             "type": "road",
-            "speed": -1.5
+            "speed": -3.0
         },
         {
             "id": 5,
@@ -40,12 +40,12 @@
         {
             "id": 6,
             "type": "water",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 7,
             "type": "water",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 8,
@@ -70,7 +70,7 @@
         {
             "id": 12,
             "type": "water",
-            "speed": 1.5
+            "speed": 3.0
         },
         {
             "id": 13,
@@ -95,17 +95,17 @@
         {
             "id": 17,
             "type": "water",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 18,
             "type": "water",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 19,
             "type": "water",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 20,
@@ -115,12 +115,12 @@
         {
             "id": 21.0,
             "type": "road",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 22,
             "type": "road",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 23,
@@ -130,12 +130,12 @@
         {
             "id": 24,
             "type": "water",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 25,
             "type": "water",
-            "speed": -1.5
+            "speed": -3.0
         },
         {
             "id": 26,
@@ -145,12 +145,12 @@
         {
             "id": 27,
             "type": "road",
-            "speed": 1.0
+            "speed": 2.0
         },
         {
             "id": 28,
             "type": "road",
-            "speed": -1.0
+            "speed": -2.0
         },
         {
             "id": 29,

@@ -25,8 +25,8 @@ class Jungle : Theme {
             // Create and append car object
             gameObjects.append(Car(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
         case "water":
-            // Create and append lilypad object
-            gameObjects.append(Log(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
+            // Create and append log object
+            gameObjects.append(Log(pos: Vector3(Float(-Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));
         case "grass":
             break; // Do nothing
         default:
