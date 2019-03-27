@@ -74,6 +74,7 @@
 		AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE92224AF1CB0025B1F6 /* rock.png */; };
 		AE63DE96224AF22A0025B1F6 /* Jungle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE95224AF22A0025B1F6 /* Jungle.swift */; };
 		AE63DE9C224B0A680025B1F6 /* Boulder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE9B224B0A680025B1F6 /* Boulder.swift */; };
+		AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */; };
 		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
@@ -188,6 +189,7 @@
 		AE63DE92224AF1CB0025B1F6 /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		AE63DE95224AF22A0025B1F6 /* Jungle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jungle.swift; sourceTree = "<group>"; };
 		AE63DE9B224B0A680025B1F6 /* Boulder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boulder.swift; sourceTree = "<group>"; };
+		AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt.jpg; sourceTree = "<group>"; };
 		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				ADEF384B221243A2000DEFCB /* model_cube.obj */,
 				AD08FB232214CFED00C0B689 /* default-texture.png */,
 				928D537F221B8EFA002C6F2B /* grass.jpg */,
+				AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */,
 				928D5380221B8EFA002C6F2B /* road.jpg */,
 				928D537E221B8EF9002C6F2B /* water.jpg */,
 				AEC6977E220D1613009AA6F1 /* crate.jpg */,
@@ -773,6 +776,7 @@
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				928D5382221B8EFA002C6F2B /* grass.jpg in Resources */,
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
+				AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */,
 				6FCCE49A22498D5A001BD702 /* coin.obj in Resources */,
 				AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,

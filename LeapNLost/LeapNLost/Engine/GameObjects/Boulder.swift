@@ -13,12 +13,11 @@ class Boulder : GameObject{
     // Game object speed
     var speed : Float;
     
-    // Color of the car
-    var color: String;
+    var glow : PointLight;
     
     init(pos: Vector3, speed: Float){
         self.speed = speed;
-        color = Car.randomColor();
+        self.glow = PointLight(color: Vector3(0.7, 0.7, 0.7), ambientIntensity: 1, diffuseIntensity: 1, specularIntensity: 1, position: pos, constant: 2.0, linear: 1.5, quadratic: 1.0);
         super.init(ModelCacheManager.loadModel(withMeshName: "rock", withTextureName: "rock.png", saveToCache: true)!);
         
         position = pos;
@@ -54,6 +53,10 @@ class Boulder : GameObject{
             }
         }
         
+        // Rotate boulder based on rolling speed
         rotation.z -= (speed * 1.5) * delta;
+        
+        // Update light position
+        glow.position = position;
     }
 }

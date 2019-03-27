@@ -13,6 +13,10 @@ import Foundation
  */
 class Jungle : Theme {
     
+    // Specify number of objects per row here
+    private let bouldersPerRow : Int = 2;
+    private let logsPerRow : Int = 3;
+    
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
         
@@ -22,11 +26,21 @@ class Jungle : Theme {
         // Generate game objects depending on row type
         switch rowType {
         case "road":
+            // Section for each boulder
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(bouldersPerRow);
+            
             // Create and append car object
-            gameObjects.append(Boulder(pos: Vector3(Float(-Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            for i in 0...bouldersPerRow - 1 {
+                gameObjects.append(Boulder(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            }
         case "water":
+            // Section for each log
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(logsPerRow);
+            
             // Create and append log object
-            gameObjects.append(Log(pos: Vector3(Float(-Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));
+            for i in 0...logsPerRow - 1 {
+                gameObjects.append(Log(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));
+            }
         case "grass":
             break; // Do nothing
         default:
@@ -48,7 +62,7 @@ class Jungle : Theme {
         // Change texture and tile depth depending on row type
         switch rowType {
         case "road":
-            textureName = "road.jpg";
+            textureName = "dirt.jpg";
             rowDepth = -5;
         case "water":
             textureName = "water.jpg";
@@ -91,23 +105,19 @@ class Jungle : Theme {
                 let memoryFragment : MemoryFragment = gameObject as! MemoryFragment;
                 pointLights.append(memoryFragment.glow);
             }
+            
+            if (gameObject is Boulder) {
+                let boulder : Boulder = gameObject as! Boulder;
+                pointLights.append(boulder.glow);
+            }
         }
         
         return pointLights;
     }
     
     func setupSpotLights(gameObjects : [GameObject]) -> [SpotLight] {
-        var spotLights : [SpotLight] = [];
-        
-        for gameObject in gameObjects {
-            
-            // Add car headlights
-            if (gameObject is Car) {
-                let car : Car = gameObject as! Car;
-                spotLights.append(car.headlight);
-            }
-        }
-        
+        let spotLights : [SpotLight] = [];
+        // No spotlights in jungle theme
         return spotLights;
     }
 }
