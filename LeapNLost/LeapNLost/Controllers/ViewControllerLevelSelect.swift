@@ -134,9 +134,14 @@ class ViewControllerLevelSelect: UIViewController {
                 button.isEnabled = false;
             }
         }
-        nextAreaButton.isEnabled = false;
-        nextAreaButton.alpha = 0.5;
-        
+        if(profile.reachedArea > area){
+            nextAreaButton.isEnabled = true;
+            nextAreaButton.alpha = 1.0;
+        } else{
+            nextAreaButton.isEnabled = false;
+            nextAreaButton.alpha = 0.5;
+        }
+        previousAreaButton.isHidden = false;
     }
     
     @IBAction func previousArea(_ sender: Any) {
@@ -150,7 +155,11 @@ class ViewControllerLevelSelect: UIViewController {
             button.alpha = 1.0;
             button.isEnabled = true;
         }
-        previousAreaButton.isHidden = true;
+        if(area == 1){
+            previousAreaButton.isHidden = true;
+        }
+        nextAreaButton.isEnabled = true;
+        nextAreaButton.alpha = 1.0;
     }
     
     //
