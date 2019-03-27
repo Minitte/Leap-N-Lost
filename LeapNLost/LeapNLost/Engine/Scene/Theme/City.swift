@@ -13,6 +13,10 @@ import Foundation
  */
 class City : Theme {
     
+    // Specify number of objects per row here
+    private let carsPerRow : Int = 2;
+    private let lilypadsPerRow : Int = 3;
+    
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
         
@@ -22,16 +26,21 @@ class City : Theme {
         // Generate game objects depending on row type
         switch rowType {
         case "road":
-            // Create and append car object
+            // Two cars per row
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(carsPerRow);
             
-            let sectionWidth : Float = Float(Level.tilesPerRow) / 3.0 * 2.0;
-            
-            for i in 1...3 {
-                gameObjects.append(Car(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            // Create and append car objects
+            for i in 0...1 {
+                gameObjects.append(Car(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2 + 0.5), speed: row.speed));
             }
         case "water":
-            // Create and append lilypad object
-            gameObjects.append(Lilypad(pos: Vector3(Float(-Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
+            // Three lilypads per row
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(lilypadsPerRow);
+            
+            // Create and append lilypad objects
+            for i in 0...2 {
+                gameObjects.append(Lilypad(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
+            }
         case "grass":
             break; // Do nothing
         default:

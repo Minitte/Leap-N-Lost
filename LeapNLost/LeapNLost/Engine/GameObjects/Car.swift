@@ -49,7 +49,7 @@ class Car: GameObject{
                 position.x += 1 * delta * speed;
             } else {
                 // Reset position
-                position.x = Float(-Level.tilesPerRow);
+                position.x = Float(-Level.tilesPerRow) + (position.x - Float(Level.tilesPerRow));
                 // Change texture when car goes off screen
                 model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
@@ -62,7 +62,7 @@ class Car: GameObject{
                 position.x += 1 * delta * speed;
             } else {
                 // Reset position
-                position.x = Float(Level.tilesPerRow);
+                position.x = Float(Level.tilesPerRow) + (position.x + Float(Level.tilesPerRow));
                 // Change texture when car goes off screen
                 model.loadTexture(fileName: "car" + Car.randomColor() + ".png");
             }
