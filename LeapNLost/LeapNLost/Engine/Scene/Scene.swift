@@ -167,7 +167,7 @@ class Scene {
         }
         
         // Set player position
-        player.teleportToTarget(target: getTile(row: 28, column: Level.tilesPerRow / 2)!);
+        player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
     }
     
     /**
