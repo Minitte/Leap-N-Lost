@@ -20,6 +20,7 @@ class PhysicsEngine {
     // Reference to the current scene
     private var currentScene : Scene;
     
+    var isMemoryFragment : Bool = false;
     /**
      * Constructor, initializes variables.
      * currentScene - the current scene of the game
@@ -56,6 +57,10 @@ class PhysicsEngine {
                     
                     // save score
                     currentScene.saveScoreToScoreboard();
+                    isMemoryFragment = true;
+                    
+                    
+                    
                 }
                 
                 if (gameObject.type == "Lilypad" || gameObject.type == "Log") {

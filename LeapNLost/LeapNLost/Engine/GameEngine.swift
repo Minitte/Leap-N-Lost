@@ -21,7 +21,7 @@ class GameEngine : BufferManager {
     // Reference to the shader
     private var mainShader : Shader;
     
-    private var physicsEngine : PhysicsEngine;
+    var physicsEngine : PhysicsEngine;
     
     // The current scene
     var currentScene : Scene;

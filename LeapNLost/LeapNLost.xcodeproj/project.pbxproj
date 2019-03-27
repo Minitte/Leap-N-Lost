@@ -24,7 +24,8 @@
 		57E97AEC2212CBA200A10BC9 /* Audio in Resources */ = {isa = PBXBuildFile; fileRef = 57E97AEB2212CBA200A10BC9 /* Audio */; };
 		6F4F9715224435EE00AA2873 /* MemoryFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F9714224435EE00AA2873 /* MemoryFragment.swift */; };
 		6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F971622443EC700AA2873 /* memoryfragment.jpg */; };
-		6F8665FD2214D8B200E6C75A /* intro.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* intro.json */; };
+		6F795DE4224AF2E2002F6C8A /* 1-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F795DE3224AF2E2002F6C8A /* 1-1.png */; };
+		6F8665FD2214D8B200E6C75A /* 1-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F8665FB2214D8B200E6C75A /* 1-1.json */; };
 		6F8666002214D9BC00E6C75A /* ViewControllerCutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */; };
 		6FCCE49A22498D5A001BD702 /* coin.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49822498D5A001BD702 /* coin.obj */; };
 		6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49922498D5A001BD702 /* coin.jpg */; };
@@ -139,7 +140,8 @@
 		57E97AEB2212CBA200A10BC9 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
 		6F4F9714224435EE00AA2873 /* MemoryFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryFragment.swift; sourceTree = "<group>"; };
 		6F4F971622443EC700AA2873 /* memoryfragment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = memoryfragment.jpg; sourceTree = "<group>"; };
-		6F8665FB2214D8B200E6C75A /* intro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = intro.json; sourceTree = "<group>"; };
+		6F795DE3224AF2E2002F6C8A /* 1-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-1.png"; sourceTree = "<group>"; };
+		6F8665FB2214D8B200E6C75A /* 1-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "1-1.json"; sourceTree = "<group>"; };
 		6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCutscene.swift; sourceTree = "<group>"; };
 		6FCCE49822498D5A001BD702 /* coin.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin.obj; sourceTree = "<group>"; };
 		6FCCE49922498D5A001BD702 /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
@@ -297,6 +299,15 @@
 				57E97AE92212A8D400A10BC9 /* Audio.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		6F795DE2224AF2CB002F6C8A /* 1-1 */ = {
+			isa = PBXGroup;
+			children = (
+				6F795DE3224AF2E2002F6C8A /* 1-1.png */,
+				6F8665FB2214D8B200E6C75A /* 1-1.json */,
+			);
+			path = "1-1";
 			sourceTree = "<group>";
 		};
 		6F8665FA2214D86D00E6C75A /* Cutscenes */ = {
@@ -553,7 +564,7 @@
 		AEB2B1462239B0CC00BE18A0 /* Cutscenes */ = {
 			isa = PBXGroup;
 			children = (
-				6F8665FB2214D8B200E6C75A /* intro.json */,
+				6F795DE2224AF2CB002F6C8A /* 1-1 */,
 			);
 			path = Cutscenes;
 			sourceTree = "<group>";
@@ -785,10 +796,12 @@
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				6F8665FD2214D8B200E6C75A /* intro.json in Resources */,
 				AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */,
+				6F8665FD2214D8B200E6C75A /* 1-1.json in Resources */,
 				57793E58220D014D00943230 /* frog.obj in Resources */,
 				FEF1711E2214B45C00C94A22 /* tree.png in Resources */,
 				AD08FB242214CFED00C0B689 /* default-texture.png in Resources */,
 				57793E59220D014D00943230 /* frogtex.png in Resources */,
+				6F795DE4224AF2E2002F6C8A /* 1-1.png in Resources */,
 				FEF171132214AFA800C94A22 /* car.obj in Resources */,
 				FEF171172214AFB100C94A22 /* lilypad.png in Resources */,
 				AEF36588220B6ABE00ED9827 /* FragmentShader.glsl in Resources */,

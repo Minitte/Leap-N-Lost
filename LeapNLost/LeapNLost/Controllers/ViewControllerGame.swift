@@ -156,6 +156,21 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
             winText.isHidden = false;
             winView.isHidden = false;
         }
+        
+        if((gameEngine?.physicsEngine.isMemoryFragment)!) {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
+            let vc = storyBoard.instantiateViewController(withIdentifier: "cutscene") as! ViewControllerCutscene;
+            
+            vc.currentArea = (gameEngine?.currentScene.currArea)!;
+            vc.currentLevel = (gameEngine?.currentScene.currLevel)!;
+            
+            gameEngine?.physicsEngine.isMemoryFragment = false;
+            if(vc.fileExist(area: vc.currentArea, level: vc.currentLevel)) {
+                self.present(vc, animated: false, completion: nil);
+                
+            }
+            gameEngine?.currentScene.player.isDead = true;
+        }
     }
     
     func playMainTheme(){
