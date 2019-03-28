@@ -18,6 +18,15 @@
 		5718CA282203C523000EC054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA272203C523000EC054 /* Assets.xcassets */; };
 		5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5718CA292203C523000EC054 /* LaunchScreen.storyboard */; };
 		5718CA5B2203F294000EC054 /* ViewControllerMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */; };
+		5728325D224D778500A7365A /* ship.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 5728325A224D778500A7365A /* ship.mtl */; };
+		5728325E224D778500A7365A /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 5728325B224D778500A7365A /* ship.png */; };
+		5728325F224D778500A7365A /* ship.obj in Resources */ = {isa = PBXBuildFile; fileRef = 5728325C224D778500A7365A /* ship.obj */; };
+		57283263224D779600A7365A /* train.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57283260224D779600A7365A /* train.obj */; };
+		57283264224D779600A7365A /* train.png in Resources */ = {isa = PBXBuildFile; fileRef = 57283261224D779600A7365A /* train.png */; };
+		57283265224D779600A7365A /* train.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 57283262224D779600A7365A /* train.mtl */; };
+		57283269224D77AD00A7365A /* panel.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57283266224D77AC00A7365A /* panel.obj */; };
+		5728326A224D77AD00A7365A /* panel.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 57283267224D77AC00A7365A /* panel.mtl */; };
+		5728326B224D77AD00A7365A /* panel.png in Resources */ = {isa = PBXBuildFile; fileRef = 57283268224D77AC00A7365A /* panel.png */; };
 		57793E58220D014D00943230 /* frog.obj in Resources */ = {isa = PBXBuildFile; fileRef = 57793E54220D014C00943230 /* frog.obj */; };
 		57793E59220D014D00943230 /* frogtex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57793E55220D014C00943230 /* frogtex.png */; };
 		57E97AEA2212A8D400A10BC9 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E97AE92212A8D400A10BC9 /* Audio.swift */; };
@@ -132,6 +141,15 @@
 		5718CA2A2203C523000EC054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5718CA2C2203C523000EC054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5718CA5A2203F294000EC054 /* ViewControllerMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMainMenu.swift; sourceTree = "<group>"; };
+		5728325A224D778500A7365A /* ship.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ship.mtl; sourceTree = "<group>"; };
+		5728325B224D778500A7365A /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
+		5728325C224D778500A7365A /* ship.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ship.obj; sourceTree = "<group>"; };
+		57283260224D779600A7365A /* train.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = train.obj; sourceTree = "<group>"; };
+		57283261224D779600A7365A /* train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = train.png; sourceTree = "<group>"; };
+		57283262224D779600A7365A /* train.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = train.mtl; sourceTree = "<group>"; };
+		57283266224D77AC00A7365A /* panel.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = panel.obj; sourceTree = "<group>"; };
+		57283267224D77AC00A7365A /* panel.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = panel.mtl; sourceTree = "<group>"; };
+		57283268224D77AC00A7365A /* panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panel.png; sourceTree = "<group>"; };
 		57793E54220D014C00943230 /* frog.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frog.obj; path = LeapNLost/Assets/Models/Frog/frog.obj; sourceTree = SOURCE_ROOT; };
 		57793E55220D014C00943230 /* frogtex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frogtex.png; path = LeapNLost/Assets/Models/Frog/frogtex.png; sourceTree = SOURCE_ROOT; };
 		57793E56220D014C00943230 /* frogOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = frogOBJ.h; path = LeapNLost/Assets/Models/Frog/frogOBJ.h; sourceTree = SOURCE_ROOT; };
@@ -280,6 +298,36 @@
 				5718CA2C2203C523000EC054 /* Info.plist */,
 			);
 			path = LeapNLost;
+			sourceTree = "<group>";
+		};
+		57283257224D75BF00A7365A /* Panel */ = {
+			isa = PBXGroup;
+			children = (
+				57283267224D77AC00A7365A /* panel.mtl */,
+				57283266224D77AC00A7365A /* panel.obj */,
+				57283268224D77AC00A7365A /* panel.png */,
+			);
+			path = Panel;
+			sourceTree = "<group>";
+		};
+		57283258224D75CB00A7365A /* Train */ = {
+			isa = PBXGroup;
+			children = (
+				57283262224D779600A7365A /* train.mtl */,
+				57283260224D779600A7365A /* train.obj */,
+				57283261224D779600A7365A /* train.png */,
+			);
+			path = Train;
+			sourceTree = "<group>";
+		};
+		57283259224D75FE00A7365A /* Ship */ = {
+			isa = PBXGroup;
+			children = (
+				5728325A224D778500A7365A /* ship.mtl */,
+				5728325C224D778500A7365A /* ship.obj */,
+				5728325B224D778500A7365A /* ship.png */,
+			);
+			path = Ship;
 			sourceTree = "<group>";
 		};
 		57793E5A220D016F00943230 /* Frog */ = {
@@ -506,6 +554,9 @@
 		AEB2B13C2239AB0100BE18A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				57283259224D75FE00A7365A /* Ship */,
+				57283258224D75CB00A7365A /* Train */,
+				57283257224D75BF00A7365A /* Panel */,
 				AE63DE90224AF1C30025B1F6 /* Rock */,
 				AE63DE89224AF03A0025B1F6 /* Log */,
 				AD622A5C2249B29F00CA4A94 /* Rabbit */,
@@ -769,22 +820,28 @@
 				AD622A612249B2B400CA4A94 /* rabbit.obj in Resources */,
 				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
 				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
+				5728325E224D778500A7365A /* ship.png in Resources */,
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
 				AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */,
 				AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */,
 				57E97AEC2212CBA200A10BC9 /* Audio in Resources */,
+				57283263224D779600A7365A /* train.obj in Resources */,
 				6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */,
+				57283269224D77AD00A7365A /* panel.obj in Resources */,
 				5708206D220AE502000740D3 /* Levels in Resources */,
 				928D5383221B8EFA002C6F2B /* road.jpg in Resources */,
 				AE63DE8C224AF0BE0025B1F6 /* log.obj in Resources */,
 				ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AD622A602249B2B400CA4A94 /* rabbit.mtl in Resources */,
+				57283264224D779600A7365A /* train.png in Resources */,
 				FEF171202214B45C00C94A22 /* tree.obj in Resources */,
 				FEF171112214AFA800C94A22 /* carRed.png in Resources */,
 				928D5381221B8EFA002C6F2B /* water.jpg in Resources */,
+				5728325D224D778500A7365A /* ship.mtl in Resources */,
 				FEF171122214AFA800C94A22 /* car.mtl in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
+				5728325F224D778500A7365A /* ship.obj in Resources */,
 				928D5382221B8EFA002C6F2B /* grass.jpg in Resources */,
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */,
@@ -793,6 +850,8 @@
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
+				5728326A224D77AD00A7365A /* panel.mtl in Resources */,
+				57283265224D779600A7365A /* train.mtl in Resources */,
 				FEF1711F2214B45C00C94A22 /* tree.mtl in Resources */,
 				6F8665FD2214D8B200E6C75A /* 1-1.json in Resources */,
 				AE63DE93224AF1CB0025B1F6 /* rock.obj in Resources */,
@@ -808,6 +867,7 @@
 				5718CA262203C522000EC054 /* Main.storyboard in Resources */,
 				FEF171192214AFB100C94A22 /* Lilypad.mtl in Resources */,
 				AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */,
+				5728326B224D77AD00A7365A /* panel.png in Resources */,
 				88E184D32243031E00B59E24 /* Prism.obj in Resources */,
 				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
 				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,

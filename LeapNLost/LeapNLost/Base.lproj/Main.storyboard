@@ -531,7 +531,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="DV4-KU-bdS"/>
                                     <action selector="onPrevAnimalBtnPressed" destination="ARL-fj-hd5" eventType="touchUpInside" id="rPZ-a9-JSA"/>
                                 </connections>
                             </button>
@@ -553,7 +552,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="level1_1:" destination="ARL-fj-hd5" eventType="touchUpInside" id="hLb-Kj-anE"/>
                                     <action selector="onNextAnimalBtnPressed" destination="ARL-fj-hd5" eventType="touchUpInside" id="iIi-d9-ppe"/>
                                 </connections>
                             </button>
