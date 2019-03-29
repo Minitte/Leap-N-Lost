@@ -106,6 +106,9 @@ void main(void) {
     // Set fragment colour
     gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting * vec4(vec3(shadow), 1.0);
     
+    // edge fog
+    lowp vec4 fogColour = calcEdgeFog();
+    gl_FragColor = clamp(gl_FragColor + fogColour, 0.0, 1.0);
 }
 
 lowp float calcShadow() {
@@ -211,4 +214,19 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
     return vec4((ambientColor + diffuseColor + specularColor) * vec3(intensity), 1.0);
         
     
+}
+
+lowp vec4 calcEdgeFog() {
+    mediump float edgeDist = abs(frag_Position.x);
+
+    if (edgeDist > 6.0) {
+        // fog colour
+        lowp float fogColour = (edgeDist - 6.0) * 0.5;
+        fogColour = clamp(fogColour * fogColour, 0.0, 1.0);
+        fogColour = -fogColour;
+
+        return vec4(fogColour, fogColour, fogColour, 0.0);
+    }
+
+    return vec4(0.0, 0.0, 0.0, 0.0);
 }
