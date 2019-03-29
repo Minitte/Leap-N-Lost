@@ -216,6 +216,9 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
     
 }
 
+/**
+ * Creates a negative colour vector based on the x distance from origin of 0.
+ */
 lowp vec4 calcEdgeFog() {
     mediump float edgeDist = abs(frag_Position.x);
 
