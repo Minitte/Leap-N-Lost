@@ -81,6 +81,7 @@ lowp float calcShadow();
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 viewDir);
+lowp float calcEdgeFog();
 
 void main(void) {
     // Properties
@@ -222,14 +223,14 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
 lowp float calcEdgeFog() {
     mediump float edgeDist = abs(frag_Position.x);
 
-    if (edgeDist > 6.0) {
+    if (edgeDist > 11.0) {
         // fog colour
-        lowp float fogColour = (edgeDist - 6.0) * 0.5;
+        lowp float fogColour = (edgeDist - 11.0) * 0.5;
         fogColour = clamp(fogColour * fogColour, 0.0, 1.0);
         fogColour = 1.0 - fogColour;
 
         return fogColour;
     }
 
-    return 0.0;
+    return 1.0;
 }
