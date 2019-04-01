@@ -81,6 +81,7 @@ lowp float calcShadow();
 lowp vec4 calcDirLighting(lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcPointLighting(PointLight pointLight, lowp vec3 normal, lowp vec3 viewDir);
 lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 viewDir);
+lowp float calcEdgeFog();
 
 void main(void) {
     // Properties
@@ -106,6 +107,9 @@ void main(void) {
     // Set fragment colour
     gl_FragColor = texture2D(u_Texture, frag_TexCoord) * lighting * vec4(vec3(shadow), 1.0);
     
+    // edge fog
+    lowp float fogColour = calcEdgeFog();
+    gl_FragColor = clamp(gl_FragColor * fogColour, 0.0, 1.0);
 }
 
 lowp float calcShadow() {
@@ -211,4 +215,22 @@ lowp vec4 calcSpotLighting(SpotLight spotLight, lowp vec3 normal, lowp vec3 view
     return vec4((ambientColor + diffuseColor + specularColor) * vec3(intensity), 1.0);
         
     
+}
+
+/**
+ * Creates a negative colour vector based on the x distance from origin of 0.
+ */
+lowp float calcEdgeFog() {
+    mediump float edgeDist = abs(frag_Position.x);
+
+    if (edgeDist > 11.0) {
+        // fog colour
+        lowp float fogColour = (edgeDist - 11.0) * 0.5;
+        fogColour = clamp(fogColour * fogColour, 0.0, 1.0);
+        fogColour = 1.0 - fogColour;
+
+        return fogColour;
+    }
+
+    return 1.0;
 }
