@@ -91,7 +91,7 @@ class PlayerGameObject : GameObject {
                 prepingHop = true;
             }
             
-            if (InputManager.singleTap) {
+            if (InputManager.singleTap || InputManager.upSwipe) {
                 hopForward();
                 stopPrepingHop();
             }

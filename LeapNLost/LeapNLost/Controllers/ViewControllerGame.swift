@@ -68,6 +68,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         }
     }
     
+    @IBAction func OnSwipeUp(_ sender: UISwipeGestureRecognizer) {
+        if (sender.state == .ended) {
+            InputManager.registerUpSwipe();
+        }
+    }
+    
     @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
             InputManager.registerLeftSwipe();

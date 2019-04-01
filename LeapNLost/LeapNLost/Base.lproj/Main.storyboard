@@ -396,6 +396,7 @@
                             <outletCollection property="gestureRecognizers" destination="CBt-ej-6hc" appends="YES" id="uOO-c9-DSE"/>
                             <outletCollection property="gestureRecognizers" destination="aAr-Gf-KhT" appends="YES" id="ah7-5V-OVV"/>
                             <outletCollection property="gestureRecognizers" destination="hpp-NF-Oig" appends="YES" id="mLy-Fm-zDB"/>
+                            <outletCollection property="gestureRecognizers" destination="DYU-3R-9ug" appends="YES" id="cXx-JL-zIy"/>
                         </connections>
                     </view>
                     <connections>
@@ -420,6 +421,11 @@
                 <swipeGestureRecognizer direction="left" id="hpp-NF-Oig">
                     <connections>
                         <action selector="OnSwipeLeft:" destination="cyD-kn-t94" id="ysB-47-AjY"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="DYU-3R-9ug">
+                    <connections>
+                        <action selector="OnSwipeUp:" destination="cyD-kn-t94" id="XEu-WK-Azg"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -512,6 +518,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onLevel5ButtonPressed:" destination="ARL-fj-hd5" eventType="touchUpInside" id="lxK-Oz-MGD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEh-rm-vN0">
                                 <rect key="frame" x="40" y="557" width="120" height="30"/>
@@ -733,9 +742,9 @@
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="810" height="1440"/>
-        <image name="chevron" width="72" height="72"/>
-        <image name="chevronLeft" width="72" height="72"/>
+        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="chevron" width="96" height="96"/>
+        <image name="chevronLeft" width="96" height="96"/>
         <image name="frog" width="258" height="265"/>
     </resources>
 </document>
