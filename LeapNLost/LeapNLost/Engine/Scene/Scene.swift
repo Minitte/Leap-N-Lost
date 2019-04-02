@@ -81,7 +81,7 @@ class Scene {
         directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
-        let camOffset : Vector3 = Vector3(0, -10, -8.5);
+        let camOffset : Vector3 = Vector3(0, -14, -8.5);
         mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: player);
         
         // For testing purposes ***

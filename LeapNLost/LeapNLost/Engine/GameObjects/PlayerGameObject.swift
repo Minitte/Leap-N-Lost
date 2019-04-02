@@ -50,6 +50,11 @@ class PlayerGameObject : GameObject {
     // Animation for pre hop
     private var preHopAnimation : TransformAnimation = TransformAnimation();
     
+    // animation for crushed death
+    private var crushedDeathAnimation : TransformAnimation = TransformAnimation();
+    
+    private var playCrushedAnimation : Bool = false;
+    
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -76,6 +81,11 @@ class PlayerGameObject : GameObject {
         
         // add keyframes
         preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.10));
+        
+        // crushed death animation
+        crushedDeathAnimation.originalScale = self.scale;
+        
+        crushedDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.5, -0.99, 0.5), atTime: 0.05));
     }
     
     /**
@@ -109,6 +119,12 @@ class PlayerGameObject : GameObject {
             preHopAnimation.update(delta: delta);
             
             self.scale = preHopAnimation.scale;
+        }
+        
+        if (playCrushedAnimation) {
+            crushedDeathAnimation.update(delta: delta);
+            
+            self.scale = crushedDeathAnimation.scale;
         }
         
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
@@ -212,6 +228,26 @@ class PlayerGameObject : GameObject {
         rotation = Vector3.init(0, Float.pi, 0);
         
         currentScene?.score += 1;
+        
+        /* WTF MODE
+        for gameObject in (currentScene?.gameObjects)! {
+            if (gameObject.type == "Boulder") {
+                (gameObject as! Boulder).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Car") {
+                (gameObject as! Car).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Log") {
+                (gameObject as! Log).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Lilypad") {
+                (gameObject as! Lilypad).speed *= -1;
+            }
+        }
+         */
     }
     
     /**
@@ -309,6 +345,17 @@ class PlayerGameObject : GameObject {
             currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
         }
         
+    }
+    
+    func runCrushedAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        prepingHop = false;
+        playCrushedAnimation = true;
+        scale = crushedDeathAnimation.originalScale;
+        crushedDeathAnimation.playFromStart();
     }
     
 }

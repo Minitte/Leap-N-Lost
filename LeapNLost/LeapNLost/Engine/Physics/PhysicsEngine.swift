@@ -70,6 +70,7 @@ class PhysicsEngine {
                 }
                 
                 if (gameObject.collider?.lethal == true) {
+                    player.runCrushedAnimation();
                     player.isDead = true;
                 }
             }
