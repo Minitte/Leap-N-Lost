@@ -15,6 +15,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // The openGL game engine.
     private var gameEngine : GameEngine?;
     let buttonAudio = Audio();
+    let hopAudio = Audio();
     var area: Int = 1;
     var level: Int = 1;
     var profile = PlayerProfile.init();
@@ -34,6 +35,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         setupGL();
         winView.layer.borderWidth = 5.0;
         winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
+        buttonAudio.setURL(fileName: "click", fileType: "wav");
+        hopAudio.setURL(fileName: "boing", fileType: "wav");
     }
     
     /**
@@ -56,6 +59,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     
     @IBAction func OnTapGesture(_ sender: UITapGestureRecognizer) {
         if (sender.state == .ended) {
+            hopAudio.play(loop: false);
             let tapPos : CGPoint = sender.location(in: self.view);
             let tapPosVec : Vector3 = Vector3.init(Float(tapPos.x), Float(tapPos.y), 0);
             InputManager.registerSingleTap(at: tapPosVec);
@@ -64,18 +68,21 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
 
     @IBAction func OnSwipeRight(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
+            hopAudio.play(loop: false);
             InputManager.registerRightSwipe();
         }
     }
     
     @IBAction func OnSwipeUp(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
+            hopAudio.play(loop: false);
             InputManager.registerUpSwipe();
         }
     }
     
     @IBAction func OnSwipeLeft(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
+            hopAudio.play(loop: false);
             InputManager.registerLeftSwipe();
         }
     }
