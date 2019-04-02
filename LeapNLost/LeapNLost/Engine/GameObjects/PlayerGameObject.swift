@@ -90,9 +90,7 @@ class PlayerGameObject : GameObject {
         crushedDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.5, -0.99, 0.5), atTime: 0.05));
         
         // drown death animation
-        drownDeathAnimation.position = self.position;
-        
-        drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.2));
+        drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.3));
     }
     
     /**
@@ -159,7 +157,7 @@ class PlayerGameObject : GameObject {
         }
         
         // stick to the targetObject position
-        if (!hopping) {
+        if (!hopping && !isDead) {
             self.position = targetObject!.position + topOffset;
         }
         
@@ -393,6 +391,8 @@ class PlayerGameObject : GameObject {
         if (isDead) {
             return;
         }
+        
+        drownDeathAnimation.originalPosition = position;
         
         prepingHop = false;
         playDrownAnimation = true;
