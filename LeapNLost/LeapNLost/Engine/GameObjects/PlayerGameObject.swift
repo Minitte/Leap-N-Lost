@@ -52,8 +52,10 @@ class PlayerGameObject : GameObject {
     
     // animation for crushed death
     private var crushedDeathAnimation : TransformAnimation = TransformAnimation();
-    
     private var playCrushedAnimation : Bool = false;
+    
+    private var drownDeathAnimation : TransformAnimation = TransformAnimation();
+    private var playDrownAnimation : Bool = false;
     
     // Time to check hop time
     private var hopTime : Float = 0.0;
@@ -86,12 +88,21 @@ class PlayerGameObject : GameObject {
         crushedDeathAnimation.originalScale = self.scale;
         
         crushedDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.5, -0.99, 0.5), atTime: 0.05));
+        
+        // drown death animation
+        drownDeathAnimation.position = self.position;
+        
+        drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.2));
     }
     
     /**
      * Overrided base update
      */
     override func update(delta: Float) {
+        /*
+         * INPUT SECTION
+         */
+        
         if (!hopping) {
             if (InputManager.touched) {
                 if (!prepingHop) {
@@ -115,6 +126,10 @@ class PlayerGameObject : GameObject {
             }
         }
         
+        /*
+         * ANIMATION SECTION
+         */
+        
         if (prepingHop) {
             preHopAnimation.update(delta: delta);
             
@@ -126,6 +141,16 @@ class PlayerGameObject : GameObject {
             
             self.scale = crushedDeathAnimation.scale;
         }
+        
+        if (playDrownAnimation) {
+            drownDeathAnimation.update(delta: delta);
+            
+            self.position = drownDeathAnimation.position;
+        }
+        
+        /*
+         * POSITION SECTION
+         */
         
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
@@ -347,6 +372,9 @@ class PlayerGameObject : GameObject {
         
     }
     
+    /**
+     * Plays the death animation
+     */
     func runCrushedAnimation() {
         if (isDead) {
             return;
@@ -356,6 +384,19 @@ class PlayerGameObject : GameObject {
         playCrushedAnimation = true;
         scale = crushedDeathAnimation.originalScale;
         crushedDeathAnimation.playFromStart();
+    }
+    
+    /**
+     * Plays the drown animation
+     */
+    func runDrownAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        prepingHop = false;
+        playDrownAnimation = true;
+        drownDeathAnimation.playFromStart();
     }
     
 }
