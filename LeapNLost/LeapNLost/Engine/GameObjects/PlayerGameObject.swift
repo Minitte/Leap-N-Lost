@@ -247,7 +247,7 @@ class PlayerGameObject : GameObject {
                 (gameObject as! Lilypad).speed *= -1;
             }
         }
-         /**/
+         */
     }
     
     /**
