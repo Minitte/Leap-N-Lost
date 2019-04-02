@@ -348,7 +348,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.98338880159999997" green="1" blue="0.64552305249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.98431372549019602" green="1" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Wsb-Oj-TEQ" firstAttribute="top" secondItem="xeQ-54-ipZ" secondAttribute="bottom" constant="38" id="JA4-QL-SVf"/>
                                     <constraint firstAttribute="height" constant="240" id="M8V-kx-WG3"/>
@@ -378,14 +378,34 @@
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcB-vC-K3q">
+                                <rect key="frame" x="335" y="30" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.98431372549019602" green="1" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="SNX-hM-gmy"/>
+                                    <constraint firstAttribute="height" constant="30" id="Tsv-vU-uHw"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Pause"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="pause:" destination="cyD-kn-t94" eventType="touchUpInside" id="1Gy-f0-tp1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="jjQ-3A-6UH" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="7Vz-mW-YpF"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="FDg-vd-9ni"/>
+                            <constraint firstItem="6gj-gu-tBq" firstAttribute="trailing" secondItem="pcB-vC-K3q" secondAttribute="trailing" constant="10" id="JjK-JV-r0x"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="MmK-Tz-mgC"/>
                             <constraint firstItem="802-sB-ZQ9" firstAttribute="centerX" secondItem="p7z-6Q-6xY" secondAttribute="centerX" id="Qjr-H2-8Oq"/>
+                            <constraint firstItem="pcB-vC-K3q" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="VTg-PS-YWJ"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="top" secondItem="jjQ-3A-6UH" secondAttribute="bottom" constant="17.5" id="W3w-cK-G4W"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="top" secondItem="802-sB-ZQ9" secondAttribute="bottom" constant="17.5" id="X3D-H9-JT6"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="tH0-nC-aX6"/>
@@ -403,6 +423,7 @@
                         <outlet property="loseText" destination="jjQ-3A-6UH" id="PxV-en-RQr"/>
                         <outlet property="loseView" destination="8oU-0u-Y1q" id="bmn-im-1Qq"/>
                         <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="7nH-EP-xPL"/>
+                        <outlet property="pauseButton" destination="pcB-vC-K3q" id="nev-vb-9G6"/>
                         <outlet property="winText" destination="802-sB-ZQ9" id="avP-DZ-VoH"/>
                         <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
                     </connections>
@@ -741,10 +762,11 @@
     </scenes>
     <resources>
         <image name="LeapNLostLogo" width="600" height="100"/>
+        <image name="Pause" width="330" height="330"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="1080" height="1920"/>
-        <image name="chevron" width="96" height="96"/>
-        <image name="chevronLeft" width="96" height="96"/>
+        <image name="cartoon-forest" width="810" height="1440"/>
+        <image name="chevron" width="72" height="72"/>
+        <image name="chevronLeft" width="72" height="72"/>
         <image name="frog" width="258" height="265"/>
     </resources>
 </document>
