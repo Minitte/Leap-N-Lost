@@ -53,6 +53,8 @@ class Scene {
     // The current score
     var score : Int = 0;
     
+    var pause: Bool = false;
+    
     
     /**
      * Constructor, initializes the scene.
@@ -193,7 +195,9 @@ class Scene {
                 gameObject.model.inView = true;
             }
             
-            gameObject.update(delta: delta);
+            if(!pause){
+                gameObject.update(delta: delta);
+            }
         }
         
         mainCamera.updatePosition();
