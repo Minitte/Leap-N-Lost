@@ -171,6 +171,12 @@ class ViewControllerLevelSelect: UIViewController {
         updateHighScorelabels();
     }
     
+    // Return to main menu
+    @IBAction func backToMainMenu(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        self.presentingViewController!.dismiss(animated: true, completion: nil);
+    }
+    
     //
     // Animal Selection
     //
