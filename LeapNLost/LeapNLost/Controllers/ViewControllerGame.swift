@@ -29,6 +29,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBOutlet weak var loseText: UILabel!
     @IBOutlet weak var loseView: UIView!
     @IBOutlet weak var nextLevelButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     
     
     // This view as a GLKView
@@ -140,14 +141,17 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         
         // Check if the player is dead
         if ((gameEngine?.currentScene.player.isDead)!) {
+            loseText.text = "You Lost";
             loseText.isHidden = false;
             loseView.isHidden = false;
             profile.lastArea = area;
             profile.lastLevel = level;
+            pauseButton.isEnabled = false;
         }
         
         // Check if the game is over
         if ((gameEngine?.currentScene.player.isGameOver)!) {
+            pauseButton.isEnabled = false;
             profile.lastArea = area;
             profile.lastLevel = level;
             if(area >= profile.reachedArea){
@@ -194,6 +198,13 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         }
     }
     
+    // Pause button
+    @IBAction func pause(_ sender: Any) {
+        gameEngine?.currentScene.pause = !(gameEngine?.currentScene.pause)!;
+        loseView.isHidden = !loseView.isHidden;
+        loseText.text = "Pause";
+        loseText.isHidden = !loseText.isHidden;
+    }
     func playMainTheme(){
         AudioPlayers.shared.stop(index: 0);
         AudioPlayers.shared.set(index: 0, fileName: "MainTheme", fileType: "mp3");

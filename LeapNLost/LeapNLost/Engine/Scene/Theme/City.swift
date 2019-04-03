@@ -95,10 +95,10 @@ class City : Theme {
         for gameObject in gameObjects {
             
             // Add lilypad point lights
-            if (gameObject is Lilypad) {
-                let lilypad : Lilypad = gameObject as! Lilypad;
-                pointLights.append(lilypad.glow);
-            }
+//            if (gameObject is Lilypad) {
+//                let lilypad : Lilypad = gameObject as! Lilypad;
+//                pointLights.append(lilypad.glow);
+//            }
             
             // Add memory fragment point lights
             if (gameObject is MemoryFragment) {

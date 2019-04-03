@@ -50,6 +50,13 @@ class PlayerGameObject : GameObject {
     // Animation for pre hop
     private var preHopAnimation : TransformAnimation = TransformAnimation();
     
+    // animation for crushed death
+    private var crushedDeathAnimation : TransformAnimation = TransformAnimation();
+    private var playCrushedAnimation : Bool = false;
+    
+    private var drownDeathAnimation : TransformAnimation = TransformAnimation();
+    private var playDrownAnimation : Bool = false;
+    
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -76,12 +83,24 @@ class PlayerGameObject : GameObject {
         
         // add keyframes
         preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.10));
+        
+        // crushed death animation
+        crushedDeathAnimation.originalScale = self.scale;
+        
+        crushedDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.5, -0.99, 0.5), atTime: 0.05));
+        
+        // drown death animation
+        drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.3));
     }
     
     /**
      * Overrided base update
      */
     override func update(delta: Float) {
+        /*
+         * INPUT SECTION
+         */
+        
         if (!hopping) {
             if (InputManager.touched) {
                 if (!prepingHop) {
@@ -105,11 +124,31 @@ class PlayerGameObject : GameObject {
             }
         }
         
+        /*
+         * ANIMATION SECTION
+         */
+        
         if (prepingHop) {
             preHopAnimation.update(delta: delta);
             
             self.scale = preHopAnimation.scale;
         }
+        
+        if (playCrushedAnimation) {
+            crushedDeathAnimation.update(delta: delta);
+            
+            self.scale = crushedDeathAnimation.scale;
+        }
+        
+        if (playDrownAnimation) {
+            drownDeathAnimation.update(delta: delta);
+            
+            self.position = drownDeathAnimation.position;
+        }
+        
+        /*
+         * POSITION SECTION
+         */
         
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
@@ -118,7 +157,7 @@ class PlayerGameObject : GameObject {
         }
         
         // stick to the targetObject position
-        if (!hopping) {
+        if (!hopping && !isDead) {
             self.position = targetObject!.position + topOffset;
         }
         
@@ -212,6 +251,26 @@ class PlayerGameObject : GameObject {
         rotation = Vector3.init(0, Float.pi, 0);
         
         currentScene?.score += 1;
+        
+        /* WTF MODE
+        for gameObject in (currentScene?.gameObjects)! {
+            if (gameObject.type == "Boulder") {
+                (gameObject as! Boulder).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Car") {
+                (gameObject as! Car).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Log") {
+                (gameObject as! Log).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Lilypad") {
+                (gameObject as! Lilypad).speed *= -1;
+            }
+        }
+         */
     }
     
     /**
@@ -309,6 +368,35 @@ class PlayerGameObject : GameObject {
             currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
         }
         
+    }
+    
+    /**
+     * Plays the death animation
+     */
+    func runCrushedAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        prepingHop = false;
+        playCrushedAnimation = true;
+        scale = crushedDeathAnimation.originalScale;
+        crushedDeathAnimation.playFromStart();
+    }
+    
+    /**
+     * Plays the drown animation
+     */
+    func runDrownAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        drownDeathAnimation.originalPosition = position;
+        
+        prepingHop = false;
+        playDrownAnimation = true;
+        drownDeathAnimation.playFromStart();
     }
     
 }
