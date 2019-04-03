@@ -53,6 +53,9 @@ class Scene {
     // The current score
     var score : Int = 0;
     
+    // Total time of this run
+    var totalTime : Float = 0.0;
+    
     var pause: Bool = false;
     
     
@@ -176,6 +179,7 @@ class Scene {
      */
     func restartLevel() {
         score = 0; // Reset the score
+        totalTime = 0.0;
         player.reset();
         spawnCoins();
     }
@@ -233,6 +237,10 @@ class Scene {
         
         if (player.tileRow >= 30) {
             player.isGameOver = true;
+        }
+        
+        if (!player.isDead && !player.isGameOver) {
+            totalTime = totalTime + delta;
         }
         
     }
