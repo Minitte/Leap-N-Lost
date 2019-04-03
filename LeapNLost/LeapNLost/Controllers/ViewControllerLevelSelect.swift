@@ -112,6 +112,23 @@ class ViewControllerLevelSelect: UIViewController {
         performSegue(withIdentifier: "levelSelected", sender: self)
     }
     
+    @IBAction func onLevel3ButtonPressed(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        AudioPlayers.shared.stop(index: 0);
+        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        AudioPlayers.shared.play(index: 0, loop: true);
+        level = 3;
+        performSegue(withIdentifier: "levelSelected", sender: self)
+    }
+    
+    @IBAction func onLevel4ButtonPressed(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        AudioPlayers.shared.stop(index: 0);
+        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        AudioPlayers.shared.play(index: 0, loop: true);
+        level = 4;
+        performSegue(withIdentifier: "levelSelected", sender: self)
+    }
     
     @IBAction func onLevel5ButtonPressed(_ sender: Any) {
         buttonAudio.play(loop: false);
