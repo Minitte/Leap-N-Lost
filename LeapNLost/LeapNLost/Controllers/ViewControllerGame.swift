@@ -27,6 +27,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBOutlet weak var nextLevelButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var scoreTextView: UITextView!
+    @IBOutlet weak var timeTextView: UITextView!
     
     
     // This view as a GLKView
@@ -136,11 +137,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         InputManager.nextFrame();
         gameEngine?.update();
         
-        // update score text
+        // update score and time text
         let scene : Scene? = gameEngine!.currentScene;
         
         if (scene != nil) {
             scoreTextView.text = "\(scene!.score)";
+            timeTextView.text = "⏱️ \(Int(scene!.totalTime))s";
         }
         
         // Check if the player is dead

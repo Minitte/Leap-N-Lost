@@ -53,6 +53,9 @@ class Scene {
     // The current score
     var score : Int = 0;
     
+    // Total time of this run
+    var totalTime : Float = 0.0;
+    
     var pause: Bool = false;
     
     
@@ -234,6 +237,8 @@ class Scene {
         if (player.tileRow >= 30) {
             player.isGameOver = true;
         }
+        
+        totalTime = totalTime + delta;
         
     }
     

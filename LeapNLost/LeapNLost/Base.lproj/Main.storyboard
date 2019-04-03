@@ -716,6 +716,7 @@
                         <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="7nH-EP-xPL"/>
                         <outlet property="pauseButton" destination="pcB-vC-K3q" id="nev-vb-9G6"/>
                         <outlet property="scoreTextView" destination="nwV-tc-2j5" id="SJf-XK-uF1"/>
+                        <outlet property="timeTextView" destination="Z2k-rE-x9M" id="t0I-2Q-BrN"/>
                         <outlet property="winText" destination="802-sB-ZQ9" id="avP-DZ-VoH"/>
                         <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
                     </connections>
