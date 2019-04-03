@@ -39,7 +39,7 @@ class Lab : Theme {
             
             // Create and append panel object
             for i in 0...panelsPerRow - 1 {
-                gameObjects.append(Panel(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4, -Float(rowIndex) * 2), speed: row.speed));
+                gameObjects.append(Panel(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
             }
         case "grass":
             break; // Do nothing
@@ -62,13 +62,13 @@ class Lab : Theme {
         // Change texture and tile depth depending on row type
         switch rowType {
         case "road":
-            textureName = "rails.png";
+            textureName = "labrails3.jpg";
             rowDepth = -5;
         case "water":
             textureName = "greenwater.jpg";
             rowDepth = -5.5;
         case "grass":
-            textureName = "darkgrass.jpg";
+            textureName = "labfloor3.jpg";
             rowDepth = -5;
         default:
             print("ERROR: Invalid row type for city theme");
