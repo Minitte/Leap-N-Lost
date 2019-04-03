@@ -15,6 +15,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // The openGL game engine.
     private var gameEngine : GameEngine?;
     let buttonAudio = Audio();
+    let winAudio = Audio();
     var area: Int = 1;
     var level: Int = 1;
     var profile = PlayerProfile.init();
@@ -36,6 +37,8 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         setupGL();
         winView.layer.borderWidth = 5.0;
         winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
+        buttonAudio.setURL(fileName: "click", fileType: "wav");
+        winAudio.setURL(fileName: "win", fileType: "wav");
     }
     
     /**
@@ -144,6 +147,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         
         // Check if the game is over
         if ((gameEngine?.currentScene.player.isGameOver)!) {
+            winAudio.play(loop: false);
             pauseButton.isEnabled = false;
             profile.lastArea = area;
             profile.lastLevel = level;
