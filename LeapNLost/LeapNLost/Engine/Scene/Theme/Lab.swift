@@ -35,7 +35,7 @@ class Lab : Theme {
             }
         case "water":
             // Section for each panel
-            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(trainsPerRow);
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(panelsPerRow);
             
             // Create and append panel object
             for i in 0...panelsPerRow - 1 {
@@ -94,21 +94,16 @@ class Lab : Theme {
         
         for gameObject in gameObjects {
             
-            // Add lilypad point lights
-            if (gameObject is Log) {
-                let log : Log = gameObject as! Log;
-                pointLights.append(log.glow);
+            // Add panel point lights
+            if (gameObject is Panel) {
+                let panel : Panel = gameObject as! Panel;
+                pointLights.append(panel.glow);
             }
             
             // Add memory fragment point lights
             if (gameObject is MemoryFragment) {
                 let memoryFragment : MemoryFragment = gameObject as! MemoryFragment;
                 pointLights.append(memoryFragment.glow);
-            }
-            
-            if (gameObject is Boulder) {
-                let boulder : Boulder = gameObject as! Boulder;
-                pointLights.append(boulder.glow);
             }
         }
         

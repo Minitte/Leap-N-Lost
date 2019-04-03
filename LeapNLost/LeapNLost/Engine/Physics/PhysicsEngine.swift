@@ -64,7 +64,7 @@ class PhysicsEngine {
                     
                 }
                 
-                if (gameObject.type == "Lilypad" || gameObject.type == "Log") {
+                if (gameObject.type == "Lilypad" || gameObject.type == "Log" || gameObject.type == "Panel") {
                     //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onFloatingObject = true;
                 }
