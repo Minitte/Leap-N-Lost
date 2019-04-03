@@ -78,6 +78,7 @@ class PhysicsEngine {
         
         // Check if the player landed on water
         if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onFloatingObject) {
+            player.runDrownAnimation();	
             player.isDead = true;
         }
     }
