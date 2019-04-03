@@ -175,6 +175,7 @@ class Scene {
      * Also respawns coins, but does not reset position of any other game objects.
      */
     func restartLevel() {
+        score = 0; // Reset the score
         player.reset();
         spawnCoins();
     }
