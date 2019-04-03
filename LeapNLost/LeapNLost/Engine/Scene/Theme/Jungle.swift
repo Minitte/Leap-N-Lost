@@ -68,7 +68,7 @@ class Jungle : Theme {
             textureName = "water.jpg";
             rowDepth = -5.5;
         case "grass":
-            textureName = "grass.jpg";
+            textureName = "darkgrass.jpg";
             rowDepth = -5;
         default:
             print("ERROR: Invalid row type for city theme");
