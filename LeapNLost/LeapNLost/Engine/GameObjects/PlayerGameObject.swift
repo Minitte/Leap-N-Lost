@@ -61,6 +61,7 @@ class PlayerGameObject : GameObject {
     private let squishDieAudio = Audio();
     private let splashDieAudio = Audio();
     private let hopAudio = Audio();
+    private let lilypadAudio = Audio();
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -100,6 +101,7 @@ class PlayerGameObject : GameObject {
         squishDieAudio.setURL(fileName: "squishDie", fileType: "wav");
         splashDieAudio.setURL(fileName: "splashDie", fileType: "wav");
         hopAudio.setURL(fileName: "boing", fileType: "wav");
+        lilypadAudio.setURL(fileName: "splashLilypad", fileType: "wav");
     }
     
     /**
@@ -252,6 +254,7 @@ class PlayerGameObject : GameObject {
             // check if there was a closest lilypad
             if (closest != nil) {
                 targetObjectToJumpTo = closest!;
+                lilypadAudio.play(loop: false);
             }
         }
         
