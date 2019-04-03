@@ -45,12 +45,17 @@ class ViewControllerMainMenu: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.destination is ViewControllerLevelSelect{
-            let vc = segue.destination as? ViewControllerLevelSelect
+            let vc = segue.destination as? ViewControllerLevelSelect;
             vc?.profile = profile;
         }
         
         if segue.destination is ViewControllerSettings{
-            let vc = segue.destination as? ViewControllerSettings
+            let vc = segue.destination as? ViewControllerSettings;
+            vc?.profile = profile;
+        }
+        
+        if segue.destination is ViewControllerHighscore{
+            let vc = segue.destination as? ViewControllerHighscore;
             vc?.profile = profile;
         }
     }
