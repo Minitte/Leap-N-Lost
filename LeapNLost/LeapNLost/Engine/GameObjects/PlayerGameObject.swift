@@ -399,4 +399,19 @@ class PlayerGameObject : GameObject {
         drownDeathAnimation.playFromStart();
     }
     
+    /**
+     * Resets this player to default settings and position.
+     */
+    func reset() {
+        // Reset flags
+        isDead = false;
+        playCrushedAnimation = false;
+        playDrownAnimation = false;
+        
+        // Reset scale
+        scale = crushedDeathAnimation.originalScale;
+        
+        // Teleport back to the start of the level
+        teleportToTarget(target: currentScene!.getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
 }

@@ -121,7 +121,7 @@ class Scene {
             theme = City();
         case "Jungle":
             theme = Jungle();
-        default:	
+        default:
             print("ERROR: Invalid level theme");
         }
       
@@ -142,16 +142,12 @@ class Scene {
             // Append objects and tiles to the level
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
-            
-            if(rowIndex % 3 == 0) {
-                let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
-                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
-                gameObjects.append(coin);
-                collisionDictionary[rowIndex]!.append(coin);
-            }
         }
         
-        //Creating a MemoryFragment and appending to gameobjects.
+        // Spawn coins
+        spawnCoins();
+        
+        // Creating a MemoryFragment and appending to gameobjects.
         let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
 
         gameObjects.append(memoryFragment);
@@ -172,6 +168,38 @@ class Scene {
         
         // Set player position
         player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
+    
+    /**
+     * Restarts the level by putting the player back at the starting tile.
+     * Also respawns coins, but does not reset position of any other game objects.
+     */
+    func restartLevel() {
+        player.reset();
+        spawnCoins();
+    }
+    
+    /**
+     * Generates coins for every third row.
+     * If there are any existing coins, they will be removed first.
+     */
+    func spawnCoins() {
+        // Remove all existing coins
+        gameObjects.removeAll(where: {$0 is Coin});
+        for i in 0..<collisionDictionary.count {
+            collisionDictionary[i]!.removeAll(where: {$0 is Coin});
+        }
+        
+        // Spawn a coin every third row
+        for rowIndex in 0..<self.level.rows.count {
+            if(rowIndex % 3 == 0) {
+                // Cap column between 2 and 12
+                let randomNumber : Int = Int.random(in: 2..<Level.tilesPerRow - 2);
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
+                gameObjects.append(coin);
+                collisionDictionary[rowIndex]!.append(coin);
+            }
+        }
     }
     
     /**
