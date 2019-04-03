@@ -56,6 +56,17 @@ class Audio {
         }
     }
     
+    // Set player volume
+    func setVolume(volume: Float){
+        self.volume = volume;
+        if #available(iOS 10.0, *) {
+            player?.setVolume(volume, fadeDuration: 1)
+        } else {
+            // Fallback on earlier versions
+            player?.volume = volume;
+        };
+    }
+    
     // Stops the player and resets audio clips to start
     func stop(){
         guard let player = player else { return }

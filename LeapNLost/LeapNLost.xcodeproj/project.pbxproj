@@ -104,6 +104,7 @@
 		E2DA6519221BCE230065A150 /* PlayerGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA6518221BCE230065A150 /* PlayerGameObject.swift */; };
 		E2F0383C223F4E5B0050B312 /* TransformAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0383B223F4E5B0050B312 /* TransformAnimation.swift */; };
 		E2F0383E223F50B90050B312 /* TransformKeyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0383D223F50B90050B312 /* TransformKeyframe.swift */; };
+		FEA343F922552A72003A0A3B /* ViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA343F822552A72003A0A3B /* ViewControllerSettings.swift */; };
 		FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710A2214AFA800C94A22 /* carBlue.png */; };
 		FEF171102214AFA800C94A22 /* carGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710B2214AFA800C94A22 /* carGreen.png */; };
 		FEF171112214AFA800C94A22 /* carRed.png in Resources */ = {isa = PBXBuildFile; fileRef = FEF1710C2214AFA800C94A22 /* carRed.png */; };
@@ -231,6 +232,7 @@
 		E2DA6518221BCE230065A150 /* PlayerGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerGameObject.swift; sourceTree = "<group>"; };
 		E2F0383B223F4E5B0050B312 /* TransformAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformAnimation.swift; sourceTree = "<group>"; };
 		E2F0383D223F50B90050B312 /* TransformKeyframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKeyframe.swift; sourceTree = "<group>"; };
+		FEA343F822552A72003A0A3B /* ViewControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettings.swift; sourceTree = "<group>"; };
 		FEF1710A2214AFA800C94A22 /* carBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBlue.png; sourceTree = "<group>"; };
 		FEF1710B2214AFA800C94A22 /* carGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carGreen.png; sourceTree = "<group>"; };
 		FEF1710C2214AFA800C94A22 /* carRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carRed.png; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				AD381727220919F500390CFF /* ViewControllerGame.swift */,
 				6F8665FF2214D9BC00E6C75A /* ViewControllerCutscene.swift */,
 				5709E92B223E5F0600F427E5 /* ViewControllerLevelSelect.swift */,
+				FEA343F822552A72003A0A3B /* ViewControllerSettings.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				AEF3658C220B6C8E00ED9827 /* GLKExtension.swift in Sources */,
 				AD6581E522406C8800C2D41D /* Tile.swift in Sources */,
 				AE1B20AF2228A16A0053CE35 /* PhysicsEngine.swift in Sources */,
+				FEA343F922552A72003A0A3B /* ViewControllerSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

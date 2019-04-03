@@ -36,6 +36,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         setupGL();
         winView.layer.borderWidth = 5.0;
         winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
+        buttonAudio.setVolume(volume: profile.volumeSFX);
     }
     
     /**
