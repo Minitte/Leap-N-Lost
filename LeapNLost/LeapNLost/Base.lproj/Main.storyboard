@@ -670,6 +670,18 @@
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="0" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2k-rE-x9M" userLabel="Time Text">
+                                <rect key="frame" x="16" y="30" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Gm7-gS-5pO"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Mhj-Jm-DCM"/>
+                                    <constraint firstAttribute="height" constant="40" id="T5Y-hR-9Hs"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="bgE-gW-Vce"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -678,13 +690,16 @@
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="FDg-vd-9ni"/>
                             <constraint firstItem="6gj-gu-tBq" firstAttribute="trailing" secondItem="pcB-vC-K3q" secondAttribute="trailing" constant="10" id="HvD-Pq-y5Z"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="MmK-Tz-mgC"/>
+                            <constraint firstItem="Z2k-rE-x9M" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="Nbg-7n-vKg"/>
                             <constraint firstItem="802-sB-ZQ9" firstAttribute="centerX" secondItem="p7z-6Q-6xY" secondAttribute="centerX" id="Qjr-H2-8Oq"/>
                             <constraint firstItem="pcB-vC-K3q" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="VTg-PS-YWJ"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="top" secondItem="jjQ-3A-6UH" secondAttribute="bottom" constant="17.5" id="W3w-cK-G4W"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="top" secondItem="802-sB-ZQ9" secondAttribute="bottom" constant="17.5" id="X3D-H9-JT6"/>
                             <constraint firstItem="nwV-tc-2j5" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="Yzk-g4-deJ"/>
                             <constraint firstItem="nwV-tc-2j5" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="gfu-j5-hgb"/>
+                            <constraint firstItem="nwV-tc-2j5" firstAttribute="leading" secondItem="Z2k-rE-x9M" secondAttribute="trailing" constant="21.5" id="p0G-A4-hZT"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="tH0-nC-aX6"/>
+                            <constraint firstItem="Z2k-rE-x9M" firstAttribute="leading" secondItem="6gj-gu-tBq" secondAttribute="leading" constant="16" id="tHQ-uf-yv3"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="v04-sP-GW1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6gj-gu-tBq"/>
