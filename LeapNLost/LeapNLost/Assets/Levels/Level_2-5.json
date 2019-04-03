@@ -1,0 +1,86 @@
+{
+    "info": {
+        "area": 2,
+        "level": 5,
+        "theme": "Jungle",
+        "night": false,
+        "desc": "Jungle Hazards"
+    },
+    "rows": [
+        {
+            "id": 0,
+            "type": "grass",
+            "speed": 1.0
+        },
+        {
+            "id": 1,
+            "type": "water",
+            "speed": 0.5
+        },
+        {
+            "id": 2,
+            "type": "road",
+            "speed": 6.0
+        },
+        {
+            "id": 3,
+            "type": "water",
+            "speed": -2.0
+        },
+        {
+            "id": 4,
+            "type": "road",
+            "speed": -5.5
+        },
+        {
+            "id": 5,
+            "type": "road",
+            "speed": 7.0
+        },
+        {
+            "id": 6,
+            "type": "grass",
+            "speed": 4.0
+        },
+        {
+            "id": 7,
+            "type": "road",
+            "speed": 10.0
+        },
+        {
+            "id": 8,
+            "type": "road",
+            "speed": 8.0
+        },
+        {
+            "id": 9,
+            "type": "grass",
+            "speed": 2.5
+        },
+        {
+            "id": 10,
+            "type": "water",
+            "speed": -1.0
+        },
+        {
+            "id": 11,
+            "type": "rock",
+            "speed": 10.0
+        },
+        {
+            "id": 12,
+            "type": "water",
+            "speed": 1.0
+        },
+        {
+            "id": 13,
+            "type": "water",
+            "speed": 6.0
+        },
+        {
+            "id": 14,
+            "type": "grass",
+            "speed": -1.0
+        }
+    ]
+}
