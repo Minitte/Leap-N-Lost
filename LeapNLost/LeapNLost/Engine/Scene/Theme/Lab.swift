@@ -15,7 +15,7 @@ class Lab : Theme {
     
     // Specify number of objects per row here
     private let trainsPerRow : Int = 2;
-    private let logsPerRow : Int = 3;
+    private let panelsPerRow : Int = 3;
     
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
@@ -34,7 +34,13 @@ class Lab : Theme {
                 gameObjects.append(Train(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.8, -Float(rowIndex) * 2 + 0.6	), speed: row.speed));
             }
         case "water":
-            break;
+            // Section for each panel
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(trainsPerRow);
+            
+            // Create and append panel object
+            for i in 0...panelsPerRow - 1 {
+                gameObjects.append(Panel(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4, -Float(rowIndex) * 2), speed: row.speed));
+            }
         case "grass":
             break; // Do nothing
         default:

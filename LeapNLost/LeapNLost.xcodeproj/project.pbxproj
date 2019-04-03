@@ -93,6 +93,7 @@
 		AEAF9B0E2255441A00FE5F99 /* rails.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B0C2255441A00FE5F99 /* rails.png */; };
 		AEAF9B0F2255441A00FE5F99 /* railsgrass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B0D2255441A00FE5F99 /* railsgrass.jpg */; };
 		AEAF9B122255443C00FE5F99 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF9B112255443C00FE5F99 /* Train.swift */; };
+		AEAF9B1422554A9E00FE5F99 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF9B1322554A9E00FE5F99 /* Panel.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
@@ -225,6 +226,7 @@
 		AEAF9B0C2255441A00FE5F99 /* rails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rails.png; sourceTree = "<group>"; };
 		AEAF9B0D2255441A00FE5F99 /* railsgrass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = railsgrass.jpg; sourceTree = "<group>"; };
 		AEAF9B112255443C00FE5F99 /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
+		AEAF9B1322554A9E00FE5F99 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -433,6 +435,7 @@
 				AE63DE86224AEFC40025B1F6 /* Log.swift */,
 				AE63DE9B224B0A680025B1F6 /* Boulder.swift */,
 				AEAF9B112255443C00FE5F99 /* Train.swift */,
+				AEAF9B1322554A9E00FE5F99 /* Panel.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 				AD6581E522406C8800C2D41D /* Tile.swift in Sources */,
 				AE1B20AF2228A16A0053CE35 /* PhysicsEngine.swift in Sources */,
 				FEA343F922552A72003A0A3B /* ViewControllerSettings.swift in Sources */,
+				AEAF9B1422554A9E00FE5F99 /* Panel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
