@@ -430,6 +430,11 @@ class PlayerGameObject : GameObject {
      */
     private func findTargetFloatable(rowOffset:Int, colOffset:Int, searchDistance:Float) -> GameObject? {
         let targetTile : Tile? = currentScene!.getTile(row: tileRow + rowOffset, column: tileCol + colOffset);
+        
+        if (targetTile == nil) {
+            return nil;
+        }
+        
         let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
         
         // closest distance between the frog(player) and the lily pad
