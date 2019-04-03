@@ -410,6 +410,22 @@ class PlayerGameObject : GameObject {
     }
     
     /**
+     * Resets this player to default settings and position.
+     */
+    func reset() {
+        // Reset flags
+        isDead = false;
+        playCrushedAnimation = false;
+        playDrownAnimation = false;
+        
+        // Reset scale
+        scale = crushedDeathAnimation.originalScale;
+        
+        // Teleport back to the start of the level
+        teleportToTarget(target: currentScene!.getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
+  
+    /**
      * Searches for a floatable at the tile at the tile position player + offset
      */
     private func findTargetFloatable(rowOffset:Int, colOffset:Int, searchDistance:Float) -> GameObject? {
@@ -437,5 +453,5 @@ class PlayerGameObject : GameObject {
         // check if there was a closest lilypad
         return closest;
     }
-    
+   
 }

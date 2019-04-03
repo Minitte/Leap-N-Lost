@@ -113,8 +113,15 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         playMainTheme();
     }
     @IBAction func TryAgainButton(_ sender: Any) {
-        gameEngine = nil;
-        gameEngine = GameEngine(self.view as! GLKView, area: area, level: level);
+        // Restart the level
+        gameEngine!.currentScene.restartLevel();
+        
+        // Reload models
+        for gameObject in gameEngine!.currentScene.gameObjects {
+            gameEngine!.loadModel(model: gameObject.model);
+            gameEngine!.loadModel(model: gameObject.collider!.model!);
+        }
+        
         loseView.isHidden = true;
         loseText.isHidden = true;
     }
