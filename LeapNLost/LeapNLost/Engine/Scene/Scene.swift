@@ -239,7 +239,9 @@ class Scene {
             player.isGameOver = true;
         }
         
-        totalTime = totalTime + delta;
+        if (!player.isDead && !player.isGameOver) {
+            totalTime = totalTime + delta;
+        }
         
     }
     
