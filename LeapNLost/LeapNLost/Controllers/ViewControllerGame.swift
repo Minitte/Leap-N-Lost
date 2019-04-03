@@ -25,6 +25,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBOutlet weak var loseView: UIView!
     @IBOutlet weak var nextLevelButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var scoreTextView: UITextView!
     
     
     // This view as a GLKView
@@ -123,6 +124,13 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     func glkViewControllerUpdate(_ controller: GLKViewController) {
         InputManager.nextFrame();
         gameEngine?.update();
+        
+        // update score text
+        let scene : Scene? = gameEngine!.currentScene;
+        
+        if (scene != nil) {
+            scoreTextView.text = "\(scene!.score)";
+        }
         
         // Check if the player is dead
         if ((gameEngine?.currentScene.player.isDead)!) {
