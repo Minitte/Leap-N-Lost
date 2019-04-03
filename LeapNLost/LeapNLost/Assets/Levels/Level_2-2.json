@@ -15,12 +15,12 @@
         {
             "id": 1,
             "type": "water",
-            "speed": -3.0
+            "speed": -2.5
         },
         {
             "id": 2,
             "type": "water",
-            "speed": -2.0
+            "speed": -4.0
         },
         {
             "id": 3,
