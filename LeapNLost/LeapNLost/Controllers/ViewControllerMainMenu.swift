@@ -17,8 +17,6 @@ class ViewControllerMainMenu: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
-        initAudio.play(loop: false);
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,8 +38,9 @@ class ViewControllerMainMenu: UIViewController {
             NSLog("No save file. Making default save...");
             profile.saveToFile();
         }
-        initAudio.volume = profile.volumeSFX;
-        buttonAudio.volume = profile.volumeSFX;
+        initAudio.volume = AudioPlayers.shared.volumeSFX;
+        buttonAudio.volume = AudioPlayers.shared.volumeSFX;
+        initAudio.play(loop: false);
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){

@@ -23,12 +23,14 @@ class ViewControllerSettings: UIViewController {
     }
     
     @IBAction func backToMainMenu(_ sender: Any) {
+        buttonAudio.play(loop: false);
         NSLog("Saving settings...");
         profile.saveToFile();
         self.presentingViewController!.dismiss(animated: true, completion: nil);
     }
     
     @IBAction func deletePlayerProfile(_ sender: Any){
+        buttonAudio.play(loop: false);
         NSLog("Making new player profile...");
         profile = PlayerProfile.init();
         profile.volumeBGM = musicSlider.value;
@@ -39,11 +41,13 @@ class ViewControllerSettings: UIViewController {
         profile.volumeBGM = musicSlider.value;
         AudioPlayers.shared.players[0].setVolume(volume: musicSlider.value);
         buttonAudio.play(loop: false);
+        AudioPlayers.shared.volumeBGM = musicSlider.value;
     }
     
     @IBAction func soundVolumeChange(_ sender: Any) {
         profile.volumeSFX = soundSlider.value;
         buttonAudio.setVolume(volume: profile.volumeSFX);
         buttonAudio.play(loop: false);
+        AudioPlayers.shared.volumeSFX = soundSlider.value;
     }
 }

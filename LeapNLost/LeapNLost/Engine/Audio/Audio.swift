@@ -88,6 +88,8 @@ class Audio {
 class AudioPlayers{
     // Singleton
     static let shared: AudioPlayers = AudioPlayers();
+    var volumeSFX: Float = 1.0;
+    var volumeBGM: Float = 1.0;
     var players = [Audio(fileName: "click", fileType: "wav"), Audio(fileName: "click", fileType: "wav")];
     
     // Adds a new audio player
