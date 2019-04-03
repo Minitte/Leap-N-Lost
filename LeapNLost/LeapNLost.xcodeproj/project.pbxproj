@@ -89,6 +89,10 @@
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
 		AEAF9B08225531FC00FE5F99 /* greenwater.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B06225531FC00FE5F99 /* greenwater.jpg */; };
 		AEAF9B09225531FC00FE5F99 /* darkgrass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B07225531FC00FE5F99 /* darkgrass.jpg */; };
+		AEAF9B0B2255436000FE5F99 /* Lab.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF9B0A2255436000FE5F99 /* Lab.swift */; };
+		AEAF9B0E2255441A00FE5F99 /* rails.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B0C2255441A00FE5F99 /* rails.png */; };
+		AEAF9B0F2255441A00FE5F99 /* railsgrass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B0D2255441A00FE5F99 /* railsgrass.jpg */; };
+		AEAF9B122255443C00FE5F99 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF9B112255443C00FE5F99 /* Train.swift */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
@@ -217,6 +221,10 @@
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		AEAF9B06225531FC00FE5F99 /* greenwater.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = greenwater.jpg; sourceTree = "<group>"; };
 		AEAF9B07225531FC00FE5F99 /* darkgrass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = darkgrass.jpg; sourceTree = "<group>"; };
+		AEAF9B0A2255436000FE5F99 /* Lab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lab.swift; sourceTree = "<group>"; };
+		AEAF9B0C2255441A00FE5F99 /* rails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rails.png; sourceTree = "<group>"; };
+		AEAF9B0D2255441A00FE5F99 /* railsgrass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = railsgrass.jpg; sourceTree = "<group>"; };
+		AEAF9B112255443C00FE5F99 /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -424,6 +432,7 @@
 				AD6581E422406C8800C2D41D /* Tile.swift */,
 				AE63DE86224AEFC40025B1F6 /* Log.swift */,
 				AE63DE9B224B0A680025B1F6 /* Boulder.swift */,
+				AEAF9B112255443C00FE5F99 /* Train.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -542,6 +551,7 @@
 				AEAF40832244323800BBAB72 /* Theme.swift */,
 				AEAF40862244340B00BBAB72 /* City.swift */,
 				AE63DE95224AF22A0025B1F6 /* Jungle.swift */,
+				AEAF9B0A2255436000FE5F99 /* Lab.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -590,6 +600,8 @@
 				928D5380221B8EFA002C6F2B /* road.jpg */,
 				928D537E221B8EF9002C6F2B /* water.jpg */,
 				AEC6977E220D1613009AA6F1 /* crate.jpg */,
+				AEAF9B0C2255441A00FE5F99 /* rails.png */,
+				AEAF9B0D2255441A00FE5F99 /* railsgrass.jpg */,
 			);
 			path = Cube;
 			sourceTree = "<group>";
@@ -833,6 +845,7 @@
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
 				AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */,
 				AEC6977F220D1613009AA6F1 /* crate.jpg in Resources */,
+				AEAF9B0E2255441A00FE5F99 /* rails.png in Resources */,
 				57E97AEC2212CBA200A10BC9 /* Audio in Resources */,
 				57283263224D779600A7365A /* train.obj in Resources */,
 				6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */,
@@ -849,6 +862,7 @@
 				FEF171112214AFA800C94A22 /* carRed.png in Resources */,
 				928D5381221B8EFA002C6F2B /* water.jpg in Resources */,
 				5728325D224D778500A7365A /* ship.mtl in Resources */,
+				AEAF9B0F2255441A00FE5F99 /* railsgrass.jpg in Resources */,
 				FEF171122214AFA800C94A22 /* car.mtl in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				5728325F224D778500A7365A /* ship.obj in Resources */,
@@ -907,6 +921,7 @@
 				AE4CA98A2214CF4C004704D8 /* Scene.swift in Sources */,
 				AEF36597220B8AA300ED9827 /* GameObject.swift in Sources */,
 				AD381728220919F500390CFF /* ViewControllerGame.swift in Sources */,
+				AEAF9B0B2255436000FE5F99 /* Lab.swift in Sources */,
 				AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */,
 				AE63DE87224AEFC40025B1F6 /* Log.swift in Sources */,
 				AEF36581220B5F2500ED9827 /* GameEngine.swift in Sources */,
@@ -942,6 +957,7 @@
 				5709E92C223E5F0600F427E5 /* ViewControllerLevelSelect.swift in Sources */,
 				ADEF384822123BCF000DEFCB /* OBJLoader.swift in Sources */,
 				92372E7322102F44001F5139 /* DirectionalLight.swift in Sources */,
+				AEAF9B122255443C00FE5F99 /* Train.swift in Sources */,
 				5718CA212203C522000EC054 /* AppDelegate.swift in Sources */,
 				AEAF40842244323800BBAB72 /* Theme.swift in Sources */,
 				5707397C221CEDAC00F54DB3 /* Car.swift in Sources */,
