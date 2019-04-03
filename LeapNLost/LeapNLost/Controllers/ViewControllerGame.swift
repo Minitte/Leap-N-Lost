@@ -16,6 +16,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     private var gameEngine : GameEngine?;
     let buttonAudio = Audio();
     let hopAudio = Audio();
+    let squishDieAudio = Audio();
+    let splashDieAudio = Audio();
+    let coinAudio = Audio();
+    let winAudio = Audio();
     var area: Int = 1;
     var level: Int = 1;
     var profile = PlayerProfile.init();
@@ -37,6 +41,10 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         hopAudio.setURL(fileName: "boing", fileType: "wav");
+        splashDieAudio.setURL(fileName: "splashDie", fileType: "wav");
+        squishDieAudio.setURL(fileName: "squishDie", fileType: "wav");
+        coinAudio.setURL(fileName: "coin", fileType: "wav");
+        winAudio.setURL(fileName: "win", fileType: "wav");
     }
     
     /**
