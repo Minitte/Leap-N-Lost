@@ -59,6 +59,12 @@ class PlayerGameObject : GameObject {
     
     private var lastFloatableCheck : Bool = false;
     
+    private let coinAudio = Audio();
+    private let squishDieAudio = Audio();
+    private let splashDieAudio = Audio();
+    private let hopAudio = Audio();
+    private let lilypadAudio = Audio();
+  
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -93,6 +99,12 @@ class PlayerGameObject : GameObject {
         
         // drown death animation
         drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.3));
+        
+        coinAudio.setURL(fileName: "coin", fileType: "wav");
+        squishDieAudio.setURL(fileName: "squishDie", fileType: "wav");
+        splashDieAudio.setURL(fileName: "splashDie", fileType: "wav");
+        hopAudio.setURL(fileName: "boing", fileType: "wav");
+        lilypadAudio.setURL(fileName: "splashLilypad", fileType: "wav");
     }
     
     /**
@@ -164,6 +176,7 @@ class PlayerGameObject : GameObject {
         }
         
         if (hopping) {
+            hopAudio.play(loop: false);
             hopTime = hopTime + delta;
             
             var limitedDelta : Float = delta;
@@ -232,6 +245,7 @@ class PlayerGameObject : GameObject {
         let closest : GameObject? = findTargetFloatable(rowOffset: 1, colOffset: 0, searchDistance: 3.0);
         
         if (closest != nil) {
+            lilypadAudio.play(loop: false);
             targetObjectToJumpTo = closest!;
         }
         
@@ -353,6 +367,7 @@ class PlayerGameObject : GameObject {
         
         //Remove the collider in the collision dictionairy.
         if object is Coin {
+            coinAudio.play(loop: false);
             let rowIndex : Int = (object as! Coin).row;
             
             currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
@@ -371,6 +386,7 @@ class PlayerGameObject : GameObject {
             return;
         }
         
+        squishDieAudio.play(loop: false);
         prepingHop = false;
         playCrushedAnimation = true;
         scale = crushedDeathAnimation.originalScale;
@@ -385,6 +401,7 @@ class PlayerGameObject : GameObject {
             return;
         }
         
+        splashDieAudio.play(loop: false);
         drownDeathAnimation.originalPosition = position;
         
         prepingHop = false;

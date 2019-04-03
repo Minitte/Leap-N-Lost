@@ -87,6 +87,8 @@
 		AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */; };
 		AEAF40842244323800BBAB72 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40832244323800BBAB72 /* Theme.swift */; };
 		AEAF40872244340B00BBAB72 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAF40862244340B00BBAB72 /* City.swift */; };
+		AEAF9B08225531FC00FE5F99 /* greenwater.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B06225531FC00FE5F99 /* greenwater.jpg */; };
+		AEAF9B09225531FC00FE5F99 /* darkgrass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AEAF9B07225531FC00FE5F99 /* darkgrass.jpg */; };
 		AEB2B1442239ADAD00BE18A0 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */; };
 		AEC6974A220D03CF009AA6F1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69749220D03CF009AA6F1 /* Camera.swift */; };
 		AEC69776220D1153009AA6F1 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC69775220D1153009AA6F1 /* MathTests.swift */; };
@@ -212,6 +214,8 @@
 		AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt.jpg; sourceTree = "<group>"; };
 		AEAF40832244323800BBAB72 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AEAF40862244340B00BBAB72 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		AEAF9B06225531FC00FE5F99 /* greenwater.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = greenwater.jpg; sourceTree = "<group>"; };
+		AEAF9B07225531FC00FE5F99 /* darkgrass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = darkgrass.jpg; sourceTree = "<group>"; };
 		AEB2B1432239ADAD00BE18A0 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		AEC69749220D03CF009AA6F1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		AEC69773220D1153009AA6F1 /* MathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -575,6 +579,8 @@
 			isa = PBXGroup;
 			children = (
 				ADEF384B221243A2000DEFCB /* model_cube.obj */,
+				AEAF9B07225531FC00FE5F99 /* darkgrass.jpg */,
+				AEAF9B06225531FC00FE5F99 /* greenwater.jpg */,
 				AD08FB232214CFED00C0B689 /* default-texture.png */,
 				928D537F221B8EFA002C6F2B /* grass.jpg */,
 				AE63DE9F224B0F6C0025B1F6 /* dirt.jpg */,
@@ -831,6 +837,7 @@
 				5708206D220AE502000740D3 /* Levels in Resources */,
 				928D5383221B8EFA002C6F2B /* road.jpg in Resources */,
 				AE63DE8C224AF0BE0025B1F6 /* log.obj in Resources */,
+				AEAF9B09225531FC00FE5F99 /* darkgrass.jpg in Resources */,
 				ADEF384C221243A2000DEFCB /* model_cube.obj in Resources */,
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AD622A602249B2B400CA4A94 /* rabbit.mtl in Resources */,
@@ -847,6 +854,7 @@
 				AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */,
 				6FCCE49A22498D5A001BD702 /* coin.obj in Resources */,
 				AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */,
+				AEAF9B08225531FC00FE5F99 /* greenwater.jpg in Resources */,
 				5718CA282203C523000EC054 /* Assets.xcassets in Resources */,
 				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
