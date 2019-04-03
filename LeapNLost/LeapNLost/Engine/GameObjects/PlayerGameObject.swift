@@ -57,11 +57,14 @@ class PlayerGameObject : GameObject {
     private var drownDeathAnimation : TransformAnimation = TransformAnimation();
     private var playDrownAnimation : Bool = false;
     
+    private var lastFloatableCheck : Bool = false;
+    
     private let coinAudio = Audio();
     private let squishDieAudio = Audio();
     private let splashDieAudio = Audio();
     private let hopAudio = Audio();
     private let lilypadAudio = Audio();
+  
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -203,6 +206,16 @@ class PlayerGameObject : GameObject {
             // update velocity
             velocity = velocity + (gravity * limitedDelta);
             
+            // last moment check
+            if (!lastFloatableCheck && hopTimeRatio >= 0.9) {
+                let floatable : GameObject? = findTargetFloatable(rowOffset: 1, colOffset: 0, searchDistance: 1.5);
+                if (floatable != nil) {
+                    targetObject = floatable;
+                }
+                lastFloatableCheck = true;
+            }
+            
+            // landed
             if (hopTime >= maxHopTime) {
                 positionToTilePosition();
                 
@@ -229,33 +242,11 @@ class PlayerGameObject : GameObject {
         var targetObjectToJumpTo : GameObject = targetTile!;
         
         // special case for water
-        if (targetTile!.type == "water") {
-            // list of water objects infront of the frog(player)
-            let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
-            
-            // closest distance between the frog(player) and the lily pad
-            var closestDist : Float = 1000000.0;
-            var closest : GameObject?;
-            
-            // find closest
-            for gameObject in waterObjects {
-                if (gameObject.type != "Lilypad" && gameObject.type != "Log") {
-                    continue;
-                }
-                
-                let dist : Float = (gameObject.position - self.position).magnitude();
-                
-                if (dist < 3 && dist < closestDist) {
-                    closestDist = dist;
-                    closest = gameObject;
-                }
-            }
-            
-            // check if there was a closest lilypad
-            if (closest != nil) {
-                targetObjectToJumpTo = closest!;
-                lilypadAudio.play(loop: false);
-            }
+        let closest : GameObject? = findTargetFloatable(rowOffset: 1, colOffset: 0, searchDistance: 3.0);
+        
+        if (closest != nil) {
+            lilypadAudio.play(loop: false);
+            targetObjectToJumpTo = closest!;
         }
         
         // jump to the target
@@ -334,6 +325,7 @@ class PlayerGameObject : GameObject {
      * tile - the tile to teleport onto
      */
     func teleportToTarget(target : GameObject) {
+        lastFloatableCheck = false;
         targetObject = target;
         self.position = target.position + Vector3(0, 2, 0);
         positionToTilePosition();
@@ -346,6 +338,8 @@ class PlayerGameObject : GameObject {
         velocity = hopVelocity;
             
         targetObject = target;
+        
+        lastFloatableCheck = false;
         
         hopTime = 0.0;
         
@@ -413,6 +407,35 @@ class PlayerGameObject : GameObject {
         prepingHop = false;
         playDrownAnimation = true;
         drownDeathAnimation.playFromStart();
+    }
+    
+    /**
+     * Searches for a floatable at the tile at the tile position player + offset
+     */
+    private func findTargetFloatable(rowOffset:Int, colOffset:Int, searchDistance:Float) -> GameObject? {
+        let targetTile : Tile? = currentScene!.getTile(row: tileRow + rowOffset, column: tileCol + colOffset);
+        let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
+        
+        // closest distance between the frog(player) and the lily pad
+        var closestDist : Float = 1000000.0;
+        var closest : GameObject?;
+        
+        // find closest
+        for gameObject in waterObjects {
+            if (gameObject.type != "Lilypad" && gameObject.type != "Log") {
+                continue;
+            }
+            
+            let dist : Float = (gameObject.position - self.position).magnitude();
+            
+            if (dist < searchDistance && dist < closestDist) {
+                closestDist = dist;
+                closest = gameObject;
+            }
+        }
+        
+        // check if there was a closest lilypad
+        return closest;
     }
     
 }
