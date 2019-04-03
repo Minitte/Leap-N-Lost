@@ -396,6 +396,16 @@
                                     <action selector="pause:" destination="cyD-kn-t94" eventType="touchUpInside" id="1Gy-f0-tp1"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="0" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwV-tc-2j5" userLabel="Score Text">
+                                <rect key="frame" x="138" y="30" width="98" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1Ob-m7-tbv"/>
+                                    <constraint firstAttribute="width" constant="100" id="Tzx-64-sSI"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -408,6 +418,9 @@
                             <constraint firstItem="pcB-vC-K3q" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="VTg-PS-YWJ"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="top" secondItem="jjQ-3A-6UH" secondAttribute="bottom" constant="17.5" id="W3w-cK-G4W"/>
                             <constraint firstItem="p7z-6Q-6xY" firstAttribute="top" secondItem="802-sB-ZQ9" secondAttribute="bottom" constant="17.5" id="X3D-H9-JT6"/>
+                            <constraint firstItem="nwV-tc-2j5" firstAttribute="leading" secondItem="6gj-gu-tBq" secondAttribute="leading" constant="138" id="cBx-ct-kXV"/>
+                            <constraint firstItem="nwV-tc-2j5" firstAttribute="top" secondItem="6gj-gu-tBq" secondAttribute="top" constant="10" id="gfu-j5-hgb"/>
+                            <constraint firstItem="pcB-vC-K3q" firstAttribute="leading" secondItem="nwV-tc-2j5" secondAttribute="trailing" constant="99" id="hyP-7V-QKx"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerX" secondItem="uMy-LC-6gp" secondAttribute="centerX" id="tH0-nC-aX6"/>
                             <constraint firstItem="8oU-0u-Y1q" firstAttribute="centerY" secondItem="uMy-LC-6gp" secondAttribute="centerY" id="v04-sP-GW1"/>
                         </constraints>
@@ -424,6 +437,7 @@
                         <outlet property="loseView" destination="8oU-0u-Y1q" id="bmn-im-1Qq"/>
                         <outlet property="nextLevelButton" destination="4HT-Fv-IMn" id="7nH-EP-xPL"/>
                         <outlet property="pauseButton" destination="pcB-vC-K3q" id="nev-vb-9G6"/>
+                        <outlet property="scoreTextView" destination="nwV-tc-2j5" id="SJf-XK-uF1"/>
                         <outlet property="winText" destination="802-sB-ZQ9" id="avP-DZ-VoH"/>
                         <outlet property="winView" destination="p7z-6Q-6xY" id="5ZK-gF-Rns"/>
                     </connections>
@@ -764,9 +778,9 @@
         <image name="LeapNLostLogo" width="600" height="100"/>
         <image name="Pause" width="330" height="330"/>
         <image name="TapToStart" width="256" height="38"/>
-        <image name="cartoon-forest" width="810" height="1440"/>
-        <image name="chevron" width="72" height="72"/>
-        <image name="chevronLeft" width="72" height="72"/>
+        <image name="cartoon-forest" width="1080" height="1920"/>
+        <image name="chevron" width="96" height="96"/>
+        <image name="chevronLeft" width="96" height="96"/>
         <image name="frog" width="258" height="265"/>
     </resources>
 </document>
