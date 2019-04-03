@@ -179,6 +179,7 @@ class Scene {
      */
     func restartLevel() {
         score = 0; // Reset the score
+        totalTime = 0.0;
         player.reset();
         spawnCoins();
     }
