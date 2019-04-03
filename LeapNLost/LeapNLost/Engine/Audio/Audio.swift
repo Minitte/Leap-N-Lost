@@ -56,6 +56,17 @@ class Audio {
         }
     }
     
+    // Set player volume
+    func setVolume(volume: Float){
+        self.volume = volume;
+        if #available(iOS 10.0, *) {
+            player?.setVolume(volume, fadeDuration: 1)
+        } else {
+            // Fallback on earlier versions
+            player?.volume = volume;
+        };
+    }
+    
     // Stops the player and resets audio clips to start
     func stop(){
         guard let player = player else { return }
@@ -77,6 +88,8 @@ class Audio {
 class AudioPlayers{
     // Singleton
     static let shared: AudioPlayers = AudioPlayers();
+    var volumeSFX: Float = 1.0;
+    var volumeBGM: Float = 1.0;
     var players = [Audio(fileName: "click", fileType: "wav"), Audio(fileName: "click", fileType: "wav")];
     
     // Adds a new audio player
