@@ -3,7 +3,7 @@
         "area": 2,
         "level": 1,
         "theme": "Jungle",
-        "night": true,
+        "night": false,
         "desc": "River"
     },
     "rows": [
