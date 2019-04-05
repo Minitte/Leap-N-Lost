@@ -1,21 +1,21 @@
 //
-//  Jungle.swift
+//  Lab.swift
 //  LeapNLost
 //
-//  Created by Anthony Wong on 2019-03-26.
+//  Created by Anthony Wong on 2019-04-03.
 //  Copyright © 2019 bcit. All rights reserved.
 //
 
 import Foundation
 
 /**
- * Parses rows and returns the appropriate game object types for a jungle theme.
+ * Parses rows and returns the appropriate game object types for a lab theme.
  */
-class Jungle : Theme {
+class Lab : Theme {
     
     // Specify number of objects per row here
-    private let bouldersPerRow : Int = 2;
-    private let logsPerRow : Int = 3;
+    private let trainsPerRow : Int = 2;
+    private let panelsPerRow : Int = 3;
     
     func parseRowObjects(row: Row, rowIndex: Int) -> [GameObject] {
         let rowType : String = row.type;
@@ -26,25 +26,25 @@ class Jungle : Theme {
         // Generate game objects depending on row type
         switch rowType {
         case "road":
-            // Section for each boulder
-            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(bouldersPerRow);
+            // Section for each train
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(trainsPerRow);
             
-            // Create and append car object
-            for i in 0...bouldersPerRow - 1 {
-                gameObjects.append(Boulder(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.0, -Float(rowIndex) * 2), speed: row.speed));
+            // Create and append train object
+            for i in 0...trainsPerRow - 1 {
+                gameObjects.append(Train(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -3.8, -Float(rowIndex) * 2 + 0.6	), speed: row.speed));
             }
         case "water":
-            // Section for each log
-            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(logsPerRow);
+            // Section for each panel
+            let sectionWidth : Float = (Float(Level.tilesPerRow) * 2.0) / Float(panelsPerRow);
             
-            // Create and append log object
-            for i in 0...logsPerRow - 1 {
-                gameObjects.append(Log(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.2, -Float(rowIndex) * 2), speed: row.speed));
+            // Create and append panel object
+            for i in 0...panelsPerRow - 1 {
+                gameObjects.append(Panel(pos: Vector3(sectionWidth * Float(i) - Float(Level.tilesPerRow), -4.0, -Float(rowIndex) * 2), speed: row.speed));
             }
         case "grass":
             break; // Do nothing
         default:
-            print("ERROR: Invalid row type for Jungle theme");
+            print("ERROR: Invalid row type for Lab theme");
         }
         
         return gameObjects;
@@ -62,13 +62,13 @@ class Jungle : Theme {
         // Change texture and tile depth depending on row type
         switch rowType {
         case "road":
-            textureName = "dirt.jpg";
+            textureName = "labrails3.jpg";
             rowDepth = -5;
         case "water":
-            textureName = "water.jpg";
+            textureName = "greenwater.jpg";
             rowDepth = -5.5;
         case "grass":
-            textureName = "darkgrass.jpg";
+            textureName = "labfloor3.jpg";
             rowDepth = -5;
         default:
             print("ERROR: Invalid row type for city theme");
@@ -94,10 +94,10 @@ class Jungle : Theme {
         
         for gameObject in gameObjects {
             
-            // Add lilypad point lights
-            if (gameObject is Log) {
-                let log : Log = gameObject as! Log;
-                pointLights.append(log.glow);
+            // Add panel point lights
+            if (gameObject is Panel) {
+                let panel : Panel = gameObject as! Panel;
+                pointLights.append(panel.glow);
             }
             
             // Add memory fragment point lights
@@ -105,19 +105,22 @@ class Jungle : Theme {
                 let memoryFragment : MemoryFragment = gameObject as! MemoryFragment;
                 pointLights.append(memoryFragment.glow);
             }
-            
-            if (gameObject is Boulder) {
-                let boulder : Boulder = gameObject as! Boulder;
-                pointLights.append(boulder.glow);
-            }
         }
         
         return pointLights;
     }
     
     func setupSpotLights(gameObjects : [GameObject]) -> [SpotLight] {
-        let spotLights : [SpotLight] = [];
-        // No spotlights in jungle theme
+        var spotLights : [SpotLight] = [];
+        
+        for gameObject in gameObjects {
+            // Add train lights
+            if (gameObject is Train) {
+                let train : Train = gameObject as! Train;
+                spotLights.append(train.headlight);
+            }
+        }
+        
         return spotLights;
     }
 }
