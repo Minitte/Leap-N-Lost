@@ -98,7 +98,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func level1_1(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 1;
     }
@@ -106,7 +106,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func level1_2(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 2;
         performSegue(withIdentifier: "levelSelected", sender: self)
@@ -115,7 +115,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func onLevel3ButtonPressed(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 3;
         performSegue(withIdentifier: "levelSelected", sender: self)
@@ -124,7 +124,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func onLevel4ButtonPressed(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 4;
         performSegue(withIdentifier: "levelSelected", sender: self)
@@ -133,7 +133,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func onLevel5ButtonPressed(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 5;
         performSegue(withIdentifier: "levelSelected", sender: self)
@@ -231,6 +231,19 @@ class ViewControllerLevelSelect: UIViewController {
             }else{
                 score.text = "0";
             }
+        }
+    }
+    
+    func areaAudio(){
+        switch area{
+        case 1:
+            AudioPlayers.shared.set(index: 0, fileName: "area1", fileType: "mp3");
+        case 2:
+            AudioPlayers.shared.set(index: 0, fileName: "area2", fileType: "wav");
+        case 3:
+            AudioPlayers.shared.set(index: 0, fileName: "area3", fileType: "wav");
+        default:
+            AudioPlayers.shared.set(index: 0, fileName: "area1", fileType: "mp3");
         }
     }
     
