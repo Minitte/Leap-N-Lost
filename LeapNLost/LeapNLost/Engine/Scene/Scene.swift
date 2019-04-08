@@ -124,6 +124,8 @@ class Scene {
             theme = City();
         case "Jungle":
             theme = Jungle();
+        case "Lab":
+            theme = Lab();
         default:
             print("ERROR: Invalid level theme");
         }
@@ -159,7 +161,7 @@ class Scene {
         // Apply night settings if it's a night level
         if (self.level.info.night == true) {
             // Dim the directional light
-            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.0, diffuseIntensity: 0.02, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
+            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.02, diffuseIntensity: 0.04, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
             
             // Add the theme's night lights.
             pointLights.append(contentsOf: theme!.setupPointLights(gameObjects: gameObjects));

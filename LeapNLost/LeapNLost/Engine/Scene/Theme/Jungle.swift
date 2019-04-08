@@ -44,7 +44,7 @@ class Jungle : Theme {
         case "grass":
             break; // Do nothing
         default:
-            print("ERROR: Invalid row type for city theme");
+            print("ERROR: Invalid row type for Jungle theme");
         }
         
         return gameObjects;
