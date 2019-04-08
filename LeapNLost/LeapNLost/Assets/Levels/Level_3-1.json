@@ -15,17 +15,17 @@
         {
             "id": 1,
             "type": "road",
-            "speed": 10.0
+            "speed": 5.0
         },
         {
             "id": 2,
             "type": "road",
-            "speed": 12.0
+            "speed": -6.0
         },
         {
             "id": 3,
-            "type": "road",
-            "speed": 14.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 4,
@@ -35,37 +35,37 @@
         {
             "id": 5,
             "type": "road",
-            "speed": -10.0
+            "speed": -5.0
         },
         {
             "id": 6,
             "type": "road",
-            "speed": -12.0
+            "speed": -5.0
         },
         {
             "id": 7,
-            "type": "road",
-            "speed": -14.0
-        },
-        {
-            "id": 8,
             "type": "grass",
             "speed": 1.0
         },
         {
+            "id": 8,
+            "type": "water",
+            "speed": 3.0
+        },
+        {
             "id": 9,
             "type": "water",
-            "speed": -13.0
+            "speed": -5.0
         },
         {
             "id": 10,
             "type": "water",
-            "speed": 8.0
+            "speed": 4.0
         },
         {
             "id": 11,
-            "type": "water",
-            "speed": 14.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 12,
@@ -75,82 +75,82 @@
         {
             "id": 13,
             "type": "road",
-            "speed": 16.0
+            "speed": 7.0
         },
         {
             "id": 14,
             "type": "road",
-            "speed": 15.0
+            "speed": 3.0
         },
         {
             "id": 15,
-            "type": "water",
-            "speed": 3.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 16,
             "type": "road",
-            "speed": 8.0
+            "speed": 3.0
         },
         {
             "id": 17,
-            "type": "road",
-            "speed": 11.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 18,
-            "type": "road",
-            "speed": -8.0
+            "type": "water",
+            "speed": -6.0
         },
         {
             "id": 19,
-            "type": "road",
-            "speed": -11.0
+            "type": "water",
+            "speed": 4.0
         },
         {
             "id": 20,
             "type": "grass",
-            "speed": -6.0
+            "speed": 1.0
         },
         {
-            "id": 21.0,
+            "id": 21,
             "type": "road",
-            "speed": -14.0
+            "speed": 4.0
         },
         {
             "id": 22,
             "type": "water",
-            "speed": 11.0
+            "speed": -3.0
         },
         {
             "id": 23,
             "type": "road",
-            "speed": 11.0
+            "speed": 4.0
         },
         {
             "id": 24,
             "type": "water",
-            "speed": -12.0
+            "speed": -5.0
         },
         {
             "id": 25,
-            "type": "road",
-            "speed": 0.5
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 26,
             "type": "water",
-            "speed": 15.0
+            "speed": 3.0
         },
         {
             "id": 27,
             "type": "water",
-            "speed": -12.0
+            "speed": -5.0
         },
         {
             "id": 28,
             "type": "road",
-            "speed": 20.0
+            "speed": 4.0
         },
         {
             "id": 29,
