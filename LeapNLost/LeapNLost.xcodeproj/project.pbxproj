@@ -78,6 +78,8 @@
 		AE4CA99B2214D7F5004704D8 /* ShadowBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */; };
 		AE4CA99E2214F490004704D8 /* ShadowVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */; };
 		AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */; };
+		AE4EDC65225BFA8500199584 /* golden_goose.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4EDC63225BFA8400199584 /* golden_goose.png */; };
+		AE4EDC66225BFA8500199584 /* golden_goose.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE4EDC64225BFA8400199584 /* golden_goose.obj */; };
 		AE63DE87224AEFC40025B1F6 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE63DE86224AEFC40025B1F6 /* Log.swift */; };
 		AE63DE8C224AF0BE0025B1F6 /* log.obj in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE8A224AF0BE0025B1F6 /* log.obj */; };
 		AE63DE8D224AF0BE0025B1F6 /* log.png in Resources */ = {isa = PBXBuildFile; fileRef = AE63DE8B224AF0BE0025B1F6 /* log.png */; };
@@ -220,6 +222,8 @@
 		AE4CA99A2214D7F5004704D8 /* ShadowBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBuffer.swift; sourceTree = "<group>"; };
 		AE4CA99C2214F490004704D8 /* ShadowVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowVertexShader.glsl; sourceTree = "<group>"; };
 		AE4CA99D2214F490004704D8 /* ShadowFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShadowFragmentShader.glsl; sourceTree = "<group>"; };
+		AE4EDC63225BFA8400199584 /* golden_goose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = golden_goose.png; sourceTree = "<group>"; };
+		AE4EDC64225BFA8400199584 /* golden_goose.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = golden_goose.obj; sourceTree = "<group>"; };
 		AE63DE86224AEFC40025B1F6 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		AE63DE8A224AF0BE0025B1F6 /* log.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.obj; sourceTree = "<group>"; };
 		AE63DE8B224AF0BE0025B1F6 /* log.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log.png; sourceTree = "<group>"; };
@@ -536,6 +540,15 @@
 			path = Shadows;
 			sourceTree = "<group>";
 		};
+		AE4EDC62225BFA6700199584 /* Golden-Goose */ = {
+			isa = PBXGroup;
+			children = (
+				AE4EDC64225BFA8400199584 /* golden_goose.obj */,
+				AE4EDC63225BFA8400199584 /* golden_goose.png */,
+			);
+			path = "Golden-Goose";
+			sourceTree = "<group>";
+		};
 		AE63DE89224AF03A0025B1F6 /* Log */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +621,7 @@
 		AEB2B13C2239AB0100BE18A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AE4EDC62225BFA6700199584 /* Golden-Goose */,
 				57283259224D75FE00A7365A /* Ship */,
 				57283258224D75CB00A7365A /* Train */,
 				57283257224D75BF00A7365A /* Panel */,
@@ -878,6 +892,7 @@
 			files = (
 				AD622A612249B2B400CA4A94 /* rabbit.obj in Resources */,
 				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
+				AE4EDC66225BFA8500199584 /* golden_goose.obj in Resources */,
 				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
 				5728325E224D778500A7365A /* ship.png in Resources */,
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
@@ -916,6 +931,7 @@
 				6F4F971722443EC700AA2873 /* memoryfragment.jpg in Resources */,
 				AEAF9B2222555A8100FE5F99 /* labrails4.jpg in Resources */,
 				AE4CA99F2214F490004704D8 /* ShadowFragmentShader.glsl in Resources */,
+				AE4EDC65225BFA8500199584 /* golden_goose.png in Resources */,
 				5728326A224D77AD00A7365A /* panel.mtl in Resources */,
 				AEAF9B1722554EAE00FE5F99 /* labfloor.jpg in Resources */,
 				57283265224D779600A7365A /* train.mtl in Resources */,
