@@ -166,7 +166,7 @@ class PlayerGameObject : GameObject {
         
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
-        if (targetObject!.type == "Lilypad" || targetObject!.type == "Log") {
+        if (targetObject!.type == "Lilypad" || targetObject!.type == "Log" || targetObject!.type == "Panel") {
             topOffset = Vector3(0, 0.5, 0);
         }
         
@@ -443,7 +443,7 @@ class PlayerGameObject : GameObject {
         
         // find closest
         for gameObject in waterObjects {
-            if (gameObject.type != "Lilypad" && gameObject.type != "Log") {
+            if (gameObject.type != "Lilypad" && gameObject.type != "Log" && gameObject.type != "Panel") {
                 continue;
             }
             

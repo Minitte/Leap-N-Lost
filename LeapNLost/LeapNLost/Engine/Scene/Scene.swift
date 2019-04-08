@@ -154,6 +154,13 @@ class Scene {
         
         // Creating a MemoryFragment and appending to gameobjects.
         let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
+        
+        // Change fragment model to ship on level 3-5
+        if (theme is Lab && self.level.info.level == 5) {
+            memoryFragment.model = ModelCacheManager.loadModel(withMeshName: "ship", withTextureName: "ship.png", saveToCache: true)!;
+            memoryFragment.scale = Vector3(0.04, 0.04, 0.04);
+            memoryFragment.rotation = Vector3(0, 0, 0);
+        }
 
         gameObjects.append(memoryFragment);
         collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
