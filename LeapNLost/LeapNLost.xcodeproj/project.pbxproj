@@ -40,6 +40,7 @@
 		6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49922498D5A001BD702 /* coin.jpg */; };
 		6FCCE49D22498D8B001BD702 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCE49C22498D8A001BD702 /* Coin.swift */; };
 		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
+		88F65CAD22564FA600E03D96 /* RedLights_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 88F65CAC22564FA600E03D96 /* RedLights_Logo.png */; };
 		88FF863D2222401E00BDEE9F /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863C2222401E00BDEE9F /* Collider.swift */; };
 		88FF863F2222410600BDEE9F /* BoxCollider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863E2222410600BDEE9F /* BoxCollider.swift */; };
 		9227BE25220BFD7000E3BE4D /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9227BE24220BFD6F00E3BE4D /* Vector3.swift */; };
@@ -169,6 +170,7 @@
 		6FCCE49922498D5A001BD702 /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
 		6FCCE49C22498D8A001BD702 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
+		88F65CAC22564FA600E03D96 /* RedLights_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedLights_Logo.png; sourceTree = "<group>"; };
 		88FF863C2222401E00BDEE9F /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
 		88FF863E2222410600BDEE9F /* BoxCollider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCollider.swift; sourceTree = "<group>"; };
 		9227BE24220BFD6F00E3BE4D /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				5718CA202203C522000EC054 /* AppDelegate.swift */,
 				5718CA242203C522000EC054 /* Main.storyboard */,
 				5718CA272203C523000EC054 /* Assets.xcassets */,
+				88F65CAC22564FA600E03D96 /* RedLights_Logo.png */,
 				5718CA292203C523000EC054 /* LaunchScreen.storyboard */,
 				5718CA2C2203C523000EC054 /* Info.plist */,
 			);
@@ -883,6 +886,7 @@
 				AE63DE94224AF1CB0025B1F6 /* rock.png in Resources */,
 				5728326B224D77AD00A7365A /* panel.png in Resources */,
 				88E184D32243031E00B59E24 /* Prism.obj in Resources */,
+				88F65CAD22564FA600E03D96 /* RedLights_Logo.png in Resources */,
 				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
 				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,
 			);
