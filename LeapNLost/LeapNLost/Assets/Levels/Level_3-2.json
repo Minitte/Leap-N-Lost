@@ -1,9 +1,9 @@
 {
     "info": {
         "area": 3,
-        "level": 1,
+        "level": 2,
         "theme": "Lab",
-        "night": false,
+        "night": true,
         "desc": ""
     },
     "rows": [
@@ -19,12 +19,12 @@
         },
         {
             "id": 2,
-            "type": "road",
-            "speed": -3.0
+            "type": "water",
+            "speed": -2.0
         },
         {
             "id": 3,
-            "type": "road",
+            "type": "water",
             "speed": 3.0
         },
         {
@@ -34,23 +34,23 @@
         },
         {
             "id": 5,
-            "type": "water",
-            "speed": -2.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 6,
-            "type": "water",
-            "speed": 3.0
+            "type": "road",
+            "speed": 2.0
         },
         {
             "id": 7,
-            "type": "grass",
+            "type": "road",
             "speed": -2.0
         },
         {
             "id": 8,
-            "type": "road",
-            "speed": 4.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 9,
@@ -60,22 +60,22 @@
         {
             "id": 10,
             "type": "road",
-            "speed": 4.5
-        },
-        {
-            "id": 11,
-            "type": "road",
             "speed": -3.0
         },
         {
+            "id": 11,
+            "type": "grass",
+            "speed": 1.0
+        },
+        {
             "id": 12,
-            "type": "road",
-            "speed": -4.0
+            "type": "water",
+            "speed": 3.0
         },
         {
             "id": 13,
-            "type": "road",
-            "speed": -3.5
+            "type": "water",
+            "speed": 2.0
         },
         {
             "id": 14,
@@ -84,12 +84,12 @@
         },
         {
             "id": 15,
-            "type": "water",
+            "type": "road",
             "speed": -2.5
         },
         {
             "id": 16,
-            "type": "water",
+            "type": "road",
             "speed": 1.0
         },
         {
@@ -99,57 +99,57 @@
         },
         {
             "id": 18,
-            "type": "grass",
+            "type": "water",
             "speed": -1.0
         },
         {
             "id": 19,
             "type": "water",
-            "speed": -1.0
+            "speed": 1.0
         },
         {
             "id": 20,
-            "type": "road",
-            "speed": -3.5
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 21.0,
-            "type": "road",
-            "speed": -3.0
+            "type": "water",
+            "speed": 2.0
         },
         {
             "id": 22,
-            "type": "road",
-            "speed": -4.0
+            "type": "water",
+            "speed": -2.0
         },
         {
             "id": 23,
-            "type": "road",
-            "speed": 4.0
+            "type": "grass",
+            "speed": 1.0
         },
         {
             "id": 24,
             "type": "road",
-            "speed": 4.5
+            "speed": 2.0
         },
         {
             "id": 25,
             "type": "road",
-            "speed": 3.5
+            "speed": -3.0
         },
         {
             "id": 26,
-            "type": "grass",
+            "type": "road",
             "speed": 2.0
         },
         {
             "id": 27,
             "type": "road",
-            "speed": 2.5
+            "speed": 2.0
         },
         {
             "id": 28,
-            "type": "road",
+            "type": "water",
             "speed": -2.0
         },
         {
