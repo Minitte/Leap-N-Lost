@@ -39,7 +39,7 @@
 		6FCCE49A22498D5A001BD702 /* coin.obj in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49822498D5A001BD702 /* coin.obj */; };
 		6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49922498D5A001BD702 /* coin.jpg */; };
 		6FCCE49D22498D8B001BD702 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCE49C22498D8A001BD702 /* Coin.swift */; };
-		88E0133F225D658200C2E7BC /* golden_goose.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E0133E225D658200C2E7BC /* golden_goose.obj */; };
+		88E01341225D680800C2E7BC /* golden_goose.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E01340225D680800C2E7BC /* golden_goose.obj */; };
 		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
 		88F65CAD22564FA600E03D96 /* RedLights_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 88F65CAC22564FA600E03D96 /* RedLights_Logo.png */; };
 		88FF863D2222401E00BDEE9F /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863C2222401E00BDEE9F /* Collider.swift */; };
@@ -183,7 +183,7 @@
 		6FCCE49822498D5A001BD702 /* coin.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coin.obj; sourceTree = "<group>"; };
 		6FCCE49922498D5A001BD702 /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
 		6FCCE49C22498D8A001BD702 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
-		88E0133E225D658200C2E7BC /* golden_goose.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = golden_goose.obj; sourceTree = "<group>"; };
+		88E01340225D680800C2E7BC /* golden_goose.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = golden_goose.obj; sourceTree = "<group>"; };
 		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
 		88F65CAC22564FA600E03D96 /* RedLights_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedLights_Logo.png; sourceTree = "<group>"; };
 		88FF863C2222401E00BDEE9F /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 		AE4EDC62225BFA6700199584 /* Golden-Goose */ = {
 			isa = PBXGroup;
 			children = (
-				88E0133E225D658200C2E7BC /* golden_goose.obj */,
+				88E01340225D680800C2E7BC /* golden_goose.obj */,
 				AE4EDC63225BFA8400199584 /* golden_goose.png */,
 			);
 			path = "Golden-Goose";
@@ -892,7 +892,7 @@
 			files = (
 				AD622A612249B2B400CA4A94 /* rabbit.obj in Resources */,
 				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
-				88E0133F225D658200C2E7BC /* golden_goose.obj in Resources */,
+				88E01341225D680800C2E7BC /* golden_goose.obj in Resources */,
 				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
 				5728325E224D778500A7365A /* ship.png in Resources */,
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
