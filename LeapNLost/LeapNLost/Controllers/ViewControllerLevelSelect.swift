@@ -65,7 +65,7 @@ class ViewControllerLevelSelect: UIViewController {
         }
         
         for(index, button) in levelButtons.enumerated(){
-            if(profile.reachedLevel >= index+1){
+            if(profile.reachedLevel >= index+1 || profile.reachedArea > area){
                 button.alpha = 1.0;
                 button.isEnabled = true;
             }else{
@@ -143,7 +143,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func nextArea(_ sender: Any) {
         area += 1;
         for(index, button) in levelButtons.enumerated(){
-            if(profile.reachedLevel >= index+1){
+            if(profile.reachedLevel >= index+1 || profile.reachedArea > area){
                 if(index+1 == 5){
                     button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
                 }else{
