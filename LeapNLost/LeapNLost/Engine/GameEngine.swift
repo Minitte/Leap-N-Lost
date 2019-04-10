@@ -351,6 +351,12 @@ class GameEngine : BufferManager {
         
         // Flush model cache
         ModelCacheManager.modelDictionary.removeAll();
+        
+        for var textureId in Texture.textureDictionary.values {
+            glDeleteTextures(1, &textureId);
+        }
+        
+        Texture.textureDictionary = [:];
     }
 }
 
