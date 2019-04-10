@@ -40,6 +40,12 @@
 		6FCCE49B22498D5A001BD702 /* coin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FCCE49922498D5A001BD702 /* coin.jpg */; };
 		6FCCE49D22498D8B001BD702 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCE49C22498D8A001BD702 /* Coin.swift */; };
 		88E01345225D6FC300C2E7BC /* golden_goose.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E01344225D6FC300C2E7BC /* golden_goose.obj */; };
+		88E0134A225D850E00C2E7BC /* 1-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E01349225D850E00C2E7BC /* 1-5.png */; };
+		88E0134C225D87F800C2E7BC /* 2-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E0134B225D87F700C2E7BC /* 2-5.png */; };
+		88E0134E225D896300C2E7BC /* 3-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E0134D225D896300C2E7BC /* 3-5.png */; };
+		88E01350225D898400C2E7BC /* 1-5.json in Resources */ = {isa = PBXBuildFile; fileRef = 88E0134F225D898400C2E7BC /* 1-5.json */; };
+		88E01352225D8DBA00C2E7BC /* 2-5.json in Resources */ = {isa = PBXBuildFile; fileRef = 88E01351225D8DBA00C2E7BC /* 2-5.json */; };
+		88E01354225D8EB900C2E7BC /* 3-5.json in Resources */ = {isa = PBXBuildFile; fileRef = 88E01353225D8EB900C2E7BC /* 3-5.json */; };
 		88E184D32243031E00B59E24 /* Prism.obj in Resources */ = {isa = PBXBuildFile; fileRef = 88E184D22243031E00B59E24 /* Prism.obj */; };
 		88F65CAD22564FA600E03D96 /* RedLights_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 88F65CAC22564FA600E03D96 /* RedLights_Logo.png */; };
 		88FF863D2222401E00BDEE9F /* Collider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FF863C2222401E00BDEE9F /* Collider.swift */; };
@@ -184,6 +190,12 @@
 		6FCCE49922498D5A001BD702 /* coin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coin.jpg; sourceTree = "<group>"; };
 		6FCCE49C22498D8A001BD702 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		88E01344225D6FC300C2E7BC /* golden_goose.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = golden_goose.obj; sourceTree = "<group>"; };
+		88E01349225D850E00C2E7BC /* 1-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-5.png"; sourceTree = "<group>"; };
+		88E0134B225D87F700C2E7BC /* 2-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-5.png"; sourceTree = "<group>"; };
+		88E0134D225D896300C2E7BC /* 3-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-5.png"; sourceTree = "<group>"; };
+		88E0134F225D898400C2E7BC /* 1-5.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "1-5.json"; sourceTree = "<group>"; };
+		88E01351225D8DBA00C2E7BC /* 2-5.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "2-5.json"; sourceTree = "<group>"; };
+		88E01353225D8EB900C2E7BC /* 3-5.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "3-5.json"; sourceTree = "<group>"; };
 		88E184D22243031E00B59E24 /* Prism.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Prism.obj; sourceTree = "<group>"; };
 		88F65CAC22564FA600E03D96 /* RedLights_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedLights_Logo.png; sourceTree = "<group>"; };
 		88FF863C2222401E00BDEE9F /* Collider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collider.swift; sourceTree = "<group>"; };
@@ -412,6 +424,33 @@
 				6FCCE49822498D5A001BD702 /* coin.obj */,
 			);
 			path = Coin;
+			sourceTree = "<group>";
+		};
+		88E01346225D844000C2E7BC /* 1-5 */ = {
+			isa = PBXGroup;
+			children = (
+				88E01349225D850E00C2E7BC /* 1-5.png */,
+				88E0134F225D898400C2E7BC /* 1-5.json */,
+			);
+			path = "1-5";
+			sourceTree = "<group>";
+		};
+		88E01347225D847000C2E7BC /* 2-5 */ = {
+			isa = PBXGroup;
+			children = (
+				88E0134B225D87F700C2E7BC /* 2-5.png */,
+				88E01351225D8DBA00C2E7BC /* 2-5.json */,
+			);
+			path = "2-5";
+			sourceTree = "<group>";
+		};
+		88E01348225D84B300C2E7BC /* 3-5 */ = {
+			isa = PBXGroup;
+			children = (
+				88E0134D225D896300C2E7BC /* 3-5.png */,
+				88E01353225D8EB900C2E7BC /* 3-5.json */,
+			);
+			path = "3-5";
 			sourceTree = "<group>";
 		};
 		88E184D1224301E900B59E24 /* memory-fragment */ = {
@@ -688,6 +727,9 @@
 		AEB2B1462239B0CC00BE18A0 /* Cutscenes */ = {
 			isa = PBXGroup;
 			children = (
+				88E01348225D84B300C2E7BC /* 3-5 */,
+				88E01347225D847000C2E7BC /* 2-5 */,
+				88E01346225D844000C2E7BC /* 1-5 */,
 				6F795DE2224AF2CB002F6C8A /* 1-1 */,
 			);
 			path = Cutscenes;
@@ -893,6 +935,7 @@
 				AD622A612249B2B400CA4A94 /* rabbit.obj in Resources */,
 				FEF1710F2214AFA800C94A22 /* carBlue.png in Resources */,
 				88E01345225D6FC300C2E7BC /* golden_goose.obj in Resources */,
+				88E0134C225D87F800C2E7BC /* 2-5.png in Resources */,
 				FEF171182214AFB100C94A22 /* Lilypad.obj in Resources */,
 				5728325E224D778500A7365A /* ship.png in Resources */,
 				AD622A622249B2B400CA4A94 /* rabbit.png in Resources */,
@@ -912,15 +955,19 @@
 				5718CA2B2203C523000EC054 /* LaunchScreen.storyboard in Resources */,
 				AD622A602249B2B400CA4A94 /* rabbit.mtl in Resources */,
 				57283264224D779600A7365A /* train.png in Resources */,
+				88E01352225D8DBA00C2E7BC /* 2-5.json in Resources */,
 				FEF171202214B45C00C94A22 /* tree.obj in Resources */,
 				FEF171112214AFA800C94A22 /* carRed.png in Resources */,
 				928D5381221B8EFA002C6F2B /* water.jpg in Resources */,
 				5728325D224D778500A7365A /* ship.mtl in Resources */,
+				88E01350225D898400C2E7BC /* 1-5.json in Resources */,
+				88E01354225D8EB900C2E7BC /* 3-5.json in Resources */,
 				AEAF9B0F2255441A00FE5F99 /* railsgrass.jpg in Resources */,
 				FEF171122214AFA800C94A22 /* car.mtl in Resources */,
 				AEF36587220B6ABE00ED9827 /* VertexShader.glsl in Resources */,
 				5728325F224D778500A7365A /* ship.obj in Resources */,
 				928D5382221B8EFA002C6F2B /* grass.jpg in Resources */,
+				88E0134E225D896300C2E7BC /* 3-5.png in Resources */,
 				FEF171102214AFA800C94A22 /* carGreen.png in Resources */,
 				AE63DEA0224B0F6C0025B1F6 /* dirt.jpg in Resources */,
 				AEAF9B1E2255578300FE5F99 /* labrails2.jpg in Resources */,
@@ -956,6 +1003,7 @@
 				5728326B224D77AD00A7365A /* panel.png in Resources */,
 				88E184D32243031E00B59E24 /* Prism.obj in Resources */,
 				88F65CAD22564FA600E03D96 /* RedLights_Logo.png in Resources */,
+				88E0134A225D850E00C2E7BC /* 1-5.png in Resources */,
 				AE1B20AD22288EC70053CE35 /* ColliderFragmentShader.glsl in Resources */,
 				AE1B20AB22288E3B0053CE35 /* ColliderVertexShader.glsl in Resources */,
 			);
