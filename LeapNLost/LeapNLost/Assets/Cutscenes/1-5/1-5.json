@@ -1,0 +1,21 @@
+{
+    "title": "cutscene-1-5",
+    "picture": "1-5.png",
+    "dialog": [
+        {
+            "id": 1,
+            "speaker": "???",
+            "lines": "It's all comming back to me.\n"
+        },
+        {
+            "id": 2,
+            "speaker": "???",
+            "lines": "I was on a mission to collect rare samples.\n"
+        },
+        {
+            "id": 3,
+            "speaker": "???",
+            "lines": "I need to go to the jungle now.                                     \t"
+        }
+    ]
+}
