@@ -50,6 +50,21 @@ class PlayerGameObject : GameObject {
     // Animation for pre hop
     private var preHopAnimation : TransformAnimation = TransformAnimation();
     
+    // animation for crushed death
+    private var crushedDeathAnimation : TransformAnimation = TransformAnimation();
+    private var playCrushedAnimation : Bool = false;
+    
+    private var drownDeathAnimation : TransformAnimation = TransformAnimation();
+    private var playDrownAnimation : Bool = false;
+    
+    private var lastFloatableCheck : Bool = false;
+    
+    private let coinAudio = Audio();
+    private let squishDieAudio = Audio();
+    private let splashDieAudio = Audio();
+    private let hopAudio = Audio();
+    private let lilypadAudio = Audio();
+  
     // Time to check hop time
     private var hopTime : Float = 0.0;
 
@@ -76,12 +91,30 @@ class PlayerGameObject : GameObject {
         
         // add keyframes
         preHopAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.2, -0.75, 0.2), atTime: 0.10));
+        
+        // crushed death animation
+        crushedDeathAnimation.originalScale = self.scale;
+        
+        crushedDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withScale: Vector3(0.5, -0.99, 0.5), atTime: 0.05));
+        
+        // drown death animation
+        drownDeathAnimation.addKeyframe(newKeyframe: TransformKeyframe(withPosition: Vector3(0.0, -5.0, 0.0), atTime: 0.3));
+        
+        coinAudio.setURL(fileName: "coin", fileType: "wav");
+        squishDieAudio.setURL(fileName: "squishDie", fileType: "wav");
+        splashDieAudio.setURL(fileName: "splashDie", fileType: "wav");
+        hopAudio.setURL(fileName: "boing", fileType: "wav");
+        lilypadAudio.setURL(fileName: "splashLilypad", fileType: "wav");
     }
     
     /**
      * Overrided base update
      */
     override func update(delta: Float) {
+        /*
+         * INPUT SECTION
+         */
+        
         if (!hopping) {
             if (InputManager.touched) {
                 if (!prepingHop) {
@@ -91,7 +124,7 @@ class PlayerGameObject : GameObject {
                 prepingHop = true;
             }
             
-            if (InputManager.singleTap) {
+            if (InputManager.singleTap || InputManager.upSwipe) {
                 hopForward();
                 stopPrepingHop();
             }
@@ -105,24 +138,45 @@ class PlayerGameObject : GameObject {
             }
         }
         
+        /*
+         * ANIMATION SECTION
+         */
+        
         if (prepingHop) {
             preHopAnimation.update(delta: delta);
             
             self.scale = preHopAnimation.scale;
         }
         
+        if (playCrushedAnimation) {
+            crushedDeathAnimation.update(delta: delta);
+            
+            self.scale = crushedDeathAnimation.scale;
+        }
+        
+        if (playDrownAnimation) {
+            drownDeathAnimation.update(delta: delta);
+            
+            self.position = drownDeathAnimation.position;
+        }
+        
+        /*
+         * POSITION SECTION
+         */
+        
         var topOffset : Vector3 = Vector3(0, 1.5, 0.5);
         
-        if (targetObject!.type == "Lilypad" || targetObject!.type == "Log") {
+        if (targetObject!.type == "Lilypad" || targetObject!.type == "Log" || targetObject!.type == "Panel") {
             topOffset = Vector3(0, 0.5, 0);
         }
         
         // stick to the targetObject position
-        if (!hopping) {
+        if (!hopping && !isDead) {
             self.position = targetObject!.position + topOffset;
         }
         
         if (hopping) {
+            hopAudio.play(loop: false);
             hopTime = hopTime + delta;
             
             var limitedDelta : Float = delta;
@@ -152,6 +206,16 @@ class PlayerGameObject : GameObject {
             // update velocity
             velocity = velocity + (gravity * limitedDelta);
             
+            // last moment check
+            if (!lastFloatableCheck && hopTimeRatio >= 0.9) {
+                let floatable : GameObject? = findTargetFloatable(rowOffset: 1, colOffset: 0, searchDistance: 1.5);
+                if (floatable != nil) {
+                    targetObject = floatable;
+                }
+                lastFloatableCheck = true;
+            }
+            
+            // landed
             if (hopTime >= maxHopTime) {
                 positionToTilePosition();
                 
@@ -178,32 +242,11 @@ class PlayerGameObject : GameObject {
         var targetObjectToJumpTo : GameObject = targetTile!;
         
         // special case for water
-        if (targetTile!.type == "water") {
-            // list of water objects infront of the frog(player)
-            let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
-            
-            // closest distance between the frog(player) and the lily pad
-            var closestDist : Float = 1000000.0;
-            var closest : GameObject?;
-            
-            // find closest
-            for gameObject in waterObjects {
-                if (gameObject.type != "Lilypad" && gameObject.type != "Log") {
-                    continue;
-                }
-                
-                let dist : Float = (gameObject.position - self.position).magnitude();
-                
-                if (dist < 3 && dist < closestDist) {
-                    closestDist = dist;
-                    closest = gameObject;
-                }
-            }
-            
-            // check if there was a closest lilypad
-            if (closest != nil) {
-                targetObjectToJumpTo = closest!;
-            }
+        let closest : GameObject? = findTargetFloatable(rowOffset: 1, colOffset: 0, searchDistance: 3.0);
+        
+        if (closest != nil) {
+            lilypadAudio.play(loop: false);
+            targetObjectToJumpTo = closest!;
         }
         
         // jump to the target
@@ -212,6 +255,26 @@ class PlayerGameObject : GameObject {
         rotation = Vector3.init(0, Float.pi, 0);
         
         currentScene?.score += 1;
+        
+        /* WTF MODE
+        for gameObject in (currentScene?.gameObjects)! {
+            if (gameObject.type == "Boulder") {
+                (gameObject as! Boulder).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Car") {
+                (gameObject as! Car).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Log") {
+                (gameObject as! Log).speed *= -1;
+            }
+            
+            else if (gameObject.type == "Lilypad") {
+                (gameObject as! Lilypad).speed *= -1;
+            }
+        }
+         */
     }
     
     /**
@@ -262,6 +325,7 @@ class PlayerGameObject : GameObject {
      * tile - the tile to teleport onto
      */
     func teleportToTarget(target : GameObject) {
+        lastFloatableCheck = false;
         targetObject = target;
         self.position = target.position + Vector3(0, 2, 0);
         positionToTilePosition();
@@ -274,6 +338,8 @@ class PlayerGameObject : GameObject {
         velocity = hopVelocity;
             
         targetObject = target;
+        
+        lastFloatableCheck = false;
         
         hopTime = 0.0;
         
@@ -301,6 +367,7 @@ class PlayerGameObject : GameObject {
         
         //Remove the collider in the collision dictionairy.
         if object is Coin {
+            coinAudio.play(loop: false);
             let rowIndex : Int = (object as! Coin).row;
             
             currentScene!.collisionDictionary[rowIndex]!.remove(at: currentScene!.collisionDictionary[rowIndex]!.firstIndex(of: object)!);
@@ -311,4 +378,85 @@ class PlayerGameObject : GameObject {
         
     }
     
+    /**
+     * Plays the death animation
+     */
+    func runCrushedAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        squishDieAudio.play(loop: false);
+        prepingHop = false;
+        playCrushedAnimation = true;
+        scale = crushedDeathAnimation.originalScale;
+        crushedDeathAnimation.playFromStart();
+    }
+    
+    /**
+     * Plays the drown animation
+     */
+    func runDrownAnimation() {
+        if (isDead) {
+            return;
+        }
+        
+        splashDieAudio.play(loop: false);
+        drownDeathAnimation.originalPosition = position;
+        
+        prepingHop = false;
+        playDrownAnimation = true;
+        drownDeathAnimation.playFromStart();
+    }
+    
+    /**
+     * Resets this player to default settings and position.
+     */
+    func reset() {
+        // Reset flags
+        isDead = false;
+        playCrushedAnimation = false;
+        playDrownAnimation = false;
+        
+        // Reset scale
+        scale = crushedDeathAnimation.originalScale;
+        
+        // Teleport back to the start of the level
+        teleportToTarget(target: currentScene!.getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
+  
+    /**
+     * Searches for a floatable at the tile at the tile position player + offset
+     */
+    private func findTargetFloatable(rowOffset:Int, colOffset:Int, searchDistance:Float) -> GameObject? {
+        let targetTile : Tile? = currentScene!.getTile(row: tileRow + rowOffset, column: tileCol + colOffset);
+        
+        if (targetTile == nil) {
+            return nil;
+        }
+        
+        let waterObjects : [GameObject] = currentScene!.collisionDictionary[targetTile!.row]!;
+        
+        // closest distance between the frog(player) and the lily pad
+        var closestDist : Float = 1000000.0;
+        var closest : GameObject?;
+        
+        // find closest
+        for gameObject in waterObjects {
+            if (gameObject.type != "Lilypad" && gameObject.type != "Log" && gameObject.type != "Panel") {
+                continue;
+            }
+            
+            let dist : Float = (gameObject.position - self.position).magnitude();
+            
+            if (dist < searchDistance && dist < closestDist) {
+                closestDist = dist;
+                closest = gameObject;
+            }
+        }
+        
+        // check if there was a closest lilypad
+        return closest;
+    }
+   
 }

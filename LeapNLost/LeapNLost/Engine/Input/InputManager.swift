@@ -31,6 +31,12 @@ class InputManager {
         }
     }
     
+    public static var upSwipe : Bool {
+        get {
+            return currentInputFrame.upSwipe;
+        }
+    }
+    
     public static var touched : Bool {
         get {
             return currentInputFrame.touched;
@@ -45,6 +51,9 @@ class InputManager {
     
     // The input frame for the next update
     private static var storedInputFrame : InputFrame = InputFrame.init();
+    
+    // frame counter
+    private static var frame : Int = 0;
     
     /**
      * Registers a single tap at a certain location
@@ -69,6 +78,10 @@ class InputManager {
         storedInputFrame.rightSwipe = true;
     }
     
+    public static func registerUpSwipe() {
+        storedInputFrame.upSwipe = true;
+    }
+    
     public static func registerTouch() {
         storedInputFrame.touched = true;
     }
@@ -77,9 +90,13 @@ class InputManager {
      * Moves the stored input to the next frame
      */
     public static func nextFrame() {
+        frame += 1;
         currentInputFrame = storedInputFrame;
         
-        storedInputFrame = InputFrame.init();
+        if (frame >= 4) {
+            storedInputFrame = InputFrame.init();
+            frame = 0;
+        }
     }
 
     /**
@@ -98,6 +115,8 @@ class InputManager {
         
         // Boolean to show if the user has swiped to the right
         public var rightSwipe : Bool = false;
+        
+        public var upSwipe : Bool = false;
         
         public var touched : Bool = false;
     }

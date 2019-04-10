@@ -17,7 +17,9 @@ class ViewControllerMainMenu: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         buttonAudio.setURL(fileName: "click", fileType: "wav");
         initAudio.setURL(fileName: "fluteUp", fileType: "wav");
-        initAudio.play(loop: false);
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if(PlayerProfile.profileExists()){
             NSLog("Loading save...");
             
@@ -36,14 +38,24 @@ class ViewControllerMainMenu: UIViewController {
             NSLog("No save file. Making default save...");
             profile.saveToFile();
         }
-        
+        initAudio.volume = AudioPlayers.shared.volumeSFX;
+        buttonAudio.volume = AudioPlayers.shared.volumeSFX;
+        initAudio.play(loop: false);
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.destination is ViewControllerLevelSelect
-        {
-            let vc = segue.destination as? ViewControllerLevelSelect
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.destination is ViewControllerLevelSelect{
+            let vc = segue.destination as? ViewControllerLevelSelect;
+            vc?.profile = profile;
+        }
+        
+        if segue.destination is ViewControllerSettings{
+            let vc = segue.destination as? ViewControllerSettings;
+            vc?.profile = profile;
+        }
+        
+        if segue.destination is ViewControllerHighscore{
+            let vc = segue.destination as? ViewControllerHighscore;
             vc?.profile = profile;
         }
     }

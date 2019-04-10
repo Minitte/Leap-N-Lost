@@ -15,6 +15,7 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     // The openGL game engine.
     private var gameEngine : GameEngine?;
     let buttonAudio = Audio();
+    let winAudio = Audio();
     var area: Int = 1;
     var level: Int = 1;
     var profile = PlayerProfile.init();
@@ -24,6 +25,9 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBOutlet weak var loseText: UILabel!
     @IBOutlet weak var loseView: UIView!
     @IBOutlet weak var nextLevelButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var scoreTextView: UITextView!
+    @IBOutlet weak var timeTextView: UITextView!
     
     
     // This view as a GLKView
@@ -34,6 +38,9 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         setupGL();
         winView.layer.borderWidth = 5.0;
         winView.layer.borderColor =  UIColor(red: 90/255, green: 181/255, blue: 77/255, alpha: 1.0).cgColor;
+        buttonAudio.setVolume(volume: AudioPlayers.shared.volumeSFX);
+        buttonAudio.setURL(fileName: "click", fileType: "wav");
+        winAudio.setURL(fileName: "win", fileType: "wav");
     }
     
     /**
@@ -65,6 +72,12 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
     @IBAction func OnSwipeRight(_ sender: UISwipeGestureRecognizer) {
         if (sender.state == .ended) {
             InputManager.registerRightSwipe();
+        }
+    }
+    
+    @IBAction func OnSwipeUp(_ sender: UISwipeGestureRecognizer) {
+        if (sender.state == .ended) {
+            InputManager.registerUpSwipe();
         }
     }
     
@@ -101,8 +114,15 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         playMainTheme();
     }
     @IBAction func TryAgainButton(_ sender: Any) {
-        gameEngine = nil;
-        gameEngine = GameEngine(self.view as! GLKView, area: area, level: level);
+        // Restart the level
+        gameEngine!.currentScene.restartLevel();
+        
+        // Reload models
+        for gameObject in gameEngine!.currentScene.gameObjects {
+            gameEngine!.loadModel(model: gameObject.model);
+            gameEngine!.loadModel(model: gameObject.collider!.model!);
+        }
+        
         loseView.isHidden = true;
         loseText.isHidden = true;
     }
@@ -117,16 +137,28 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         InputManager.nextFrame();
         gameEngine?.update();
         
+        // update score and time text
+        let scene : Scene? = gameEngine!.currentScene;
+        
+        if (scene != nil) {
+            scoreTextView.text = "\(scene!.score)";
+            timeTextView.text = "⏱️ \(Int(scene!.totalTime))s";
+        }
+        
         // Check if the player is dead
         if ((gameEngine?.currentScene.player.isDead)!) {
+            loseText.text = "You Lost";
             loseText.isHidden = false;
             loseView.isHidden = false;
             profile.lastArea = area;
             profile.lastLevel = level;
+            pauseButton.isEnabled = false;
         }
         
         // Check if the game is over
         if ((gameEngine?.currentScene.player.isGameOver)!) {
+            winAudio.play(loop: false);
+            pauseButton.isEnabled = false;
             profile.lastArea = area;
             profile.lastLevel = level;
             if(area >= profile.reachedArea){
@@ -173,6 +205,13 @@ class ViewControllerGame : GLKViewController, GLKViewControllerDelegate {
         }
     }
     
+    // Pause button
+    @IBAction func pause(_ sender: Any) {
+        gameEngine?.currentScene.pause = !(gameEngine?.currentScene.pause)!;
+        loseView.isHidden = !loseView.isHidden;
+        loseText.text = "Pause";
+        loseText.isHidden = !loseText.isHidden;
+    }
     func playMainTheme(){
         AudioPlayers.shared.stop(index: 0);
         AudioPlayers.shared.set(index: 0, fileName: "MainTheme", fileType: "mp3");

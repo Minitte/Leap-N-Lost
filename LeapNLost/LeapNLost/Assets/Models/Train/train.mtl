@@ -1,0 +1,13 @@
+# Blender MTL File: 'Sci_fi_Train.blend'
+# Material Count: 1
+
+newmtl train
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Ricky\Textures\engine\Sci fi Train color.png

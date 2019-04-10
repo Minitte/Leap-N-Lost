@@ -64,12 +64,13 @@ class PhysicsEngine {
                     
                 }
                 
-                if (gameObject.type == "Lilypad" || gameObject.type == "Log") {
+                if (gameObject.type == "Lilypad" || gameObject.type == "Log" || gameObject.type == "Panel") {
                     //player.position = gameObject.position + Vector3(0, 0.5, 0);
                     onFloatingObject = true;
                 }
                 
                 if (gameObject.collider?.lethal == true) {
+                    player.runCrushedAnimation();
                     player.isDead = true;
                 }
             }
@@ -77,6 +78,7 @@ class PhysicsEngine {
         
         // Check if the player landed on water
         if (currentScene.tiles[player.tileRow * Level.tilesPerRow].type == "water" && !onFloatingObject) {
+            player.runDrownAnimation();	
             player.isDead = true;
         }
     }

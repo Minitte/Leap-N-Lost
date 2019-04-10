@@ -44,7 +44,7 @@ class Jungle : Theme {
         case "grass":
             break; // Do nothing
         default:
-            print("ERROR: Invalid row type for city theme");
+            print("ERROR: Invalid row type for Jungle theme");
         }
         
         return gameObjects;
@@ -68,7 +68,7 @@ class Jungle : Theme {
             textureName = "water.jpg";
             rowDepth = -5.5;
         case "grass":
-            textureName = "grass.jpg";
+            textureName = "darkgrass.jpg";
             rowDepth = -5;
         default:
             print("ERROR: Invalid row type for city theme");

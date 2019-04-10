@@ -31,6 +31,13 @@ class PlayerProfile : Codable {
     // animallist object for the player
     var animalList : AnimalList;
     
+    // BGM volume
+    var volumeBGM : Float;
+    
+    // SFX volume
+    var volumeSFX : Float;
+    
+    
     /**
      * Initalization of a player profile where all the values are zero
      */
@@ -39,13 +46,15 @@ class PlayerProfile : Codable {
         
         // For debug purposes ***
         reachedArea = 4;
-        reachedLevel = 5;
+        reachedLevel = 2;
         // ***
         
         lastArea = 0;
         lastLevel = 0;
         scoreboard = Scoreboard.init();
         animalList = AnimalList();
+        volumeBGM = 1.0;
+        volumeSFX = 1.0;
     }
     
     /**
@@ -59,6 +68,8 @@ class PlayerProfile : Codable {
         lastLevel = ll;
         scoreboard = sb;
         animalList = al;
+        volumeBGM = 1.0;
+        volumeSFX = 1.0;
     }
     
     /**

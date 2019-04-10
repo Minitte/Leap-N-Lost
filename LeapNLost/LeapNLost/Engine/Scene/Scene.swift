@@ -53,6 +53,11 @@ class Scene {
     // The current score
     var score : Int = 0;
     
+    // Total time of this run
+    var totalTime : Float = 0.0;
+    
+    var pause: Bool = false;
+    
     
     /**
      * Constructor, initializes the scene.
@@ -81,7 +86,7 @@ class Scene {
         directionalLight = DirectionalLight(color: Vector3(1, 1, 0.8), ambientIntensity: 0.5, diffuseIntensity: 1, specularIntensity: 1, direction: Vector3(0, -2, -5));
         
         // Setup the camera
-        let camOffset : Vector3 = Vector3(0, -10, -8.5);
+        let camOffset : Vector3 = Vector3(0, -14, -8.5);
         mainCamera = CameraFollowTarget(cameraOffset: camOffset, trackTarget: player);
         
         // For testing purposes ***
@@ -119,7 +124,9 @@ class Scene {
             theme = City();
         case "Jungle":
             theme = Jungle();
-        default:	
+        case "Lab":
+            theme = Lab();
+        default:
             print("ERROR: Invalid level theme");
         }
       
@@ -140,17 +147,20 @@ class Scene {
             // Append objects and tiles to the level
             self.gameObjects.append(contentsOf: rowObjects);
             self.tiles.append(contentsOf: rowTiles);
-            
-            if(rowIndex % 3 == 0) {
-                let randomNumber : Int = Int.random(in: 1..<Level.tilesPerRow);
-                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
-                gameObjects.append(coin);
-                collisionDictionary[rowIndex]!.append(coin);
-            }
         }
         
-        //Creating a MemoryFragment and appending to gameobjects.
+        // Spawn coins
+        spawnCoins();
+        
+        // Creating a MemoryFragment and appending to gameobjects.
         let memoryFragment = MemoryFragment(position: getTile(row: self.level.rows.count - 1, column: Level.tilesPerRow / 2)!.position + Vector3(0, 2, 0), row: self.level.rows.count - 1);
+        
+        // Change fragment model to ship on level 3-5
+        if (theme is Lab && self.level.info.level == 5) {
+            memoryFragment.model = ModelCacheManager.loadModel(withMeshName: "ship", withTextureName: "ship.png", saveToCache: true)!;
+            memoryFragment.scale = Vector3(0.04, 0.04, 0.04);
+            memoryFragment.rotation = Vector3(0, 0, 0);
+        }
 
         gameObjects.append(memoryFragment);
         collisionDictionary[self.level.rows.count - 1]!.append(memoryFragment);
@@ -158,7 +168,7 @@ class Scene {
         // Apply night settings if it's a night level
         if (self.level.info.night == true) {
             // Dim the directional light
-            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.0, diffuseIntensity: 0.02, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
+            directionalLight = DirectionalLight(color: Vector3(0.8, 1, 0.8), ambientIntensity: 0.02, diffuseIntensity: 0.04, specularIntensity: 0.02, direction: Vector3(0, -2, -5));
             
             // Add the theme's night lights.
             pointLights.append(contentsOf: theme!.setupPointLights(gameObjects: gameObjects));
@@ -170,6 +180,40 @@ class Scene {
         
         // Set player position
         player.teleportToTarget(target: getTile(row: 0, column: Level.tilesPerRow / 2)!);
+    }
+    
+    /**
+     * Restarts the level by putting the player back at the starting tile.
+     * Also respawns coins, but does not reset position of any other game objects.
+     */
+    func restartLevel() {
+        score = 0; // Reset the score
+        totalTime = 0.0;
+        player.reset();
+        spawnCoins();
+    }
+    
+    /**
+     * Generates coins for every third row.
+     * If there are any existing coins, they will be removed first.
+     */
+    func spawnCoins() {
+        // Remove all existing coins
+        gameObjects.removeAll(where: {$0 is Coin});
+        for i in 0..<collisionDictionary.count {
+            collisionDictionary[i]!.removeAll(where: {$0 is Coin});
+        }
+        
+        // Spawn a coin every third row
+        for rowIndex in 0..<self.level.rows.count {
+            if(rowIndex % 3 == 0) {
+                // Cap column between 2 and 12
+                let randomNumber : Int = Int.random(in: 2..<Level.tilesPerRow - 2);
+                let coin = Coin(position: getTile(row: rowIndex, column: Level.tilesPerRow - randomNumber)!.position + Vector3(0,2,0), row: rowIndex);
+                gameObjects.append(coin);
+                collisionDictionary[rowIndex]!.append(coin);
+            }
+        }
     }
     
     /**
@@ -193,13 +237,19 @@ class Scene {
                 gameObject.model.inView = true;
             }
             
-            gameObject.update(delta: delta);
+            if(!pause){
+                gameObject.update(delta: delta);
+            }
         }
         
         mainCamera.updatePosition();
         
         if (player.tileRow >= 30) {
             player.isGameOver = true;
+        }
+        
+        if (!player.isDead && !player.isGameOver) {
+            totalTime = totalTime + delta;
         }
         
     }

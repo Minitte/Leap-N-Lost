@@ -65,7 +65,7 @@ class ViewControllerLevelSelect: UIViewController {
         }
         
         for(index, button) in levelButtons.enumerated(){
-            if(profile.reachedLevel >= index+1){
+            if(profile.reachedLevel >= index+1 || profile.reachedArea > area){
                 button.alpha = 1.0;
                 button.isEnabled = true;
             }else{
@@ -98,7 +98,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func level1_1(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 1;
     }
@@ -106,9 +106,36 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func level1_2(_ sender: Any) {
         buttonAudio.play(loop: false);
         AudioPlayers.shared.stop(index: 0);
-        AudioPlayers.shared.set(index: 0, fileName: "Level1", fileType: "mp3");
+        areaAudio();
         AudioPlayers.shared.play(index: 0, loop: true);
         level = 2;
+        performSegue(withIdentifier: "levelSelected", sender: self)
+    }
+    
+    @IBAction func onLevel3ButtonPressed(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        AudioPlayers.shared.stop(index: 0);
+        areaAudio();
+        AudioPlayers.shared.play(index: 0, loop: true);
+        level = 3;
+        performSegue(withIdentifier: "levelSelected", sender: self)
+    }
+    
+    @IBAction func onLevel4ButtonPressed(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        AudioPlayers.shared.stop(index: 0);
+        areaAudio();
+        AudioPlayers.shared.play(index: 0, loop: true);
+        level = 4;
+        performSegue(withIdentifier: "levelSelected", sender: self)
+    }
+    
+    @IBAction func onLevel5ButtonPressed(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        AudioPlayers.shared.stop(index: 0);
+        areaAudio();
+        AudioPlayers.shared.play(index: 0, loop: true);
+        level = 5;
         performSegue(withIdentifier: "levelSelected", sender: self)
     }
     
@@ -116,7 +143,7 @@ class ViewControllerLevelSelect: UIViewController {
     @IBAction func nextArea(_ sender: Any) {
         area += 1;
         for(index, button) in levelButtons.enumerated(){
-            if(profile.reachedLevel >= index+1){
+            if(profile.reachedLevel >= index+1 || profile.reachedArea > area){
                 if(index+1 == 5){
                     button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
                 }else{
@@ -161,6 +188,12 @@ class ViewControllerLevelSelect: UIViewController {
         updateHighScorelabels();
     }
     
+    // Return to main menu
+    @IBAction func backToMainMenu(_ sender: Any) {
+        buttonAudio.play(loop: false);
+        self.presentingViewController!.dismiss(animated: true, completion: nil);
+    }
+    
     //
     // Animal Selection
     //
@@ -198,6 +231,19 @@ class ViewControllerLevelSelect: UIViewController {
             }else{
                 score.text = "0";
             }
+        }
+    }
+    
+    func areaAudio(){
+        switch area{
+        case 1:
+            AudioPlayers.shared.set(index: 0, fileName: "area1", fileType: "mp3");
+        case 2:
+            AudioPlayers.shared.set(index: 0, fileName: "area2", fileType: "wav");
+        case 3:
+            AudioPlayers.shared.set(index: 0, fileName: "area3", fileType: "wav");
+        default:
+            AudioPlayers.shared.set(index: 0, fileName: "area1", fileType: "mp3");
         }
     }
     

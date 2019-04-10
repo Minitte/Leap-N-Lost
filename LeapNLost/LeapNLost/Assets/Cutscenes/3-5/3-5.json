@@ -1,0 +1,21 @@
+{
+    "title": "cutscene-3-5",
+    "picture": "3-5.png",
+    "dialog": [
+        {
+            "id": 1,
+            "speaker": "Master G",
+            "lines": "Welcome home Agent Z.\n"
+        },
+        {
+            "id": 2,
+            "speaker": "Master G",
+            "lines": "With these earth samples we can restore our planet.\n"
+        },
+        {
+            "id": 3,
+            "speaker": "Master G",
+            "lines": "Congratulations you did it.                                      \t"
+        }
+    ]
+}

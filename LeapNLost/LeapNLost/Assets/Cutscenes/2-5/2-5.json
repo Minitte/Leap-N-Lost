@@ -1,0 +1,21 @@
+{
+    "title": "cutscene-2-5",
+    "picture": "2-5.png",
+    "dialog": [
+        {
+            "id": 1,
+            "speaker": "???",
+            "lines": "I remember now.\n"
+        },
+        {
+            "id": 2,
+            "speaker": "???",
+            "lines": "I'm not from this world.\n"
+        },
+        {
+            "id": 3,
+            "speaker": "???",
+            "lines": "It's time to finish my mission.                                      \t"
+        }
+    ]
+}
