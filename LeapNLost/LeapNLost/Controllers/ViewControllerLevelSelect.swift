@@ -144,18 +144,20 @@ class ViewControllerLevelSelect: UIViewController {
         area += 1;
         for(index, button) in levelButtons.enumerated(){
             if(profile.reachedLevel >= index+1 || profile.reachedArea > area){
-                if(index+1 == 5){
-                    button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
-                }else{
-                    button.setTitle("Level " + String(area) + "-" + String(index+1), for: .normal);
-                }
                 button.alpha = 1.0;
                 button.isEnabled = true;
             }else{
                 button.alpha = 0.5;
                 button.isEnabled = false;
             }
+            
+            if(index+1 == 5){
+                button.setTitle("Level " + String(area) + "-" + String(index+1) + "\u{1F480}", for: .normal);
+            }else{
+                button.setTitle("Level " + String(area) + "-" + String(index+1), for: .normal);
+            }
         }
+        
         if(profile.reachedArea > area){
             nextAreaButton.isEnabled = true;
             nextAreaButton.alpha = 1.0;
@@ -163,6 +165,7 @@ class ViewControllerLevelSelect: UIViewController {
             nextAreaButton.isEnabled = false;
             nextAreaButton.alpha = 0.5;
         }
+        
         previousAreaButton.isHidden = false;
         
         updateHighScorelabels();

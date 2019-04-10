@@ -30,17 +30,17 @@
         {
             "id": 4,
             "type": "road",
-            "speed": -9.5
+            "speed": -7.5
         },
         {
             "id": 5,
             "type": "road",
-            "speed": 10.0
+            "speed": 5.0
         },
         {
             "id": 6,
             "type": "road",
-            "speed": 14.0
+            "speed": 7.0
         },
         {
             "id": 7,
@@ -50,12 +50,12 @@
         {
             "id": 8,
             "type": "road",
-            "speed": 10.0
+            "speed": 6.0
         },
         {
             "id": 9,
             "type": "road",
-            "speed": 12.5
+            "speed": 4.5
         },
         {
             "id": 10,
