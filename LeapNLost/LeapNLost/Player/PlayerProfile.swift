@@ -46,7 +46,7 @@ class PlayerProfile : Codable {
         
         // For debug purposes ***
         reachedArea = 4;
-        reachedLevel = 5;
+        reachedLevel = 2;
         // ***
         
         lastArea = 0;
