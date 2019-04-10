@@ -24,6 +24,8 @@ class AnimalList : Codable {
         
         animals.append(Animal(animalName: "Rabbit", modelFileName: "rabbit", textureFileName: "rabbit.png", unlocked: true));
         
+        animals.append(Animal(animalName: "GoldenGoose", modelFileName: "golden_goose", textureFileName: "golden_goose.png", unlocked: true));
+        
         // END OF ANIMAL LIST
         
         animalIndex = 0;
