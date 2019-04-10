@@ -14,6 +14,8 @@ import GLKit
  */
 class Texture {
     
+    static var textureDictionary : [String : GLuint] = [:];
+    
     // The id of the texture.
     var id : GLuint;
     
@@ -49,7 +51,10 @@ class Texture {
      * filename - the name of the texture file.
      */
     func loadTexture(fileName: String) {
-        deleteTexture(); // Delete existing texture if it exists
+        if (Texture.textureDictionary[fileName] != nil) {
+            id = Texture.textureDictionary[fileName]!;
+            return;
+        }
         
         // Path to the image
         let path = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as NSString, "" as CFString, nil)
@@ -107,30 +112,6 @@ class Texture {
         // Unbind the texture for now
         glBindTexture(GLenum(GL_TEXTURE_2D), 0);
         
-        /*
-         let path = Bundle.main.path(forResource: filename, ofType: nil)!
-         let option = [ GLKTextureLoaderOriginBottomLeft: true]
-         do {
-         let info = try GLKTextureLoader.texture(withContentsOfFile: path, options: option as [String : NSNumber]?)
-         self.texture = info.name
-         } catch {
-         print("*** Texture loading error ***");
-         }
-         */
-    }
-    
-    /**
-     * Deletes an existing texture from memory.
-     */
-    func deleteTexture() {
-        // Cleanup if there is an existing texture
-        if (id != 0) {
-            glDeleteTextures(1, &id);
-        }
-    }
-    
-    deinit {
-        // Cleanup
-        deleteTexture();
+        Texture.textureDictionary[fileName] = self.id;
     }
 }
