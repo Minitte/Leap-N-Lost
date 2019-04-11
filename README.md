@@ -2,10 +2,10 @@
 
 Authors
 ------
-Jackee Ma
-Ricky Mok
-Davis Pham
-Anthony Wong
+- Jackee Ma
+- Ricky Mok
+- Davis Pham
+- Anthony Wong
 
 In Game Controls
 ------
